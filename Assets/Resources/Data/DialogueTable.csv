@@ -1,0 +1,13 @@
+﻿대사 ID,캐릭터 ID,캐릭터 슬롯,슬롯 상태,배경 리소스,대사 스트링 키,다음 대사 ID
+dialogue_id,char_id,slot,slot_state,bg_res,dialogue_str,next_id
+int,int,int,int,string,string,int
+101010001,10101,1,120000,BG_Room_01,Dial_Intro_Luna_001,101010002
+101010002,10101,1,120000,BG_Room_01,Dial_Intro_Luna_002,101010003
+101010003,10103,1,120000,BG_Room_01,Dial_Intro_Luna_003,101010004
+101010004,10202,5,110002,BG_Room_01,Dial_Intro_Grandma_001,101010005
+101010005,10202,5,110002,BG_Room_01,Dial_Intro_Grandma_002,101010006
+101010006,10101,1,120001,BG_Room_01,Dial_Intro_Luna_004,101010007
+101010007,10001,0,110001,BG_Room_01,Dial_Intro_Na_001,101010008
+101010008,10304,2,112001,BG_Room_01,Dial_Intro_Maid_001,101010009
+101010009,10201,5,110002,BG_Room_01,Dial_Intro_Grandma_003,301010001
+301010001,10201,3,100200,BG_Room_01,Dial_Intro_Grandma_004,

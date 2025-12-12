@@ -1,0 +1,20 @@
+﻿스트링 ID,한국어,영어
+key_index,ko,en
+string,string,string
+Char_Name_Nar,,
+Char_Name_001,루나,Luna
+Char_Name_002,할머니,Grandma
+Char_Name_003,메이드,Maid
+Fact_Name_Nar,,
+Fact_Name_001,알렌테 가문,The House of Alente
+Fact_Name_002,사용인,Servant
+Dial_Intro_Luna_001,안녕 달팽아?,Hi little snail?
+Dial_Intro_Luna_002,이건 테스트 대사야.,This is a test line.
+Dial_Intro_Luna_003,오늘도 과제를 제출하지 않은거야?,You didn't turn in your homework again today?
+Dial_Intro_Luna_004,그래. 본인만 손해지.,Fine. You're only hurting yourself.
+Dial_Intro_Grandma_001,너무 화내지 마렴.,Don't get too upset.
+Dial_Intro_Grandma_002,과제는 안하는 만큼 손해니까.,Skipping your homework only hurts you.
+Dial_Intro_Grandma_003,요즘 메이드들은 예의가 없구나.,Maids these days have no manners.
+Dial_Intro_Grandma_004,아무튼 이게 다란다. 끝!,Anyway that's everything. The end!
+Dial_Intro_Na_001,(잠시 후),(A short while later)
+Dial_Intro_Maid_001,아가씨! 다중 슬롯 테스트를 위해 잠시 들렀어요. 바로 나가보겠습니다~,Milady! I just stopped by for a moment to test the multi-slot. I'll be heading out right now!
