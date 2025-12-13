@@ -28,6 +28,10 @@
 # Visual Studio cache directory
 .vs/
 
+# My Plastic Stuff and Cloud Settings
+.plastic/
+ProjectSettings/ProjectSettings.asset
+
 # Gradle cache directory
 .gradle/
 

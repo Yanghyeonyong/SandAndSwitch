@@ -1,0 +1,181 @@
+using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+public class UIManager : MonoBehaviour
+{
+    private List<GameObject> _canvasList = new List<GameObject>();
+    private List<Button> _menuButton = new List<Button>();
+    private List<Button> _ingameButton = new List<Button>();
+    private List<Button> _pauseMenuButton = new List<Button>();
+    private List<Button> _gameOverMenuButton = new List<Button>();
+
+    InputAction _pauseGameAction;
+
+    void Start()
+    {
+
+
+        //UI 관련
+        /*
+        Canvas는 인덱스 순으로 MainMenu, IngameUI, PauseMenu, GameOverMenu
+        버튼 동작은 UIManager에서 처리하되 그 함수를 GameManager에서 호출할 수 있게 만들어놨다
+        버튼 순서는 각 와이어프레임에서 좌에서 우 혹은 위에서 아래 순이다
+
+        MenuButton: Start, ControlGuide, Exit
+        IngameButton: Pause
+        PauseMenuButton: Restart, MainMenu, Resume, ControlGuide
+        GameOVerMenuButton: Restart, MainMenu
+
+        ControlGuide는 아직 기획표가 안나옴
+        */
+
+        int index = 0;
+        foreach (Transform child in transform)
+        {
+            GameManager.Instance.CanvasList.Add(child.gameObject);
+            _canvasList.Add(child.gameObject);
+            foreach (Transform grandChild in child)
+            {
+                if (grandChild.GetComponent<Button>() !=null)
+                {
+                    Button button = grandChild.GetComponent<Button>();
+                    if (index == 0)
+                    {
+                        
+                        GameManager.Instance.MenuButton.Add(button);
+                        _menuButton.Add(button);
+                        
+
+                    }
+                    else if (index == 1)
+                    {
+                        GameManager.Instance.IngameButton.Add(button);
+                        _ingameButton.Add(button);
+
+                    }
+                    else if (index == 2)
+                    {
+                        GameManager.Instance.PauseMenuButton.Add(button);
+                        _pauseMenuButton.Add(button);
+                        //Debug.Log(button.name);
+                    }
+                    else if (index == 3)
+                    {
+                        GameManager.Instance.GameOverMenuButton.Add(button);
+                        _gameOverMenuButton.Add(button);
+                        //Debug.Log(button.name);
+                    }
+                }
+                
+            }
+            index++;
+     
+        }
+
+        _menuButton[0].onClick.AddListener(GameManager.Instance.LoadGameScene);
+        _menuButton[0].onClick.AddListener(LoadGameSceneLogic);
+        _menuButton[2].onClick.AddListener(GameManager.Instance.ExitGame);
+
+        _ingameButton[0].onClick.AddListener(GameManager.Instance.PauseGame);
+        _ingameButton[0].onClick.AddListener(PauseLogic);
+
+        _pauseMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
+        _pauseMenuButton[0].onClick.AddListener(RestartLogic);
+        _pauseMenuButton[1].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
+        _pauseMenuButton[1].onClick.AddListener(LoadMainMenuLogic);
+        _pauseMenuButton[2].onClick.AddListener(GameManager.Instance.ResumeGame);
+        _pauseMenuButton[2].onClick.AddListener(ResumeLogic);
+
+        _gameOverMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
+        _gameOverMenuButton[0].onClick.AddListener(RestartLogic);
+        _gameOverMenuButton[1].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
+        _gameOverMenuButton[1].onClick.AddListener(LoadMainMenuLogic);
+
+
+        _pauseGameAction = InputSystem.actions.FindActionMap("Player").FindAction("ESC");
+        _pauseGameAction.performed += ESCAction;
+    }
+
+    private void OnDestroy()
+    {
+        if (_pauseGameAction != null)
+        {
+            _pauseGameAction.performed -= ESCAction;
+        }
+    }
+
+    void ESCAction(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.GetCurrentSceneIndex() != 0)
+        {
+            if (!_canvasList[2].activeSelf)
+            {
+                _ingameButton[0].onClick.Invoke();
+            }
+            else if (_canvasList[2].activeSelf)
+            {
+                _pauseMenuButton[2].onClick.Invoke();
+            }
+        }
+    }
+
+    private void PauseLogic()
+    {
+        _canvasList[2].SetActive(true);
+    }
+
+    private void ResumeLogic()
+    {
+        _canvasList[2].SetActive(false);
+    }
+
+    private void RestartLogic()
+    {
+        if (_canvasList[2].activeSelf)
+        {
+            _canvasList[2].SetActive(false);
+        }
+        if (_canvasList[3].activeSelf)
+        {
+            _canvasList[3].SetActive(false);
+        }
+    }
+
+    private void LoadGameSceneLogic()
+    {
+        _canvasList[0].SetActive(false);
+        _canvasList[1].SetActive(true);
+    }
+
+    private void LoadMainMenuLogic()
+    {
+        foreach (GameObject canvas in _canvasList)
+        {
+            if (canvas == _canvasList[0])
+
+            {
+                canvas.SetActive(true);
+            }
+            else
+            {
+                canvas.SetActive(false);
+            }
+        }
+    }
+
+    //private void GameOverLogic()
+    //{         
+    //    _canvasList[3].SetActive(true);
+    //}
+
+
+
+   
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
