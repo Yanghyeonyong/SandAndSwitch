@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
 
     InputAction _pauseGameAction;
 
-    void Awake()
+    void Start()
     {
 
 
@@ -99,7 +99,10 @@ public class UIManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        _pauseGameAction.performed -= ESCAction;
+        if (_pauseGameAction != null)
+        {
+            _pauseGameAction.performed -= ESCAction;
+        }
     }
 
     void ESCAction(InputAction.CallbackContext context)
@@ -168,11 +171,7 @@ public class UIManager : MonoBehaviour
 
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void Update()
