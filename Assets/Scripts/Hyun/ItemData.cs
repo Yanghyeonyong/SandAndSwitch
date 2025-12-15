@@ -22,6 +22,7 @@ public class ItemData : ScriptableObject
     [Header("Consumable/Bomb")]
     public float radius = 1.5f;
     public float delay = 2f;
+    public LayerMask targetLayer;
 
     [Header("Consumable/Potion")]
     public float amount;

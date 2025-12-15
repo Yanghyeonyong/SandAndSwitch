@@ -5,6 +5,7 @@ public class QuickSlot : MonoBehaviour
     [SerializeField] private ItemData _data;//아이템정보
     [SerializeField] private int _count;//수량
     
+    
     //읽기전용
     public ItemData Data => _data;
     public int Count => _count;
@@ -12,19 +13,21 @@ public class QuickSlot : MonoBehaviour
 
     public void Init(ItemData data, int count)
     {
-        
+        _data = data;
+        _count = count;
     }
-    public void Add()
+    public void Add(int amount)//아이템 추가
     {
-
+        _count += amount;
     }
-    public void Consume()
+    public void Consume(int amount)//아이템 소모
     {
-
-    }
-    public void Clear()
-    {
-
+        _count -= amount;
+        if (_count <= 0)
+        {
+            _data = null;
+            _count = 0;
+        }
     }
 
 }
