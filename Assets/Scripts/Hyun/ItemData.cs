@@ -15,10 +15,8 @@ public class ItemData : ScriptableObject
     public GameObject prefab;
     public float weight;
 
-    [Header("Stack/Consume")]
-    [SerializeField] private bool _isConsumable = true;
+    [Header("Stack")]
     public int maxStack = 99;
-    public bool IsConsumable => _isConsumable;
     public bool IsStackable => maxStack > 1;
 
     [Header("Consumable/Bomb")]

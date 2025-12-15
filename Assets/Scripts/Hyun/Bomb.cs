@@ -10,7 +10,7 @@ public class Bomb : MonoBehaviour
     public static event Action OnUseBomb;
     public void UseBomb()
     {
-        //조건
+        //조건       
         OnUseBomb?.Invoke();
     }
     private void Explode()
