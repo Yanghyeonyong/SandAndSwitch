@@ -16,12 +16,12 @@ public class ItemData : ScriptableObject
     public float weight;
 
     [Header("Stack")]
-    public int maxStack = 99;
+    public int maxStack;
     public bool IsStackable => maxStack > 1;
 
     [Header("Consumable/Bomb")]
-    public float radius = 1.5f;
-    public float delay = 2f;
+    public float radius;
+    public float delay;
     public LayerMask targetLayer;
 
     [Header("Consumable/Potion")]

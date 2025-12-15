@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
   itemName: 
-  type: 0
+  type: 2
   icon: {fileID: 0}
   prefab: {fileID: 0}
   weight: 0
-  _isConsumable: 1
   maxStack: 99
-  radius: 1.5
-  delay: 2
+  radius: 0
+  delay: 0
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
   amount: 0
