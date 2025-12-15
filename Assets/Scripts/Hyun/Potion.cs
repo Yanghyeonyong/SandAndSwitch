@@ -3,8 +3,8 @@ using System;
 
 public class Potion : MonoBehaviour
 {
+    [SerializeField] private ItemData _itemData;
 
-    //읽기전용
     //포션 사용을 알리는 이벤트
     public static event Action OnUsePotion;
     public void UsePotion()
