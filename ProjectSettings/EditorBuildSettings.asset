@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SenseiScene.unity
     guid: a6ecd9677b92ec9478ced7beffccea59
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SenseiSceneGame.unity
     guid: 149e852fa7ba04449a7d1f59ab39b618
   - enabled: 1
