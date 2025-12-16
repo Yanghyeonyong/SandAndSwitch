@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
   m_Name: Bomb_Consumable
   m_EditorClassIdentifier: Assembly-CSharp::Item
+  id: 0
   itemName: 
-  icon: {fileID: 0}
-  prefab: {fileID: 0}
   type: 0
+  icon: {fileID: -2613247888821195678, guid: fe757fe48e0478946886c386485f8efa, type: 3}
+  prefab: {fileID: 6008120758980611909, guid: 1acefdf1a87e85e448b42e1dc49ccc4b, type: 3}
+  maxStack: 0
+  radius: 1.5
+  delay: 2
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0

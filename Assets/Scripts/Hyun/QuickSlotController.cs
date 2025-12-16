@@ -5,6 +5,7 @@ public class QuickSlotController : MonoBehaviour
     [SerializeField] private QuickSlot[] _slots = new QuickSlot[3];
     private int _currnetIndex = 0;
 
+
     public bool TryPickup(ItemData data)
     {
         //ÁßÃ¸

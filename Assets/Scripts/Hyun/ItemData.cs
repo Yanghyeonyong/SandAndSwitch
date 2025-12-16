@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum ItemType
 {
-    Consumable, Key, Special
+    Consumable, Special//, Key
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
@@ -13,7 +13,7 @@ public class ItemData : ScriptableObject
     public ItemType type;
     public Sprite icon;
     public GameObject prefab;
-    public float weight;
+    //public float weight;
 
     [Header("Stack")]
     public int maxStack;
@@ -24,8 +24,8 @@ public class ItemData : ScriptableObject
     public float delay;
     public LayerMask targetLayer;
 
-    [Header("Consumable/Potion")]
-    public float amount;
+    //[Header("Consumable/Potion")]
+    //public float amount;
     //[Header("Key")]
     
     //[Header("Special")]
