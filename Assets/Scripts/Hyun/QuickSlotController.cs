@@ -7,29 +7,27 @@ public class QuickSlotController : MonoBehaviour
 
     public int CurrentIndex { get; private set; } = 0;
 
-    private void Update()
+    private void Awake()
     {
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    CurrentIndex = 0;
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    CurrentIndex = 1;
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    CurrentIndex = 2;
-        //}
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            if (_slots[i] == null)
+                _slots[i] = new QuickSlot();
+        }
     }
     public bool TryPickup(ItemData data)
     {
+        if (data == null)
+        {
+            return false;
+        }
+
         //중첩
         if (data.IsStackable)
         {
             foreach (QuickSlot slot in _slots)
             {
-                if (slot.IsEmpty == false && slot.Data == data && slot.Count < data.maxStack)
+                if (slot.IsEmpty == false && slot.data == data && slot.count < data.maxStack)
                 {
                     slot.Add(1);
                     return true;
@@ -45,6 +43,7 @@ public class QuickSlotController : MonoBehaviour
                 return true;
             }
         }
+        Debug.Log($"픽업 완료 → 슬롯0: {_slots[0].data?.itemName}, 수량: {_slots[0].count}");
         return false;
     }
 
@@ -60,12 +59,12 @@ public class QuickSlotController : MonoBehaviour
         {
             return false;
         }
-        if (slot.Data.type != ItemType.Consumable)//소모성아이템이 아닐경우
+        if (slot.data.type != ItemType.Consumable)//소모성아이템이 아닐경우
         {
             return false;
         }
         //아이템 사용
-        slot.Consume(1);
+        slot.Use(1);
         return true;
     }
 }

@@ -295,6 +295,16 @@ public class Player : MonoBehaviour
         {
             _curGimmick.ExitGimmick();
         }
+        if (ctx.started && _nearbyItem != null)
+        {
+            QuickSlotController slot = GetComponent<QuickSlotController>();
+            if (slot != null && slot.TryPickup(_nearbyItem.ItemData))
+            {
+                _nearbyItem.Pickup();
+                _nearbyItem = null;
+                return; // 기믹과 중복 처리 방지
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -315,5 +325,16 @@ public class Player : MonoBehaviour
         {
             onPortal = 0;
         }
+    }
+    private ItemPickup _nearbyItem;
+    public void SetNearbyItem(ItemPickup item)
+    {
+        _nearbyItem = item;
+    }
+
+    public void ClearNearbyItem(ItemPickup item)
+    {
+        if (_nearbyItem == item)
+            _nearbyItem = null;
     }
 }

@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
-  m_Name: Speciall
+  m_Name: Special
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: 
+  itemName: Special
+  description: 
   type: 2
-  icon: {fileID: 0}
   prefab: {fileID: 0}
-  weight: 0.2
+  icon: {fileID: 0}
   maxStack: 1
   radius: 0
   delay: 0
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  amount: 0

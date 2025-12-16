@@ -4,8 +4,7 @@ public class ItemPickup : MonoBehaviour
 {
     [SerializeField] private ItemData _itemData;
 
-    private bool _canPickup;
-    private QuickSlotController _cachedSlot;
+    public ItemData ItemData => _itemData;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,8 +13,11 @@ public class ItemPickup : MonoBehaviour
             return;
         }
 
-        _cachedSlot = collision.GetComponent<QuickSlotController>();
-        _canPickup = true;
+        Player player = collision.GetComponent<Player>();
+        if (player != null)
+        {
+            player.SetNearbyItem(this);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -25,23 +27,16 @@ public class ItemPickup : MonoBehaviour
             return;
         }
 
-        _cachedSlot = null;
-        _canPickup = false;
+        Player player = collision.GetComponent<Player>();
+        if (player != null)
+        {
+            player.ClearNearbyItem(this);
+
+        }
     }
 
-    private void Update()
+    public void Pickup()
     {
-        if (!_canPickup)
-        {
-            return;
-        }
-
-        //if (Input.GetKeyDown(KeyCode.F))
-        //{
-        //    if (_cachedSlot != null && _cachedSlot.TryPickup(_itemData))
-        //    {
-        //        Destroy(gameObject);
-        //    }
-        //}
+        Destroy(gameObject);
     }
 }
