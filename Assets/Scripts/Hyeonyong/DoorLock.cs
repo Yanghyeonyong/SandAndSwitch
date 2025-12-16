@@ -63,14 +63,14 @@ public class DoorLock : MonoBehaviour
         //패스워드 정답시 발동할 코드
         if (_curPassword == _password)
         {
-            GameManager_Hyeonyong.Instance.IsGimmickClear[_gimmick.GimmickId] = true;
+            GameManager.Instance.IsGimmickClear[_gimmick.GimmickId] = true;
             _testObject.SetActive(false);
             gameObject.SetActive(false);
             
             _gimmick.IsClear = true;
             _gimmick=null;  
-            GameManager_Hyeonyong.Instance.OnProgressGimmick=false;
-            //Debug.Log(GameManager_Hyeonyong.Instance.IsGimmickClear[_gimmick.GimmickId]);
+            GameManager.Instance.OnProgressGimmick=false;
+            //Debug.Log(GameManager.Instance.IsGimmickClear[_gimmick.GimmickId]);
         }
     }
 
@@ -88,7 +88,7 @@ public class DoorLock : MonoBehaviour
     //}
     //public void ChoiceItem()
     //{
-    //    if (GamaManager_Hyeonyong.Instance.CheckItem)
+    //    if (GameManager.Instance.CheckItem)
     //    {
     //        _doorLock.SetActive(false);
     //        _testObject.SetActive(false);
