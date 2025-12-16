@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class Bomb : MonoBehaviour
 {
@@ -10,10 +11,15 @@ public class Bomb : MonoBehaviour
     public static event Action OnUseBomb;
     public void UseBomb()
     {
-        //조건       
+        //조건
+        StartCoroutine(ExplodeCoroutine());
         OnUseBomb?.Invoke();
     }
-    private void Explode()
+    private IEnumerator ExplodeCoroutine()//딜레이를 주기위한 코루틴
+    {
+        yield return new WaitForSeconds(_itemData.delay);
+    }
+    private void Explode()//폭발메서드
     {
         
     }

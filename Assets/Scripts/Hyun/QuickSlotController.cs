@@ -43,6 +43,11 @@ public class QuickSlotController : MonoBehaviour
         {
             return;
         }
+        if(slot.Data.type == ItemType.Consumable)
+        {
+            GameObject bombObj = Instantiate(slot.Data.prefab, 플레이어위치, Quaternion.identity);
+            
+        }
         //아이템 사용
         slot.Consume(1);
     }

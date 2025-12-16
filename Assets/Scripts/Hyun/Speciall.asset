@@ -17,8 +17,8 @@ MonoBehaviour:
   type: 2
   icon: {fileID: 0}
   prefab: {fileID: 0}
-  weight: 0
-  maxStack: 99
+  weight: 0.2
+  maxStack: 1
   radius: 0
   delay: 0
   targetLayer:
