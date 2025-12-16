@@ -1,0 +1,60 @@
+using UnityEngine;
+
+public class QuickSlotController : MonoBehaviour
+{
+    [SerializeField] private QuickSlot[] _slots = new QuickSlot[3];
+    //[SerializeField] private Player _player; //플레이어 참조 혹은 플레이어가 퀵슬롯컨트롤러를 참조
+    private int _currnetIndex = 0;
+
+
+    public bool TryPickup(ItemData data)
+    {
+        //중첩
+        if (data.IsStackable)
+        {
+            foreach (QuickSlot slot in _slots)
+            {
+                if (slot.IsEmpty == false && slot.Data == data)
+                {
+                    slot.Add(1);
+                    return true;
+                }
+            }
+        }
+        //빈슬롯
+        foreach (QuickSlot slot in _slots)
+        {
+            if (slot.IsEmpty)
+            {
+                slot.Init(data, 1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void SelectSlot(int index)//슬롯 선택
+    {
+        _currnetIndex = index;
+    }
+    
+    public void UseCurrentSlot()//선택된 슬롯 아이템 사용
+    {
+        QuickSlot slot = _slots[_currnetIndex];
+        if (slot.IsEmpty)
+        {
+            return;
+        }
+        if (slot.Data.type != ItemType.Consumable)//소모성아이템이 아닐경우
+        {
+            return;
+        }
+        if (slot.Data.type == ItemType.Consumable)
+        {
+            //GameObject bombObj = Instantiate(slot.Data.prefab, 플레이어위치, Quaternion.identity);
+            
+        }
+        //아이템 사용
+        slot.Consume(1);
+    }
+}
