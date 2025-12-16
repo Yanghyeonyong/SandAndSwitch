@@ -77,6 +77,8 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadGameScene()
     {
+        _curScene = 1;
+        _isGimmickClear.Clear();
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }
