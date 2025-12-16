@@ -31,7 +31,6 @@ public class ItemPickup : MonoBehaviour
         if (player != null)
         {
             player.ClearNearbyItem(this);
-
         }
     }
 

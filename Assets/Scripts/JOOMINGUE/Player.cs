@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public float holdForce = 25f;
     public float maxHoldTime = 0.18f;
     public float jumpCutMultiplier = 0.35f;
-    
+
     [Header("Jump Assist")]
     public float coyoteTime = 0.1f;
     public float jumpBufferTime = 0.12f;
@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
         // Direction
         if (Mathf.Abs(moveX) > 0.01f)
         {
-            transform.localScale = new Vector3(Mathf.Sign(moveX)*playerScale, playerScale, playerScale);
+            transform.localScale = new Vector3(Mathf.Sign(moveX) * playerScale, playerScale, playerScale);
         }
 
         // Variable Jump Hold
@@ -295,6 +295,7 @@ public class Player : MonoBehaviour
         {
             _curGimmick.ExitGimmick();
         }
+        //아이템 관련 추가
         if (ctx.started && _nearbyItem != null)
         {
             QuickSlotController slot = GetComponent<QuickSlotController>();
@@ -302,7 +303,7 @@ public class Player : MonoBehaviour
             {
                 _nearbyItem.Pickup();
                 _nearbyItem = null;
-                return; // 기믹과 중복 처리 방지
+                return;
             }
         }
     }
@@ -326,6 +327,7 @@ public class Player : MonoBehaviour
             onPortal = 0;
         }
     }
+    //아이템 관련 추가
     private ItemPickup _nearbyItem;
     public void SetNearbyItem(ItemPickup item)
     {
@@ -335,6 +337,8 @@ public class Player : MonoBehaviour
     public void ClearNearbyItem(ItemPickup item)
     {
         if (_nearbyItem == item)
+        {
             _nearbyItem = null;
+        }
     }
 }

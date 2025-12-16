@@ -12,7 +12,9 @@ public class QuickSlotController : MonoBehaviour
         for (int i = 0; i < _slots.Length; i++)
         {
             if (_slots[i] == null)
+            {
                 _slots[i] = new QuickSlot();
+            }
         }
     }
     public bool TryPickup(ItemData data)
@@ -27,7 +29,7 @@ public class QuickSlotController : MonoBehaviour
         {
             foreach (QuickSlot slot in _slots)
             {
-                if (slot.IsEmpty == false && slot.data == data && slot.count < data.maxStack)
+                if (slot.IsEmpty == false && slot.Data == data && slot.Count < data.maxStack)
                 {
                     slot.Add(1);
                     return true;
@@ -43,7 +45,6 @@ public class QuickSlotController : MonoBehaviour
                 return true;
             }
         }
-        Debug.Log($"픽업 완료 → 슬롯0: {_slots[0].data?.itemName}, 수량: {_slots[0].count}");
         return false;
     }
 
@@ -59,7 +60,7 @@ public class QuickSlotController : MonoBehaviour
         {
             return false;
         }
-        if (slot.data.type != ItemType.Consumable)//소모성아이템이 아닐경우
+        if (slot.Data.type != ItemType.Consumable)//소모성아이템이 아닐경우
         {
             return false;
         }
