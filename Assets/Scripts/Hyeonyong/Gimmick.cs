@@ -18,15 +18,15 @@ public abstract class Gimmick : MonoBehaviour
 
     protected bool CheckClear()
     {
-        //Debug.Log(GameManager_Hyeonyong.Instance.IsGimmickClear);
-        if (GameManager_Hyeonyong.Instance.IsGimmickClear.ContainsKey(_gimmickId))
+        //Debug.Log(GameManager.Instance.IsGimmickClear);
+        if (GameManager.Instance.IsGimmickClear.ContainsKey(_gimmickId))
         {
-            _isClear = GameManager_Hyeonyong.Instance.IsGimmickClear[_gimmickId];
+            _isClear = GameManager.Instance.IsGimmickClear[_gimmickId];
             return _isClear;
         }
         else
         {
-            GameManager_Hyeonyong.Instance.IsGimmickClear.Add(_gimmickId, _isClear);
+            GameManager.Instance.IsGimmickClear.Add(_gimmickId, _isClear);
             return _isClear;
         }
     }

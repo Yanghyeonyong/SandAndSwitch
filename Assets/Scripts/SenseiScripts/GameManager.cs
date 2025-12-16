@@ -18,10 +18,49 @@ public class GameManager : Singleton<GameManager>
     GameOverMenuButton: Restart, MainMenu
 
     */
+    //251216 - 양현용 추가 " 기믹 확인 용도
+    //이후엔 실제 퀵슬롯에서 원하는 타입의 아이템이 있는지를 체크할 예정
+    [SerializeField] bool _checkItem;
+    public bool CheckItem => _checkItem;
+    [SerializeField] bool _onProgressGimmick = false;
+    PlayerTest playerTest;
+    public PlayerTest PlayerTest => playerTest;
+    public bool OnProgressGimmick
+    {
+        get { return _onProgressGimmick; }
+        set { _onProgressGimmick = value; }
+    }
+
+    private Dictionary<int, bool> _isGimmickClear = new Dictionary<int, bool>();
+    public Dictionary<int, bool> IsGimmickClear => _isGimmickClear;
+
+    [SerializeField] int _curScene = 0;
+
+    //
+    void Start()
+    {
+        //251216 - 양현용 추가 : 테스트용 플레이어 스크립트를 찾는 용도
+        //해당 값을 찾는 기능은 현재 테스트 용으로  start에 있으나, 이후 플레이어 스폰 지점으로 이동 예정
+        playerTest = GameObject.FindFirstObjectByType<PlayerTest>().GetComponent<PlayerTest>();
+    }
+
 
     public int GetCurrentSceneIndex()
     {
         return SceneManager.GetActiveScene().buildIndex;
+    }
+
+
+    //251216 - 양현용 추가 : 다음 씬, 이전 씬으로 넘어가는 용도
+     public void LoadNextScene()
+    {
+        _curScene++;
+        SceneManager.LoadScene(_curScene);
+    }
+    public void LoadPrevScene()
+    {
+        _curScene--;
+        SceneManager.LoadScene(_curScene);
     }
 
 
@@ -97,10 +136,6 @@ public class GameManager : Singleton<GameManager>
     public List<Button> GameOverMenuButton { get; set; } = new List<Button>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

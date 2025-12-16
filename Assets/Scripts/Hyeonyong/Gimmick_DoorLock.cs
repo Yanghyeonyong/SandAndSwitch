@@ -66,7 +66,7 @@ public class Gimmick_DoorLock : Gimmick
         _interactiveUI.SetActive(false);
         _selection.SetActive(true);
 
-        GameManager_Hyeonyong.Instance.OnProgressGimmick = true;
+        GameManager.Instance.OnProgressGimmick = true;
     }
 
     public void ChoiceGimmick()
@@ -78,14 +78,14 @@ public class Gimmick_DoorLock : Gimmick
     }
     public void ChoiceItem()
     {
-        if (GameManager_Hyeonyong.Instance.CheckItem)
+        if (GameManager.Instance.CheckItem)
         {
             _doorLockObject.SetActive(false);
             _testObject.SetActive(false);
             _selection.SetActive(false);
 
             ResetSelectionButton();
-            GameManager_Hyeonyong.Instance.OnProgressGimmick = false;
+            GameManager.Instance.OnProgressGimmick = false;
         }
     }
     public override void ExitGimmick()
@@ -99,7 +99,7 @@ public class Gimmick_DoorLock : Gimmick
         ResetSelectionButton();
         _interactiveUI.SetActive(true);
 
-        GameManager_Hyeonyong.Instance.OnProgressGimmick=false;
+        GameManager.Instance.OnProgressGimmick=false;
     }
 
     public void ResetSelectionButton()

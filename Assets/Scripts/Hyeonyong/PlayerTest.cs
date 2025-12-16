@@ -8,6 +8,8 @@ public class PlayerTest : MonoBehaviour
     Vector2 _moveDir;
     Rigidbody2D _rb;
     [SerializeField] float _moveSpeed;
+    [SerializeField] float _jumpForce;
+    [SerializeField] float _knockBackForce;
 
     private bool _checkGimmick = false;
     public bool CheckGimmick
@@ -32,6 +34,8 @@ public class PlayerTest : MonoBehaviour
         }
     }
 
+    [SerializeField] private int onPortal=0;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -46,21 +50,54 @@ public class PlayerTest : MonoBehaviour
     {
         _moveDir = ctx.ReadValue<Vector2>();
     }
-
+    public void OnJump(InputAction.CallbackContext ctx)
+    {
+        _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+    }
     public void TakeDamage()
     {
         Debug.Log("데미지 입음");
+        _rb.AddForce(-_rb.linearVelocity * _knockBackForce, ForceMode2D.Impulse);
     }
 
     public void OnIneract(InputAction.CallbackContext ctx)
     {
-        if (ctx.started && _checkGimmick && !GameManager_Hyeonyong.Instance.OnProgressGimmick)
+        if (ctx.started && onPortal==1)
+        {
+            GameManager.Instance.LoadNextScene();
+        }
+        if (ctx.started && onPortal==2)
+        {
+            GameManager.Instance.LoadPrevScene();
+        }
+        
+        if (ctx.started && _checkGimmick && !GameManager.Instance.OnProgressGimmick)
         {
             _curGimmick.StartGimmick();
         }
-        else if (ctx.started && _checkGimmick && GameManager_Hyeonyong.Instance.OnProgressGimmick)
+        else if (ctx.started && _checkGimmick && GameManager.Instance.OnProgressGimmick)
         {
             _curGimmick.ExitGimmick();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Finish"))
+        {
+            onPortal=1;
+        }
+        else if (collision.CompareTag("Respawn"))
+        {
+            onPortal=2;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Finish")|| collision.CompareTag("Respawn"))
+        {
+            onPortal = 0;
         }
     }
 }

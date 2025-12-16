@@ -14,7 +14,7 @@ public class InteractiveObject : MonoBehaviour
     private void Start()
     {
         _gimmick = GetComponent<Gimmick>();
-        _playerTest = GameManager_Hyeonyong.Instance.GetComponent<PlayerTest>();
+        _playerTest = GameManager.Instance.GetComponent<PlayerTest>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
