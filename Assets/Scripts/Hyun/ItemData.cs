@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//임시로 제외 대상 주석처리
 public enum ItemType
 {
     Consumable, Special//, Key
@@ -10,9 +11,10 @@ public class ItemData : ScriptableObject
 {
     public int id;
     public string itemName;
+    public string description;
     public ItemType type;
-    public Sprite icon;
     public GameObject prefab;
+    public Sprite icon;
     //public float weight;
 
     [Header("Stack")]

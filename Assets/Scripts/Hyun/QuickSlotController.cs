@@ -3,6 +3,7 @@ using UnityEngine;
 public class QuickSlotController : MonoBehaviour
 {
     [SerializeField] private QuickSlot[] _slots = new QuickSlot[3];
+    //[SerializeField] private Player _player; //플레이어 참조 혹은 플레이어가 퀵슬롯컨트롤러를 참조
     private int _currnetIndex = 0;
 
 
@@ -44,7 +45,11 @@ public class QuickSlotController : MonoBehaviour
         {
             return;
         }
-        if(slot.Data.type == ItemType.Consumable)
+        if (slot.Data.type != ItemType.Consumable)//소모성아이템이 아닐경우
+        {
+            return;
+        }
+        if (slot.Data.type == ItemType.Consumable)
         {
             //GameObject bombObj = Instantiate(slot.Data.prefab, 플레이어위치, Quaternion.identity);
             
