@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "name": "KeySystem",
+    "maps": [
+        {
+            "name": "KeyDown",
+            "id": "545cfcd7-b664-47f1-970f-441844b497ba",
+            "actions": [
+                {
+                    "name": "NextKeyDown",
+                    "type": "Button",
+                    "id": "4e0d5443-acad-4b6a-ac37-0f8860e2ecdf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dc641c46-ba7b-4d38-92f9-179286b2b839",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextKeyDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "PC",
+            "bindingGroup": "PC",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+﻿캐릭터 ID,이름 스트링 키,소속 스트링 키,캐릭터 리소스
+char_id,name_str,faction_str,char_res
+int,str,str,string
+10001,Char_Name_Nar,Fact_Name_Nar,
+10101,Char_Name_001,Fact_Name_001,CH_Luna_01
+10102,Char_Name_001,Fact_Name_001,CH_Luna_02
+10103,Char_Name_001,Fact_Name_001,CH_Luna_03
+10104,Char_Name_001,Fact_Name_001,CH_Luna_04
+10105,Char_Name_001,Fact_Name_001,CH_Luna_05
+10201,Char_Name_002,Fact_Name_001,CH_Grandma_01
+10202,Char_Name_002,Fact_Name_001,CH_Grandma_02
+10203,Char_Name_002,Fact_Name_001,CH_Grandma_03
+10204,Char_Name_002,Fact_Name_001,CH_Grandma_04
+10205,Char_Name_002,Fact_Name_001,CH_Grandma_05
+10301,Char_Name_003,Fact_Name_002,CH_Maid_01
+10302,Char_Name_003,Fact_Name_002,CH_Maid_02
+10303,Char_Name_003,Fact_Name_002,CH_Maid_03
+10304,Char_Name_003,Fact_Name_002,CH_Maid_04
+10305,Char_Name_003,Fact_Name_002,CH_Maid_05
