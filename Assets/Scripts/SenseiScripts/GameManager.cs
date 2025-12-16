@@ -77,6 +77,7 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadGameScene()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }
 
