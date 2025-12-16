@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public float maxSpeed = 8f;
     public float acceleration = 60f;
     public float deceleration = 80f;
+    //251216 - 양현용 : 넉백 당하는 힘
+    public float knockBackForce;
 
     // Jump (Variable Jump)
     [Header("Jump")]
@@ -18,7 +20,7 @@ public class Player : MonoBehaviour
     public float holdForce = 25f;
     public float maxHoldTime = 0.18f;
     public float jumpCutMultiplier = 0.35f;
-
+    
     [Header("Jump Assist")]
     public float coyoteTime = 0.1f;
     public float jumpBufferTime = 0.12f;
@@ -55,6 +57,37 @@ public class Player : MonoBehaviour
     bool jumpHeld;
     float holdTimer;
 
+    [SerializeField] float playerScale = 5f;
+
+
+    //251216 - 양현용 : 기믹과의 상호작용
+    private bool _checkGimmick = false;
+    public bool CheckGimmick
+    {
+        get
+        {
+            return _checkGimmick;
+        }
+        set
+        {
+            _checkGimmick = value;
+        }
+    }
+    private Gimmick _curGimmick;
+    public Gimmick CurGimmick
+    {
+        get
+        { return _curGimmick; }
+        set
+        {
+            _curGimmick = value;
+        }
+    }
+
+    [SerializeField] private int onPortal = 0;
+
+    Vector3 curVelocity;
+
     // Unity 생명주기
     void Awake()
     {
@@ -67,6 +100,9 @@ public class Player : MonoBehaviour
         var map = actions.FindActionMap("Player", true);
         moveAction = map.FindAction("Move", true);
         jumpAction = map.FindAction("Jump", true);
+
+        //251216 - 양현용 : 게임매니저에 플레이어 전달
+        GameManager.Instance.Player = this;
     }
 
     void OnEnable()
@@ -164,7 +200,7 @@ public class Player : MonoBehaviour
         // Direction
         if (Mathf.Abs(moveX) > 0.01f)
         {
-            transform.localScale = new Vector3(Mathf.Sign(moveX), 1f, 1f);
+            transform.localScale = new Vector3(Mathf.Sign(moveX)*playerScale, playerScale, playerScale);
         }
 
         // Variable Jump Hold
@@ -218,7 +254,10 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
+        Debug.Log("데미지를 입었다");
+        curVelocity = rb.linearVelocity.normalized;
         animator.SetTrigger("Damage");
+        rb.AddForce(-curVelocity * knockBackForce, ForceMode2D.Impulse);
     }
 
     // FSM Helper
@@ -234,5 +273,47 @@ public class Player : MonoBehaviour
         if (groundCheck == null) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+    //251216 - 양현용 : 기믹과의 상호작용
+    public void OnIneract(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started && onPortal == 1)
+        {
+            GameManager.Instance.LoadNextScene();
+        }
+        if (ctx.started && onPortal == 2)
+        {
+            GameManager.Instance.LoadPrevScene();
+        }
+
+        if (ctx.started && _checkGimmick && !GameManager.Instance.OnProgressGimmick)
+        {
+            _curGimmick.StartGimmick();
+        }
+        else if (ctx.started && _checkGimmick && GameManager.Instance.OnProgressGimmick)
+        {
+            _curGimmick.ExitGimmick();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Finish"))
+        {
+            onPortal = 1;
+        }
+        else if (collision.CompareTag("Respawn"))
+        {
+            onPortal = 2;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Finish") || collision.CompareTag("Respawn"))
+        {
+            onPortal = 0;
+        }
     }
 }

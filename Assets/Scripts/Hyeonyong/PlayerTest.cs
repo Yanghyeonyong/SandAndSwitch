@@ -57,6 +57,7 @@ public class PlayerTest : MonoBehaviour
     public void TakeDamage()
     {
         Debug.Log("데미지 입음");
+
         _rb.AddForce(-_rb.linearVelocity * _knockBackForce, ForceMode2D.Impulse);
     }
 

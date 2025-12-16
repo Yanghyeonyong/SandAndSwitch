@@ -9,7 +9,7 @@ public class SpikeTrap : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             //해당 스크립트는 테스트용이며, 이후 변경 예정
-            collision.gameObject.GetComponent<PlayerTest>().TakeDamage();
+            collision.gameObject.GetComponent<Player>().TakeDamage();
         }
     }
 

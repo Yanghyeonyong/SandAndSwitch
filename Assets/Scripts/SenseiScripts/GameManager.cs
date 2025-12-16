@@ -23,8 +23,19 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] bool _checkItem;
     public bool CheckItem => _checkItem;
     [SerializeField] bool _onProgressGimmick = false;
-    PlayerTest playerTest;
-    public PlayerTest PlayerTest => playerTest;
+    Player player;
+    public Player Player
+    {
+        get
+        {
+            return player;
+        }
+        set
+        {
+            player = value;
+        }
+    }
+    //public Player Player => player;
     public bool OnProgressGimmick
     {
         get { return _onProgressGimmick; }
@@ -41,7 +52,7 @@ public class GameManager : Singleton<GameManager>
     {
         //251216 - 양현용 추가 : 테스트용 플레이어 스크립트를 찾는 용도
         //해당 값을 찾는 기능은 현재 테스트 용으로  start에 있으나, 이후 플레이어 스폰 지점으로 이동 예정
-        playerTest = GameObject.FindFirstObjectByType<PlayerTest>().GetComponent<PlayerTest>();
+        //player = GameObject.FindFirstObjectByType<Player>().GetComponent<Player>();
     }
 
 
