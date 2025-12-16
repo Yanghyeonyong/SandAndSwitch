@@ -19,6 +19,10 @@ public class QuickSlot : MonoBehaviour
     public void Add(int amount)//아이템 추가
     {
         _count += amount;
+        if (_count > _data.maxStack)//최대 스택 초과 방지
+        {
+            _count = _data.maxStack;
+        }
     }
     public void Consume(int amount)//아이템 소모
     {

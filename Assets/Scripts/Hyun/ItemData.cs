@@ -3,7 +3,7 @@ using UnityEngine;
 //임시로 제외 대상 주석처리
 public enum ItemType
 {
-    Consumable, Special//, Key
+    Consumable = 1, Special = 2//, Key
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]

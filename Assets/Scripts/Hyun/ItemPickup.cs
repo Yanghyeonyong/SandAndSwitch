@@ -4,25 +4,44 @@ public class ItemPickup : MonoBehaviour
 {
     [SerializeField] private ItemData _itemData;
 
+    private bool _canPickup;
+    private QuickSlotController _cachedSlot;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!collision.CompareTag("Player"))//태그 기준이라면...
+        if (!collision.CompareTag("Player"))
         {
             return;
         }
 
-        QuickSlotController quickSlot = collision.GetComponent<QuickSlotController>();
+        _cachedSlot = collision.GetComponent<QuickSlotController>();
+        _canPickup = true;
+    }
 
-        if (quickSlot == null)
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player"))
         {
             return;
         }
 
-        bool success = quickSlot.TryPickup(_itemData);
+        _cachedSlot = null;
+        _canPickup = false;
+    }
 
-        if (success)
+    private void Update()
+    {
+        if (!_canPickup)
         {
-            Destroy(gameObject);
+            return;
         }
+
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    if (_cachedSlot != null && _cachedSlot.TryPickup(_itemData))
+        //    {
+        //        Destroy(gameObject);
+        //    }
+        //}
     }
 }

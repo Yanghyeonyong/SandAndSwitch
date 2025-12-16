@@ -3,10 +3,25 @@ using UnityEngine;
 public class QuickSlotController : MonoBehaviour
 {
     [SerializeField] private QuickSlot[] _slots = new QuickSlot[3];
-    //[SerializeField] private Player _player; //플레이어 참조 혹은 플레이어가 퀵슬롯컨트롤러를 참조
-    private int _currnetIndex = 0;
 
 
+    public int CurrentIndex { get; private set; } = 0;
+
+    private void Update()
+    {
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    CurrentIndex = 0;
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    CurrentIndex = 1;
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    CurrentIndex = 2;
+        //}
+    }
     public bool TryPickup(ItemData data)
     {
         //중첩
@@ -14,7 +29,7 @@ public class QuickSlotController : MonoBehaviour
         {
             foreach (QuickSlot slot in _slots)
             {
-                if (slot.IsEmpty == false && slot.Data == data)
+                if (slot.IsEmpty == false && slot.Data == data && slot.Count < data.maxStack)
                 {
                     slot.Add(1);
                     return true;
@@ -35,26 +50,22 @@ public class QuickSlotController : MonoBehaviour
 
     public void SelectSlot(int index)//슬롯 선택
     {
-        _currnetIndex = index;
+        CurrentIndex = index;
     }
-    
-    public void UseCurrentSlot()//선택된 슬롯 아이템 사용
+
+    public bool TryUseCurrentSlot()//선택된 슬롯 아이템 사용
     {
-        QuickSlot slot = _slots[_currnetIndex];
+        QuickSlot slot = _slots[CurrentIndex];
         if (slot.IsEmpty)
         {
-            return;
+            return false;
         }
         if (slot.Data.type != ItemType.Consumable)//소모성아이템이 아닐경우
         {
-            return;
-        }
-        if (slot.Data.type == ItemType.Consumable)
-        {
-            //GameObject bombObj = Instantiate(slot.Data.prefab, 플레이어위치, Quaternion.identity);
-            
+            return false;
         }
         //아이템 사용
         slot.Consume(1);
+        return true;
     }
 }
