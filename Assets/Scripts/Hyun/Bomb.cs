@@ -44,7 +44,7 @@ public class Bomb : MonoBehaviour
         //폭탄 위치 기준, 범위(반지름), 대상
         Collider[] bombHits = Physics.OverlapSphere(transform.position, _itemData.radius, _itemData.targetLayer);
         _audio.Play();
-        foreach (Collider hit in bombHits)
+        foreach (Collider hit in bombHits)//
         {
             
         }
