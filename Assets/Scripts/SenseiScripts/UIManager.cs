@@ -10,6 +10,10 @@ public class UIManager : MonoBehaviour
     private List<Button> _pauseMenuButton = new List<Button>();
     private List<Button> _gameOverMenuButton = new List<Button>();
 
+    //승리메뉴 추가
+    private List<Button> _victoryMenuButton = new List<Button>();
+
+
     InputAction _pauseGameAction;
 
     void Start()
@@ -66,6 +70,13 @@ public class UIManager : MonoBehaviour
                         _gameOverMenuButton.Add(button);
                         //Debug.Log(button.name);
                     }
+                    else if (index ==4)
+                    {
+                        //승리메뉴 버튼 추가
+                        GameManager.Instance.VictoryMenuButton.Add(button);
+                        _victoryMenuButton.Add(button);
+                        //Debug.Log(button.name);
+                    }
                 }
                 
             }
@@ -92,6 +103,9 @@ public class UIManager : MonoBehaviour
         _gameOverMenuButton[1].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
         _gameOverMenuButton[1].onClick.AddListener(LoadMainMenuLogic);
 
+
+        _victoryMenuButton[0].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
+        _victoryMenuButton[0].onClick.AddListener(LoadMainMenuLogic);
 
         _pauseGameAction = InputSystem.actions.FindActionMap("Player").FindAction("ESC");
         _pauseGameAction.performed += ESCAction;
@@ -153,6 +167,23 @@ public class UIManager : MonoBehaviour
         foreach (GameObject canvas in _canvasList)
         {
             if (canvas == _canvasList[0])
+
+            {
+                canvas.SetActive(true);
+            }
+            else
+            {
+                canvas.SetActive(false);
+            }
+        }
+    }
+
+
+    private void LoadVictoryMenuLogic()
+    {
+        foreach (GameObject canvas in _canvasList)
+        {
+            if (canvas == _canvasList[4])
 
             {
                 canvas.SetActive(true);
