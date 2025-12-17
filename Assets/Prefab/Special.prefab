@@ -123,7 +123,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76aa71b4c84cd8f4ba9ece321682c838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialItem
-  _itemData: {fileID: 0}
+  _itemData: {fileID: 11400000, guid: 810cf7971d7d3b64da968029b8d72bac, type: 2}
 --- !u!114 &1099866606629244385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,4 +154,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3476ccb888d6cfd46afc79e2dbb19e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
-  _itemData: {fileID: 0}
+  _itemData: {fileID: 11400000, guid: 810cf7971d7d3b64da968029b8d72bac, type: 2}
