@@ -19,8 +19,8 @@ MonoBehaviour:
   prefab: {fileID: 6008120758980611909, guid: 1acefdf1a87e85e448b42e1dc49ccc4b, type: 3}
   icon: {fileID: -2613247888821195678, guid: fe757fe48e0478946886c386485f8efa, type: 3}
   maxStack: 99
-  radius: 1.5
+  radius: 7
   delay: 2
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128

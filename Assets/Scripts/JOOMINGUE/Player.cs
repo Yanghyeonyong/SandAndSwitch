@@ -121,6 +121,9 @@ public class Player : MonoBehaviour
 
         moveAction.Disable();
         jumpAction.Disable();
+
+      
+
     }
 
     void Update()
@@ -340,5 +343,40 @@ public class Player : MonoBehaviour
         {
             _nearbyItem = null;
         }
+    }
+    public void OnUseItem(InputAction.CallbackContext ctx)
+    {
+        QuickSlotController qs = GetComponent<QuickSlotController>();
+        if (qs == null) return;
+
+        QuickSlot slot = qs.CurrentSlot;
+
+        if (slot == null || slot.IsEmpty || slot.Data == null)
+            return;
+
+        ItemData data = slot.Data;
+
+        if (qs.TryUseCurrentSlot())
+        {
+            if (data.type == ItemType.Consumable && data.prefab != null)
+            {
+                GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+                bombObj.GetComponent<Bomb>().UseBomb();
+            }
+        }
+    }
+    public void OnSelectSlot1(InputAction.CallbackContext ctx)
+    {
+        GetComponent<QuickSlotController>().SelectSlot(0);
+    }
+
+    public void OnSelectSlot2(InputAction.CallbackContext ctx)
+    {
+        GetComponent<QuickSlotController>().SelectSlot(1);
+    }
+
+    public void OnSelectSlot3(InputAction.CallbackContext ctx)
+    {
+        GetComponent<QuickSlotController>().SelectSlot(2);
     }
 }

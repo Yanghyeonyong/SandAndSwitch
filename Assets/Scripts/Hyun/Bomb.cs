@@ -1,6 +1,7 @@
-using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Bomb : MonoBehaviour
 {
@@ -41,14 +42,40 @@ public class Bomb : MonoBehaviour
         //설정된 폭발 범위에 따라 폭발 애니메이션 스케일 증가
         float explosionScale = _itemData.radius / _baseExplosionRadius;//설정된 폭발 범위 / 스케일
         transform.localScale = Vector3.one * explosionScale;
-        //폭발 판정 확인(설치범위와 폭발 범위가 달라서 판정이 필요하다면 추가, 확정으로 설치만하면 파괴될것이라면 없어도됨)
-        //폭탄 위치 기준, 범위(반지름), 대상
-        Collider[] bombHits = Physics.OverlapSphere(transform.position, _itemData.radius, _itemData.targetLayer);
-        _audio.Play();
-        foreach (Collider hit in bombHits)
-        {
-            //지형파괴
 
+        _audio.Play();
+        BreakRadius();
+    }
+
+    private void BreakRadius()
+    {
+        Vector3 origin = transform.position;
+        float radius = _itemData.radius;
+
+        // 타일맵 탐색
+        Collider2D[] maps = Physics2D.OverlapCircleAll(origin, radius, _itemData.targetLayer);
+
+        foreach (var col in maps)
+        {
+            Tilemap map = col.GetComponent<Tilemap>();
+            if (map == null) continue;
+
+            // 폭발 범위 내부의 타일만 제거
+            BoundsInt bounds = map.cellBounds;
+
+            for (int x = bounds.xMin; x <= bounds.xMax; x++)
+            {
+                for (int y = bounds.yMin; y <= bounds.yMax; y++)
+                {
+                    Vector3Int cell = new Vector3Int(x, y, 0);
+                    Vector3 world = map.GetCellCenterWorld(cell);
+
+                    if (Vector2.Distance(origin, world) <= radius)
+                    {
+                        map.SetTile(cell, null);
+                    }
+                }
+            }
         }
     }
 }

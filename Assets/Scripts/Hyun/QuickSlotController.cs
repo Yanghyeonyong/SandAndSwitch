@@ -5,7 +5,10 @@ public class QuickSlotController : MonoBehaviour
     [SerializeField] private QuickSlot[] _slots = new QuickSlot[3];
 
 
+    //읽기전용
     public int CurrentIndex { get; private set; } = 0;
+    public QuickSlot CurrentSlot => _slots[CurrentIndex];
+
 
     private void Awake()
     {
