@@ -258,9 +258,9 @@ public class Player : MonoBehaviour
     public void TakeDamage()
     {
         Debug.Log("데미지를 입었다");
-        curVelocity = rb.linearVelocity.normalized;
+        //curVelocity = rb.linearVelocity.normalized;
         animator.SetTrigger("Damage");
-        rb.AddForce(-curVelocity * knockBackForce, ForceMode2D.Impulse);
+        //rb.AddForce(-curVelocity * knockBackForce, ForceMode2D.Impulse);
     }
 
     // FSM Helper
