@@ -93,7 +93,18 @@ public class GameManager : Singleton<GameManager>
 
         SceneManager.LoadScene(temp - 1);
         //Time.timeScale = 0f;
-        CanvasList[4].SetActive(true);
+        foreach (var canvas in CanvasList)
+        {
+            if (canvas != CanvasList[4])
+            {
+                canvas.SetActive(false);
+            }
+            else
+            {
+                canvas.SetActive(true);
+            }
+        }
+        //CanvasList[4].SetActive(true);
         //추가로직
     }
 

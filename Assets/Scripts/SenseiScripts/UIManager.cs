@@ -179,21 +179,21 @@ public class UIManager : MonoBehaviour
     }
 
 
-    private void LoadVictoryMenuLogic()
-    {
-        foreach (GameObject canvas in _canvasList)
-        {
-            if (canvas == _canvasList[4])
+    //private void LoadVictoryMenuLogic()
+    //{
+    //    foreach (GameObject canvas in _canvasList)
+    //    {
+    //        if (canvas == _canvasList[4])
 
-            {
-                canvas.SetActive(true);
-            }
-            else
-            {
-                canvas.SetActive(false);
-            }
-        }
-    }
+    //        {
+    //            canvas.SetActive(true);
+    //        }
+    //        else
+    //        {
+    //            canvas.SetActive(false);
+    //        }
+    //    }
+    //}
 
     //private void GameOverLogic()
     //{         
