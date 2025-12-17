@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2821272513310658220}
   - component: {fileID: 5041499167289587995}
   - component: {fileID: 920479805915004061}
+  - component: {fileID: 8321268917780800024}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -402,6 +403,25 @@ MonoBehaviour:
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &920479805915004061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673342718292914668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19df8988d43b7ab41a2bb702b8a6b7fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuickSlotController
+  _slots:
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+--- !u!114 &8321268917780800024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
