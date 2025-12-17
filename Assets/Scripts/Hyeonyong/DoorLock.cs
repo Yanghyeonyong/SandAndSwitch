@@ -52,7 +52,8 @@ public class DoorLock : MonoBehaviour
     }
     void SetPassword(int pressNum)
     {
-        PlaySound(_audio[2]);
+        //PlaySound(_audio[2]);
+        SoundEffectManager.Instance.PlayEffectSound(_audio[2]);
         _curPassword = pressNum;
     }
 
@@ -85,7 +86,8 @@ public class DoorLock : MonoBehaviour
             //Debug.Log(GameManager.Instance.IsGimmickClear[_gimmick.GimmickId]);
         }
 
-        PlaySound(_audio[0]);
+        //PlaySound(_audio[0]);
+        SoundEffectManager.Instance.PlayEffectSound(_audio[0]);
 
     }
 
