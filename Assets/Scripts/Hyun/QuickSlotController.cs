@@ -16,6 +16,15 @@ public class QuickSlotController : MonoBehaviour
                 _slots[i] = new QuickSlot();
             }
         }
+
+
+
+        if (GameManager.Instance != null)
+        {
+            //GameManager의 퀵슬롯 참조
+            GameManager.Instance.GameManagerQuickSlots = _slots;
+        }
+
     }
     public bool TryPickup(ItemData data)
     {
@@ -32,6 +41,14 @@ public class QuickSlotController : MonoBehaviour
                 if (slot.IsEmpty == false && slot.Data == data && slot.Count < data.maxStack)
                 {
                     slot.Add(1);
+                    for ( int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
+                    {
+                        if (slot.Data == GameManager.Instance.GameManagerQuickSlots[i].Data)
+                        {
+                            Debug.Log(i);
+                            GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = slot.Count.ToString();
+                        }
+                    }
                     return true;
                 }
             }
@@ -42,6 +59,15 @@ public class QuickSlotController : MonoBehaviour
             if (slot.IsEmpty)
             {
                 slot.Init(data, 1);
+                for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
+                {
+                    if (slot.Data == GameManager.Instance.GameManagerQuickSlots[i].Data)
+                    {
+                        GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = slot.Count.ToString();
+                        GameManager.Instance.GameManagerQuickSlotIcons[i].sprite = slot.Data.icon;
+                        GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(true);
+                    }
+                }
                 return true;
             }
         }
@@ -66,6 +92,14 @@ public class QuickSlotController : MonoBehaviour
         }
         //아이템 사용
         slot.Use(1);
+        if (slot.Count <= 0)
+        {
+            GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = "";
+            GameManager.Instance.GameManagerQuickSlotIcons[CurrentIndex].gameObject.SetActive(false);
+            GameManager.Instance.GameManagerQuickSlotIcons[CurrentIndex].sprite = null;
+        }
+
+        //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
         return true;
     }
 }

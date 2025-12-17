@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 public class UIManager : MonoBehaviour
 {
     private List<GameObject> _canvasList = new List<GameObject>();
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour
         int index = 0;
         foreach (Transform child in transform)
         {
+            int grandchildIndex = 0;
             GameManager.Instance.CanvasList.Add(child.gameObject);
             _canvasList.Add(child.gameObject);
             foreach (Transform grandChild in child)
@@ -78,14 +80,48 @@ public class UIManager : MonoBehaviour
                         //Debug.Log(button.name);
                     }
                 }
+
+                else if (index ==1)
+                {
+                    switch (grandchildIndex)
+                    {
+                        case 5:
+                           
+                            GameManager.Instance.GameManagerQuickSlotCountTexts[0] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+                            GameManager.Instance.GameManagerQuickSlotIcons[0] = grandChild.GetChild(0).GetComponent<Image>();
+                            GameManager.Instance.GameManagerQuickSlotIcons[0].gameObject.SetActive(false);
+                            Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[0].name);
+                            break;
+                        case 6:
+                            GameManager.Instance.GameManagerQuickSlotCountTexts[1] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+                            GameManager.Instance.GameManagerQuickSlotIcons[1] = grandChild.GetChild(0).GetComponent<Image>();
+                            GameManager.Instance.GameManagerQuickSlotIcons[1].gameObject.SetActive(false);
+                            Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[1].name);
+                            break;
+                        case 7:
+                            GameManager.Instance.GameManagerQuickSlotCountTexts[2] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+                            GameManager.Instance.GameManagerQuickSlotIcons[2] = grandChild.GetChild(0).GetComponent<Image>();
+                            GameManager.Instance.GameManagerQuickSlotIcons[2].gameObject.SetActive(false);
+                            Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[2].name);
+                            break;
+                    }
+
+
+
+                }
+
+                grandchildIndex++;
+
+
+
                 
             }
             index++;
      
         }
 
-        _menuButton[0].onClick.AddListener(GameManager.Instance.LoadGameScene);
         _menuButton[0].onClick.AddListener(LoadGameSceneLogic);
+        _menuButton[0].onClick.AddListener(GameManager.Instance.LoadGameScene);
         _menuButton[2].onClick.AddListener(GameManager.Instance.ExitGame);
 
         _ingameButton[0].onClick.AddListener(GameManager.Instance.PauseGame);
@@ -146,6 +182,15 @@ public class UIManager : MonoBehaviour
 
     private void RestartLogic()
     {
+
+        for (int i = 0; i < GameManager.Instance.GameManagerQuickSlotCountTexts.Length; i++)
+        {
+            GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
+            GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
+            GameManager.Instance.GameManagerQuickSlots[i] = null;
+        }
+
+
         if (_canvasList[2].activeSelf)
         {
             _canvasList[2].SetActive(false);
@@ -157,6 +202,19 @@ public class UIManager : MonoBehaviour
     }
 
     private void LoadGameSceneLogic()
+    {
+        for (int i = 0; i < GameManager.Instance.GameManagerQuickSlotCountTexts.Length; i++)
+        {
+            GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
+            GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
+            GameManager.Instance.GameManagerQuickSlots[i] = null;
+        }
+        //GameManager.Instance.GameManagerQuickSlotCountTexts[0].text = "";
+        //GameManager.Instance.GameManagerQuickSlotIcons[0].gameObject.SetActive(false);
+        _canvasList[0].SetActive(false);
+        _canvasList[1].SetActive(true);
+    }
+    private void LoadSaveGameSceneLogic()
     {
         _canvasList[0].SetActive(false);
         _canvasList[1].SetActive(true);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using TMPro;
 
 public enum GameState
 {
@@ -27,6 +28,12 @@ public class GameManager : Singleton<GameManager>
     */
     //251216 - 양현용 추가 " 기믹 확인 용도
     //이후엔 실제 퀵슬롯에서 원하는 타입의 아이템이 있는지를 체크할 예정
+
+    public QuickSlot[] GameManagerQuickSlots { get; set; } = new QuickSlot[3];
+    public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[3];
+    public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[3];
+
+
     [SerializeField] bool _checkItem;
     public bool CheckItem => _checkItem;
     [SerializeField] bool _onProgressGimmick = false;
