@@ -58,7 +58,10 @@ public class Bomb : MonoBehaviour
         foreach (var col in maps)
         {
             Tilemap map = col.GetComponent<Tilemap>();
-            if (map == null) continue;
+            if (map == null)
+            {
+                continue;
+            }
 
             // 폭발 범위 내부의 타일만 제거
             BoundsInt bounds = map.cellBounds;

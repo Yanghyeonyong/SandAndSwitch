@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4109991600814425346}
   - component: {fileID: 2821272513310658220}
   - component: {fileID: 5041499167289587995}
+  - component: {fileID: 920479805915004061}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -331,11 +332,94 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4109991600814425346}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnSelectSlot1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a653d269-5297-42e5-95ed-b76badf88ce0
+    m_ActionName: 'Player/SelectSlot1[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4109991600814425346}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnSelectSlot2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 74ee7c66-04ca-47a9-9ed4-09adb255ab42
+    m_ActionName: 'Player/SelectSlot2[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4109991600814425346}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnSelectSlot3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7f191f62-9644-4a6c-b800-f5cd1d8fb8f6
+    m_ActionName: 'Player/SelectSlot3[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4109991600814425346}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnUseItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c8dd5a94-a72f-4299-8eb2-1fe258a389ad
+    m_ActionName: 'Player/UseItem[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &920479805915004061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673342718292914668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19df8988d43b7ab41a2bb702b8a6b7fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuickSlotController
+  _slots:
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
 --- !u!1 &5184850711954464169
 GameObject:
   m_ObjectHideFlags: 0
