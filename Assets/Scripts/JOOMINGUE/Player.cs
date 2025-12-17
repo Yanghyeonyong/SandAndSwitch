@@ -347,12 +347,17 @@ public class Player : MonoBehaviour
     public void OnUseItem(InputAction.CallbackContext ctx)
     {
         QuickSlotController qs = GetComponent<QuickSlotController>();
-        if (qs == null) return;
+        if (qs == null)
+        {
+            return;
+        }
 
         QuickSlot slot = qs.CurrentSlot;
 
         if (slot == null || slot.IsEmpty || slot.Data == null)
+        {
             return;
+        }
 
         ItemData data = slot.Data;
 
