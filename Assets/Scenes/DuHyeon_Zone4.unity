@@ -359,6 +359,10 @@ PrefabInstance:
       value: Player (1)
       objectReference: {fileID: 0}
     - target: {fileID: 673342718292914668, guid: 04458193750062148a0826942060c90d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 673342718292914668, guid: 04458193750062148a0826942060c90d, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -3134,6 +3138,7 @@ GameObject:
   - component: {fileID: 1737635461}
   - component: {fileID: 1737635460}
   - component: {fileID: 1737635459}
+  - component: {fileID: 1737635462}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -3230,6 +3235,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1737635462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737635458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d090f86afb3f88542a5f3b1360b82bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraManager
 --- !u!1 &1880192312
 GameObject:
   m_ObjectHideFlags: 0

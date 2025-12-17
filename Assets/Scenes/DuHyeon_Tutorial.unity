@@ -11002,6 +11002,9 @@ MonoBehaviour:
   _checkItem: 0
   _onProgressGimmick: 0
   _curScene: 2
+  _playerPrefab: {fileID: 0}
+  _player: {fileID: 0}
+  _playerSpawnPos: []
 --- !u!4 &1375658254
 Transform:
   m_ObjectHideFlags: 0
@@ -11373,6 +11376,7 @@ GameObject:
   - component: {fileID: 1662788307}
   - component: {fileID: 1662788306}
   - component: {fileID: 1662788309}
+  - component: {fileID: 1662788310}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -11489,6 +11493,18 @@ MonoBehaviour:
     MaxWindowSize: 0
     Padding: 0
   m_LegacyMaxWindowSize: -2
+--- !u!114 &1662788310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662788305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d090f86afb3f88542a5f3b1360b82bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraManager
 --- !u!1001 &1672792270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11500,6 +11516,10 @@ PrefabInstance:
     - target: {fileID: 673342718292914668, guid: 04458193750062148a0826942060c90d, type: 3}
       propertyPath: m_Name
       value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 673342718292914668, guid: 04458193750062148a0826942060c90d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5041499167289587995, guid: 04458193750062148a0826942060c90d, type: 3}
       propertyPath: m_ActionEvents.Array.size

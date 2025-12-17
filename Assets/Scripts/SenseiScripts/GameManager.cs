@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using TMPro;
 using System.Collections;
+using UnityEditor;
 
 public enum GameState
 {
@@ -73,6 +74,12 @@ public class GameManager : Singleton<GameManager>
         private set { _gameState = value; }
     }
 
+    [SerializeField] GameObject _playerPrefab;
+    public GameObject _player;
+
+    //0. 튜토리얼 시작 위치 1. 맵 2시작 위치 2. 맵 4 시작 위치 3. 맵2 복귀 위치
+    [SerializeField] Vector3[] _playerSpawnPos;
+
     void Start()
     {
         //251216 - 양현용 추가 : 테스트용 플레이어 스크립트를 찾는 용도
@@ -94,21 +101,51 @@ public class GameManager : Singleton<GameManager>
     //251216 - 양현용 추가 : 다음 씬, 이전 씬으로 넘어가는 용도
      public void LoadNextScene()
     {
+        player = null;
         _curScene++;
         SceneManager.LoadScene(_curScene);
+
+        if (_curScene >= 1 && _curScene <= 3)
+        {
+            //_player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene-1], Quaternion.identity);
+            //player = _player.GetComponent<Player>();
+            StartCoroutine(SpawnPlayer());
+        }
+    }
+    IEnumerator SpawnPlayer()
+    {
+        yield return GameSceneLoadAsyncOperation.isDone;
+        _player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene - 1], Quaternion.identity);
+        player = _player.GetComponent<Player>();
+    }
+    IEnumerator SpawnPlayer(int spawnPos)
+    {
+        yield return GameSceneLoadAsyncOperation.isDone;
+        _player = Instantiate(_playerPrefab, _playerSpawnPos[spawnPos], Quaternion.identity);
+        player = _player.GetComponent<Player>();
     }
     public void LoadPrevScene()
     {
+        player = null;
         _curScene--;
         SceneManager.LoadScene(_curScene);
+        if (_curScene == 2)
+        {
+            //_player = Instantiate(_playerPrefab, _playerSpawnPos[3], Quaternion.identity);
+            //player = _player.GetComponent<Player>();
+            StartCoroutine(SpawnPlayer(3));
+        }
     }
 
     public AsyncOperation GameSceneLoadAsyncOperation;
     public void LoadGameScene()
     {
         //251216 - 양현용 : 새게임시 기믹 초기화 및 씬 설정
+        Debug.Log("스타트");
         _curScene = 1;
         _isGimmickClear.Clear();
+        player = null;
+
 
         Time.timeScale = 1f;
         GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
@@ -129,8 +166,15 @@ public class GameManager : Singleton<GameManager>
         }
 
             GameSceneLoadAsyncOperation.allowSceneActivation = true;
-       
+
+        yield return GameSceneLoadAsyncOperation.isDone;
+        _player = Instantiate(_playerPrefab, _playerSpawnPos[0], Quaternion.identity);
+        player = _player.GetComponent<Player>();
+        Debug.Log("플레이어 생성");
+
     }
+
+    
 
     public void LoadMainMenuScene()
     {
