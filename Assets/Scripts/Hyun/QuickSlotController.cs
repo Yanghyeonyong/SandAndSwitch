@@ -107,6 +107,10 @@ public class QuickSlotController : MonoBehaviour
             GameManager.Instance.GameManagerQuickSlotIcons[CurrentIndex].gameObject.SetActive(false);
             GameManager.Instance.GameManagerQuickSlotIcons[CurrentIndex].sprite = null;
         }
+        else
+        {
+            GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
+        }
 
         //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
         return true;
