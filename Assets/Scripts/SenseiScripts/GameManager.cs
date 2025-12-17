@@ -178,6 +178,7 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 1f;
         //+추가로직
+        _curScene = 1;
 
         //현재 체크포인트 개념 없음
         if (SceneManager.GetActiveScene().buildIndex != 1)
