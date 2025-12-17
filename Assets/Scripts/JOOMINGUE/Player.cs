@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         moveAction.Disable();
         jumpAction.Disable();
 
-      
+
 
     }
 
@@ -346,6 +346,10 @@ public class Player : MonoBehaviour
     }
     public void OnUseItem(InputAction.CallbackContext ctx)
     {
+        if (!ctx.started)
+        {
+            return;
+        }
         QuickSlotController qs = GetComponent<QuickSlotController>();
         if (qs == null)
         {
