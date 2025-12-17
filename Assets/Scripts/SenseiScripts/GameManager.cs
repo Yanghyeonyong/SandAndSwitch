@@ -86,6 +86,17 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(0);
     }
 
+
+    public void LoadVictoryScene()
+    {
+        int temp = SceneManager.sceneCountInBuildSettings;
+
+        SceneManager.LoadScene(temp - 1);
+        //Time.timeScale = 0f;
+        CanvasList[4].SetActive(true);
+        //추가로직
+    }
+
     public void PauseGame()
     {
 
@@ -146,6 +157,9 @@ public class GameManager : Singleton<GameManager>
     public List<Button> IngameButton { get; set; } = new List<Button>();
     public List<Button> PauseMenuButton { get; set; } = new List<Button>();
     public List<Button> GameOverMenuButton { get; set; } = new List<Button>();
+
+    //Victory Menu Button
+    public List<Button> VictoryMenuButton { get; set; } = new List<Button>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
