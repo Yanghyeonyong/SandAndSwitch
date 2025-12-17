@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using TMPro;
+using System.Collections;
 
 public enum GameState
 {
@@ -102,7 +103,7 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(_curScene);
     }
 
-
+    public AsyncOperation GameSceneLoadAsyncOperation;
     public void LoadGameScene()
     {
         //251216 - 양현용 : 새게임시 기믹 초기화 및 씬 설정
@@ -110,7 +111,25 @@ public class GameManager : Singleton<GameManager>
         _isGimmickClear.Clear();
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene(1);
+        GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
+        GameSceneLoadAsyncOperation.allowSceneActivation = false;
+        StartCoroutine(WaitForGameSceneLoad());
+
+
+        //SceneManager.LoadScene(1);
+    }
+
+
+    IEnumerator WaitForGameSceneLoad()
+    {
+
+        while (GameSceneLoadAsyncOperation.progress < 0.9f)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+            GameSceneLoadAsyncOperation.allowSceneActivation = true;
+       
     }
 
     public void LoadMainMenuScene()

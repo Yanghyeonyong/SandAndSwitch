@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Collections;
 public class UIManager : MonoBehaviour
 {
     private List<GameObject> _canvasList = new List<GameObject>();
@@ -120,8 +121,8 @@ public class UIManager : MonoBehaviour
      
         }
 
-        _menuButton[0].onClick.AddListener(LoadGameSceneLogic);
         _menuButton[0].onClick.AddListener(GameManager.Instance.LoadGameScene);
+        _menuButton[0].onClick.AddListener(LoadGameSceneLogic);
         _menuButton[2].onClick.AddListener(GameManager.Instance.ExitGame);
 
         _ingameButton[0].onClick.AddListener(GameManager.Instance.PauseGame);
@@ -211,9 +212,24 @@ public class UIManager : MonoBehaviour
         }
         //GameManager.Instance.GameManagerQuickSlotCountTexts[0].text = "";
         //GameManager.Instance.GameManagerQuickSlotIcons[0].gameObject.SetActive(false);
+        StartCoroutine(WaitForAsyncGameSceneLoad());
+    }
+
+    IEnumerator WaitForAsyncGameSceneLoad()
+    {
+
+        while (GameManager.Instance.GameSceneLoadAsyncOperation.progress < 0.95f)
+        {
+            yield return null;
+        }
         _canvasList[0].SetActive(false);
         _canvasList[1].SetActive(true);
+
     }
+
+
+
+
     private void LoadSaveGameSceneLogic()
     {
         _canvasList[0].SetActive(false);
