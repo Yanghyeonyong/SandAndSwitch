@@ -21,8 +21,10 @@ public class Gimmick_DoorLock : Gimmick
     [SerializeField] GameObject _interactiveUI;
     [SerializeField] GameObject _testObject;
     public GameObject TestObject => _testObject;
-    
 
+    //사용에 필요한 아이템 id
+    [SerializeField] int _itemId;
+    int length = 0;
     private void Start()
     {
         if (CheckClear())
@@ -47,6 +49,7 @@ public class Gimmick_DoorLock : Gimmick
                 _selectionButtons[i] = _selection.transform.GetChild(i).GetComponent<Button>();
             }
         }
+        length=GameManager.Instance.GameManagerQuickSlots.Length;
     }
 
     public override void StartGimmick()
@@ -80,16 +83,40 @@ public class Gimmick_DoorLock : Gimmick
     }
     public void ChoiceItem()
     {
-        if (GameManager.Instance.CheckItem)
+        //if (GameManager.Instance.CheckItem)
+        //{
+        //    _doorLockObject.SetActive(false);
+        //    _testObject.SetActive(false);
+        //    _selection.SetActive(false);
+
+        //    ResetSelectionButton();
+        //    GameManager.Instance.OnProgressGimmick = false;
+
+        //    GameManager.Instance.ResumeGame();
+        //}
+        int index = CheckQuickSlotItem();
+        if (index !=-1)
         {
+            ItemData data = GameManager.Instance.GameManagerQuickSlots[index].Data;
+            GameManager.Instance.GameManagerQuickSlots[index].Use(1);
+            GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+            bombObj.GetComponent<Bomb>().UseBomb();
+            if (GameManager.Instance.GameManagerQuickSlots[index].Count <= 0)
+            {
+                GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
+                GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
+                GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
+            }
+
             _doorLockObject.SetActive(false);
-            _testObject.SetActive(false);
+            //_testObject.SetActive(false);
             _selection.SetActive(false);
 
             ResetSelectionButton();
             GameManager.Instance.OnProgressGimmick = false;
 
             GameManager.Instance.ResumeGame();
+            IsClear = true;
         }
     }
     public override void ExitGimmick()
@@ -122,5 +149,24 @@ public class Gimmick_DoorLock : Gimmick
         _selection.SetActive(false);
         ResetSelectionButton();
         _interactiveUI.SetActive(true);
+    }
+
+
+    //해당 아이템 id가 있으면 true 반환
+    private int CheckQuickSlotItem()
+    {
+        //QuickSlot[] _check = GameManager.Instance.GameManagerQuickSlots;
+        for (int i = 0; i < length; i++)
+        {
+            if (GameManager.Instance.GameManagerQuickSlots[i] != null)
+            {
+                if (GameManager.Instance.GameManagerQuickSlots[i].Data.id == 0)
+                {
+                    return i;
+                }
+
+            }
+        }
+        return -1;
     }
 }
