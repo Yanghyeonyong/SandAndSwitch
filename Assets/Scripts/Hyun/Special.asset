@@ -16,8 +16,8 @@ MonoBehaviour:
   itemName: "\uBCF4\uBB3C"
   description: 
   type: 3
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 5886606223929163084, guid: 613102a45d38cb74da182a9982c859dd, type: 3}
+  icon: {fileID: -3491882392630799336, guid: a8aadeb4b96f4c547a47786bfbdbbea6, type: 3}
   maxStack: 1
   radius: 0
   delay: 0
