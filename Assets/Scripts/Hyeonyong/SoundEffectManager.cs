@@ -3,10 +3,13 @@ using UnityEngine;
 public class SoundEffectManager:Singleton<SoundEffectManager>
 {
     [SerializeField] private AudioSource _effectAudio;
-    //효과음은 한 번에 여러개 들릴 수 있으니 PlayOneShot 활용
-    public void PlayEffectSound(AudioClip audio, Vector3 pos)
+    private void Awake()
     {
-        transform.position = pos;   
+        _effectAudio=GetComponent<AudioSource>();
+    }
+    //효과음은 한 번에 여러개 들릴 수 있으니 PlayOneShot 활용
+    public void PlayEffectSound(AudioClip audio)
+    {   
         if (_effectAudio.clip == null)
         {
             _effectAudio.clip = audio;
