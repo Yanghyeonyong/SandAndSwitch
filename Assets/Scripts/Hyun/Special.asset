@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 0
   itemName: Special
   description: 
-  type: 2
+  type: 3
   prefab: {fileID: 0}
   icon: {fileID: 0}
   maxStack: 1

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 0
-  itemName: Key
+  id: 102
+  itemName: "\uC5F4\uC1E0"
   description: 
-  type: 1
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  type: 2
+  prefab: {fileID: 2886194570387356004, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+  icon: {fileID: -2613247888821195678, guid: fe757fe48e0478946886c386485f8efa, type: 3}
   maxStack: 99
   radius: 0
   delay: 0
