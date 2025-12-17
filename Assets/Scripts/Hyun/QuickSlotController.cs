@@ -20,12 +20,18 @@ public class QuickSlotController : MonoBehaviour
             }
         }
 
+         
 
-
-        if (GameManager.Instance != null)
+        if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] == null)
         {
             //GameManagerÀÇ Äü½½·Ô ÂüÁ¶
             GameManager.Instance.GameManagerQuickSlots = _slots;
+        }
+
+
+        else if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] != null)
+        {
+            _slots = GameManager.Instance.GameManagerQuickSlots;
         }
 
     }
