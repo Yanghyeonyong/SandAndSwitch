@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class QuickSlot : MonoBehaviour
+[System.Serializable]
+public class QuickSlot
 {
     [SerializeField] private ItemData _data;//아이템정보
     [SerializeField] private int _count;//수량
-    
-    
+
+
     //읽기전용
     public ItemData Data => _data;
     public int Count => _count;
@@ -19,8 +20,12 @@ public class QuickSlot : MonoBehaviour
     public void Add(int amount)//아이템 추가
     {
         _count += amount;
+        if (_count > _data.maxStack)//최대 스택 초과 방지
+        {
+            _count = _data.maxStack;
+        }
     }
-    public void Consume(int amount)//아이템 소모
+    public void Use(int amount)//아이템 사용
     {
         _count -= amount;
         if (_count <= 0)

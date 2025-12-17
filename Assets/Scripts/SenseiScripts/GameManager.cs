@@ -77,6 +77,10 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadGameScene()
     {
+        //251216 - 양현용 : 새게임시 기믹 초기화 및 씬 설정
+        _curScene = 1;
+        _isGimmickClear.Clear();
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }

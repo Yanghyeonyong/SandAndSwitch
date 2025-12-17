@@ -20,11 +20,12 @@ public class Bomb : MonoBehaviour
             _audio = GetComponent<AudioSource>();
         }
     }
-    private void Start()
+
+    public void UseBomb()
     {
         StartCoroutine(ExplodeCoroutine());
     }
-    
+
     private IEnumerator ExplodeCoroutine()//딜레이를 주기위한 코루틴
     {
 
@@ -46,8 +47,8 @@ public class Bomb : MonoBehaviour
         _audio.Play();
         foreach (Collider hit in bombHits)
         {
-            
+            //지형파괴
+
         }
-        //지형파괴
     }
 }
