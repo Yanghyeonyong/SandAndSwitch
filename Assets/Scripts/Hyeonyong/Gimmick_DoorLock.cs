@@ -67,6 +67,8 @@ public class Gimmick_DoorLock : Gimmick
         _selection.SetActive(true);
 
         GameManager.Instance.OnProgressGimmick = true;
+
+        GameManager.Instance.PauseGame();
     }
 
     public void ChoiceGimmick()
@@ -86,6 +88,8 @@ public class Gimmick_DoorLock : Gimmick
 
             ResetSelectionButton();
             GameManager.Instance.OnProgressGimmick = false;
+
+            GameManager.Instance.ResumeGame();
         }
     }
     public override void ExitGimmick()
@@ -100,6 +104,8 @@ public class Gimmick_DoorLock : Gimmick
         _interactiveUI.SetActive(true);
 
         GameManager.Instance.OnProgressGimmick=false;
+
+        GameManager.Instance.ResumeGame();
     }
 
     public void ResetSelectionButton()
