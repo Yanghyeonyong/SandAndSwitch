@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+
+public enum GameState
+{
+    PhaseOne,
+    PhaseTwo
+}
+
 public class GameManager : Singleton<GameManager>
 {
 
@@ -48,6 +55,16 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] int _curScene = 0;
 
     //
+
+
+    private GameState _gameState = GameState.PhaseOne;
+
+    public GameState CurrentGameState
+    {
+        get { return _gameState; }
+        private set { _gameState = value; }
+    }
+
     void Start()
     {
         //251216 - 양현용 추가 : 테스트용 플레이어 스크립트를 찾는 용도
@@ -55,6 +72,10 @@ public class GameManager : Singleton<GameManager>
         //player = GameObject.FindFirstObjectByType<Player>().GetComponent<Player>();
     }
 
+    public void EnterPhaseTwo()
+    {
+        _gameState = (GameState)1;
+    }
 
     public int GetCurrentSceneIndex()
     {
