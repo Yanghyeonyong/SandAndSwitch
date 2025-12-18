@@ -363,7 +363,7 @@ public class GameManager : Singleton<GameManager>
         //Time.timeScale = 0f;
         foreach (var canvas in CanvasList)
         {
-            if (canvas != CanvasList[4])
+            if (canvas != CanvasList[4] || canvas != CanvasList[5])
             {
                 canvas.SetActive(false);
             }
@@ -410,7 +410,7 @@ public class GameManager : Singleton<GameManager>
     {
         foreach (GameObject canvas in CanvasList)
         {
-            if (canvas != CanvasList[3])
+            if (canvas != CanvasList[3] || canvas != CanvasList[5])
             {
                 canvas.SetActive(false);
 

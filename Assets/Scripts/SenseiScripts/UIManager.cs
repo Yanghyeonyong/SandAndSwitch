@@ -208,6 +208,7 @@ public class UIManager : MonoBehaviour
             _canvasList[6].SetActive(false);
             foreach (GameObject canvas in _tempCanvasList)
             {
+                
                 canvas.SetActive(true);
             }
             _tempCanvasList.Clear();
@@ -218,7 +219,7 @@ public class UIManager : MonoBehaviour
         {
             foreach (GameObject canvas in _canvasList)
             {
-                if (canvas.activeSelf)
+                if (canvas.activeSelf & canvas != _canvasList[5])
                 {
                     _tempCanvasList.Add(canvas);
                     canvas.SetActive(false);
@@ -248,7 +249,7 @@ public class UIManager : MonoBehaviour
 
         else if (_canvasList[6].activeSelf)
         {
-            ControlGuideLogic();
+            _controlGuideMenuButton[0].onClick.Invoke();
         }
     }
 
