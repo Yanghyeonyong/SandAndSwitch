@@ -11,17 +11,6 @@ public class Bomb : MonoBehaviour
 
     private float _baseExplosionRadius = 1f;//스케일 1일때 폭발 반경
 
-    //폭탄을 사용을 알리는 이벤트
-    public static event Action OnUseBomb;
-
-    private void Awake()
-    {
-        if (_audio == null)
-        {
-            _audio = GetComponent<AudioSource>();
-        }
-    }
-
     public void UseBomb()
     {
         StartCoroutine(ExplodeCoroutine());
@@ -34,7 +23,6 @@ public class Bomb : MonoBehaviour
         _animator.SetTrigger("Explosion");
         Explode();
         yield return new WaitForSeconds(0.6f);
-        OnUseBomb?.Invoke();
         Destroy(gameObject);
     }
     private void Explode()//폭발메서드
