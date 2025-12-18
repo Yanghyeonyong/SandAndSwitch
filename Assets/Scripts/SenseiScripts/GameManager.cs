@@ -446,6 +446,8 @@ public class GameManager : Singleton<GameManager>
     //Victory Menu Button
     public List<Button> VictoryMenuButton { get; set; } = new List<Button>();
 
+    public List<Button> ControlGuideMenuButton { get; set; } = new List<Button>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     // Update is called once per frame

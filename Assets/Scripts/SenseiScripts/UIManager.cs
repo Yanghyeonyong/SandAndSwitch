@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     private List<Button> _ingameButton = new List<Button>();
     private List<Button> _pauseMenuButton = new List<Button>();
     private List<Button> _gameOverMenuButton = new List<Button>();
+    private List<Button> _controlGuideMenuButton = new List<Button>();
 
     //승리메뉴 추가
     private List<Button> _victoryMenuButton = new List<Button>();
@@ -53,12 +54,13 @@ public class UIManager : MonoBehaviour
             {
                 _audioSource = child.GetComponent<AudioSource>();
 
-                break;
+                
             }
 
             int grandchildIndex = 0;
             GameManager.Instance.CanvasList.Add(child.gameObject);
             _canvasList.Add(child.gameObject);
+            Debug.Log(child.name);
             foreach (Transform grandChild in child)
             {
                 if (grandChild.GetComponent<Button>() !=null)
@@ -97,6 +99,13 @@ public class UIManager : MonoBehaviour
                         _victoryMenuButton.Add(button);
                         //Debug.Log(button.name);
                     }
+                    else if (index == 6)
+                    {
+                        GameManager.Instance.ControlGuideMenuButton.Add(button);
+                        _controlGuideMenuButton.Add(button);
+                        Debug.Log(button.name);
+                    }
+
                 }
 
                 else if (index ==1)
@@ -141,6 +150,8 @@ public class UIManager : MonoBehaviour
         _menuButton[0].onClick.AddListener(GameManager.Instance.LoadGameScene);
         _menuButton[0].onClick.AddListener(LoadGameSceneLogic);
         _menuButton[0].onClick.AddListener(PlayUIClickSound);
+        _menuButton[1].onClick.AddListener(ControlGuideLogic);
+        _menuButton[1].onClick.AddListener(PlayUIClickSound);
         _menuButton[2].onClick.AddListener(GameManager.Instance.ExitGame);
         _menuButton[2].onClick.AddListener(PlayUIClickSound);
 
@@ -157,6 +168,8 @@ public class UIManager : MonoBehaviour
         _pauseMenuButton[2].onClick.AddListener(GameManager.Instance.ResumeGame);
         _pauseMenuButton[2].onClick.AddListener(PlayUIClickSound);
         _pauseMenuButton[2].onClick.AddListener(ResumeLogic);
+        _pauseMenuButton[3].onClick.AddListener(ControlGuideLogic);
+        _pauseMenuButton[3].onClick.AddListener(PlayUIClickSound);
 
         _gameOverMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
         _gameOverMenuButton[0].onClick.AddListener(PlayUIClickSound);
@@ -170,6 +183,9 @@ public class UIManager : MonoBehaviour
         _victoryMenuButton[0].onClick.AddListener(PlayUIClickSound);
         _victoryMenuButton[0].onClick.AddListener(LoadMainMenuLogic);
 
+        _controlGuideMenuButton[0].onClick.AddListener(ControlGuideLogic);
+        _controlGuideMenuButton[0].onClick.AddListener(PlayUIClickSound);
+
         _pauseGameAction = InputSystem.actions.FindActionMap("Player").FindAction("ESC");
         _pauseGameAction.performed += ESCAction;
     }
@@ -182,9 +198,43 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    List<GameObject> _tempCanvasList = new List<GameObject>();
+
+    void ControlGuideLogic()
+    {
+        if (_canvasList[6].activeSelf)
+        {
+            _canvasList[6].SetActive(false);
+            foreach (GameObject canvas in _tempCanvasList)
+            {
+                canvas.SetActive(true);
+            }
+            _tempCanvasList.Clear();
+            //return;
+        }
+
+        else if (!_canvasList[6].activeSelf)
+        {
+            foreach (GameObject canvas in _canvasList)
+            {
+                if (canvas.activeSelf)
+                {
+                    _tempCanvasList.Add(canvas);
+                    canvas.SetActive(false);
+                }
+            }
+            _canvasList[6].SetActive(true);
+        }
+
+
+
+
+    }
+
     void ESCAction(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.GetCurrentSceneIndex() != 0)
+        if (GameManager.Instance.GetCurrentSceneIndex() != 0 && _canvasList[1].activeSelf)
         {
             if (!_canvasList[2].activeSelf)
             {
@@ -194,6 +244,11 @@ public class UIManager : MonoBehaviour
             {
                 _pauseMenuButton[2].onClick.Invoke();
             }
+        }
+
+        else if (_canvasList[6].activeSelf)
+        {
+            ControlGuideLogic();
         }
     }
 
