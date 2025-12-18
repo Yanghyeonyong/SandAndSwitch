@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using TMPro;
 using System.Collections;
 using UnityEditor;
+using NUnit.Framework.Constraints;
 
 public enum GameState
 {
@@ -80,16 +81,40 @@ public class GameManager : Singleton<GameManager>
     //0. 튜토리얼 시작 위치 1. 맵 2시작 위치 2. 맵 4 시작 위치 3. 맵2 복귀 위치
     [SerializeField] Vector3[] _playerSpawnPos;
 
+    [SerializeField] float _gameOverCount = 60f;
+    [SerializeField] float _minusGameOverCount = 0.1f;
+    WaitForSeconds _wait;
+    private Coroutine _gameOverCoroutine;
+    public Coroutine GameOverCoroutine
+    {
+        get
+        {
+            return _gameOverCoroutine;
+        }
+        set
+        {
+            _gameOverCoroutine = value;
+        }
+    }
+
     void Start()
     {
         //251216 - 양현용 추가 : 테스트용 플레이어 스크립트를 찾는 용도
         //해당 값을 찾는 기능은 현재 테스트 용으로  start에 있으나, 이후 플레이어 스폰 지점으로 이동 예정
         //player = GameObject.FindFirstObjectByType<Player>().GetComponent<Player>();
+        _wait = new WaitForSeconds(_minusGameOverCount);
     }
 
     public void EnterPhaseTwo()
     {
         _gameState = (GameState)1;
+        //
+        _gameOverCoroutine = StartCoroutine(CheckGameOver());
+    }
+    public void EnterPhaseOne()
+    {
+        _gameState = (GameState)0;
+        _checkItem=false;
     }
 
     public int GetCurrentSceneIndex()
@@ -112,28 +137,49 @@ public class GameManager : Singleton<GameManager>
             StartCoroutine(SpawnPlayer());
         }
     }
+
+    IEnumerator CheckGameOver()
+    {
+        float _curCount = _gameOverCount;
+        _curCount -= _minusGameOverCount;
+        while (_curCount > 0)
+        {
+            yield return _wait;
+            _curCount -= _minusGameOverCount;
+        }
+        PlayerDeath();
+    }
+
     IEnumerator SpawnPlayer()
     {
         yield return GameSceneLoadAsyncOperation.isDone;
         _player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene - 1], Quaternion.identity);
         player = _player.GetComponent<Player>();
     }
-    IEnumerator SpawnPlayer(int spawnPos)
+    IEnumerator SpawnPlayer_Prev(int spawnPos, bool phaseChange)
     {
         yield return GameSceneLoadAsyncOperation.isDone;
         _player = Instantiate(_playerPrefab, _playerSpawnPos[spawnPos], Quaternion.identity);
         player = _player.GetComponent<Player>();
+
+        if (phaseChange)
+        {
+            EnterPhaseTwo();
+        }
     }
     public void LoadPrevScene()
     {
         player = null;
         _curScene--;
         SceneManager.LoadScene(_curScene);
+        //현재 페이즈가 전환되는 시점의 씬 넘버가 2라서 이와 같이 적용
         if (_curScene == 2)
         {
             //_player = Instantiate(_playerPrefab, _playerSpawnPos[3], Quaternion.identity);
             //player = _player.GetComponent<Player>();
-            StartCoroutine(SpawnPlayer(3));
+            
+            //테스트용으로 남는 bool값 아이템 보유 여부로 사용
+            StartCoroutine(SpawnPlayer_Prev(3, _checkItem));
         }
     }
 
@@ -241,9 +287,16 @@ public class GameManager : Singleton<GameManager>
 
     public void PlayerDeath()
     {
+        foreach (GameObject canvas in CanvasList)
+        {
+            canvas.SetActive(false); 
+        }
+
         Time.timeScale = 0f;
         CanvasList[3].SetActive(true);
+        EnterPhaseOne();
         //추가로직
+
     }
 
 
