@@ -28,9 +28,38 @@ public class GameManager : Singleton<GameManager>
 
     private Color _heartFullColor;
     private Color _heartEmptyColor;
-    
-    
 
+    //아이템테이블,스트링테이블(주민규)
+    public Table<int, ItemTableData> ItemTable { get; private set; }
+    public Table<string, StringTableData> StringTable { get; private set; }
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+
+        LoadTables();      // 1) 파싱
+        ResolveTableAssets(); // 2) 프리팹/아이콘 실제 로드
+    }
+
+    void LoadTables()
+    {
+        TextAsset csv = Resources.Load<TextAsset>("Data/ItemTable"); // Resources/Data/ItemTable.csv
+        ItemTable = TableParser.Parse<int, ItemTableData>(csv, "ID");
+        StringTable = TableParser.Parse<string, StringTableData>(csv, "key");
+    }
+
+    void ResolveTableAssets()
+    {
+        // 아래 foreach는 너 Table 구현에 맞춰서 "모든 row를 도는 방법"만 맞춰야 해.
+        foreach (var row in ItemTable.Data.Values) // 예: Rows가 Dictionary라면
+        {
+            if (!string.IsNullOrEmpty(row.Prefab))
+                row.PrefabObject = Resources.Load<GameObject>(row.Prefab);
+
+            if (!string.IsNullOrEmpty(row.Icon))
+                row.IconSprite = Resources.Load<Sprite>(row.Icon);
+        }
+    }
 
     //UI 관련
     /*
