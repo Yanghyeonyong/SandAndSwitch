@@ -163,6 +163,7 @@ public class GameManager : Singleton<GameManager>
         _player = Instantiate(_playerPrefab, _playerSpawnPos[spawnPos], Quaternion.identity);
         player = _player.GetComponent<Player>();
 
+
         if (phaseChange)
         {
             EnterPhaseTwo();
@@ -178,8 +179,12 @@ public class GameManager : Singleton<GameManager>
         {
             //_player = Instantiate(_playerPrefab, _playerSpawnPos[3], Quaternion.identity);
             //player = _player.GetComponent<Player>();
-            
+
             //테스트용으로 남는 bool값 아이템 보유 여부로 사용
+
+            //현재 테스트용으로 이와 같이 적용되었습니다. 이후 수정 예정
+            _checkItem = true;
+
             StartCoroutine(SpawnPlayer_Prev(3, _checkItem));
         }
     }
