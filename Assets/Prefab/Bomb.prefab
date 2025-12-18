@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2613247888821195678, guid: fe757fe48e0478946886c386485f8efa, type: 3}
+  m_Sprite: {fileID: 6727300385631512931, guid: f50e437ab0c193b4ea12df51ed1a487b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
   _itemData: {fileID: 11400000, guid: add8d2d4205b91f4d81c38cac2df835c, type: 2}
+  _soundValue: 1
 --- !u!82 &2051655380453933502
 AudioSource:
   m_ObjectHideFlags: 0
