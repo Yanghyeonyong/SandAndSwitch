@@ -11,6 +11,11 @@ public class InteractiveObject : MonoBehaviour
     Player _player;
     [SerializeField] GameObject _interactiveUI;
     [SerializeField] bool _isReuse=false;
+    public bool IsReuse
+    {
+        get { return _isReuse; }
+        set { _isReuse = value; }
+    }
 
     private void Start()
     {
@@ -47,7 +52,8 @@ public class InteractiveObject : MonoBehaviour
         }
         if (_gimmick.IsClear)
         {
-            if (_player.CheckGimmick)
+            //NullReferenceExeption 방지를 위해 && _isReuse 추가
+            if (_player.CheckGimmick && _isReuse)
             {
                 _player.CheckGimmick = false;
                 _interactiveUI.SetActive(false);

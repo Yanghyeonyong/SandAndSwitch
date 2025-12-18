@@ -22,8 +22,12 @@ public class Gimmick_Gate : Gimmick
     {
         if (IsClear|| CheckQuickSlotItem())
         {
+            IsClear = true;
+            //NullReferenceExeption 방지를 위해 IsReuse를 false로 전환
+            GetComponent<InteractiveObject>().IsReuse = false;
             GameManager.Instance.IsGimmickClear[GimmickId] = true;
             GameManager.Instance.LoadNextScene();
+            gameObject.SetActive(false);
         }
     }
 

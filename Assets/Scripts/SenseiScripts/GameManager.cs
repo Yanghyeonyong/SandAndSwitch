@@ -139,7 +139,10 @@ public class GameManager : Singleton<GameManager>
         SoundEffectManager.Instance.PlayBGM(_bgms[3]);
         _gameState = (GameState)1;
         //
-        _gameOverCoroutine = StartCoroutine(CheckGameOver());
+        if (_gameOverCoroutine == null)
+        {
+            _gameOverCoroutine = StartCoroutine(CheckGameOver());
+        }
     }
     public void EnterPhaseOne()
     {
