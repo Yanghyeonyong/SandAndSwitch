@@ -219,6 +219,12 @@ public class GameManager : Singleton<GameManager>
         player = null;
 
 
+        if (_gameOverCoroutine != null)
+        {
+            StopCoroutine(_gameOverCoroutine);
+            _gameOverCoroutine = null;
+        }
+
         CurrentPlayerHealth = _maxPlayerHealth;
         HeartLogic();
 
