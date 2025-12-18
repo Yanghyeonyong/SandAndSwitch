@@ -192,14 +192,8 @@ public class UIManager : MonoBehaviour
         }
 
 
-        if (_canvasList[2].activeSelf)
-        {
-            _canvasList[2].SetActive(false);
-        }
-        if (_canvasList[3].activeSelf)
-        {
-            _canvasList[3].SetActive(false);
-        }
+        StartCoroutine(WaitForAsyncGameSceneLoad());
+        
     }
 
     private void LoadGameSceneLogic()
@@ -222,9 +216,24 @@ public class UIManager : MonoBehaviour
         {
             yield return null;
         }
-        _canvasList[0].SetActive(false);
-        _canvasList[1].SetActive(true);
+        
+        if(_canvasList[0].activeSelf)
+        {
+            _canvasList[0].SetActive(false);
+        }
+        if (!_canvasList[1].activeSelf)
+        {
+            _canvasList[1].SetActive(true);
+        }
 
+        if (_canvasList[2].activeSelf)
+        {
+            _canvasList[2].SetActive(false);
+        }
+        if (_canvasList[3].activeSelf)
+        {
+            _canvasList[3].SetActive(false);
+        }
     }
 
 
