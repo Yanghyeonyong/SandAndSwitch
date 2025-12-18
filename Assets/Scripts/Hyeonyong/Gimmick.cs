@@ -7,7 +7,7 @@ public abstract class Gimmick : MonoBehaviour
     [SerializeField] int _gimmickId=0;
     public int GimmickId => _gimmickId;
 
-    private bool _isClear = false;
+    protected bool _isClear = false;
     public bool IsClear
     {
         get { return _isClear; }

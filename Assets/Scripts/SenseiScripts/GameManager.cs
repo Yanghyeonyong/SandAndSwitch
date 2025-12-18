@@ -38,7 +38,11 @@ public class GameManager : Singleton<GameManager>
 
 
     [SerializeField] bool _checkItem;
-    public bool CheckItem => _checkItem;
+    public bool CheckItem
+    {
+        get { return _checkItem; }
+        set { _checkItem = value; }
+    }
     [SerializeField] bool _onProgressGimmick = false;
     Player player;
     public Player Player
@@ -59,7 +63,7 @@ public class GameManager : Singleton<GameManager>
         set { _onProgressGimmick = value; }
     }
 
-    private Dictionary<int, bool> _isGimmickClear = new Dictionary<int, bool>();
+    [SerializeField] private Dictionary<int, bool> _isGimmickClear = new Dictionary<int, bool>();
     public Dictionary<int, bool> IsGimmickClear => _isGimmickClear;
 
     [SerializeField] int _curScene = 0;
@@ -97,6 +101,10 @@ public class GameManager : Singleton<GameManager>
             _gameOverCoroutine = value;
         }
     }
+
+    //BGM 목록
+    //0. 튜토리얼 1. 스테이지 2 :Phase 1 2. 스테이지 4 3. 스테이지 2 : Phase 2
+    [SerializeField] AudioClip[] _bgms;
 
     void Start()
     {
@@ -154,20 +162,24 @@ public class GameManager : Singleton<GameManager>
     IEnumerator SpawnPlayer()
     {
         yield return GameSceneLoadAsyncOperation.isDone;
+        yield return null;
+        SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
         _player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene - 1], Quaternion.identity);
         player = _player.GetComponent<Player>();
     }
-    IEnumerator SpawnPlayer_Prev(int spawnPos, bool phaseChange)
+    IEnumerator SpawnPlayer_Prev(int spawnPos)
     {
         yield return GameSceneLoadAsyncOperation.isDone;
+        yield return null;
+        SoundEffectManager.Instance.PlayBGM(_bgms[spawnPos]);
         _player = Instantiate(_playerPrefab, _playerSpawnPos[spawnPos], Quaternion.identity);
         player = _player.GetComponent<Player>();
 
 
-        if (phaseChange)
-        {
-            EnterPhaseTwo();
-        }
+        //if (phaseChange)
+        //{
+        //    EnterPhaseTwo();
+        //}
     }
     public void LoadPrevScene()
     {
@@ -182,10 +194,8 @@ public class GameManager : Singleton<GameManager>
 
             //테스트용으로 남는 bool값 아이템 보유 여부로 사용
 
-            //현재 테스트용으로 이와 같이 적용되었습니다. 이후 수정 예정
-            _checkItem = true;
 
-            StartCoroutine(SpawnPlayer_Prev(3, _checkItem));
+            StartCoroutine(SpawnPlayer_Prev(3));
         }
     }
 
@@ -197,6 +207,12 @@ public class GameManager : Singleton<GameManager>
         _curScene = 1;
         _isGimmickClear.Clear();
         player = null;
+
+        if (_gameOverCoroutine != null)
+        {
+            StopCoroutine(_gameOverCoroutine);
+            _gameOverCoroutine = null;
+        }
 
 
         Time.timeScale = 1f;
@@ -231,10 +247,16 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
+        _isGimmickClear.Clear();
+        if (_gameOverCoroutine != null)
+        {
+            StopCoroutine(_gameOverCoroutine);
+            _gameOverCoroutine = null;
+        }
         Time.timeScale = 1f;
         //+추가로직
         _curScene = 1;
-
+        
 
         GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
         GameSceneLoadAsyncOperation.allowSceneActivation = false;
@@ -253,6 +275,13 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadVictoryScene()
     {
+        if (_gameOverCoroutine != null)
+        {
+            StopCoroutine(_gameOverCoroutine);
+            _gameOverCoroutine = null;
+        }
+        EnterPhaseOne();
+
         int temp = SceneManager.sceneCountInBuildSettings;
 
         SceneManager.LoadScene(temp - 1);

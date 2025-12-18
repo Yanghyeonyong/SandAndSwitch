@@ -115,4 +115,33 @@ public class QuickSlotController : MonoBehaviour
         //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
         return true;
     }
+
+
+    public bool TryUseCurrentSlot(int index)//선택된 슬롯 아이템 사용
+    {
+        QuickSlot slot = _slots[index];
+        if (slot.IsEmpty)
+        {
+            return false;
+        }
+        if (slot.Data.type != ItemType.Consumable)//소모성아이템이 아닐경우
+        {
+            return false;
+        }
+        //아이템 사용
+        slot.Use(1);
+        if (slot.Count <= 0)
+        {
+            GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
+            GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
+            GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
+        }
+        else
+        {
+            GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = slot.Count.ToString();
+        }
+
+        //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
+        return true;
+    }
 }
