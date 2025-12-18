@@ -10,6 +10,7 @@ public class InteractiveObject : MonoBehaviour
     Gimmick _gimmick;
     Player _player;
     [SerializeField] GameObject _interactiveUI;
+    [SerializeField] bool _isReuse=false;
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class InteractiveObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_gimmick.IsClear)
+        if (_gimmick.IsClear && !_isReuse)
         {
             return;
         }

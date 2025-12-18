@@ -116,6 +116,7 @@ public class GameManager : Singleton<GameManager>
 
     public void EnterPhaseTwo()
     {
+        SoundEffectManager.Instance.PlayBGM(_bgms[3]);
         _gameState = (GameState)1;
         //
         _gameOverCoroutine = StartCoroutine(CheckGameOver());
@@ -171,7 +172,10 @@ public class GameManager : Singleton<GameManager>
     {
         yield return GameSceneLoadAsyncOperation.isDone;
         yield return null;
-        SoundEffectManager.Instance.PlayBGM(_bgms[spawnPos]);
+        if (!_checkItem)
+        {
+            SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
+        }
         _player = Instantiate(_playerPrefab, _playerSpawnPos[spawnPos], Quaternion.identity);
         player = _player.GetComponent<Player>();
 

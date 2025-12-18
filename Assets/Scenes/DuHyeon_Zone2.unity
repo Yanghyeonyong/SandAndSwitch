@@ -396,7 +396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &37743253
 Transform:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &108820080
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -752,6 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 1341535657}
+  _isReuse: 0
 --- !u!114 &108820085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,6 +861,18 @@ PrefabInstance:
     - target: {fileID: 7695490896634775110, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391615826656233361, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391615826656233361, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391615826656233361, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -40195,6 +40208,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8391615826656233361, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391615826656233361, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391615826656233361, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40549,6 +40574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 1341535657}
+  _isReuse: 0
 --- !u!114 &850403366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40657,6 +40683,18 @@ PrefabInstance:
     - target: {fileID: 7695490896634775110, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391615826656233361, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391615826656233361, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391615826656233361, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41263,9 +41301,11 @@ GameObject:
   - component: {fileID: 1587891369}
   - component: {fileID: 1587891368}
   - component: {fileID: 1587891370}
+  - component: {fileID: 1587891372}
+  - component: {fileID: 1587891371}
   m_Layer: 0
   m_Name: Portal_End
-  m_TagString: Finish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41389,6 +41429,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.16, y: 0.24}
   m_EdgeRadius: 0
+--- !u!114 &1587891371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587891367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242189ce8a6366c48b2e79b269a4ad4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gimmick_Gate
+  _gimmickId: 1
+  _itemId: 102
+  _requireCount: 3
+--- !u!114 &1587891372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587891367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0292107f62db3e7478a1976754147deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
+  _interactiveUI: {fileID: 1341535657}
+  _isReuse: 1
 --- !u!1001 &1745033912
 PrefabInstance:
   m_ObjectHideFlags: 0
