@@ -83,17 +83,6 @@ public class Gimmick_DoorLock : Gimmick
     }
     public void ChoiceItem()
     {
-        //if (GameManager.Instance.CheckItem)
-        //{
-        //    _doorLockObject.SetActive(false);
-        //    _testObject.SetActive(false);
-        //    _selection.SetActive(false);
-
-        //    ResetSelectionButton();
-        //    GameManager.Instance.OnProgressGimmick = false;
-
-        //    GameManager.Instance.ResumeGame();
-        //}
         int index = CheckQuickSlotItem();
         if (index !=-1)
         {
@@ -160,7 +149,7 @@ public class Gimmick_DoorLock : Gimmick
         {
             if (GameManager.Instance.GameManagerQuickSlots[i] != null)
             {
-                if (GameManager.Instance.GameManagerQuickSlots[i].Data.id == 0)
+                if (GameManager.Instance.GameManagerQuickSlots[i].Data.id == _itemId)
                 {
                     return i;
                 }

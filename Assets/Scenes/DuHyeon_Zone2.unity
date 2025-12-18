@@ -40568,7 +40568,7 @@ MonoBehaviour:
   _password: 4
   _interactiveUI: {fileID: 1341535657}
   _testObject: {fileID: 16988666}
-  _itemId: 0
+  _itemId: 101
 --- !u!58 &850403367
 CircleCollider2D:
   m_ObjectHideFlags: 0
