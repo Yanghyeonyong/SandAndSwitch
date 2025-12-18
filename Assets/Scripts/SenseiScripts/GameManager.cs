@@ -205,6 +205,8 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(WaitForGameSceneLoad());
 
 
+
+
         //SceneManager.LoadScene(1);
     }
 
@@ -220,16 +222,31 @@ public class GameManager : Singleton<GameManager>
             GameSceneLoadAsyncOperation.allowSceneActivation = true;
 
         yield return GameSceneLoadAsyncOperation.isDone;
-        _player = Instantiate(_playerPrefab, _playerSpawnPos[0], Quaternion.identity);
-        player = _player.GetComponent<Player>();
+        StartCoroutine(SpawnPlayer());
+        //_player = Instantiate(_playerPrefab, _playerSpawnPos[0], Quaternion.identity);
+        //player = _player.GetComponent<Player>();
         Debug.Log("플레이어 생성");
 
     }
 
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        //+추가로직
+        _curScene = 1;
+
+
+        GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
+        GameSceneLoadAsyncOperation.allowSceneActivation = false;
+        StartCoroutine(WaitForGameSceneLoad());
+
+        //StartCoroutine(SpawnPlayer());
+    }
     
 
     public void LoadMainMenuScene()
     {
+        CanvasList[0].SetActive(true);
         SceneManager.LoadScene(0);
     }
 
@@ -270,20 +287,6 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    public void RestartGame()
-    {
-        Time.timeScale = 1f;
-        //+추가로직
-        _curScene = 1;
-
-        //현재 체크포인트 개념 없음
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-        {
-            SceneManager.LoadScene(1);
-        }
-
-        StartCoroutine(SpawnPlayer());
-    }
 
 
     public void PlayerTakeDamage(int damage)
