@@ -6192,6 +6192,13 @@ MonoBehaviour:
   _checkItem: 0
   _onProgressGimmick: 0
   _curScene: 1
+  _playerPrefab: {fileID: 673342718292914668, guid: 04458193750062148a0826942060c90d, type: 3}
+  _player: {fileID: 0}
+  _playerSpawnPos:
+  - {x: -5, y: -3, z: 0}
+  - {x: 6.4, y: 0, z: 0}
+  - {x: -5, y: -3, z: 0}
+  - {x: -53, y: -62, z: 0}
 --- !u!1 &1962358948
 GameObject:
   m_ObjectHideFlags: 0
