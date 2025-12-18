@@ -82,6 +82,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] Vector3[] _playerSpawnPos;
 
     [SerializeField] float _gameOverCount = 60f;
+    [SerializeField] float _curGameOverCount;
     [SerializeField] float _minusGameOverCount = 0.1f;
     WaitForSeconds _wait;
     private Coroutine _gameOverCoroutine;
@@ -140,12 +141,12 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator CheckGameOver()
     {
-        float _curCount = _gameOverCount;
-        _curCount -= _minusGameOverCount;
-        while (_curCount > 0)
+        _curGameOverCount = _gameOverCount;
+        _curGameOverCount -= _minusGameOverCount;
+        while (_curGameOverCount > 0)
         {
             yield return _wait;
-            _curCount -= _minusGameOverCount;
+            _curGameOverCount -= _minusGameOverCount;
         }
         PlayerDeath();
     }
@@ -275,6 +276,8 @@ public class GameManager : Singleton<GameManager>
         {
             SceneManager.LoadScene(1);
         }
+
+        StartCoroutine(SpawnPlayer());
     }
 
 

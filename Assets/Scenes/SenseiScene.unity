@@ -3487,7 +3487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.73333335, g: 0.67058825, b: 0.54509807, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6114,7 +6114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5360bf272bf396747ae7eddcd3275ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  _checkItem: 0
+  _checkItem: 1
   _onProgressGimmick: 0
   _curScene: 1
   _playerPrefab: {fileID: 673342718292914668, guid: 04458193750062148a0826942060c90d, type: 3}
@@ -6124,6 +6124,9 @@ MonoBehaviour:
   - {x: 6.4, y: 0, z: 0}
   - {x: -5, y: -3, z: 0}
   - {x: -53, y: -62, z: 0}
+  _gameOverCount: 60
+  _curGameOverCount: 60
+  _minusGameOverCount: 0.1
 --- !u!1 &1962358948
 GameObject:
   m_ObjectHideFlags: 0
