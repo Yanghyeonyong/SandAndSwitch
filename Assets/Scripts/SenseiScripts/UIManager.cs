@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
 
     InputAction _pauseGameAction;
 
+    AudioSource _audioSource;
+
     void Start()
     {
 
@@ -39,6 +41,13 @@ public class UIManager : MonoBehaviour
         int index = 0;
         foreach (Transform child in transform)
         {
+            if (index==5)
+            {
+                _audioSource = child.GetComponent<AudioSource>();
+
+                break;
+            }
+
             int grandchildIndex = 0;
             GameManager.Instance.CanvasList.Add(child.gameObject);
             _canvasList.Add(child.gameObject);
@@ -123,25 +132,34 @@ public class UIManager : MonoBehaviour
 
         _menuButton[0].onClick.AddListener(GameManager.Instance.LoadGameScene);
         _menuButton[0].onClick.AddListener(LoadGameSceneLogic);
+        _menuButton[0].onClick.AddListener(PlayUIClickSound);
         _menuButton[2].onClick.AddListener(GameManager.Instance.ExitGame);
+        _menuButton[2].onClick.AddListener(PlayUIClickSound);
 
         _ingameButton[0].onClick.AddListener(GameManager.Instance.PauseGame);
         _ingameButton[0].onClick.AddListener(PauseLogic);
+        _ingameButton[0].onClick.AddListener(PlayUIClickSound);
 
         _pauseMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
+        _pauseMenuButton[0].onClick.AddListener(PlayUIClickSound);
         _pauseMenuButton[0].onClick.AddListener(RestartLogic);
         _pauseMenuButton[1].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
+        _pauseMenuButton[1].onClick.AddListener(PlayUIClickSound);
         _pauseMenuButton[1].onClick.AddListener(LoadMainMenuLogic);
         _pauseMenuButton[2].onClick.AddListener(GameManager.Instance.ResumeGame);
+        _pauseMenuButton[2].onClick.AddListener(PlayUIClickSound);
         _pauseMenuButton[2].onClick.AddListener(ResumeLogic);
 
         _gameOverMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
+        _gameOverMenuButton[0].onClick.AddListener(PlayUIClickSound);
         _gameOverMenuButton[0].onClick.AddListener(RestartLogic);
         _gameOverMenuButton[1].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
+        _gameOverMenuButton[1].onClick.AddListener(PlayUIClickSound);
         _gameOverMenuButton[1].onClick.AddListener(LoadMainMenuLogic);
 
 
         _victoryMenuButton[0].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
+        _victoryMenuButton[0].onClick.AddListener(PlayUIClickSound);
         _victoryMenuButton[0].onClick.AddListener(LoadMainMenuLogic);
 
         _pauseGameAction = InputSystem.actions.FindActionMap("Player").FindAction("ESC");
@@ -169,6 +187,11 @@ public class UIManager : MonoBehaviour
                 _pauseMenuButton[2].onClick.Invoke();
             }
         }
+    }
+
+    private void PlayUIClickSound()
+    {
+        _audioSource.PlayOneShot(_audioSource.clip);
     }
 
     private void PauseLogic()
