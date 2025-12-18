@@ -263,6 +263,7 @@ public class Player : MonoBehaviour
         Debug.Log("데미지를 입었다");
         //curVelocity = rb.linearVelocity.normalized;
         animator.SetTrigger("Damage");
+        GameManager.Instance.PlayerTakeDamage(1);
         //rb.AddForce(-curVelocity * knockBackForce, ForceMode2D.Impulse);
     }
 

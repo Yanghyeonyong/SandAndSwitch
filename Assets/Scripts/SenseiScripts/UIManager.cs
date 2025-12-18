@@ -41,6 +41,14 @@ public class UIManager : MonoBehaviour
         int index = 0;
         foreach (Transform child in transform)
         {
+            if (index ==1)
+            {
+                GameManager.Instance.HeartImages.Add(child.GetChild(0).GetComponent<Image>());
+                GameManager.Instance.HeartImages.Add(child.GetChild(1).GetComponent<Image>());
+                GameManager.Instance.HeartImages.Add(child.GetChild(2).GetComponent<Image>());
+            }
+
+
             if (index==5)
             {
                 _audioSource = child.GetComponent<AudioSource>();

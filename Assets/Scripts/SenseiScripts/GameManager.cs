@@ -17,6 +17,21 @@ public enum GameState
 public class GameManager : Singleton<GameManager>
 {
 
+
+    [Header("플레이어 체력 관련")]
+    [SerializeField] private int _maxPlayerHealth = 3;
+    [SerializeField] private int CurrentPlayerHealth = 1;
+    public List<Image> HeartImages = new List<Image>();
+
+    [SerializeField] string _heartEmptyHexColor = "000000";
+    [SerializeField] string _heartFullHexColor = "FF0000";
+
+    private Color _heartFullColor;
+    private Color _heartEmptyColor;
+    
+    
+
+
     //UI 관련
     /*
     Canvas는 인덱스 순으로 MainMenu, IngameUI, PauseMenu, GameOverMenu
@@ -35,6 +50,8 @@ public class GameManager : Singleton<GameManager>
     public QuickSlot[] GameManagerQuickSlots { get; set; } = new QuickSlot[3];
     public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[3];
     public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[3];
+
+
 
 
     [SerializeField] bool _checkItem;
@@ -112,6 +129,9 @@ public class GameManager : Singleton<GameManager>
         //해당 값을 찾는 기능은 현재 테스트 용으로  start에 있으나, 이후 플레이어 스폰 지점으로 이동 예정
         //player = GameObject.FindFirstObjectByType<Player>().GetComponent<Player>();
         _wait = new WaitForSeconds(_minusGameOverCount);
+
+        ColorUtility.TryParseHtmlString("#" + _heartFullHexColor, out _heartFullColor);
+        ColorUtility.TryParseHtmlString("#" + _heartEmptyHexColor, out _heartEmptyColor);
     }
 
     public void EnterPhaseTwo()
@@ -215,6 +235,15 @@ public class GameManager : Singleton<GameManager>
         }
 
 
+        if (_gameOverCoroutine != null)
+        {
+            StopCoroutine(_gameOverCoroutine);
+            _gameOverCoroutine = null;
+        }
+
+        CurrentPlayerHealth = _maxPlayerHealth;
+        HeartLogic();
+
         Time.timeScale = 1f;
         GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
         GameSceneLoadAsyncOperation.allowSceneActivation = false;
@@ -256,7 +285,10 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1f;
         //+추가로직
         _curScene = 1;
-        
+
+
+        CurrentPlayerHealth = _maxPlayerHealth;
+        HeartLogic();
 
         GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
         GameSceneLoadAsyncOperation.allowSceneActivation = false;
@@ -265,6 +297,42 @@ public class GameManager : Singleton<GameManager>
         //StartCoroutine(SpawnPlayer());
     }
     
+
+    private void HeartLogic()
+    {
+
+        switch(CurrentPlayerHealth)
+        {
+            case 3:
+                foreach (var heart in HeartImages)
+                {
+
+
+                    heart.color = _heartFullColor;
+                }
+                break;
+            case 2:
+                HeartImages[0].color = _heartFullColor;
+                HeartImages[1].color = _heartFullColor;
+                HeartImages[2].color = _heartEmptyColor;
+                break;
+            case 1:
+                HeartImages[0].color = _heartFullColor;
+                HeartImages[1].color = _heartEmptyColor;
+                HeartImages[2].color = _heartEmptyColor;
+                break;
+            case 0:
+                HeartImages[0].color = _heartEmptyColor;
+                HeartImages[1].color = _heartEmptyColor;
+                HeartImages[2].color = _heartEmptyColor;
+                break;
+        }
+
+       
+
+
+    }
+
 
     public void LoadMainMenuScene()
     {
@@ -320,6 +388,12 @@ public class GameManager : Singleton<GameManager>
 
     public void PlayerTakeDamage(int damage)
     {
+        CurrentPlayerHealth -= damage;
+        HeartLogic();
+        if (CurrentPlayerHealth <= 0)
+        {
+            PlayerDeath();
+        }
         //체력 감소 로직
         //추가로직
     }
@@ -329,11 +403,18 @@ public class GameManager : Singleton<GameManager>
     {
         foreach (GameObject canvas in CanvasList)
         {
-            canvas.SetActive(false); 
-        }
+            if (canvas != CanvasList[3])
+            {
+                canvas.SetActive(false);
 
+            }
+            else
+            {
+                CanvasList[3].SetActive(true);
+            }
+
+        }
         Time.timeScale = 0f;
-        CanvasList[3].SetActive(true);
         EnterPhaseOne();
         //추가로직
 
