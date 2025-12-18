@@ -89,15 +89,17 @@ public class Gimmick_DoorLock : Gimmick
             GameManager.Instance.IsGimmickClear[GimmickId] = true;
             _isClear = true;
             ItemData data = GameManager.Instance.GameManagerQuickSlots[index].Data;
-            GameManager.Instance.GameManagerQuickSlots[index].Use(1);
+            //퀵슬롯이 아니라 퀵슬롯 컨트롤러를 통해서 진행한다
             GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
             bombObj.GetComponent<Bomb>().UseBomb();
-            if (GameManager.Instance.GameManagerQuickSlots[index].Count <= 0)
-            {
-                GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
-                GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
-                GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
-            }
+            GameManager.Instance.Player.Slot.TryUseCurrentSlot(index);
+            //GameManager.Instance.GameManagerQuickSlots[index].Use(1);
+            //if (GameManager.Instance.GameManagerQuickSlots[index].Count <= 0)
+            //{
+            //    GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
+            //    GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
+            //    GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
+            //}
 
             _doorLockObject.SetActive(false);
             //_testObject.SetActive(false);

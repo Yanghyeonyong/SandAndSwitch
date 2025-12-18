@@ -85,6 +85,8 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private int onPortal = 0;
+    private QuickSlotController slot;
+    public QuickSlotController Slot =>slot;
 
     Vector3 curVelocity;
 
@@ -92,6 +94,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        slot = GetComponent<QuickSlotController>();
         rb.freezeRotation = true;
 
         if (animator == null)
@@ -301,7 +304,7 @@ public class Player : MonoBehaviour
         //아이템 관련 추가
         if (ctx.started && _nearbyItem != null)
         {
-            QuickSlotController slot = GetComponent<QuickSlotController>();
+            //QuickSlotController slot = GetComponent<QuickSlotController>();
             if (slot != null && slot.TryPickup(_nearbyItem.ItemData))
             {
                 _nearbyItem.Pickup();
@@ -377,16 +380,19 @@ public class Player : MonoBehaviour
     //}
     public void OnSelectSlot1(InputAction.CallbackContext ctx)
     {
-        GetComponent<QuickSlotController>().SelectSlot(0);
+        //GetComponent<QuickSlotController>().SelectSlot(0);
+        slot.SelectSlot(0);
     }
 
     public void OnSelectSlot2(InputAction.CallbackContext ctx)
     {
-        GetComponent<QuickSlotController>().SelectSlot(1);
+        //GetComponent<QuickSlotController>().SelectSlot(1);
+        slot.SelectSlot(1);
     }
 
     public void OnSelectSlot3(InputAction.CallbackContext ctx)
     {
-        GetComponent<QuickSlotController>().SelectSlot(2);
+        //GetComponent<QuickSlotController>().SelectSlot(2);
+        slot.SelectSlot(2);
     }
 }
