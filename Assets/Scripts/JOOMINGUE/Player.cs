@@ -344,36 +344,37 @@ public class Player : MonoBehaviour
             _nearbyItem = null;
         }
     }
-    public void OnUseItem(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.started)
-        {
-            return;
-        }
-        QuickSlotController qs = GetComponent<QuickSlotController>();
-        if (qs == null)
-        {
-            return;
-        }
+    //만일을 위해 폭탄 사용 주석처리
+    //public void OnUseItem(InputAction.CallbackContext ctx)
+    //{
+    //    if (!ctx.started)
+    //    {
+    //        return;
+    //    }
+    //    QuickSlotController qs = GetComponent<QuickSlotController>();
+    //    if (qs == null)
+    //    {
+    //        return;
+    //    }
 
-        QuickSlot slot = qs.CurrentSlot;
+    //    QuickSlot slot = qs.CurrentSlot;
 
-        if (slot == null || slot.IsEmpty || slot.Data == null)
-        {
-            return;
-        }
+    //    if (slot == null || slot.IsEmpty || slot.Data == null)
+    //    {
+    //        return;
+    //    }
 
-        ItemData data = slot.Data;
+    //    ItemData data = slot.Data;
 
-        if (qs.TryUseCurrentSlot())
-        {
-            if (data.type == ItemType.Consumable && data.prefab != null)
-            {
-                GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
-                bombObj.GetComponent<Bomb>().UseBomb();
-            }
-        }
-    }
+    //    if (qs.TryUseCurrentSlot())
+    //    {
+    //        if (data.type == ItemType.Consumable && data.prefab != null)
+    //        {
+    //            GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+    //            bombObj.GetComponent<Bomb>().UseBomb();
+    //        }
+    //    }
+    //}
     public void OnSelectSlot1(InputAction.CallbackContext ctx)
     {
         GetComponent<QuickSlotController>().SelectSlot(0);
