@@ -5818,7 +5818,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6495,7 +6495,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5360bf272bf396747ae7eddcd3275ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  _checkItem: 1
+  _maxPlayerHealth: 3
+  CurrentPlayerHealth: 1
+  HeartImages: []
+  _heartEmptyHexColor: 000000
+  _heartFullHexColor: FF0000
+  _checkItem: 0
   _onProgressGimmick: 0
   _curScene: 1
   _playerPrefab: {fileID: 673342718292914668, guid: 04458193750062148a0826942060c90d, type: 3}
