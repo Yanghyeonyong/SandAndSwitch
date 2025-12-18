@@ -102,6 +102,10 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    //BGM 목록
+    //0. 튜토리얼 1. 스테이지 2 :Phase 1 2. 스테이지 4 3. 스테이지 2 : Phase 2
+    [SerializeField] AudioClip[] _bgms;
+
     void Start()
     {
         //251216 - 양현용 추가 : 테스트용 플레이어 스크립트를 찾는 용도
@@ -159,7 +163,7 @@ public class GameManager : Singleton<GameManager>
     {
         yield return GameSceneLoadAsyncOperation.isDone;
         yield return null;
-
+        SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
         _player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene - 1], Quaternion.identity);
         player = _player.GetComponent<Player>();
     }
@@ -167,6 +171,7 @@ public class GameManager : Singleton<GameManager>
     {
         yield return GameSceneLoadAsyncOperation.isDone;
         yield return null;
+        SoundEffectManager.Instance.PlayBGM(_bgms[spawnPos]);
         _player = Instantiate(_playerPrefab, _playerSpawnPos[spawnPos], Quaternion.identity);
         player = _player.GetComponent<Player>();
 
