@@ -3,6 +3,7 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour
 {
     [SerializeField] private ItemData _itemData;
+    [SerializeField] private float _soundValue = 1f;
 
     public ItemData ItemData => _itemData;
 
@@ -36,6 +37,10 @@ public class ItemPickup : MonoBehaviour
 
     public void Pickup()
     {
+        if (_itemData.pickupSoundClip != null)
+        {
+            AudioSource.PlayClipAtPoint(_itemData.pickupSoundClip, transform.position, _soundValue);
+        }
         Destroy(gameObject);
     }
 }

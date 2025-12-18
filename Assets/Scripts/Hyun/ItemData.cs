@@ -26,10 +26,13 @@ public class ItemData : ScriptableObject
     public float delay;
     public LayerMask targetLayer;
 
+    [Header("Sound")]
+    public AudioClip pickupSoundClip;
+
     //[Header("Consumable/Potion")]
     //public float amount;
     //[Header("Key")]
-    
+
     //[Header("Special")]
 
 }
