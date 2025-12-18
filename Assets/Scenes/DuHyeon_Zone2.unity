@@ -40304,6 +40304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9097253411bd98f449ae1fec49eda7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClearPortal
+  _itemId: 103
 --- !u!61 &839951092
 BoxCollider2D:
   m_ObjectHideFlags: 0

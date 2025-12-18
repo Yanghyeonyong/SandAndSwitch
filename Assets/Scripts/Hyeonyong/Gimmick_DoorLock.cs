@@ -86,6 +86,8 @@ public class Gimmick_DoorLock : Gimmick
         int index = CheckQuickSlotItem();
         if (index !=-1)
         {
+            GameManager.Instance.IsGimmickClear[GimmickId] = true;
+            _isClear = true;
             ItemData data = GameManager.Instance.GameManagerQuickSlots[index].Data;
             GameManager.Instance.GameManagerQuickSlots[index].Use(1);
             GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
@@ -105,7 +107,7 @@ public class Gimmick_DoorLock : Gimmick
             GameManager.Instance.OnProgressGimmick = false;
 
             GameManager.Instance.ResumeGame();
-            IsClear = true;
+
         }
     }
     public override void ExitGimmick()
@@ -149,6 +151,11 @@ public class Gimmick_DoorLock : Gimmick
         {
             if (GameManager.Instance.GameManagerQuickSlots[i] != null)
             {
+                if (GameManager.Instance.GameManagerQuickSlots[i].Data == null)
+                {
+                    continue;
+                }
+
                 if (GameManager.Instance.GameManagerQuickSlots[i].Data.id == _itemId)
                 {
                     return i;
