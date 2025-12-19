@@ -414,4 +414,20 @@ public class Player : MonoBehaviour
         }
 
     }
+    public void OnSlotPrev(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+        {
+            return;
+        }
+        slot.SelectPreviousSlot();
+    }
+    public void OnSlotNext(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+        {
+            return;
+        }
+        slot.SelectNextSlot();
+    }
 }

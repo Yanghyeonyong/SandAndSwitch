@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class QuickSlotController : MonoBehaviour
@@ -120,5 +121,25 @@ public class QuickSlotController : MonoBehaviour
 
         //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
         return true;
+    }
+    public void SelectPreviousSlot()
+    {
+        CurrentIndex--;
+        if (CurrentIndex < 0)
+        {
+            CurrentIndex = _slots.Length - 1;
+        }
+
+        //슬롯UI업데이트관련호출
+    }
+    public void SelectNextSlot()
+    {
+        CurrentIndex++;
+        if (CurrentIndex >= _slots.Length)
+        {
+            CurrentIndex = 0;
+        }
+
+        //슬롯UI업데이트관련호출
     }
 }
