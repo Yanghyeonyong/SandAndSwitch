@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Shutter : Gimmick_Object
+public class Door : Gimmick_Object
 {
     [SerializeField] GameObject _shutterObject;
     Animator _animator;
