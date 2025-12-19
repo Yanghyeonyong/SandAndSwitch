@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
   _itemData: {fileID: 11400000, guid: add8d2d4205b91f4d81c38cac2df835c, type: 2}
   _soundValue: 1
+  uniqueId: 
 --- !u!82 &2051655380453933502
 AudioSource:
   m_ObjectHideFlags: 0

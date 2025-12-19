@@ -82,7 +82,8 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[3];
     public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[3];
 
-
+    //아이템픽업 관련
+    public HashSet<string> CollectedItemIDs = new HashSet<string>();
 
 
     [SerializeField] bool _checkItem;
@@ -264,6 +265,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("스타트");
         _curScene = 1;
         _isGimmickClear.Clear();
+        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         player = null;
 
         if (_gameOverCoroutine != null)
@@ -314,6 +316,7 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
+        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         _isGimmickClear.Clear();
         if (_gameOverCoroutine != null)
         {
@@ -381,6 +384,7 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadVictoryScene()
     {
+        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         if (_gameOverCoroutine != null)
         {
             StopCoroutine(_gameOverCoroutine);

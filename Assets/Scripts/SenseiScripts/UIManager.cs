@@ -174,8 +174,8 @@ public class UIManager : MonoBehaviour
         _gameOverMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
         _gameOverMenuButton[0].onClick.AddListener(PlayUIClickSound);
         _gameOverMenuButton[0].onClick.AddListener(RestartLogic);
-        _gameOverMenuButton[1].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
         _gameOverMenuButton[1].onClick.AddListener(PlayUIClickSound);
+        _gameOverMenuButton[1].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
         _gameOverMenuButton[1].onClick.AddListener(LoadMainMenuLogic);
 
 
