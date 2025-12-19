@@ -39,4 +39,9 @@ public class QuickSlot
         _data = null;
         _count = 0;
     }
+    public void SlotCopy(QuickSlot other)
+    {
+        _data = other.Data;
+        _count = other.Count;
+    }
 }

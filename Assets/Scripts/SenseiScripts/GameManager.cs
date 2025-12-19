@@ -184,8 +184,23 @@ public class GameManager : Singleton<GameManager>
         }
 
     }
+    private readonly Color clear = new Color(1, 1, 1, 0);
+    public void UpdateQuickSlot(int index, QuickSlot slot)
+    {
+        if (slot.IsEmpty)
+        {
+            GameManagerQuickSlotCountTexts[index].text = "";
+            GameManagerQuickSlotIcons[index].sprite = null;
+            GameManagerQuickSlotIcons[index].color = clear;
+            GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
+            return;
+        }
 
-
+        GameManagerQuickSlotCountTexts[index].text = slot.Count.ToString();
+        GameManagerQuickSlotIcons[index].sprite = slot.Data.icon;
+        GameManagerQuickSlotIcons[index].color = Color.white;
+        GameManagerQuickSlotIcons[index].gameObject.SetActive(true);
+    }
 
 
 

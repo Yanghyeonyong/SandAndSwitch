@@ -305,7 +305,10 @@ public class Player : MonoBehaviour
         //아이템 관련 추가
         if (ctx.started && _nearbyItem != null)
         {
-            //QuickSlotController slot = GetComponent<QuickSlotController>();
+            if (!_nearbyItem.CanPickup)
+            {
+                return;
+            }
             if (slot != null && slot.TryPickup(_nearbyItem.ItemData))
             {
                 _nearbyItem.Pickup();
@@ -429,5 +432,15 @@ public class Player : MonoBehaviour
             return;
         }
         slot.SelectNextSlot();
+    }
+    public void OnWheelScroll(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+        {
+            return;
+        }
+
+        float scroll = ctx.ReadValue<float>();
+        slot.WheelScroll(scroll);
     }
 }

@@ -6,9 +6,38 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] private ItemData _itemData;
     [SerializeField] private float _soundValue = 1f;
     [SerializeField] private string uniqueID;
+    [SerializeField] private bool _canPickup = true;
+
+    private Bomb bomb;
 
     public ItemData ItemData => _itemData;
     public string UniqueID => uniqueID;
+    
+
+    private void Awake()
+    {
+        bomb = GetComponent<Bomb>();
+    }
+
+    public bool CanPickup
+    {
+        get
+        {
+            if (bomb != null)
+            {
+                if (bomb.IsThrownBomb)
+                {
+                    return false;
+                }
+                if (bomb.IsExploding)
+                {
+                    return false;
+                }
+            }
+            return _canPickup;
+        }
+    }
+#if UNITY_EDITOR
     //에디터에서 컴포넌트가 변경 될때 자동 실행
     private void OnValidate()
     {
@@ -26,6 +55,8 @@ public class ItemPickup : MonoBehaviour
             UnityEditor.EditorUtility.SetDirty(this); // 변경사항 저장
         }
     }
+#endif
+
 
     private void Start()
     {
@@ -65,6 +96,10 @@ public class ItemPickup : MonoBehaviour
 
     public void Pickup()
     {
+        if (!_canPickup)
+        {
+            return;
+        }
         GameManager.Instance.CollectedItemIDs.Add(uniqueID);
         if (_itemData.pickupSoundClip != null)
         {

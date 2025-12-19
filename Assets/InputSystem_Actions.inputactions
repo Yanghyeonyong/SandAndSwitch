@@ -131,6 +131,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "WheelScroll",
+                    "type": "Value",
+                    "id": "9d509900-5b31-46d8-b722-cf6199b8aa4d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -670,6 +679,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SlotNext",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "946ffd79-a1bb-4c5d-b1e0-a4bbc4ade777",
+                    "path": "<Mouse>/scroll/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WheelScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d93261ec-0852-42e2-8c44-9deb7d4e8036",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WheelScroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
