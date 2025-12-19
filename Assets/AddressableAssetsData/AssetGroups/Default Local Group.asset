@@ -23,7 +23,8 @@ MonoBehaviour:
   - m_GUID: add8d2d4205b91f4d81c38cac2df835c
     m_Address: BombScriptableObject
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ScriptableObject
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1b22adb8edb3e064c8f6930ba8943177, type: 2}
