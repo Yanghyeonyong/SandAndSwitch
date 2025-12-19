@@ -1,3 +1,3 @@
 ID,Name,Desc,Type,MaxStack,Prefab,Icon
 int,string,string,enum,int,string,string
-101,폭탄,폭발한다,1,99,/Assets/Prefab/Bomb,/Assets/ExcludeGit/DirectAssets/Item/bombsecond
+101,폭탄,폭발한다,1,99,Assets/Prefab/Bomb.prefab,Assets/ExcludeGit/DirectAssets/Item/bombsecond.png
