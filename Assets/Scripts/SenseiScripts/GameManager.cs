@@ -440,18 +440,26 @@ public class GameManager : Singleton<GameManager>
     {
         foreach (GameObject canvas in CanvasList)
         {
+            Debug.Log(canvas.name);
             if (canvas != CanvasList[3] || canvas != CanvasList[5])
             {
                 canvas.SetActive(false);
 
             }
-            else
-            {
-                CanvasList[3].SetActive(true);
-            }
+            
+            
 
         }
-        Time.timeScale = 0f;
+        if (CanvasList[3].activeSelf == false)
+        {
+
+        CanvasList[3].SetActive(true);
+        }
+        if (CanvasList[5].activeSelf == false)
+        {
+            CanvasList[5].SetActive(true);
+        }
+            Time.timeScale = 0f;
         EnterPhaseOne();
         //추가로직
 
