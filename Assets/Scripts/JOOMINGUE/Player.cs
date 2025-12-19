@@ -305,10 +305,7 @@ public class Player : MonoBehaviour
         //아이템 관련 추가
         if (ctx.started && _nearbyItem != null)
         {
-            if (!_nearbyItem.CanPickup)
-            {
-                return;
-            }
+
             if (slot != null && slot.TryPickup(_nearbyItem.ItemData))
             {
                 _nearbyItem.Pickup();
