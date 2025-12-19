@@ -1,4 +1,4 @@
-using NUnit.Framework.Constraints;
+//using NUnit.Framework.Constraints;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,13 +7,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 
 #if UNITY_EDITOR
 //using UnityEngine.AddressableAssets;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
-using UnityEngine.ResourceManagement.AsyncOperations;
 #endif
 
 
@@ -52,15 +52,33 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-
-#if UNITY_EDITOR
         LoadTables();      // 1) 파싱
         ResolveTableAssets(); // 2) 프리팹/아이콘 실제 로드
+
+#if UNITY_EDITOR
         PutParsingResultsInScriptableObjects(); // 3) Addressables에 파싱 결과 넣기
 #endif
     }
 
 
+#if UNITY_EDITOR
+    public string GetAssociatedDescriptionFromImage(GameObject objectToCompare)
+
+    {
+        foreach (var entry in ItemTable.Data.Values)
+        {
+
+
+            if (entry.Icon == objectToCompare.GetComponent<SpriteRenderer>().sprite.ToString())
+            {
+                //return entry.ScriptableObject;
+            }
+
+        }
+
+        return null;
+
+    }
 
     void PutParsingResultsInScriptableObjects()
     {
@@ -113,7 +131,7 @@ public class GameManager : Singleton<GameManager>
 
 
 
-
+#endif
     void LoadTables()
     {
         TextAsset itemCsv = Resources.Load<TextAsset>("Data/ItemTable"); // Resources/Data/ItemTable.csv
@@ -497,6 +515,11 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(0);
     }
 
+
+    public int GetTotalSceneCount()
+    {
+        return SceneManager.sceneCountInBuildSettings;
+    }
 
     public void LoadVictoryScene()
     {
