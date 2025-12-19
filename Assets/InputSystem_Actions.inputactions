@@ -113,6 +113,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SlotPrev",
+                    "type": "Button",
+                    "id": "07e040a0-c956-4c0d-aea6-4cbd1a36849f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SlotNext",
+                    "type": "Button",
+                    "id": "746aaafe-1ef8-48e6-9c00-6bb187feb181",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WheelScroll",
+                    "type": "Value",
+                    "id": "9d509900-5b31-46d8-b722-cf6199b8aa4d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -630,6 +657,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "SlotSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d05af5bf-c7c7-4fb0-b90e-6dee498f02a5",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SlotPrev",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aa7c69a6-0a65-4966-a634-3bdf67290c5f",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SlotNext",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "946ffd79-a1bb-4c5d-b1e0-a4bbc4ade777",
+                    "path": "<Mouse>/scroll/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WheelScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d93261ec-0852-42e2-8c44-9deb7d4e8036",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WheelScroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -10,7 +10,19 @@ public class Bomb : MonoBehaviour
     [SerializeField] private AudioSource _audio;//폭발사운드용
 
     private float _baseExplosionRadius = 1f;//스케일 1일때 폭발 반경
-
+    public bool IsExploding { get; private set; } = false;
+    public bool IsThrownBomb { get; set; } = false;
+    private void Awake()
+    {
+        if (IsThrownBomb)
+        {
+            var pickup = GetComponent<ItemPickup>();
+            if (pickup != null)
+            {
+                pickup.enabled = false;
+            }
+        }
+    }
     public void UseBomb()
     {
         StartCoroutine(ExplodeCoroutine());
@@ -18,7 +30,6 @@ public class Bomb : MonoBehaviour
 
     private IEnumerator ExplodeCoroutine()//딜레이를 주기위한 코루틴
     {
-
         yield return new WaitForSeconds(_itemData.delay);
         _animator.SetTrigger("Explosion");
         Explode();

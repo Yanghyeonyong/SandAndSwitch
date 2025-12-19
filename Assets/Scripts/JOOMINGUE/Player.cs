@@ -305,7 +305,7 @@ public class Player : MonoBehaviour
         //아이템 관련 추가
         if (ctx.started && _nearbyItem != null)
         {
-            //QuickSlotController slot = GetComponent<QuickSlotController>();
+
             if (slot != null && slot.TryPickup(_nearbyItem.ItemData))
             {
                 _nearbyItem.Pickup();
@@ -413,5 +413,31 @@ public class Player : MonoBehaviour
             //혹은 키아이템 사용을 따로 할것이라면 아래에 추가
         }
 
+    }
+    public void OnSlotPrev(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+        {
+            return;
+        }
+        slot.SelectPreviousSlot();
+    }
+    public void OnSlotNext(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+        {
+            return;
+        }
+        slot.SelectNextSlot();
+    }
+    public void OnWheelScroll(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+        {
+            return;
+        }
+
+        float scroll = ctx.ReadValue<float>();
+        slot.WheelScroll(scroll);
     }
 }

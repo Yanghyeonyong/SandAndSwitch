@@ -364,6 +364,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fe155eb3-84f6-48d3-88fa-cae92e5fd87b
     m_ActionName: 'Player/SlotSelect[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/0]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4109991600814425346}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnSlotPrev
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 07e040a0-c956-4c0d-aea6-4cbd1a36849f
+    m_ActionName: 'Player/SlotPrev[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4109991600814425346}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnSlotNext
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 746aaafe-1ef8-48e6-9c00-6bb187feb181
+    m_ActionName: 'Player/SlotNext[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4109991600814425346}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnWheelScroll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9d509900-5b31-46d8-b722-cf6199b8aa4d
+    m_ActionName: 'Player/WheelScroll[/Mouse/scroll/x,/Mouse/scroll/y]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 

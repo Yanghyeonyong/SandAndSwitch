@@ -1,9 +1,12 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class QuickSlotController : MonoBehaviour
 {
-    [SerializeField] private QuickSlot[] _slots = new QuickSlot[3];
+    [SerializeField] private QuickSlot[] _slots = new QuickSlot[10];
+    [SerializeField] private float _wheelCool = 0.1f;
 
+    private float _wheelTimer = 0f;
 
     //읽기전용
     public int CurrentIndex { get; private set; } = 0;
@@ -35,6 +38,14 @@ public class QuickSlotController : MonoBehaviour
         }
 
     }
+
+    private void Update()
+    {
+        if (_wheelTimer > 0)
+        {
+            _wheelTimer -= Time.deltaTime;
+        }
+    }
     public bool TryPickup(ItemData data)
     {
         if (data == null)
@@ -42,7 +53,7 @@ public class QuickSlotController : MonoBehaviour
             return false;
         }
 
-        //중첩
+
         if (data.IsStackable)
         {
             foreach (QuickSlot slot in _slots)
@@ -50,7 +61,7 @@ public class QuickSlotController : MonoBehaviour
                 if (slot.IsEmpty == false && slot.Data == data && slot.Count < data.maxStack)
                 {
                     slot.Add(1);
-                    for ( int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
+                    for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
                     {
                         if (slot.Data == GameManager.Instance.GameManagerQuickSlots[i].Data)
                         {
@@ -62,7 +73,25 @@ public class QuickSlotController : MonoBehaviour
                 }
             }
         }
-        //빈슬롯
+        //중첩
+        //if (data.IsStackable)
+        //{
+        //    for (int i = 0; i < _slots.Length; i++)
+        //    {
+        //        QuickSlot slot = _slots[i];
+
+        //        if (!slot.IsEmpty && slot.Data == data && slot.Count < data.maxStack)
+        //        {
+        //            slot.Add(1);
+
+        //            // UI 업데이트는 GameManager 호출
+        //            GameManager.Instance.UpdateQuickSlot(i, slot);
+        //            return true;
+        //        }
+        //    }
+        //}
+
+
         foreach (QuickSlot slot in _slots)
         {
             if (slot.IsEmpty)
@@ -81,6 +110,19 @@ public class QuickSlotController : MonoBehaviour
                 return true;
             }
         }
+        //빈슬롯
+        //for (int i = 0; i < _slots.Length; i++)
+        //{
+        //    QuickSlot slot = _slots[i];
+
+        //    if (slot.IsEmpty)
+        //    {
+        //        slot.Init(data, 1);
+
+        //        GameManager.Instance.UpdateQuickSlot(i, slot);
+        //        return true;
+        //    }
+        //}
         return false;
     }
 
@@ -92,7 +134,7 @@ public class QuickSlotController : MonoBehaviour
 
 
     Color clear = new Color(1, 1, 1, 0);
-    
+
 
     public bool TryUseCurrentSlot(int index)//선택된 슬롯 아이템 사용
     {
@@ -107,6 +149,22 @@ public class QuickSlotController : MonoBehaviour
         }
         //아이템 사용
         slot.Use(1);
+
+        //GameManager.Instance.UpdateQuickSlot(index, slot);
+        //if (slot.Count <= 0)
+        //{
+        //    ShiftSlots();//슬롯이동
+
+        //    for (int i = 0; i < _slots.Length; i++)
+        //    {
+        //        GameManager.Instance.UpdateQuickSlot(i, _slots[i]);//슬롯이동후 UI갱신
+        //    }
+
+        //    //현재 인덱스도 0으로 초기화
+        //    CurrentIndex = 0;
+        //    GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
+        //}
+
         if (slot.Count <= 0)
         {
             GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
@@ -121,5 +179,60 @@ public class QuickSlotController : MonoBehaviour
 
         //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
         return true;
+    }
+    public void SelectPreviousSlot()
+    {
+        CurrentIndex--;
+        if (CurrentIndex < 0)
+        {
+            CurrentIndex = _slots.Length - 1;
+        }
+
+        GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
+    }
+    public void SelectNextSlot()
+    {
+        CurrentIndex++;
+        if (CurrentIndex >= _slots.Length)
+        {
+            CurrentIndex = 0;
+        }
+
+        GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
+    }
+    public void WheelScroll(float scroll)
+    {
+        if (_wheelTimer > 0)
+        {
+            Debug.Log(" WheelCooldown…");
+            return;
+        }
+        Debug.Log(" Wheel input accepted: " + scroll);
+        if (scroll > 0)
+        {
+            SelectPreviousSlot();
+        }
+        else if (scroll < 0)
+        {
+            SelectNextSlot();
+        }
+        _wheelTimer = _wheelCool;
+    }
+    private void ShiftSlots()
+    {
+        int writeIndex = 0;
+
+        for (int readIndex = 0; readIndex < _slots.Length; readIndex++)
+        {
+            if (!_slots[readIndex].IsEmpty)
+            {
+                if (writeIndex != readIndex)
+                {
+                    _slots[writeIndex].SlotCopy(_slots[readIndex]);
+                    _slots[readIndex].Clear();
+                }
+                writeIndex++;
+            }
+        }
     }
 }
