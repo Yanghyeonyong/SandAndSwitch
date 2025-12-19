@@ -7,7 +7,7 @@ public class QuickSlotController : MonoBehaviour
 
     //읽기전용
     public int CurrentIndex { get; private set; } = 0;
-    //public QuickSlot CurrentSlot => _slots[CurrentIndex];
+    public QuickSlot CurrentSlot => _slots[CurrentIndex];
 
 
     private void Awake()
