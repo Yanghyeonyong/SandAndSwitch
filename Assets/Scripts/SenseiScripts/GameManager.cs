@@ -60,7 +60,27 @@ public class GameManager : Singleton<GameManager>
 #endif
     }
 
+    public string GetAssociatedScriptableObjectFromImage(GameObject objectToCompare)
+    {
+        foreach (var entry in AddressableAssetSettingsDefaultObject.Settings.DefaultGroup.entries)
+        {
 
+
+            if (entry.labels.Contains("ScriptableObject"))
+            {
+                //if (object.toCompare)
+                ItemData tempData = AssetDatabase.LoadAssetAtPath<ItemData>(entry.AssetPath);
+                if (tempData.icon == objectToCompare.GetComponent<Image>().sprite)
+                {
+                    //return tempData.description
+                }
+            }
+
+        }
+
+        return null;
+
+    }
 
     void PutParsingResultsInScriptableObjects()
     {
@@ -497,6 +517,11 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(0);
     }
 
+
+    public int GetTotalSceneCount()
+    {
+        return SceneManager.sceneCountInBuildSettings;
+    }
 
     public void LoadVictoryScene()
     {

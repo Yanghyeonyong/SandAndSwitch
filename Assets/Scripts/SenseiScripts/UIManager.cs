@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Collections;
+using UnityEngine.EventSystems;
+
 public class UIManager : MonoBehaviour
 {
     private List<GameObject> _canvasList = new List<GameObject>();
@@ -378,11 +380,56 @@ public class UIManager : MonoBehaviour
 
 
 
-   
+    GameObject _hoveredUI;
+
+
+
+    GameObject GetCurrentHoveredUI()
+    {
+
+
+        PointerEventData mouseEventData = new PointerEventData(EventSystem.current);
+        if (Mouse.current != null)
+        {
+            mouseEventData.position = Mouse.current.position.ReadValue();
+        }
+
+        List<RaycastResult> pointerRaycastHits = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(mouseEventData, pointerRaycastHits);
+
+
+        if (pointerRaycastHits.Count > 0)
+        {
+            return pointerRaycastHits[0].gameObject;
+        }
+        return null;
+
+    }
 
     // Update is called once per frame
     void Update()
     {
         
+        if (GameManager.Instance.GetCurrentSceneIndex() !=0 && GameManager.Instance.GetCurrentSceneIndex() != GameManager.Instance.GetTotalSceneCount()-1)
+        {
+            
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+            if ( GetCurrentHoveredUI() != null)
+            {
+               // if (GetCurrentHoveredUI().GetComponent<Image>.sprite 
+
+            }
+                //_hoveredUI = GetCurrentHoveredUI();
+            }
+
+            else
+            {
+                
+            }
+
+        }
+
+
     }
 }
