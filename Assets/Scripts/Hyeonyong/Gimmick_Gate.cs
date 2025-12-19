@@ -20,19 +20,29 @@ public class Gimmick_Gate : Gimmick
 
     public override void StartGimmick()
     {
-        if (IsClear|| CheckQuickSlotItem())
+        int index = CheckQuickSlotItem();
+        if (IsClear || index != -1)
         {
             IsClear = true;
+            if (index != -1)
+            {
+                for (int i = 0; i < _requireCount; i++)
+                {
+                    Debug.Log("열쇠 사용");
+                    GameManager.Instance.Player.Slot.TryUseCurrentSlot(index);
+                }
+            }
             //NullReferenceExeption 방지를 위해 IsReuse를 false로 전환
             GetComponent<InteractiveObject>().IsReuse = false;
             GameManager.Instance.IsGimmickClear[GimmickId] = true;
             GameManager.Instance.LoadNextScene();
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+
         }
     }
 
     //해당 아이템 id가 있으면 true 반환
-    private bool CheckQuickSlotItem()
+    private int CheckQuickSlotItem()
     {
         //QuickSlot[] _check = GameManager.Instance.GameManagerQuickSlots;
         for (int i = 0; i < length; i++)
@@ -47,13 +57,13 @@ public class Gimmick_Gate : Gimmick
                 if (GameManager.Instance.GameManagerQuickSlots[i].Data.id == _itemId)
                 {
                     if(GameManager.Instance.GameManagerQuickSlots[i].Count >=_requireCount)
-                        return true;
+                        return i;
                     else 
-                        return false;
+                        return -1;
                 }
 
             }
         }
-        return false;
+        return -1;
     }
 }
