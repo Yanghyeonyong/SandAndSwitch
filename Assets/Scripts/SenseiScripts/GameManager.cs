@@ -33,9 +33,9 @@ public class GameManager : Singleton<GameManager>
     public Table<int, ItemTableData> ItemTable { get; private set; }
     public Table<string, StringTableData> StringTable { get; private set; }
 
-    void Awake()
+    protected override void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
 
         LoadTables();      // 1) 파싱
         ResolveTableAssets(); // 2) 프리팹/아이콘 실제 로드
