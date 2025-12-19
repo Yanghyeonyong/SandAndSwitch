@@ -30,12 +30,13 @@ public class QuickSlot
         _count -= amount;
         if (_count <= 0)
         {
-            _data = null;
             //최정욱 추가 아이콘 초기화
-            
-
-            _count = 0;
+            Clear();
         }
     }
-
+    public void Clear()
+    {
+        _data = null;
+        _count = 0;
+    }
 }

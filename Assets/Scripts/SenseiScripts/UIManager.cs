@@ -24,7 +24,11 @@ public class UIManager : MonoBehaviour
     void Start()
     {
 
-
+        int sceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex != 0)
+        {
+            InitQuickSlotUI();
+        }
         //UI 관련
         /*
         Canvas는 인덱스 순으로 MainMenu, IngameUI, PauseMenu, GameOverMenu
@@ -271,12 +275,12 @@ public class UIManager : MonoBehaviour
     private void RestartLogic()
     {
 
-        for (int i = 0; i < GameManager.Instance.GameManagerQuickSlotCountTexts.Length; i++)
-        {
-            GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
-            GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
-            GameManager.Instance.GameManagerQuickSlots[i] = null;
-        }
+        //for (int i = 0; i < GameManager.Instance.GameManagerQuickSlotCountTexts.Length; i++)
+        //{
+        //    GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
+        //    GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
+        //    GameManager.Instance.GameManagerQuickSlots[i] = null;
+        //}
 
 
         StartCoroutine(WaitForAsyncGameSceneLoad());
@@ -285,12 +289,12 @@ public class UIManager : MonoBehaviour
 
     private void LoadGameSceneLogic()
     {
-        for (int i = 0; i < GameManager.Instance.GameManagerQuickSlotCountTexts.Length; i++)
-        {
-            GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
-            GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
-            GameManager.Instance.GameManagerQuickSlots[i] = null;
-        }
+        //for (int i = 0; i < GameManager.Instance.GameManagerQuickSlotCountTexts.Length; i++)
+        //{
+        //    GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
+        //    GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
+        //    GameManager.Instance.GameManagerQuickSlots[i] = null;
+        //}
         //GameManager.Instance.GameManagerQuickSlotCountTexts[0].text = "";
         //GameManager.Instance.GameManagerQuickSlotIcons[0].gameObject.SetActive(false);
         StartCoroutine(WaitForAsyncGameSceneLoad());
@@ -374,7 +378,17 @@ public class UIManager : MonoBehaviour
     //}
 
 
+    public void InitQuickSlotUI()
+    {
+        for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
+        {
+            GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
+            GameManager.Instance.GameManagerQuickSlotIcons[i].sprite = null;
+            GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
 
+            GameManager.Instance.GameManagerQuickSlots[i].Clear();
+        }
+    }
    
 
     // Update is called once per frame

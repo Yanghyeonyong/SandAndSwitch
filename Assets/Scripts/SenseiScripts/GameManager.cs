@@ -36,7 +36,11 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-
+        GameManagerQuickSlots = new QuickSlot[10];
+        for (int i = 0; i < 10; i++)
+        {
+            GameManagerQuickSlots[i] = new QuickSlot();
+        }
         LoadTables();      // 1) 파싱
         ResolveTableAssets(); // 2) 프리팹/아이콘 실제 로드
     }
@@ -78,9 +82,10 @@ public class GameManager : Singleton<GameManager>
     //251216 - 양현용 추가 " 기믹 확인 용도
     //이후엔 실제 퀵슬롯에서 원하는 타입의 아이템이 있는지를 체크할 예정
 
-    public QuickSlot[] GameManagerQuickSlots { get; set; } = new QuickSlot[3];
-    public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[3];
-    public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[3];
+    //public QuickSlot[] GameManagerQuickSlots { get; set; } = new QuickSlot[10];
+    public QuickSlot[] GameManagerQuickSlots { get; private set; }
+    public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[10];
+    public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[10];
 
     //아이템픽업 관련
     public HashSet<string> CollectedItemIDs = new HashSet<string>();
@@ -471,8 +476,24 @@ public class GameManager : Singleton<GameManager>
     }
 
 
+    public void QuickSlotUI(int index)
+    {
+        QuickSlot slot = GameManagerQuickSlots[index];
 
+        // 슬롯 비어있으면 초기화
+        if (slot == null || slot.IsEmpty)
+        {
+            GameManagerQuickSlotCountTexts[index].text = "";
+            GameManagerQuickSlotIcons[index].sprite = null;
+            GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
+            return;
+        }
 
+        // 슬롯에 아이템 있다면 UI 표시
+        GameManagerQuickSlotCountTexts[index].text = slot.Count.ToString();
+        GameManagerQuickSlotIcons[index].sprite = slot.Data.icon;
+        GameManagerQuickSlotIcons[index].gameObject.SetActive(true);
+    }
 
     public void ExitGame()
     {

@@ -348,45 +348,54 @@ public class Player : MonoBehaviour
             _nearbyItem = null;
         }
     }
-    //만일을 위해 폭탄 사용 주석처리
-    //public void OnUseItem(InputAction.CallbackContext ctx)
+
+    //public void OnSelectSlot1(InputAction.CallbackContext ctx)
     //{
-    //    if (!ctx.started)
-    //    {
-    //        return;
-    //    }
-    //    QuickSlot currentSlot = slot.CurrentSlot;
-    //    if (currentSlot == null || currentSlot.IsEmpty || currentSlot.Data == null)
-    //    {
-    //        return;
-    //    }
-
-    //    ItemData data = currentSlot.Data;
-
-    //    if (slot.TryUseCurrentSlot(slot.CurrentIndex))
-    //    {
-    //        if (data.type == ItemType.Consumable && data.prefab != null)
-    //        {
-    //            GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
-    //            bombObj.GetComponent<Bomb>().UseBomb();
-    //        }
-    //    }
+    //    //GetComponent<QuickSlotController>().SelectSlot(0);
+    //    slot.SelectSlot(0);
     //}
-    public void OnSelectSlot1(InputAction.CallbackContext ctx)
-    {
-        //GetComponent<QuickSlotController>().SelectSlot(0);
-        slot.SelectSlot(0);
-    }
 
-    public void OnSelectSlot2(InputAction.CallbackContext ctx)
-    {
-        //GetComponent<QuickSlotController>().SelectSlot(1);
-        slot.SelectSlot(1);
-    }
+    //public void OnSelectSlot2(InputAction.CallbackContext ctx)
+    //{
+    //    //GetComponent<QuickSlotController>().SelectSlot(1);
+    //    slot.SelectSlot(1);
+    //}
 
-    public void OnSelectSlot3(InputAction.CallbackContext ctx)
+    //public void OnSelectSlot3(InputAction.CallbackContext ctx)
+    //{
+    //    //GetComponent<QuickSlotController>().SelectSlot(2);
+    //    slot.SelectSlot(2);
+    //}
+    public void OnSelectSlot(InputAction.CallbackContext ctx, int index)
     {
-        //GetComponent<QuickSlotController>().SelectSlot(2);
-        slot.SelectSlot(2);
+        if (!ctx.started)
+        {
+            return;
+        }
+        slot.SelectSlot(index);
+    }
+    public void OnUseItem(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.started)
+        {
+            return;
+        }
+        QuickSlot slotData = slot.CurrentSlot;
+        if (slotData == null || slotData.IsEmpty || slotData.Data == null)//빈슬롯
+        {
+            return;
+        }
+        ItemData data = slotData.Data;
+
+        if (slot.TryUseCurrentSlot(slot.CurrentIndex))
+        {
+            //if (data.type == ItemType.Consumable && data.prefab != null)//폭탄
+            //{
+            //    GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+            //    obj.GetComponent<Bomb>().UseBomb();
+            //}
+            //혹은 키아이템 사용을 따로 할것이라면 아래에 추가
+        }
+
     }
 }
