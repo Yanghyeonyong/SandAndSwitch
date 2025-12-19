@@ -9,6 +9,9 @@ public class ItemPickup : MonoBehaviour
 
     public ItemData ItemData => _itemData;
     public string UniqueID => uniqueID;
+
+
+#if UNITY_EDITOR
     //에디터에서 컴포넌트가 변경 될때 자동 실행
     private void OnValidate()
     {
@@ -26,7 +29,7 @@ public class ItemPickup : MonoBehaviour
             UnityEditor.EditorUtility.SetDirty(this); // 변경사항 저장
         }
     }
-
+#endif
     private void Start()
     {
         if (GameManager.Instance.CollectedItemIDs.Contains(uniqueID))
