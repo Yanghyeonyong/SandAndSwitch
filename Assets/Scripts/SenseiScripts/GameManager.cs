@@ -392,13 +392,13 @@ public class GameManager : Singleton<GameManager>
         //Time.timeScale = 0f;
         foreach (var canvas in CanvasList)
         {
-            if (canvas != CanvasList[4] || canvas != CanvasList[5])
+            if (canvas == CanvasList[4] || canvas == CanvasList[5])
             {
-                canvas.SetActive(false);
+                canvas.SetActive(true);
             }
             else
             {
-                canvas.SetActive(true);
+                canvas.SetActive(false);
             }
         }
         //CanvasList[4].SetActive(true);
