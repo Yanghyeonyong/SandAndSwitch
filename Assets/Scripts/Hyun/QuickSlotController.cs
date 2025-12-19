@@ -74,6 +74,7 @@ public class QuickSlotController : MonoBehaviour
                     {
                         GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = slot.Count.ToString();
                         GameManager.Instance.GameManagerQuickSlotIcons[i].sprite = slot.Data.icon;
+                        GameManager.Instance.GameManagerQuickSlotIcons[i].color = Color.white;
                         GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(true);
                     }
                 }
@@ -116,6 +117,8 @@ public class QuickSlotController : MonoBehaviour
     //    return true;
     //}
 
+    Color clear = new Color(1, 1, 1, 0);
+    
 
     public bool TryUseCurrentSlot(int index)//선택된 슬롯 아이템 사용
     {
@@ -135,6 +138,7 @@ public class QuickSlotController : MonoBehaviour
             GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
             GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
             GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
+            GameManager.Instance.GameManagerQuickSlotIcons[index].color = clear;
         }
         else
         {

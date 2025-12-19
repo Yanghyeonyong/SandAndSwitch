@@ -86,7 +86,7 @@ public class GameManager : Singleton<GameManager>
         _bombScriptableObject.icon = AssetDatabase.LoadAssetAtPath<Sprite>(ItemTable[101].Icon);
         _bombPrefabImage.sprite = _bombScriptableObject.icon; //어차피 변경되어 
 
-
+        //string test = StringTable["Test"].kr;
 
 
         EditorUtility.SetDirty(_bombScriptableObject);
@@ -151,8 +151,9 @@ public class GameManager : Singleton<GameManager>
     //251216 - 양현용 추가 " 기믹 확인 용도
     //이후엔 실제 퀵슬롯에서 원하는 타입의 아이템이 있는지를 체크할 예정
 
-    public QuickSlot[] GameManagerQuickSlots { get; set; } = new QuickSlot[3];
-    public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[3];
+    public QuickSlot[] GameManagerQuickSlots { get; set; } = new QuickSlot[10];
+    public Image[] GameManagerQuickSlotsImages { get; set; } = new Image[10];
+    public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[10];
 
     //민규님을 위한 예시
 
@@ -167,7 +168,7 @@ public class GameManager : Singleton<GameManager>
 
 
 
-    public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[3];
+    public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[10];
 
     //아이템픽업 관련
     public HashSet<string> CollectedItemIDs = new HashSet<string>();
