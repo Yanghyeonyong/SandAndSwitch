@@ -349,23 +349,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    //public void OnSelectSlot1(InputAction.CallbackContext ctx)
-    //{
-    //    //GetComponent<QuickSlotController>().SelectSlot(0);
-    //    slot.SelectSlot(0);
-    //}
-
-    //public void OnSelectSlot2(InputAction.CallbackContext ctx)
-    //{
-    //    //GetComponent<QuickSlotController>().SelectSlot(1);
-    //    slot.SelectSlot(1);
-    //}
-
-    //public void OnSelectSlot3(InputAction.CallbackContext ctx)
-    //{
-    //    //GetComponent<QuickSlotController>().SelectSlot(2);
-    //    slot.SelectSlot(2);
-    //}
     public void OnSelectSlot(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed)

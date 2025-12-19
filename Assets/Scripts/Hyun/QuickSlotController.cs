@@ -89,33 +89,6 @@ public class QuickSlotController : MonoBehaviour
         CurrentIndex = index;
     }
 
-    //public bool TryUseCurrentSlot()//선택된 슬롯 아이템 사용
-    //{
-    //    QuickSlot slot = _slots[CurrentIndex];
-    //    if (slot.IsEmpty)
-    //    {
-    //        return false;
-    //    }
-    //    if (slot.Data.type != ItemType.Consumable)//소모성아이템이 아닐경우
-    //    {
-    //        return false;
-    //    }
-    //    //아이템 사용
-    //    slot.Use(1);
-    //    if (slot.Count <= 0)
-    //    {
-    //        GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = "";
-    //        GameManager.Instance.GameManagerQuickSlotIcons[CurrentIndex].gameObject.SetActive(false);
-    //        GameManager.Instance.GameManagerQuickSlotIcons[CurrentIndex].sprite = null;
-    //    }
-    //    else
-    //    {
-    //        GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
-    //    }
-
-    //    //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
-    //    return true;
-    //}
 
     Color clear = new Color(1, 1, 1, 0);
     
