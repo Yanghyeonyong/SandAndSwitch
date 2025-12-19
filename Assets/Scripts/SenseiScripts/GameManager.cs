@@ -1,12 +1,21 @@
-using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEngine.Events;
-using TMPro;
-using System.Collections;
-using UnityEditor;
 using NUnit.Framework.Constraints;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+
+#if UNITY_EDITOR
+//using UnityEngine.AddressableAssets;
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
+using UnityEngine.ResourceManagement.AsyncOperations;
+#endif
+
 
 public enum GameState
 {
@@ -16,6 +25,12 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
+
+    
+
+    //addresables references
+    ItemData _bombScriptableObject;
+    SpriteRenderer _bombPrefabImage;
 
 
     [Header("플레이어 체력 관련")]
@@ -37,9 +52,67 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
+
+#if UNITY_EDITOR
         LoadTables();      // 1) 파싱
         ResolveTableAssets(); // 2) 프리팹/아이콘 실제 로드
+        PutParsingResultsInScriptableObjects(); // 3) Addressables에 파싱 결과 넣기
+#endif
     }
+
+
+
+    void PutParsingResultsInScriptableObjects()
+    {
+
+
+        
+
+
+
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        var group = settings.DefaultGroup;
+
+        //사실 addressable 사용안해도됫엇다 허걱스
+
+        //폭탄관련 데이터 스크립터블오브젝트에 프리팹, 아이콘 적용
+        var bombScriptableObjectEntry = GetEntryFromAddressableGroup(group, "BombScriptableObject");
+        var bombPrefabEntry = GetEntryFromAddressableGroup(group, "BombPrefab");
+
+        _bombScriptableObject = AssetDatabase.LoadAssetAtPath<ItemData>(bombScriptableObjectEntry.AssetPath);
+        _bombPrefabImage = AssetDatabase.LoadAssetAtPath<GameObject>(bombPrefabEntry.AssetPath).GetComponent<SpriteRenderer>();
+
+        _bombScriptableObject.prefab = AssetDatabase.LoadAssetAtPath<GameObject>(ItemTable[101].Prefab);
+        _bombScriptableObject.icon = AssetDatabase.LoadAssetAtPath<Sprite>(ItemTable[101].Icon);
+        _bombPrefabImage.sprite = _bombScriptableObject.icon; //어차피 변경되어 
+
+
+
+
+        EditorUtility.SetDirty(_bombScriptableObject);
+        EditorUtility.SetDirty(_bombPrefabImage);
+        AssetDatabase.SaveAssets();
+
+
+
+
+    }
+
+    AddressableAssetEntry GetEntryFromAddressableGroup(AddressableAssetGroup group, string targetAddress)
+    {
+        foreach (var entry in group.entries)
+            {
+            if (entry.address ==  targetAddress)
+            {
+                return entry;
+            }
+
+        }
+        return null;
+    }
+
+
+
 
     void LoadTables()
     {
@@ -80,6 +153,20 @@ public class GameManager : Singleton<GameManager>
 
     public QuickSlot[] GameManagerQuickSlots { get; set; } = new QuickSlot[3];
     public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[3];
+
+    //민규님을 위한 예시
+
+    //void Start()
+    //{
+    //    GameManagerQuickSlotCountTexts[0].text = ItemTable[1].Name;
+
+    //}
+
+
+
+
+
+
     public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[3];
 
     //아이템픽업 관련
@@ -164,6 +251,13 @@ public class GameManager : Singleton<GameManager>
 
         ColorUtility.TryParseHtmlString("#" + _heartFullHexColor, out _heartFullColor);
         ColorUtility.TryParseHtmlString("#" + _heartEmptyHexColor, out _heartEmptyColor);
+
+
+        //addressable 로딩
+
+        //PutParsingResultsInScriptableObjects();
+
+
     }
 
     public void EnterPhaseTwo()
