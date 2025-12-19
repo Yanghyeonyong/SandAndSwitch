@@ -366,13 +366,46 @@ public class Player : MonoBehaviour
     //    //GetComponent<QuickSlotController>().SelectSlot(2);
     //    slot.SelectSlot(2);
     //}
-    public void OnSelectSlot(InputAction.CallbackContext ctx, int index)
+    public void OnSelectSlot(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started)
+        if (!ctx.performed)
         {
             return;
         }
-        slot.SelectSlot(index);
+        string input = ctx.control.name;
+        switch (input)
+        {
+            case "1":
+                slot.SelectSlot(0);
+                break;
+            case "2":
+                slot.SelectSlot(1);
+                break;
+            case "3":
+                slot.SelectSlot(2);
+                break;
+            case "4":
+                slot.SelectSlot(3);
+                break;
+            case "5":
+                slot.SelectSlot(4);
+                break;
+            case "6":
+                slot.SelectSlot(5);
+                break;
+            case "7":
+                slot.SelectSlot(6);
+                break;
+            case "8":
+                slot.SelectSlot(7);
+                break;
+            case "9":
+                slot.SelectSlot(8);
+                break;
+            case "0":
+                slot.SelectSlot(9);
+                break;
+        }
     }
     public void OnUseItem(InputAction.CallbackContext ctx)
     {
@@ -389,11 +422,11 @@ public class Player : MonoBehaviour
 
         if (slot.TryUseCurrentSlot(slot.CurrentIndex))
         {
-            //if (data.type == ItemType.Consumable && data.prefab != null)//폭탄
-            //{
-            //    GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
-            //    obj.GetComponent<Bomb>().UseBomb();
-            //}
+            if (data.type == ItemType.Consumable && data.prefab != null)//폭탄
+            {
+                GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+                obj.GetComponent<Bomb>().UseBomb();
+            }
             //혹은 키아이템 사용을 따로 할것이라면 아래에 추가
         }
 

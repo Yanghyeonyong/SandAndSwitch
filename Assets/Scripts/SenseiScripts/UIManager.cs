@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
 
-        
+
         //UI 관련
         /*
         Canvas는 인덱스 순으로 MainMenu, IngameUI, PauseMenu, GameOverMenu
@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
         int index = 0;
         foreach (Transform child in transform)
         {
-            if (index ==1)
+            if (index == 1)
             {
                 GameManager.Instance.HeartImages.Add(child.GetChild(0).GetComponent<Image>());
                 GameManager.Instance.HeartImages.Add(child.GetChild(1).GetComponent<Image>());
@@ -50,11 +50,11 @@ public class UIManager : MonoBehaviour
             }
 
 
-            if (index==5)
+            if (index == 5)
             {
                 _audioSource = child.GetComponent<AudioSource>();
 
-                
+
             }
 
             int grandchildIndex = 0;
@@ -63,15 +63,15 @@ public class UIManager : MonoBehaviour
             Debug.Log(child.name);
             foreach (Transform grandChild in child)
             {
-                if (grandChild.GetComponent<Button>() !=null)
+                if (grandChild.GetComponent<Button>() != null)
                 {
                     Button button = grandChild.GetComponent<Button>();
                     if (index == 0)
                     {
-                        
+
                         GameManager.Instance.MenuButton.Add(button);
                         _menuButton.Add(button);
-                        
+
 
                     }
                     else if (index == 1)
@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
                         _gameOverMenuButton.Add(button);
                         //Debug.Log(button.name);
                     }
-                    else if (index ==4)
+                    else if (index == 4)
                     {
                         //승리메뉴 버튼 추가
                         GameManager.Instance.VictoryMenuButton.Add(button);
@@ -108,32 +108,43 @@ public class UIManager : MonoBehaviour
 
                 }
 
-                else if (index ==1)
+                else if (index == 1)
                 {
-                    switch (grandchildIndex)
+                    //switch (grandchildIndex)
+                    //{
+                    //    case 5:
+
+                    //        GameManager.Instance.GameManagerQuickSlotCountTexts[0] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+                    //        GameManager.Instance.GameManagerQuickSlotIcons[0] = grandChild.GetChild(0).GetComponent<Image>();
+                    //        GameManager.Instance.GameManagerQuickSlotIcons[0].gameObject.SetActive(false);
+                    //        Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[0].name);
+                    //        break;
+                    //    case 6:
+                    //        GameManager.Instance.GameManagerQuickSlotCountTexts[1] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+                    //        GameManager.Instance.GameManagerQuickSlotIcons[1] = grandChild.GetChild(0).GetComponent<Image>();
+                    //        GameManager.Instance.GameManagerQuickSlotIcons[1].gameObject.SetActive(false);
+                    //        Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[1].name);
+                    //        break;
+                    //    case 7:
+                    //        GameManager.Instance.GameManagerQuickSlotCountTexts[2] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+                    //        GameManager.Instance.GameManagerQuickSlotIcons[2] = grandChild.GetChild(0).GetComponent<Image>();
+                    //        GameManager.Instance.GameManagerQuickSlotIcons[2].gameObject.SetActive(false);
+                    //        Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[2].name);
+                    //        break;
+                    //}
+                    if (grandchildIndex >= 5 && grandchildIndex <= 14)
                     {
-                        case 5:
-                           
-                            GameManager.Instance.GameManagerQuickSlotCountTexts[0] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[0] = grandChild.GetChild(0).GetComponent<Image>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[0].gameObject.SetActive(false);
-                            Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[0].name);
-                            break;
-                        case 6:
-                            GameManager.Instance.GameManagerQuickSlotCountTexts[1] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[1] = grandChild.GetChild(0).GetComponent<Image>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[1].gameObject.SetActive(false);
-                            Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[1].name);
-                            break;
-                        case 7:
-                            GameManager.Instance.GameManagerQuickSlotCountTexts[2] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[2] = grandChild.GetChild(0).GetComponent<Image>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[2].gameObject.SetActive(false);
-                            Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[2].name);
-                            break;
+                        int slotIndex = grandchildIndex - 5;
+
+                        var slotIcon = grandChild.GetChild(0).GetComponent<Image>();
+                        var slotText = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+
+                        GameManager.Instance.GameManagerQuickSlotIcons[slotIndex] = slotIcon;
+                        GameManager.Instance.GameManagerQuickSlotCountTexts[slotIndex] = slotText;
+
+                        slotIcon.gameObject.SetActive(false);
+                        slotText.text = "";
                     }
-
-
 
                 }
 
@@ -141,10 +152,10 @@ public class UIManager : MonoBehaviour
 
 
 
-                
+
             }
             index++;
-     
+
         }
 
         _menuButton[0].onClick.AddListener(GameManager.Instance.LoadGameScene);
@@ -189,11 +200,7 @@ public class UIManager : MonoBehaviour
         _pauseGameAction = InputSystem.actions.FindActionMap("Player").FindAction("ESC");
         _pauseGameAction.performed += ESCAction;
 
-        int sceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-        if (sceneIndex != 0)
-        {
-            InitQuickSlotUI();
-        }
+
     }
 
     private void OnDestroy()
@@ -214,7 +221,7 @@ public class UIManager : MonoBehaviour
             _canvasList[6].SetActive(false);
             foreach (GameObject canvas in _tempCanvasList)
             {
-                
+
                 canvas.SetActive(true);
             }
             _tempCanvasList.Clear();
@@ -286,7 +293,7 @@ public class UIManager : MonoBehaviour
 
 
         StartCoroutine(WaitForAsyncGameSceneLoad());
-        
+
     }
 
     private void LoadGameSceneLogic()
@@ -309,8 +316,8 @@ public class UIManager : MonoBehaviour
         {
             yield return null;
         }
-        
-        if(_canvasList[0].activeSelf)
+
+        if (_canvasList[0].activeSelf)
         {
             _canvasList[0].SetActive(false);
         }
@@ -379,23 +386,13 @@ public class UIManager : MonoBehaviour
     //    _canvasList[3].SetActive(true);
     //}
 
-    //퀵슬롯 UI 관련 초기화
-    public void InitQuickSlotUI()
-    {
-        for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
-        {
-            GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
-            GameManager.Instance.GameManagerQuickSlotIcons[i].sprite = null;
-            GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
 
-            GameManager.Instance.GameManagerQuickSlots[i].Clear();
-        }
-    }
-   
+
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

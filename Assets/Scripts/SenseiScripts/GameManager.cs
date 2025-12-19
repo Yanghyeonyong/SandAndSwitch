@@ -36,11 +36,14 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
+
+        //퀵슬롯컨트롤러 관련
         GameManagerQuickSlots = new QuickSlot[10];
         for (int i = 0; i < 10; i++)
         {
             GameManagerQuickSlots[i] = new QuickSlot();
         }
+
         LoadTables();      // 1) 파싱
         ResolveTableAssets(); // 2) 프리팹/아이콘 실제 로드
     }
