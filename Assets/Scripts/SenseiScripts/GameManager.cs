@@ -159,10 +159,31 @@ public class GameManager : Singleton<GameManager>
 
     //void Start()
     //{
-    //    GameManagerQuickSlotCountTexts[0].text = ItemTable[1].Name;
+    //    GameManagerQuickSlotCountTexts[0].text = ItemTable[101].Name;
 
     //}
 
+
+    //Äü½½·Ô UI ¾÷µ¥ÀÌÆ®
+    public void QuickSlotUIUpdate(int currentSelectedQuickslot)
+    {
+        foreach (var quickslottemp in GameManagerQuickSlotsImages)
+        {
+            if (quickslottemp != GameManagerQuickSlotsImages[currentSelectedQuickslot])
+            {
+                quickslottemp.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (quickslottemp.gameObject.activeSelf == false)
+                {
+                    quickslottemp.gameObject.SetActive(true);
+                }
+
+            }
+        }
+
+    }
 
 
 
