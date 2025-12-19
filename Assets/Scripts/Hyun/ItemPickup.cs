@@ -22,7 +22,7 @@ public class ItemPickup : MonoBehaviour
         // 2. ID가 비어있다면 새 ID 부여
         if (string.IsNullOrEmpty(uniqueID))
         {
-            uniqueID = System.Guid.NewGuid().ToString();
+            uniqueID = Guid.NewGuid().ToString();
             UnityEditor.EditorUtility.SetDirty(this); // 변경사항 저장
         }
     }

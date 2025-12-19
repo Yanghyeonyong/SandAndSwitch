@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        slot = GetComponent<QuickSlotController>();
+        slot = GetComponent<QuickSlotController>();        
         rb.freezeRotation = true;
 
         if (animator == null)
@@ -349,36 +349,29 @@ public class Player : MonoBehaviour
         }
     }
     //만일을 위해 폭탄 사용 주석처리
-    //public void OnUseItem(InputAction.CallbackContext ctx)
-    //{
-    //    if (!ctx.started)
-    //    {
-    //        return;
-    //    }
-    //    QuickSlotController qs = GetComponent<QuickSlotController>();
-    //    if (qs == null)
-    //    {
-    //        return;
-    //    }
+    public void OnUseItem(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.started)
+        {
+            return;
+        }
+        QuickSlot currentSlot = slot.CurrentSlot;
+        if (currentSlot == null || currentSlot.IsEmpty || currentSlot.Data == null)
+        {
+            return;
+        }
 
-    //    QuickSlot slot = qs.CurrentSlot;
+        ItemData data = currentSlot.Data;
 
-    //    if (slot == null || slot.IsEmpty || slot.Data == null)
-    //    {
-    //        return;
-    //    }
-
-    //    ItemData data = slot.Data;
-
-    //    if (qs.TryUseCurrentSlot())
-    //    {
-    //        if (data.type == ItemType.Consumable && data.prefab != null)
-    //        {
-    //            GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
-    //            bombObj.GetComponent<Bomb>().UseBomb();
-    //        }
-    //    }
-    //}
+        if (slot.TryUseCurrentSlot(slot.CurrentIndex))
+        {
+            if (data.type == ItemType.Consumable && data.prefab != null)
+            {
+                GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+                bombObj.GetComponent<Bomb>().UseBomb();
+            }
+        }
+    }
     public void OnSelectSlot1(InputAction.CallbackContext ctx)
     {
         //GetComponent<QuickSlotController>().SelectSlot(0);
