@@ -225,7 +225,10 @@ public class GameManager : Singleton<GameManager>
     public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[10];
 
     //아이템픽업 관련
-    public HashSet<string> CollectedItemIDs = new HashSet<string>();
+    public List<Vector3> CollectedItemIDs = new List<Vector3>();
+
+
+
 
 
     [SerializeField] bool _checkItem;
