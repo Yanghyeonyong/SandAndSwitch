@@ -87,6 +87,7 @@ public class QuickSlotController : MonoBehaviour
     public void SelectSlot(int index)//ΩΩ∑‘ º±≈√
     {
         CurrentIndex = index;
+        GameManager.Instance.QuickSlotUIUpdate(index);
     }
 
 
