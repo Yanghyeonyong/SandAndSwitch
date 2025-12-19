@@ -174,8 +174,8 @@ public class UIManager : MonoBehaviour
         _gameOverMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
         _gameOverMenuButton[0].onClick.AddListener(PlayUIClickSound);
         _gameOverMenuButton[0].onClick.AddListener(RestartLogic);
-        _gameOverMenuButton[1].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
         _gameOverMenuButton[1].onClick.AddListener(PlayUIClickSound);
+        _gameOverMenuButton[1].onClick.AddListener(GameManager.Instance.LoadMainMenuScene);
         _gameOverMenuButton[1].onClick.AddListener(LoadMainMenuLogic);
 
 
@@ -336,10 +336,13 @@ public class UIManager : MonoBehaviour
     {
         foreach (GameObject canvas in _canvasList)
         {
-            if (canvas == _canvasList[0])
+            if (canvas == _canvasList[0] || canvas == _canvasList[5])
 
             {
-                canvas.SetActive(true);
+                if (canvas.activeSelf == false)
+                {
+                    canvas.SetActive(true);
+                }
             }
             else
             {

@@ -43,9 +43,11 @@ public class GameManager : Singleton<GameManager>
 
     void LoadTables()
     {
-        TextAsset csv = Resources.Load<TextAsset>("Data/ItemTable"); // Resources/Data/ItemTable.csv
-        ItemTable = TableParser.Parse<int, ItemTableData>(csv, "ID");
-        StringTable = TableParser.Parse<string, StringTableData>(csv, "key");
+        TextAsset itemCsv = Resources.Load<TextAsset>("Data/ItemTable"); // Resources/Data/ItemTable.csv
+        ItemTable = TableParser.Parse<int, ItemTableData>(itemCsv, "ID");
+
+        TextAsset stringCsv = Resources.Load<TextAsset>("Data/StringTable");
+        StringTable = TableParser.Parse<string, StringTableData>(stringCsv, "key");
     }
 
     void ResolveTableAssets()
@@ -80,7 +82,8 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[3];
     public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[3];
 
-
+    //아이템픽업 관련
+    public HashSet<string> CollectedItemIDs = new HashSet<string>();
 
 
     [SerializeField] bool _checkItem;
@@ -262,6 +265,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("스타트");
         _curScene = 1;
         _isGimmickClear.Clear();
+        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         player = null;
 
         if (_gameOverCoroutine != null)
@@ -312,6 +316,7 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
+        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         _isGimmickClear.Clear();
         if (_gameOverCoroutine != null)
         {
@@ -379,6 +384,7 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadVictoryScene()
     {
+        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         if (_gameOverCoroutine != null)
         {
             StopCoroutine(_gameOverCoroutine);
@@ -392,13 +398,13 @@ public class GameManager : Singleton<GameManager>
         //Time.timeScale = 0f;
         foreach (var canvas in CanvasList)
         {
-            if (canvas != CanvasList[4] || canvas != CanvasList[5])
+            if (canvas == CanvasList[4] || canvas == CanvasList[5])
             {
-                canvas.SetActive(false);
+                canvas.SetActive(true);
             }
             else
             {
-                canvas.SetActive(true);
+                canvas.SetActive(false);
             }
         }
         //CanvasList[4].SetActive(true);
@@ -439,18 +445,26 @@ public class GameManager : Singleton<GameManager>
     {
         foreach (GameObject canvas in CanvasList)
         {
+            Debug.Log(canvas.name);
             if (canvas != CanvasList[3] || canvas != CanvasList[5])
             {
                 canvas.SetActive(false);
 
             }
-            else
-            {
-                CanvasList[3].SetActive(true);
-            }
+            
+            
 
         }
-        Time.timeScale = 0f;
+        if (CanvasList[3].activeSelf == false)
+        {
+
+        CanvasList[3].SetActive(true);
+        }
+        if (CanvasList[5].activeSelf == false)
+        {
+            CanvasList[5].SetActive(true);
+        }
+            Time.timeScale = 0f;
         EnterPhaseOne();
         //추가로직
 

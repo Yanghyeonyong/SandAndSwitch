@@ -124,7 +124,7 @@ public class QuickSlotController : MonoBehaviour
         {
             return false;
         }
-        if (slot.Data.type != ItemType.Consumable)//소모성아이템이 아닐경우
+        if (slot.Data.type != ItemType.Consumable && slot.Data.type != ItemType.Key)//소모성아이템,키가 아닐경우
         {
             return false;
         }
