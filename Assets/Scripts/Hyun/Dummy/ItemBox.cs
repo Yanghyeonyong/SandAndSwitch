@@ -11,6 +11,7 @@ public class ItemBox : MonoBehaviour
     private bool _isOpened = false;
 
     [SerializeField] float _delay = 1f;
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (UnityEditor.PrefabUtility.IsPartOfPrefabAsset(this))
