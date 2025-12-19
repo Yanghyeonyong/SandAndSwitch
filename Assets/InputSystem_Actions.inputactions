@@ -113,6 +113,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SlotPrev",
+                    "type": "Button",
+                    "id": "07e040a0-c956-4c0d-aea6-4cbd1a36849f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SlotNext",
+                    "type": "Button",
+                    "id": "746aaafe-1ef8-48e6-9c00-6bb187feb181",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -630,6 +648,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SlotSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d05af5bf-c7c7-4fb0-b90e-6dee498f02a5",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SlotPrev",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aa7c69a6-0a65-4966-a634-3bdf67290c5f",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SlotNext",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
