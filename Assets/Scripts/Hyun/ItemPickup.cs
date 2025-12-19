@@ -9,8 +9,7 @@ public class ItemPickup : MonoBehaviour
 
     public ItemData ItemData => _itemData;
     public string UniqueID => uniqueID;
-#if UNITY_EDITOR
-    //런타임이 아니라 에디터에서 코드실행
+
     private void OnValidate()
     {
         // 1. 프리팹 에셋 자체에는 ID를 부여하지 않음 (씬에 배치된 인스턴스만 대상)
@@ -27,7 +26,7 @@ public class ItemPickup : MonoBehaviour
             UnityEditor.EditorUtility.SetDirty(this); // 변경사항 저장 강제
         }
     }
-#endif
+
     private void Start()
     {
         if (GameManager.Instance.CollectedItemIDs.Contains(uniqueID))
