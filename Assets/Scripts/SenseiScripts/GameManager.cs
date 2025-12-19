@@ -45,7 +45,6 @@ public class GameManager : Singleton<GameManager>
     {
         TextAsset csv = Resources.Load<TextAsset>("Data/ItemTable"); // Resources/Data/ItemTable.csv
         ItemTable = TableParser.Parse<int, ItemTableData>(csv, "ID");
-        StringTable = TableParser.Parse<string, StringTableData>(csv, "key");
     }
 
     void ResolveTableAssets()
