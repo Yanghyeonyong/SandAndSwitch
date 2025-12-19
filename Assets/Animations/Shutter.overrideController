@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shutter
+  m_Controller: {fileID: 9100000, guid: f2b04c54dba9268448c955695dc4ae7b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: dbd374b251c72b8418579871885e9b39, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6ac88d687f2cdb148884eb4505d9afd8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 86d3296724fd5ac488c9c29edf23da3a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e1c20d61f9fb0fb44969026ac07f8d7e, type: 2}
