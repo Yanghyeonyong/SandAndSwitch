@@ -5,10 +5,10 @@ public class ItemPickup : MonoBehaviour
 {
     [SerializeField] private ItemData _itemData;
     [SerializeField] private float _soundValue = 1f;
-    [SerializeField] private string uniqueId;
+    [SerializeField] private string uniqueID;
 
     public ItemData ItemData => _itemData;
-    public string UniqueId => uniqueId;
+    public string UniqueID => uniqueID;
 #if UNITY_EDITOR
     // 에디터에서 값이 변경되거나 오브젝트가 배치될 때 자동 실행
     private void OnValidate()
@@ -16,21 +16,21 @@ public class ItemPickup : MonoBehaviour
         // 1. 프리팹 에셋 자체에는 ID를 부여하지 않음 (씬에 배치된 인스턴스만 대상)
         if (UnityEditor.PrefabUtility.IsPartOfPrefabAsset(this))
         {
-            uniqueId = string.Empty;
+            uniqueID = string.Empty;
             return;
         }
 
         // 2. ID가 비어있다면 새 GUID 부여
-        if (string.IsNullOrEmpty(uniqueId))
+        if (string.IsNullOrEmpty(uniqueID))
         {
-            uniqueId = System.Guid.NewGuid().ToString();
+            uniqueID = System.Guid.NewGuid().ToString();
             UnityEditor.EditorUtility.SetDirty(this); // 변경사항 저장 강제
         }
     }
 #endif
     private void Start()
     {
-        if (GameManager.Instance.CollectedItemIDs.Contains(uniqueId))
+        if (GameManager.Instance.CollectedItemIDs.Contains(uniqueID))
         {
             gameObject.SetActive(false);
             return;
@@ -66,7 +66,7 @@ public class ItemPickup : MonoBehaviour
 
     public void Pickup()
     {
-        GameManager.Instance.CollectedItemIDs.Add(uniqueId);
+        GameManager.Instance.CollectedItemIDs.Add(uniqueID);
         if (_itemData.pickupSoundClip != null)
         {
             AudioSource.PlayClipAtPoint(_itemData.pickupSoundClip, transform.position, _soundValue);
