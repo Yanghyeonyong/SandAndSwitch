@@ -1,4 +1,4 @@
-using NUnit.Framework.Constraints;
+//using NUnit.Framework.Constraints;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,13 +7,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 
 #if UNITY_EDITOR
 //using UnityEngine.AddressableAssets;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
-using UnityEngine.ResourceManagement.AsyncOperations;
 #endif
 
 
@@ -52,28 +52,26 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-
-#if UNITY_EDITOR
         LoadTables();      // 1) 파싱
         ResolveTableAssets(); // 2) 프리팹/아이콘 실제 로드
+
+#if UNITY_EDITOR
         PutParsingResultsInScriptableObjects(); // 3) Addressables에 파싱 결과 넣기
 #endif
     }
 
-    public string GetAssociatedScriptableObjectFromImage(GameObject objectToCompare)
+
+#if UNITY_EDITOR
+    public string GetAssociatedDescriptionFromImage(GameObject objectToCompare)
+
     {
-        foreach (var entry in AddressableAssetSettingsDefaultObject.Settings.DefaultGroup.entries)
+        foreach (var entry in ItemTable.Data.Values)
         {
 
 
-            if (entry.labels.Contains("ScriptableObject"))
+            if (entry.Icon == objectToCompare.GetComponent<SpriteRenderer>().sprite.ToString())
             {
-                //if (object.toCompare)
-                ItemData tempData = AssetDatabase.LoadAssetAtPath<ItemData>(entry.AssetPath);
-                if (tempData.icon == objectToCompare.GetComponent<Image>().sprite)
-                {
-                    //return tempData.description
-                }
+                //return entry.ScriptableObject;
             }
 
         }
@@ -133,7 +131,7 @@ public class GameManager : Singleton<GameManager>
 
 
 
-
+#endif
     void LoadTables()
     {
         TextAsset itemCsv = Resources.Load<TextAsset>("Data/ItemTable"); // Resources/Data/ItemTable.csv

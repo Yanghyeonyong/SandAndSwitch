@@ -412,7 +412,10 @@ public class UIManager : MonoBehaviour
         
         if (GameManager.Instance.GetCurrentSceneIndex() !=0 && GameManager.Instance.GetCurrentSceneIndex() != GameManager.Instance.GetTotalSceneCount()-1)
         {
-            
+            if (EventSystem.current == null)
+            {
+                return;
+            }
             if (EventSystem.current.IsPointerOverGameObject())
             {
             if ( GetCurrentHoveredUI() != null)

@@ -7,6 +7,8 @@ public class ItemBox : MonoBehaviour
     [SerializeField] private string _uniqueID;
 
     private bool _isOpened = false;
+
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (UnityEditor.PrefabUtility.IsPartOfPrefabAsset(this))
@@ -21,6 +23,10 @@ public class ItemBox : MonoBehaviour
             UnityEditor.EditorUtility.SetDirty(this);
         }
     }
+#endif
+
+
+
     public void OpenBox()
     {
         if (_isOpened)
