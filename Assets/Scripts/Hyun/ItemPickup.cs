@@ -9,21 +9,21 @@ public class ItemPickup : MonoBehaviour
 
     public ItemData ItemData => _itemData;
     public string UniqueID => uniqueID;
-
+    //에디터에서 컴포넌트가 변경 될때 자동 실행
     private void OnValidate()
     {
-        // 1. 프리팹 에셋 자체에는 ID를 부여하지 않음 (씬에 배치된 인스턴스만 대상)
+        //프리팹 제외
         if (UnityEditor.PrefabUtility.IsPartOfPrefabAsset(this))
         {
             uniqueID = string.Empty;
             return;
         }
 
-        // 2. ID가 비어있다면 새 GUID 부여
+        // 2. ID가 비어있다면 새 ID 부여
         if (string.IsNullOrEmpty(uniqueID))
         {
             uniqueID = System.Guid.NewGuid().ToString();
-            UnityEditor.EditorUtility.SetDirty(this); // 변경사항 저장 강제
+            UnityEditor.EditorUtility.SetDirty(this); // 변경사항 저장
         }
     }
 
