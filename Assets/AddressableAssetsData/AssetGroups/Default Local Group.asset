@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: c04e9605ce6c60140966272b90ad4594
   m_SerializeEntries:
+  - m_GUID: 1acefdf1a87e85e448b42e1dc49ccc4b
+    m_Address: BombPrefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: add8d2d4205b91f4d81c38cac2df835c
     m_Address: BombScriptableObject
     m_ReadOnly: 0

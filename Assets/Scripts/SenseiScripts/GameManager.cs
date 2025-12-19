@@ -26,15 +26,11 @@ public enum GameState
 public class GameManager : Singleton<GameManager>
 {
 
-    //Addressables
-    //handles
-    AsyncOperationHandle<ItemData> _bombScriptableObjectHandle;
-    AsyncOperationHandle<GameObject> _bombPrefabHandle;
-    AsyncOperationHandle<Sprite> _bombIconHandle;
+    
 
     //addresables references
     ItemData _bombScriptableObject;
-
+    SpriteRenderer _bombPrefabImage;
 
 
     [Header("플레이어 체력 관련")]
@@ -80,18 +76,21 @@ public class GameManager : Singleton<GameManager>
         //사실 addressable 사용안해도됫엇다 허걱스
 
         //폭탄관련 데이터 스크립터블오브젝트에 프리팹, 아이콘 적용
-        var bombEntry = GetEntryFromAddressableGroup(group, "BombScriptableObject");
+        var bombScriptableObjectEntry = GetEntryFromAddressableGroup(group, "BombScriptableObject");
+        var bombPrefabEntry = GetEntryFromAddressableGroup(group, "BombPrefab");
 
-        _bombScriptableObject = AssetDatabase.LoadAssetAtPath<ItemData>(bombEntry.AssetPath);
-        
+        _bombScriptableObject = AssetDatabase.LoadAssetAtPath<ItemData>(bombScriptableObjectEntry.AssetPath);
+        _bombPrefabImage = AssetDatabase.LoadAssetAtPath<GameObject>(bombPrefabEntry.AssetPath).GetComponent<SpriteRenderer>();
+
         _bombScriptableObject.prefab = AssetDatabase.LoadAssetAtPath<GameObject>(ItemTable[101].Prefab);
         _bombScriptableObject.icon = AssetDatabase.LoadAssetAtPath<Sprite>(ItemTable[101].Icon);
+        _bombPrefabImage.sprite = _bombScriptableObject.icon; //어차피 변경되어 
 
 
 
 
         EditorUtility.SetDirty(_bombScriptableObject);
-
+        EditorUtility.SetDirty(_bombPrefabImage);
         AssetDatabase.SaveAssets();
 
 
