@@ -113,24 +113,27 @@ public class UIManager : MonoBehaviour
                     switch (grandchildIndex)
                     {
                         case 5:
-                           
-                            GameManager.Instance.GameManagerQuickSlotCountTexts[0] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[0] = grandChild.GetChild(0).GetComponent<Image>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[0].gameObject.SetActive(false);
-                            Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[0].name);
+                            for (int greatGrandChildIndex = 0; greatGrandChildIndex < 10; greatGrandChildIndex ++)
+                            
+                            {
+                                if(grandChild.GetChild(greatGrandChildIndex)==null)
+                                {
+                                    continue;
+                                }
+                                GameManager.Instance.GameManagerQuickSlotsImages[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).GetChild(0).GetComponent<Image>();
+                                GameManager.Instance.GameManagerQuickSlotCountTexts[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).GetChild(3).GetComponent<TextMeshProUGUI>();
+                                GameManager.Instance.GameManagerQuickSlotIcons[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).GetChild(1).GetComponent<Image>();
+                                
+                                if (GameManager.Instance.GameManagerQuickSlotsImages[greatGrandChildIndex].gameObject.activeSelf)
+                                {
+                                GameManager.Instance.GameManagerQuickSlotIcons[greatGrandChildIndex].gameObject.SetActive(false);
+                                    //continue;
+                                }
+                                //Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[greatGrandChildIndex].name);
+
+                            }
                             break;
-                        case 6:
-                            GameManager.Instance.GameManagerQuickSlotCountTexts[1] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[1] = grandChild.GetChild(0).GetComponent<Image>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[1].gameObject.SetActive(false);
-                            Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[1].name);
-                            break;
-                        case 7:
-                            GameManager.Instance.GameManagerQuickSlotCountTexts[2] = grandChild.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[2] = grandChild.GetChild(0).GetComponent<Image>();
-                            GameManager.Instance.GameManagerQuickSlotIcons[2].gameObject.SetActive(false);
-                            Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[2].name);
-                            break;
+
                     }
 
 
