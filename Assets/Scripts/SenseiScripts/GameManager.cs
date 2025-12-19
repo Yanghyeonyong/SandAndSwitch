@@ -79,7 +79,7 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[3];
     public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[3];
 
-    //아이템 관련
+    //아이템픽업 관련
     public HashSet<string> CollectedItemIDs = new HashSet<string>();
 
 
