@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ItemRow : TableBase
+public class ItemTableData : TableBase
 {
     public int ID;
     public string Name;
