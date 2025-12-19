@@ -336,10 +336,13 @@ public class UIManager : MonoBehaviour
     {
         foreach (GameObject canvas in _canvasList)
         {
-            if (canvas == _canvasList[0])
+            if (canvas == _canvasList[0] || canvas == _canvasList[5])
 
             {
-                canvas.SetActive(true);
+                if (canvas.activeSelf == false)
+                {
+                    canvas.SetActive(true);
+                }
             }
             else
             {
