@@ -140,7 +140,10 @@ public class GameManager : Singleton<GameManager>
         SoundEffectManager.Instance.PlayBGM(_bgms[3]);
         _gameState = (GameState)1;
         //
-        _gameOverCoroutine = StartCoroutine(CheckGameOver());
+        if (_gameOverCoroutine == null)
+        {
+            _gameOverCoroutine = StartCoroutine(CheckGameOver());
+        }
     }
     public void EnterPhaseOne()
     {
@@ -361,7 +364,7 @@ public class GameManager : Singleton<GameManager>
         //Time.timeScale = 0f;
         foreach (var canvas in CanvasList)
         {
-            if (canvas != CanvasList[4])
+            if (canvas != CanvasList[4] || canvas != CanvasList[5])
             {
                 canvas.SetActive(false);
             }
@@ -408,7 +411,7 @@ public class GameManager : Singleton<GameManager>
     {
         foreach (GameObject canvas in CanvasList)
         {
-            if (canvas != CanvasList[3])
+            if (canvas != CanvasList[3] || canvas != CanvasList[5])
             {
                 canvas.SetActive(false);
 
@@ -446,6 +449,8 @@ public class GameManager : Singleton<GameManager>
 
     //Victory Menu Button
     public List<Button> VictoryMenuButton { get; set; } = new List<Button>();
+
+    public List<Button> ControlGuideMenuButton { get; set; } = new List<Button>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
