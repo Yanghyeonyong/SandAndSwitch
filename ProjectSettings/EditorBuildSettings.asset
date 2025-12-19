@@ -21,5 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SenseiVictoryScene.unity
     guid: c11245d2638f8e1489e7b217a673e043
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 5ab283a604bc597418e8e88f77d768b8, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
