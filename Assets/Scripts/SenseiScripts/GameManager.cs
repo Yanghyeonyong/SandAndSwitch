@@ -475,7 +475,7 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-
+    //퀵슬롯컨트롤러 관련
     public void QuickSlotUI(int index)
     {
         QuickSlot slot = GameManagerQuickSlots[index];

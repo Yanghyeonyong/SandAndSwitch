@@ -24,11 +24,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
 
-        int sceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-        if (sceneIndex != 0)
-        {
-            InitQuickSlotUI();
-        }
+        
         //UI 관련
         /*
         Canvas는 인덱스 순으로 MainMenu, IngameUI, PauseMenu, GameOverMenu
@@ -192,6 +188,12 @@ public class UIManager : MonoBehaviour
 
         _pauseGameAction = InputSystem.actions.FindActionMap("Player").FindAction("ESC");
         _pauseGameAction.performed += ESCAction;
+
+        int sceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex != 0)
+        {
+            InitQuickSlotUI();
+        }
     }
 
     private void OnDestroy()
@@ -377,7 +379,7 @@ public class UIManager : MonoBehaviour
     //    _canvasList[3].SetActive(true);
     //}
 
-
+    //퀵슬롯 UI 관련 초기화
     public void InitQuickSlotUI()
     {
         for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
