@@ -349,29 +349,29 @@ public class Player : MonoBehaviour
         }
     }
     //만일을 위해 폭탄 사용 주석처리
-    public void OnUseItem(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.started)
-        {
-            return;
-        }
-        QuickSlot currentSlot = slot.CurrentSlot;
-        if (currentSlot == null || currentSlot.IsEmpty || currentSlot.Data == null)
-        {
-            return;
-        }
+    //public void OnUseItem(InputAction.CallbackContext ctx)
+    //{
+    //    if (!ctx.started)
+    //    {
+    //        return;
+    //    }
+    //    QuickSlot currentSlot = slot.CurrentSlot;
+    //    if (currentSlot == null || currentSlot.IsEmpty || currentSlot.Data == null)
+    //    {
+    //        return;
+    //    }
 
-        ItemData data = currentSlot.Data;
+    //    ItemData data = currentSlot.Data;
 
-        if (slot.TryUseCurrentSlot(slot.CurrentIndex))
-        {
-            if (data.type == ItemType.Consumable && data.prefab != null)
-            {
-                GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
-                bombObj.GetComponent<Bomb>().UseBomb();
-            }
-        }
-    }
+    //    if (slot.TryUseCurrentSlot(slot.CurrentIndex))
+    //    {
+    //        if (data.type == ItemType.Consumable && data.prefab != null)
+    //        {
+    //            GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+    //            bombObj.GetComponent<Bomb>().UseBomb();
+    //        }
+    //    }
+    //}
     public void OnSelectSlot1(InputAction.CallbackContext ctx)
     {
         //GetComponent<QuickSlotController>().SelectSlot(0);
