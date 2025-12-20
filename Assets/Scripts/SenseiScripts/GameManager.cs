@@ -25,11 +25,15 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
+    //busy loading game scene flag
+    bool _isLoadingGameScene = false;
 
-    
+    //cutscene info
+    public int CurrentCutsceneIndex = 0;
+    public CinematicController CinematicControllerSensei {get; set;}
 
-    //addresables references
-    ItemData _bombScriptableObject;
+//addresables references
+ItemData _bombScriptableObject;
     SpriteRenderer _bombPrefabImage;
 
 
@@ -413,6 +417,20 @@ public class GameManager : Singleton<GameManager>
     public AsyncOperation GameSceneLoadAsyncOperation;
     public void LoadGameScene()
     {
+
+        if (CinematicControllerSensei == null)
+        {
+            CinematicControllerSensei = GetComponentInChildren<CinematicController>();
+        }
+
+
+        if (_isLoadingGameScene)
+        {
+            return;
+        }
+        _isLoadingGameScene = true;
+
+        //
         //251216 - 양현용 : 새게임시 기믹 초기화 및 씬 설정
         Debug.Log("스타트");
         _curScene = 1;
@@ -439,8 +457,8 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1f;
         GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
         GameSceneLoadAsyncOperation.allowSceneActivation = false;
+        
         StartCoroutine(WaitForGameSceneLoad());
-
 
 
 
@@ -448,17 +466,64 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    IEnumerator WaitForGameSceneLoad()
+    IEnumerator WaitForVictorySceneLoad()
     {
-
         while (GameSceneLoadAsyncOperation.progress < 0.9f)
         {
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
-            GameSceneLoadAsyncOperation.allowSceneActivation = true;
+        //yield return null;
+
+        GameSceneLoadAsyncOperation.allowSceneActivation = true;
+        //yield return new WaitForSecondsRealtime(0.3f);
+        while (CinematicControllerSensei.InCutscene)
+        {
+            yield return null;
+        }
 
         yield return GameSceneLoadAsyncOperation.isDone;
+
+
+        foreach (var canvas in CanvasList)
+        {
+            if (canvas == CanvasList[4] || canvas == CanvasList[5])
+            {
+                canvas.SetActive(true);
+            }
+            else
+            {
+                canvas.SetActive(false);
+            }
+        }
+
+        //StartCoroutine(SpawnPlayer());
+        //_player = Instantiate(_playerPrefab, _playerSpawnPos[0], Quaternion.identity);
+        //player = _player.GetComponent<Player>();
+        //Debug.Log("플레이어 생성");
+
+    }
+    IEnumerator WaitForGameSceneLoad()
+    {
+        while (GameSceneLoadAsyncOperation.progress < 0.9f)
+        {
+            yield return null; ;
+        }
+        CinematicControllerSensei.PlayCutscene();
+        //yield return null;
+
+        //yield return null;
+        GameSceneLoadAsyncOperation.allowSceneActivation = true;
+
+        while (CinematicControllerSensei.InCutscene)
+        {
+            yield return null;
+        }
+
+        yield return GameSceneLoadAsyncOperation.isDone;
+        
+        _isLoadingGameScene = false;
+
         StartCoroutine(SpawnPlayer());
         //_player = Instantiate(_playerPrefab, _playerSpawnPos[0], Quaternion.identity);
         //player = _player.GetComponent<Player>();
@@ -531,6 +596,9 @@ public class GameManager : Singleton<GameManager>
     {
         CanvasList[0].SetActive(true);
         SceneManager.LoadScene(0);
+        CurrentCutsceneIndex = 0;
+        CinematicControllerSensei.ClearCutscene();
+
     }
 
 
@@ -548,25 +616,22 @@ public class GameManager : Singleton<GameManager>
             _gameOverCoroutine = null;
         }
         EnterPhaseOne();
+        CinematicControllerSensei.PlayCutscene();
 
         int temp = SceneManager.sceneCountInBuildSettings;
 
-        SceneManager.LoadScene(temp - 1);
+        GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(temp - 1);
+        GameSceneLoadAsyncOperation.allowSceneActivation = false;
+        StartCoroutine(WaitForVictorySceneLoad());
+        //SceneManager.LoadScene(temp - 1);
         //Time.timeScale = 0f;
-        foreach (var canvas in CanvasList)
-        {
-            if (canvas == CanvasList[4] || canvas == CanvasList[5])
-            {
-                canvas.SetActive(true);
-            }
-            else
-            {
-                canvas.SetActive(false);
-            }
-        }
+        
         //CanvasList[4].SetActive(true);
         //추가로직
     }
+
+
+
 
     public void PauseGame()
     {

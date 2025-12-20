@@ -60,10 +60,14 @@ public class UIManager : MonoBehaviour
             }
 
             int grandchildIndex = 0;
-            GameManager.Instance.CanvasList.Add(child.gameObject);
-            _canvasList.Add(child.gameObject);
-            Debug.Log(child.name);
-            foreach (Transform grandChild in child)
+            if (index != 7)
+            {
+                GameManager.Instance.CanvasList.Add(child.gameObject);
+                _canvasList.Add(child.gameObject);
+            }
+                Debug.Log(child.name);
+            
+                foreach (Transform grandChild in child)
             {
                 if (grandChild.GetComponent<Button>() !=null)
                 {
@@ -106,6 +110,7 @@ public class UIManager : MonoBehaviour
                         GameManager.Instance.ControlGuideMenuButton.Add(button);
                         _controlGuideMenuButton.Add(button);
                         Debug.Log(button.name);
+                        break;
                     }
 
                 }
@@ -240,6 +245,11 @@ public class UIManager : MonoBehaviour
 
     void ESCAction(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.CinematicControllerSensei.InCutscene)
+        {
+                       return;
+        }
+
         if (GameManager.Instance.GetCurrentSceneIndex() != 0 && _canvasList[1].activeSelf)
         {
             if (!_canvasList[2].activeSelf)
@@ -256,6 +266,9 @@ public class UIManager : MonoBehaviour
         {
             _controlGuideMenuButton[0].onClick.Invoke();
         }
+
+
+        //GameManager.Instance.CinematicControllerSensei.ResetPlayableDirector();
     }
 
     private void PlayUIClickSound()
