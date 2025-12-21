@@ -310,7 +310,7 @@ ItemData _bombScriptableObject;
         //해당 값을 찾는 기능은 현재 테스트 용으로  start에 있으나, 이후 플레이어 스폰 지점으로 이동 예정
         //player = GameObject.FindFirstObjectByType<Player>().GetComponent<Player>();
         _wait = new WaitForSeconds(_minusGameOverCount);
-
+        _waitRealTime = new WaitForSecondsRealtime(_minusGameOverCount);
         ColorUtility.TryParseHtmlString("#" + _heartFullHexColor, out _heartFullColor);
         ColorUtility.TryParseHtmlString("#" + _heartEmptyHexColor, out _heartEmptyColor);
 
@@ -321,6 +321,9 @@ ItemData _bombScriptableObject;
 
 
     }
+
+    Coroutine _phaseTwoFadeCortouine;
+
 
     public void EnterPhaseTwo()
     {
@@ -361,10 +364,16 @@ ItemData _bombScriptableObject;
 
     IEnumerator CheckGameOver()
     {
+        //페이즈 하얘지는 연출 추가 251221 최정욱
+        Color _currentWhiteFadeColor = new Color(1f, 1f, 1f, 0f);
+
         _curGameOverCount = _gameOverCount;
         _curGameOverCount -= _minusGameOverCount;
         while (_curGameOverCount > 0)
         {
+        //페이즈 하얘지는 연출 추가 251221 최정욱
+            _currentWhiteFadeColor.a = 1f - (_curGameOverCount / _gameOverCount);
+            ExtraUITools[0].GetComponent<Image>().color = _currentWhiteFadeColor;
             yield return _wait;
             _curGameOverCount -= _minusGameOverCount;
         }
@@ -533,6 +542,7 @@ ItemData _bombScriptableObject;
 
     public void RestartGame()
     {
+        CurrentCutsceneIndex = 0;
         CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         _isGimmickClear.Clear();
         if (_gameOverCoroutine != null)
@@ -607,8 +617,29 @@ ItemData _bombScriptableObject;
         return SceneManager.sceneCountInBuildSettings;
     }
 
+    [SerializeField] float _blackFadeToVictoryCutscenesTime = 1.5f;
+    Coroutine _blackFadeToVictoryCoroutine;
+
+    IEnumerator BlackFadeToVictoryCutscene()
+    {
+        Color tempColor = new Color(0f, 0f, 0f, 1f);
+        float tempFadeTime = _blackFadeToVictoryCutscenesTime;
+        //ExtraUITools[1].GetComponent<Image>().raycastTarget = true;
+
+        CinematicControllerSensei.PreloadVictoryBackground();
+        while (tempFadeTime > 0)
+        {
+            tempColor.a = tempFadeTime / _blackFadeToVictoryCutscenesTime;
+            ExtraUITools[0].GetComponent<Image>().color = tempColor;
+            yield return _wait;
+            tempFadeTime -= _minusGameOverCount;
+        }
+        CinematicControllerSensei.PlayCutscene();
+    }
+
     public void LoadVictoryScene()
     {
+        _blackFadeToVictoryCoroutine = StartCoroutine(BlackFadeToVictoryCutscene());
         CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         if (_gameOverCoroutine != null)
         {
@@ -616,7 +647,6 @@ ItemData _bombScriptableObject;
             _gameOverCoroutine = null;
         }
         EnterPhaseOne();
-        CinematicControllerSensei.PlayCutscene();
 
         int temp = SceneManager.sceneCountInBuildSettings;
 
@@ -662,13 +692,48 @@ ItemData _bombScriptableObject;
         //추가로직
     }
 
+    [SerializeField] float _deathWhiteToBlackFadeDuration = 1.5f;
+
+    Coroutine _deathWhiteToBlackFadeCoroutine;
+
+    WaitForSecondsRealtime _waitRealTime;
+    IEnumerator DeathWhiteToBlackFade()
+    {
+        float fadeDuration = _deathWhiteToBlackFadeDuration;
+        Color tempColor = new Color(1f, 1f, 1f, 1f);
+        ExtraUITools[0].GetComponent<Image>().raycastTarget = true;
+        while (fadeDuration > 0)
+        {
+            tempColor.g = fadeDuration / _deathWhiteToBlackFadeDuration;
+            tempColor.b = fadeDuration / _deathWhiteToBlackFadeDuration;
+            tempColor.r = fadeDuration / _deathWhiteToBlackFadeDuration;
+            ExtraUITools[0].GetComponent<Image>().color = tempColor;
+            yield return _waitRealTime;
+            fadeDuration -= _minusGameOverCount;
+        }
+
+
+        fadeDuration = _deathWhiteToBlackFadeDuration;
+        while (fadeDuration > 0)
+        {
+        //ExtraUITools[0].GetComponent<Image>().raycastTarget = true;
+            tempColor.a = (fadeDuration / _deathWhiteToBlackFadeDuration);
+            ExtraUITools[0].GetComponent<Image>().color = tempColor;
+            yield return _waitRealTime;
+            fadeDuration -= _minusGameOverCount;
+        }
+        ExtraUITools[0].GetComponent<Image>().raycastTarget = false;
+
+    }
 
     public void PlayerDeath()
     {
+        _deathWhiteToBlackFadeCoroutine = StartCoroutine(DeathWhiteToBlackFade());
+
         foreach (GameObject canvas in CanvasList)
         {
             Debug.Log(canvas.name);
-            if (canvas != CanvasList[3] || canvas != CanvasList[5])
+            if (canvas != CanvasList[3] && canvas != CanvasList[5])
             {
                 canvas.SetActive(false);
 
@@ -702,7 +767,7 @@ ItemData _bombScriptableObject;
     }
 
 
-
+    public List<GameObject> ExtraUITools { get; set; } = new List<GameObject>();
 
     public List<GameObject> CanvasList { get; set; } = new List<GameObject>();
     public List<Button> MenuButton { get; set; } = new List<Button>();

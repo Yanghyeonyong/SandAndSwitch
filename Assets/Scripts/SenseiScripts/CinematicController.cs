@@ -140,6 +140,14 @@ public class CinematicController : MonoBehaviour
 
     }
 
+    public void PreloadVictoryBackground()
+    {
+        _cutsceneCanvas.SetActive(true);
+        _custceneStill.sprite = _tempVictorySprites[0];
+    }
+
+    
+
     public void ResetPlayableDirector()
     {
         _currentExecutionIndex++;

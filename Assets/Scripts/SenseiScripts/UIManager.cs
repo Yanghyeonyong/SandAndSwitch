@@ -60,11 +60,20 @@ public class UIManager : MonoBehaviour
             }
 
             int grandchildIndex = 0;
-            if (index != 7)
+            if (index != 7 && index != 8)
             {
                 GameManager.Instance.CanvasList.Add(child.gameObject);
                 _canvasList.Add(child.gameObject);
             }
+
+            if (index ==8)
+            {
+                foreach (Transform UITools in child)
+                {
+                    GameManager.Instance.ExtraUITools.Add(UITools.gameObject);
+                }
+            }
+
                 Debug.Log(child.name);
             
                 foreach (Transform grandChild in child)
