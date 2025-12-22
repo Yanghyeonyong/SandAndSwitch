@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4000942028175026526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4332253915996235408}
+  m_Layer: 0
+  m_Name: TeleportPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4332253915996235408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000942028175026526}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.02, y: 4.6359997, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5775389616876981403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4119056416699950548
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +71,7 @@ Transform:
   - {fileID: 1243671462521445303}
   - {fileID: 6845272138778573474}
   - {fileID: 5179376891981312593}
+  - {fileID: 4332253915996235408}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3327898961020325229
@@ -231,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6cceae443e6e64baf0aeb9a80810ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_Switch
-  _gimmickId: 0
+  _gimmickId: 5
   _turnSwitch: 0
 --- !u!114 &7266417965015965277
 MonoBehaviour:
@@ -246,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shutter
   _shutterObject: {fileID: 4509691225346623291}
-  _interactiveObj: {fileID: 0}
+  _interactiveObj: {fileID: 7062690150137175514}
 --- !u!95 &5644070047313174010
 Animator:
   serializedVersion: 7
@@ -516,13 +548,14 @@ GameObject:
   - component: {fileID: 5423630309831623428}
   - component: {fileID: 398147421098843943}
   - component: {fileID: 4442425932333467658}
+  - component: {fileID: 5763171674440513744}
   m_Layer: 0
   m_Name: MapDoor(Interactive)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5179376891981312593
 Transform:
   m_ObjectHideFlags: 0
@@ -683,6 +716,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 0}
   _isReuse: 0
+--- !u!114 &5763171674440513744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7062690150137175514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7d8b95a7ce9d6544801a02807ccb191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gimmick_MapDoor
+  _gimmickId: 0
+  _teleportPos: {fileID: 4332253915996235408}
 --- !u!1001 &326668226674693140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -731,10 +778,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1846996092967696993, guid: 463856a2a787981438847960e72b2f29, type: 3}
+      propertyPath: _gimmickId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7980944775428752459, guid: 463856a2a787981438847960e72b2f29, type: 3}
       propertyPath: m_Name
       value: Box
       objectReference: {fileID: 0}
+    - target: {fileID: 8963731967332385344, guid: 463856a2a787981438847960e72b2f29, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

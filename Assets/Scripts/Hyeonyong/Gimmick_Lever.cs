@@ -11,11 +11,14 @@ public class Gimmick_Lever : Gimmick
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _obj = GetComponent<Gimmick_Object>();
         if (CheckClear())
         {
-            
+            _turnLever=true;
+            _obj.TurnOn();
+            _animator.SetTrigger("TurnOn");
         }
-        _obj = GetComponent<Gimmick_Object>();
+
     }
 
     public override void StartGimmick()
@@ -26,12 +29,14 @@ public class Gimmick_Lever : Gimmick
 
             _obj.TurnOn();
             _animator.SetTrigger("TurnOn");
+            GameManager.Instance.IsGimmickClear[GimmickId] = true;
         }
         else
         {
 
             _obj.TurnOff();
             _animator.SetTrigger("TurnOff");
+            GameManager.Instance.IsGimmickClear[GimmickId] = false;
         }
     }
 }

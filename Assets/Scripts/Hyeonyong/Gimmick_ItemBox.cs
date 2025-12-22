@@ -12,7 +12,7 @@ public class Gimmick_ItemBox : Gimmick
         _animator = GetComponent<Animator>();
         if (CheckClear())
         {
-
+            _animator.SetTrigger("TurnOn");
         }
         _itemBox= GetComponent<ItemBox>();
     }
