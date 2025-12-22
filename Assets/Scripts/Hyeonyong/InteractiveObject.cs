@@ -8,18 +8,24 @@ public class InteractiveObject : MonoBehaviour
     //3. 해당 객체 정보에서 Gimmick(부모 클래스) 가져오고 StartGimmick 메서드 실행
 
     Gimmick _gimmick;
-    PlayerTest _playerTest;
+    Player _player;
     [SerializeField] GameObject _interactiveUI;
+    [SerializeField] bool _isReuse=false;
+    public bool IsReuse
+    {
+        get { return _isReuse; }
+        set { _isReuse = value; }
+    }
 
     private void Start()
     {
         _gimmick = GetComponent<Gimmick>();
-        _playerTest = GameManager_Hyeonyong.Instance.GetComponent<PlayerTest>();
+        _player = GameManager.Instance.GetComponent<Player>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_gimmick.IsClear)
+        if (_gimmick.IsClear && !_isReuse)
         {
             return;
         }
@@ -27,28 +33,29 @@ public class InteractiveObject : MonoBehaviour
         //플레이어에게 존재하는 bool 활성화
         if (collision.CompareTag("Player"))
         {
-            if (_playerTest == null)
+            if (_player == null)
             {
-                _playerTest = collision.gameObject.GetComponent<PlayerTest>();
+                _player = collision.gameObject.GetComponent<Player>();
             }
             //플레이어와 충돌 시 상호작용 버튼 활성화
-            _playerTest.CheckGimmick = true;
-            _playerTest.CurGimmick = _gimmick;
+            _player.CheckGimmick = true;
+            _player.CurGimmick = _gimmick;
             _interactiveUI.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_playerTest == null) 
+        if (_player == null) 
         { 
             return ;
         }
         if (_gimmick.IsClear)
         {
-            if (_playerTest.CheckGimmick)
+            //NullReferenceExeption 방지를 위해 && _isReuse 추가
+            if (_player.CheckGimmick && _isReuse)
             {
-                _playerTest.CheckGimmick = false;
+                _player.CheckGimmick = false;
                 _interactiveUI.SetActive(false);
             }
             return;
@@ -56,7 +63,7 @@ public class InteractiveObject : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             //플레이어와 충돌 시 상호작용 버튼 비활성화
-            _playerTest.CheckGimmick = false;
+            _player.CheckGimmick = false;
             _interactiveUI.SetActive(false);
         }
     }

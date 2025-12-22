@@ -21,8 +21,10 @@ public class Gimmick_DoorLock : Gimmick
     [SerializeField] GameObject _interactiveUI;
     [SerializeField] GameObject _testObject;
     public GameObject TestObject => _testObject;
-    
 
+    //사용에 필요한 아이템 id
+    [SerializeField] int _itemId;
+    int length = 0;
     private void Start()
     {
         if (CheckClear())
@@ -47,6 +49,7 @@ public class Gimmick_DoorLock : Gimmick
                 _selectionButtons[i] = _selection.transform.GetChild(i).GetComponent<Button>();
             }
         }
+        length=GameManager.Instance.GameManagerQuickSlots.Length;
     }
 
     public override void StartGimmick()
@@ -66,7 +69,9 @@ public class Gimmick_DoorLock : Gimmick
         _interactiveUI.SetActive(false);
         _selection.SetActive(true);
 
-        GameManager_Hyeonyong.Instance.OnProgressGimmick = true;
+        GameManager.Instance.OnProgressGimmick = true;
+
+        GameManager.Instance.PauseGame();
     }
 
     public void ChoiceGimmick()
@@ -78,14 +83,33 @@ public class Gimmick_DoorLock : Gimmick
     }
     public void ChoiceItem()
     {
-        if (GameManager_Hyeonyong.Instance.CheckItem)
+        int index = CheckQuickSlotItem();
+        if (index !=-1)
         {
+            GameManager.Instance.IsGimmickClear[GimmickId] = true;
+            _isClear = true;
+            ItemData data = GameManager.Instance.GameManagerQuickSlots[index].Data;
+            //퀵슬롯이 아니라 퀵슬롯 컨트롤러를 통해서 진행한다
+            GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+            bombObj.GetComponent<Bomb>().UseBomb();
+            GameManager.Instance.Player.Slot.TryUseCurrentSlot(index);
+            //GameManager.Instance.GameManagerQuickSlots[index].Use(1);
+            //if (GameManager.Instance.GameManagerQuickSlots[index].Count <= 0)
+            //{
+            //    GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
+            //    GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
+            //    GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
+            //}
+
             _doorLockObject.SetActive(false);
-            _testObject.SetActive(false);
+            //_testObject.SetActive(false);
             _selection.SetActive(false);
 
             ResetSelectionButton();
-            GameManager_Hyeonyong.Instance.OnProgressGimmick = false;
+            GameManager.Instance.OnProgressGimmick = false;
+
+            GameManager.Instance.ResumeGame();
+
         }
     }
     public override void ExitGimmick()
@@ -99,7 +123,9 @@ public class Gimmick_DoorLock : Gimmick
         ResetSelectionButton();
         _interactiveUI.SetActive(true);
 
-        GameManager_Hyeonyong.Instance.OnProgressGimmick=false;
+        GameManager.Instance.OnProgressGimmick=false;
+
+        GameManager.Instance.ResumeGame();
     }
 
     public void ResetSelectionButton()
@@ -116,5 +142,29 @@ public class Gimmick_DoorLock : Gimmick
         _selection.SetActive(false);
         ResetSelectionButton();
         _interactiveUI.SetActive(true);
+    }
+
+
+    //해당 아이템 id가 있으면 true 반환
+    private int CheckQuickSlotItem()
+    {
+        //QuickSlot[] _check = GameManager.Instance.GameManagerQuickSlots;
+        for (int i = 0; i < length; i++)
+        {
+            if (GameManager.Instance.GameManagerQuickSlots[i] != null)
+            {
+                if (GameManager.Instance.GameManagerQuickSlots[i].Data == null)
+                {
+                    continue;
+                }
+
+                if (GameManager.Instance.GameManagerQuickSlots[i].Data.id == _itemId)
+                {
+                    return i;
+                }
+
+            }
+        }
+        return -1;
     }
 }

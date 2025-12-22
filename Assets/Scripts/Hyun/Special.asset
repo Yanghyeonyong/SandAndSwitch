@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
+  m_Name: Special
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  id: 103
+  itemName: "\uBCF4\uBB3C"
+  description: 
+  type: 3
+  prefab: {fileID: 5886606223929163084, guid: 613102a45d38cb74da182a9982c859dd, type: 3}
+  icon: {fileID: -3491882392630799336, guid: a8aadeb4b96f4c547a47786bfbdbbea6, type: 3}
+  maxStack: 99
+  radius: 0
+  delay: 0
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  pickupSoundClip: {fileID: 8300000, guid: c454f0066ef17b94daa5753983170042, type: 3}

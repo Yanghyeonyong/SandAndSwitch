@@ -7,7 +7,7 @@ public abstract class Gimmick : MonoBehaviour
     [SerializeField] int _gimmickId=0;
     public int GimmickId => _gimmickId;
 
-    private bool _isClear = false;
+    protected bool _isClear = false;
     public bool IsClear
     {
         get { return _isClear; }
@@ -18,16 +18,34 @@ public abstract class Gimmick : MonoBehaviour
 
     protected bool CheckClear()
     {
-        //Debug.Log(GameManager_Hyeonyong.Instance.IsGimmickClear);
-        if (GameManager_Hyeonyong.Instance.IsGimmickClear.ContainsKey(_gimmickId))
+        //Debug.Log(GameManager.Instance.IsGimmickClear);
+        if (GameManager.Instance.IsGimmickClear.ContainsKey(_gimmickId))
         {
-            _isClear = GameManager_Hyeonyong.Instance.IsGimmickClear[_gimmickId];
+            _isClear = GameManager.Instance.IsGimmickClear[_gimmickId];
             return _isClear;
         }
         else
         {
-            GameManager_Hyeonyong.Instance.IsGimmickClear.Add(_gimmickId, _isClear);
+            GameManager.Instance.IsGimmickClear.Add(_gimmickId, _isClear);
             return _isClear;
         }
     }
+
+    protected ItemTransform CheckPos()
+    {
+        if (GameManager.Instance.GimmickPos.ContainsKey(_gimmickId))
+        {
+            Debug.Log("저장된 값 반환 : "+ GameManager.Instance.GimmickPos[_gimmickId].position);
+
+            return GameManager.Instance.GimmickPos[_gimmickId];
+        }
+        else
+        {
+            ItemTransform myTransform = new ItemTransform(this.transform.position, this.transform.rotation, this.transform.localScale);
+            GameManager.Instance.GimmickPos.Add(_gimmickId, myTransform);
+            Debug.Log("저장된 값 없음");
+            return null;
+        }
+    }
+
 }

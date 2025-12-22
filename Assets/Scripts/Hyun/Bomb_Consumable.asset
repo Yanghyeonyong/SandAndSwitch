@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
+  m_Name: Bomb_Consumable
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  id: 101
+  itemName: "\uD3ED\uD0C4"
+  description: "\uD3ED\uBC1C\uD55C\uB2E4"
+  type: 1
+  prefab: {fileID: 6008120758980611909, guid: 1acefdf1a87e85e448b42e1dc49ccc4b, type: 3}
+  icon: {fileID: -8368097971112543834, guid: b5a00b4863784f34986bdb7f6d01474e, type: 3}
+  maxStack: 1
+  radius: 7
+  delay: 2
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  pickupSoundClip: {fileID: 8300000, guid: c454f0066ef17b94daa5753983170042, type: 3}

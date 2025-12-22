@@ -1,9 +1,13 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DoorLock : MonoBehaviour
 {
+    AudioSource _audioSource;
+    // 0 : 오답 1 : 정답 2: 버튼 클릭
+    [SerializeField] AudioClip[] _audio;
     //관문, 맵 기믹에 사용
     /// <summary>
     /// 플레이어
@@ -15,7 +19,7 @@ public class DoorLock : MonoBehaviour
     ////패스워드
     //[SerializeField] GameObject _doorLock;
     [SerializeField] int _password;
-    [SerializeField] int _curPassword=-1;
+    [SerializeField] int _curPassword = -1;
     Button[] _numButtons;
     Button _submitButton;
 
@@ -27,9 +31,10 @@ public class DoorLock : MonoBehaviour
 
     public void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         int _count = transform.childCount;
         //리스트로 Add를 통해 추가해도 되지만 List의 경우 정확한 Capacity가 아닌 더 많은 할당량을 적용하여 최적화를 위해 정확한 크기를 가진 배열 사용
-        _numButtons=new Button[_count];
+        _numButtons = new Button[_count];
 
         for (int i = 0; i < _count; i++)
         {
@@ -40,13 +45,15 @@ public class DoorLock : MonoBehaviour
                 continue;
             }
             int index = i;
-            _numButtons[i]= transform.GetChild(i).GetComponent<Button>();
+            _numButtons[i] = transform.GetChild(i).GetComponent<Button>();
             _numButtons[i].onClick.AddListener(() => SetPassword(index + 1));
 
         }
     }
     void SetPassword(int pressNum)
     {
+        //PlaySound(_audio[2]);
+        SoundEffectManager.Instance.PlayEffectSound(_audio[2]);
         _curPassword = pressNum;
     }
 
@@ -54,7 +61,7 @@ public class DoorLock : MonoBehaviour
     {
         _gimmick = gimmick;
         _password = _gimmick.Password;
-        _testObject= _gimmick.TestObject;
+        _testObject = _gimmick.TestObject;
     }
 
     void checkPassword()
@@ -63,42 +70,46 @@ public class DoorLock : MonoBehaviour
         //패스워드 정답시 발동할 코드
         if (_curPassword == _password)
         {
-            GameManager_Hyeonyong.Instance.IsGimmickClear[_gimmick.GimmickId] = true;
+            //PlaySound(_audio[1]);
+            SoundEffectManager.Instance.PlayEffectSound(_audio[1]);
+            GameManager.Instance.IsGimmickClear[_gimmick.GimmickId] = true;
             _testObject.SetActive(false);
-            gameObject.SetActive(false);
-            
+
             _gimmick.IsClear = true;
-            _gimmick=null;  
-            GameManager_Hyeonyong.Instance.OnProgressGimmick=false;
-            //Debug.Log(GameManager_Hyeonyong.Instance.IsGimmickClear[_gimmick.GimmickId]);
+            _gimmick = null;
+            GameManager.Instance.OnProgressGimmick = false;
+            GameManager.Instance.ResumeGame();
+            gameObject.SetActive(false);
+            //StartCoroutine(CollectPassword());
+
+            return;
+            //Debug.Log(GameManager.Instance.IsGimmickClear[_gimmick.GimmickId]);
         }
+
+        //PlaySound(_audio[0]);
+        SoundEffectManager.Instance.PlayEffectSound(_audio[0]);
+
     }
 
-    //public override void StartGimmick()
-    //{
-    //    _interactiveUI.SetActive(false);
-    //    _selection.SetActive(true);
-    //    Debug.Log("기믹 시작 : 도어락");
-    //}
+    private void PlaySound(AudioClip audio)
+    {
+        _audioSource.clip = audio;
+        _audioSource.Play();
+    }
 
-    //public void ChoiceGimmick()
-    //{
-    //    _selection.SetActive(false);
-    //    _doorLock.SetActive(true);
-    //}
-    //public void ChoiceItem()
-    //{
-    //    if (GamaManager_Hyeonyong.Instance.CheckItem)
-    //    {
-    //        _doorLock.SetActive(false);
-    //        _testObject.SetActive(false);
-    //        _selection.SetActive(false);
-    //    }
-    //}
-    //public void ExitGimmick()
-    //{
-    //    _selection.SetActive(false);
-    //    _interactiveUI.SetActive(true);
-    //}
+    IEnumerator CollectPassword()
+    {
+        Debug.Log("도어락 사운드 실행");
+        PlaySound(_audio[1]);
+        GameManager.Instance.IsGimmickClear[_gimmick.GimmickId] = true;
+        _testObject.SetActive(false);
+
+        _gimmick.IsClear = true;
+        _gimmick = null;
+        GameManager.Instance.OnProgressGimmick = false;
+        yield return new WaitForSeconds(_audioSource.clip.length);
+        _audioSource.clip = null;
+        gameObject.SetActive(false);
+    }
 
 }
