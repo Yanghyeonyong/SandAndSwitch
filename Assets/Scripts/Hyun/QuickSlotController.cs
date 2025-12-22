@@ -37,6 +37,8 @@ public class QuickSlotController : MonoBehaviour
             _slots = GameManager.Instance.GameManagerQuickSlots;
         }
 
+        GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
+
     }
 
     private void Update()
