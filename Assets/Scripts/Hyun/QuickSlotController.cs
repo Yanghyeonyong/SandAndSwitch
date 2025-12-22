@@ -212,10 +212,8 @@ public class QuickSlotController : MonoBehaviour
     {
         if (_wheelTimer > 0)
         {
-            Debug.Log(" WheelCooldown¡¦");
             return;
         }
-        Debug.Log(" Wheel input accepted: " + scroll);
         if (scroll > 0)
         {
             SelectPreviousSlot();
