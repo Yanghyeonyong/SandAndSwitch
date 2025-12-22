@@ -19,9 +19,9 @@ MonoBehaviour:
   prefab: {fileID: 6008120758980611909, guid: 1acefdf1a87e85e448b42e1dc49ccc4b, type: 3}
   icon: {fileID: -8368097971112543834, guid: b5a00b4863784f34986bdb7f6d01474e, type: 3}
   maxStack: 99
-  radius: 7
+  radius: 6.5
   delay: 2
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 4294967295
   pickupSoundClip: {fileID: 8300000, guid: c454f0066ef17b94daa5753983170042, type: 3}

@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class QuickSlotController : MonoBehaviour
     public int CurrentIndex { get; private set; } = 0;
     public QuickSlot CurrentSlot => _slots[CurrentIndex];
 
+    public event Action<ItemData, int> OnItemUsed;//외부에 아이템 사용을 알리는 이벤트
 
     private void Awake()
     {
@@ -151,8 +153,18 @@ public class QuickSlotController : MonoBehaviour
         {
             return false;
         }
+        int useCount = 1;
+        if (slot.Data.type == ItemType.Key)
+        {
+            useCount = 3;
+
+            if (slot.Count < useCount)
+            {
+                return false;
+            }
+        }
         //아이템 사용
-        slot.Use(1);
+        slot.Use(useCount);
 
         //기존코드
         //if (slot.Count <= 0)
@@ -184,7 +196,9 @@ public class QuickSlotController : MonoBehaviour
             CurrentIndex = 0;
             GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
         }
- 
+
+        OnItemUsed?.Invoke(slot.Data, useCount);//아이템 사용 알림
+
         return true;
     }
     public void SelectPreviousSlot()
