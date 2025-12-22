@@ -93,8 +93,9 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private int onPortal = 0;
+    private ItemPickup _nearbyItem;
     private QuickSlotController slot;
-    public QuickSlotController Slot =>slot;
+    public QuickSlotController Slot => slot;
 
     Vector3 curVelocity;
 
@@ -102,7 +103,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        slot = GetComponent<QuickSlotController>();        
+        slot = GetComponent<QuickSlotController>();
         rb.freezeRotation = true;
 
         if (animator == null)
@@ -375,9 +376,21 @@ public class Player : MonoBehaviour
         //{
         //    _curGimmick.ExitGimmick();
         //}
+        //아이템 관련 추가 
+        if (ctx.started && _nearbyItem != null)
+        {
+            if (slot != null && _nearbyItem.ItemData.type == ItemType.Special)
+            {
+                if (slot.TryPickup(_nearbyItem.ItemData))
+                {
+                    _nearbyItem.Pickup();
+                    _nearbyItem = null;
+                    return;
 
+                }
+            }
+        }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Finish"))
@@ -456,6 +469,19 @@ public class Player : MonoBehaviour
                     _curGimmick.CheckNum(3);
                     break;
             }
+        }
+    }
+
+    public void SetNearbyItem(ItemPickup item)
+    {
+        _nearbyItem = item;
+    }
+
+    public void ClearNearbyItem(ItemPickup item)
+    {
+        if (_nearbyItem == item)
+        {
+            _nearbyItem = null;
         }
     }
 
