@@ -15,33 +15,8 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: c04e9605ce6c60140966272b90ad4594
   m_SerializeEntries:
-  - m_GUID: 0194d986dc53d2b428e171a58a7245fb
-    m_Address: Assets/ExcludeGit/DirectAssets/Background/2.4.7.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 01da6e78826a5ee4f9d41c82df402a3d
-    m_Address: Assets/ExcludeGit/DirectAssets/Background/2.4.5.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1acefdf1a87e85e448b42e1dc49ccc4b
     m_Address: BombPrefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8046017eef937d5428ffa5e1483fd835
-    m_Address: Assets/ExcludeGit/DirectAssets/Background/2.3.5.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a46cbc38ac830ec4e9fedd06d9c99a29
-    m_Address: Assets/ExcludeGit/DirectAssets/Background/2.1.2.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a7b681c39124e344194c2d2c9e67e6c6
-    m_Address: Assets/ExcludeGit/DirectAssets/Background/2.4.6.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -50,16 +25,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - ScriptableObject
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d23ac88ca2eec2340bd0e8e8af800d75
-    m_Address: Assets/ExcludeGit/DirectAssets/Background/2.4.4.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e4d881e50849759408feaf8d1520cbe1
-    m_Address: Assets/ExcludeGit/DirectAssets/Background/2.1.3.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1b22adb8edb3e064c8f6930ba8943177, type: 2}

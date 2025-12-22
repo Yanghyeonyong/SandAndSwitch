@@ -22,10 +22,17 @@ public class Bomb : MonoBehaviour
                 pickup.enabled = false;
             }
         }
+           
     }
     public void UseBomb()
     {
-        StartCoroutine(ExplodeCoroutine());
+        IsThrownBomb = true;
+        var pickup = GetComponent<ItemPickup>();
+        if (pickup != null)
+        {
+            pickup.enabled = false;
+        }
+            StartCoroutine(ExplodeCoroutine());
     }
 
     private IEnumerator ExplodeCoroutine()//딜레이를 주기위한 코루틴
