@@ -389,7 +389,7 @@ ItemData _bombScriptableObject;
         {
         //페이즈 하얘지는 연출 추가 251221 최정욱
 
-            if (_curGameOverCount / _gameOverCount >= 0.2f)
+            if (_curGameOverCount / _gameOverCount >= 1- _maxAlpha)
             {
                 _currentWhiteFadeColor.a = _maxAlpha * (1f - (_curGameOverCount / _gameOverCount));
             }
