@@ -413,7 +413,7 @@ ItemData _bombScriptableObject;
     }
 
     //25122 - 양현용 추가 : 원하는 씬으로 넘어가는 용도
-    public void LoadScene(int index)
+    public void LoadIndexScene(int index)
     {
         player = null;
         SceneManager.LoadScene(index);
@@ -422,7 +422,7 @@ ItemData _bombScriptableObject;
         {
             //_player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene-1], Quaternion.identity);
             //player = _player.GetComponent<Player>();
-            StartCoroutine(SpawnPlayer());
+            StartCoroutine(SpawnPlayer_CheckPoint());
         }
     }
 
@@ -464,6 +464,43 @@ ItemData _bombScriptableObject;
         SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
         _player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene - 1], Quaternion.identity);
         player = _player.GetComponent<Player>();
+    }
+    IEnumerator SpawnPlayer_CheckPoint()
+    {
+        yield return GameSceneLoadAsyncOperation.isDone;
+        yield return null;
+        SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
+        _player = Instantiate(_playerPrefab, _checkPointData._playerPos,_checkPointData._playerRot);
+        player = _player.GetComponent<Player>();
+
+        if (_checkPointData == null)
+        {
+            Debug.Log("체크포인트가 없다");
+        }
+        Debug.Log("체크포인트 위치 정보 : " + _checkPointData._playerPos);
+
+        for (int i = 0; i < GameManagerQuickSlots.Length; i++)
+        {
+            if (_checkPointData.GameManagerQuickSlots[i] != null)
+            {
+                if (_checkPointData.GameManagerQuickSlots[i].Data != null)
+                {
+                    ItemData data = Instantiate(_checkPointData.GameManagerQuickSlots[i].Data) as ItemData;
+                    Debug.Log("아이템 데이터 정보 : " + data.id);
+
+                    if (data == null)
+                    {
+                        Debug.Log("데이터가 없다");
+                    }
+                    GameManagerQuickSlots[i].Init(data, _checkPointData.GameManagerQuickSlots[i].Count);
+                    UpdateQuickSlot(i, GameManagerQuickSlots[i]);
+                }
+            }
+            else
+            {
+                Debug.Log("체크포인트에 값이 없다 : " + i);
+            }
+        }
     }
     IEnumerator SpawnPlayer_Prev(int spawnPos)
     {
@@ -523,6 +560,7 @@ ItemData _bombScriptableObject;
         _isGimmickClear.Clear();
         _gimmickPos.Clear();
         CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+        _checkPointData._onCheck=false;
         player = null;
 
         if (_gameOverCoroutine != null)
@@ -620,7 +658,7 @@ ItemData _bombScriptableObject;
 
     public void RestartGame()
     {
-        if (_checkPointData != null)
+        if (!_checkPointData._onCheck)
         {
             CurrentCutsceneIndex = 0;
             CollectedItemIDs.Clear();//아이템픽업 관련 초기화
@@ -645,6 +683,7 @@ ItemData _bombScriptableObject;
         }
         else
         {
+            Debug.Log("체크포인트 기반 다시하기");
             CollectedItemIDs.Clear();//아이템픽업 관련 초기화
             _isGimmickClear.Clear();
             _gimmickPos.Clear();
@@ -656,6 +695,7 @@ ItemData _bombScriptableObject;
             Time.timeScale = 1f;
 
             _checkPointData.LoadCheckPointData();
+            LoadIndexScene(_curScene);
         }
 
 
