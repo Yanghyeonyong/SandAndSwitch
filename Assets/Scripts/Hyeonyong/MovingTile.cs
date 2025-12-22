@@ -26,12 +26,6 @@ public class MovingTile : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator Move()
     {
         while (true)

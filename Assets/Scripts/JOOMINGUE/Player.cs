@@ -371,10 +371,10 @@ public class Player : MonoBehaviour
         {
             _curGimmick.StartGimmick();
         }
-        else if (ctx.started && _checkGimmick && GameManager.Instance.OnProgressGimmick)
-        {
-            _curGimmick.ExitGimmick();
-        }
+        //else if (ctx.started && _checkGimmick && GameManager.Instance.OnProgressGimmick)
+        //{
+        //    _curGimmick.ExitGimmick();
+        //}
 
     }
 
@@ -406,40 +406,59 @@ public class Player : MonoBehaviour
             return;
         }
         string input = ctx.control.name;
-        switch (input)
+        if (!GameManager.Instance.OnSelection && !GameManager.Instance.OnProgressGimmick)
         {
-            case "1":
-                slot.SelectSlot(0);
-                break;
-            case "2":
-                slot.SelectSlot(1);
-                break;
-            case "3":
-                slot.SelectSlot(2);
-                break;
-            case "4":
-                slot.SelectSlot(3);
-                break;
-            case "5":
-                slot.SelectSlot(4);
-                break;
-            case "6":
-                slot.SelectSlot(5);
-                break;
-            case "7":
-                slot.SelectSlot(6);
-                break;
-            case "8":
-                slot.SelectSlot(7);
-                break;
-            case "9":
-                slot.SelectSlot(8);
-                break;
-            case "0":
-                slot.SelectSlot(9);
-                break;
+            switch (input)
+            {
+                case "1":
+                    slot.SelectSlot(0);
+                    break;
+                case "2":
+                    slot.SelectSlot(1);
+                    break;
+                case "3":
+                    slot.SelectSlot(2);
+                    break;
+                case "4":
+                    slot.SelectSlot(3);
+                    break;
+                case "5":
+                    slot.SelectSlot(4);
+                    break;
+                case "6":
+                    slot.SelectSlot(5);
+                    break;
+                case "7":
+                    slot.SelectSlot(6);
+                    break;
+                case "8":
+                    slot.SelectSlot(7);
+                    break;
+                case "9":
+                    slot.SelectSlot(8);
+                    break;
+                case "0":
+                    slot.SelectSlot(9);
+                    break;
+            }
+        }
+        else
+        {
+            switch (input)
+            {
+                case "1":
+                    _curGimmick.CheckNum(1);
+                    break;
+                case "2":
+                    _curGimmick.CheckNum(2);
+                    break;
+                case "3":
+                    _curGimmick.CheckNum(3);
+                    break;
+            }
         }
     }
+
     public void OnUseItem(InputAction.CallbackContext ctx)
     {
         if (!ctx.started)

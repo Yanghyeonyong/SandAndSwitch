@@ -269,7 +269,13 @@ ItemData _bombScriptableObject;
     public Dictionary<int, ItemTransform> GimmickPos => _gimmickPos;
 
     [SerializeField] int _curScene = 0;
-
+    //251222 - 양현용 추가 : 플레이어 선택지가 활성화되어 있는지 체크
+    [SerializeField] bool onSelection = false;
+    public bool OnSelection
+    {
+        get { return onSelection; }
+        set { onSelection = value; }
+    }
     //
 
 

@@ -258,6 +258,17 @@ public class UIManager : MonoBehaviour
         {
                        return;
         }
+        //251222 - ¾çÇö¿ë Ãß°¡ : ±â¹Í UI ²ô±â
+        if (GameManager.Instance.OnSelection)
+        {
+            GameManager.Instance.Player.CurGimmick.CheckNum(-1);
+            return;
+        }
+        else if (GameManager.Instance.Player.CheckGimmick && GameManager.Instance.OnProgressGimmick)
+        {
+            GameManager.Instance.Player.CurGimmick.ExitGimmick();
+            return;
+        }
 
         if (GameManager.Instance.GetCurrentSceneIndex() != 0 && _canvasList[1].activeSelf)
         {
