@@ -7,16 +7,14 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] private float _soundValue = 1f;
     [SerializeField] private Vector3 uniqueID;
 
-    private Bomb _bomb;
-    private Player _player;
+    
 
     public ItemData ItemData => _itemData;
     public Vector3 UniqueID => uniqueID;
+    
 
     private void Start()
     {
-        _bomb = GetComponent<Bomb>();
-        _player = GetComponent<Player>();
         uniqueID = transform.position;
         if (GameManager.Instance.CollectedItemIDs.Contains(uniqueID))
         {
@@ -34,13 +32,15 @@ public class ItemPickup : MonoBehaviour
         {
             return;
         }
-        if (_bomb != null && _bomb.IsThrownBomb)
+        Bomb bomb = GetComponent<Bomb>();
+        if (bomb != null && bomb.IsThrownBomb)
         {
             return;
         }
-        if (_player != null)
+        Player player = collision.GetComponent<Player>();
+        if (player != null)
         {
-            _player.SetNearbyItem(this);
+            player.SetNearbyItem(this);
         }
     }
 
@@ -50,13 +50,15 @@ public class ItemPickup : MonoBehaviour
         {
             return;
         }
-        if (_bomb != null && _bomb.IsThrownBomb)
+        Bomb bomb = GetComponent<Bomb>();
+        if (bomb != null && bomb.IsThrownBomb)
         {
             return;
         }
-        if (_player != null)
+        Player player = collision.GetComponent<Player>();
+        if (player != null)
         {
-            _player.ClearNearbyItem(this);
+            player.ClearNearbyItem(this);
         }
     }
 
