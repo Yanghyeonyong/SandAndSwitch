@@ -90,6 +90,7 @@ public class Gimmick_DoorLock : Gimmick
         {
             GameManager.Instance.IsGimmickClear[GimmickId] = true;
             _isClear = true;
+           
             ItemData data = GameManager.Instance.GameManagerQuickSlots[index].Data;
             //퀵슬롯이 아니라 퀵슬롯 컨트롤러를 통해서 진행한다
             GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
@@ -102,7 +103,7 @@ public class Gimmick_DoorLock : Gimmick
 
             ResetSelectionButton();
             GameManager.Instance.OnProgressGimmick = false;
-
+            GameManager.Instance.Player.CurGimmick = null;
             GameManager.Instance.ResumeGame();
 
         }
