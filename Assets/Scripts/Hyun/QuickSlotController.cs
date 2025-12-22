@@ -55,76 +55,78 @@ public class QuickSlotController : MonoBehaviour
             return false;
         }
 
-
-        if (data.IsStackable)
-        {
-            foreach (QuickSlot slot in _slots)
-            {
-                if (slot.IsEmpty == false && slot.Data == data && slot.Count < data.maxStack)
-                {
-                    slot.Add(1);
-                    for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
-                    {
-                        if (slot.Data == GameManager.Instance.GameManagerQuickSlots[i].Data)
-                        {
-                            Debug.Log(i);
-                            GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = slot.Count.ToString();
-                        }
-                    }
-                    return true;
-                }
-            }
-        }
-        //중첩
+        //기존 중첩코드
         //if (data.IsStackable)
         //{
-        //    for (int i = 0; i < _slots.Length; i++)
+        //    foreach (QuickSlot slot in _slots)
         //    {
-        //        QuickSlot slot = _slots[i];
-
-        //        if (!slot.IsEmpty && slot.Data == data && slot.Count < data.maxStack)
+        //        if (slot.IsEmpty == false && slot.Data == data && slot.Count < data.maxStack)
         //        {
         //            slot.Add(1);
-
-        //            // UI 업데이트는 GameManager 호출
-        //            GameManager.Instance.UpdateQuickSlot(i, slot);
+        //            for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
+        //            {
+        //                if (slot.Data == GameManager.Instance.GameManagerQuickSlots[i].Data)
+        //                {
+        //                    Debug.Log(i);
+        //                    GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = slot.Count.ToString();
+        //                }
+        //            }
         //            return true;
         //        }
         //    }
         //}
 
-
-        foreach (QuickSlot slot in _slots)
+        //변경된 중첩
+        if (data.IsStackable)
         {
-            if (slot.IsEmpty)
+            for (int i = 0; i < _slots.Length; i++)
             {
-                slot.Init(data, 1);
-                for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
+                QuickSlot slot = _slots[i];
+
+                if (!slot.IsEmpty && slot.Data == data && slot.Count < data.maxStack)
                 {
-                    if (slot.Data == GameManager.Instance.GameManagerQuickSlots[i].Data)
-                    {
-                        GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = slot.Count.ToString();
-                        GameManager.Instance.GameManagerQuickSlotIcons[i].sprite = slot.Data.icon;
-                        GameManager.Instance.GameManagerQuickSlotIcons[i].color = Color.white;
-                        GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(true);
-                    }
+                    slot.Add(1);
+
+                    // UI 업데이트는 GameManager 호출
+                    GameManager.Instance.UpdateQuickSlot(i, slot);
+                    return true;
                 }
-                return true;
             }
         }
-        //빈슬롯
-        //for (int i = 0; i < _slots.Length; i++)
-        //{
-        //    QuickSlot slot = _slots[i];
 
+        //기존 빈슬롯 코드
+        //foreach (QuickSlot slot in _slots)
+        //{
         //    if (slot.IsEmpty)
         //    {
         //        slot.Init(data, 1);
-
-        //        GameManager.Instance.UpdateQuickSlot(i, slot);
+        //        for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
+        //        {
+        //            if (slot.Data == GameManager.Instance.GameManagerQuickSlots[i].Data)
+        //            {
+        //                GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = slot.Count.ToString();
+        //                GameManager.Instance.GameManagerQuickSlotIcons[i].sprite = slot.Data.icon;
+        //                GameManager.Instance.GameManagerQuickSlotIcons[i].color = Color.white;
+        //                GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(true);
+        //            }
+        //        }
         //        return true;
         //    }
         //}
+
+        //변경된 빈슬롯
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            QuickSlot slot = _slots[i];
+
+            if (slot.IsEmpty)
+            {
+                slot.Init(data, 1);
+
+                GameManager.Instance.UpdateQuickSlot(i, slot);
+                return true;
+            }
+        }
         return false;
     }
 
@@ -152,34 +154,37 @@ public class QuickSlotController : MonoBehaviour
         //아이템 사용
         slot.Use(1);
 
-        //GameManager.Instance.UpdateQuickSlot(index, slot);
+        //기존코드
         //if (slot.Count <= 0)
         //{
-        //    ShiftSlots();//슬롯이동
-
-        //    for (int i = 0; i < _slots.Length; i++)
-        //    {
-        //        GameManager.Instance.UpdateQuickSlot(i, _slots[i]);//슬롯이동후 UI갱신
-        //    }
-
-        //    //현재 인덱스도 0으로 초기화
-        //    CurrentIndex = 0;
-        //    GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
+        //    GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
+        //    GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
+        //    GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
+        //    GameManager.Instance.GameManagerQuickSlotIcons[index].color = clear;
+        //}
+        //else
+        //{
+        //    GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = slot.Count.ToString();
         //}
 
+        //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
+
+        //변경된 코드
+        GameManager.Instance.UpdateQuickSlot(index, slot);
         if (slot.Count <= 0)
         {
-            GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
-            GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
-            GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
-            GameManager.Instance.GameManagerQuickSlotIcons[index].color = clear;
-        }
-        else
-        {
-            GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = slot.Count.ToString();
-        }
+            ShiftSlots();//슬롯이동
 
-        //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                GameManager.Instance.UpdateQuickSlot(i, _slots[i]);//슬롯이동후 UI갱신
+            }
+
+            //현재 인덱스도 0으로 초기화
+            CurrentIndex = 0;
+            GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
+        }
+ 
         return true;
     }
     public void SelectPreviousSlot()
