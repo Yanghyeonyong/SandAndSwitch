@@ -7,7 +7,6 @@ public class QuickSlotController : MonoBehaviour
     [SerializeField] private float _wheelCool = 0.1f;
 
     private float _wheelTimer = 0f;
-    private QuickSlot _slot;
 
     //읽기전용
     public int CurrentIndex { get; private set; } = 0;
@@ -82,14 +81,14 @@ public class QuickSlotController : MonoBehaviour
         {
             for (int i = 0; i < _slots.Length; i++)
             {
-                _slot = _slots[i];
+                 QuickSlot slot = _slots[i];
 
-                if (!_slot.IsEmpty && _slot.Data == data && _slot.Count < data.maxStack)
+                if (!slot.IsEmpty && slot.Data == data && slot.Count < data.maxStack)
                 {
-                    _slot.Add(1);
+                    slot.Add(1);
 
                     // UI 업데이트는 GameManager 호출
-                    GameManager.Instance.UpdateQuickSlot(i, _slot);
+                    GameManager.Instance.UpdateQuickSlot(i, slot);
                     return true;
                 }
             }
@@ -118,13 +117,13 @@ public class QuickSlotController : MonoBehaviour
         //변경된 빈슬롯
         for (int i = 0; i < _slots.Length; i++)
         {
-            _slot = _slots[i];
+            QuickSlot slot = _slots[i];
 
-            if (_slot.IsEmpty)
+            if (slot.IsEmpty)
             {
-                _slot.Init(data, 1);
+                slot.Init(data, 1);
 
-                GameManager.Instance.UpdateQuickSlot(i, _slot);
+                GameManager.Instance.UpdateQuickSlot(i, slot);
                 return true;
             }
         }
@@ -143,17 +142,17 @@ public class QuickSlotController : MonoBehaviour
 
     public bool TryUseCurrentSlot(int index)//선택된 슬롯 아이템 사용
     {
-        _slot = _slots[index];
-        if (_slot.IsEmpty)
+        QuickSlot slot = _slots[index];
+        if (slot.IsEmpty)
         {
             return false;
         }
-        if (_slot.Data.type != ItemType.Consumable && _slot.Data.type != ItemType.Key)//소모성아이템,키가 아닐경우
+        if (slot.Data.type != ItemType.Consumable && slot.Data.type != ItemType.Key)//소모성아이템,키가 아닐경우
         {
             return false;
         }
         //아이템 사용
-        _slot.Use(1);
+        slot.Use(1);
 
         //기존코드
         //if (slot.Count <= 0)
@@ -171,8 +170,8 @@ public class QuickSlotController : MonoBehaviour
         //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
 
         //변경된 코드
-        GameManager.Instance.UpdateQuickSlot(index, _slot);
-        if (_slot.Count <= 0)
+        GameManager.Instance.UpdateQuickSlot(index, slot);
+        if (slot.Count <= 0)
         {
             ShiftSlots();//슬롯이동
 
