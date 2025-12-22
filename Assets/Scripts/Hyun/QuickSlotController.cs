@@ -7,6 +7,7 @@ public class QuickSlotController : MonoBehaviour
     [SerializeField] private float _wheelCool = 0.1f;
 
     private float _wheelTimer = 0f;
+    private QuickSlot _slot;
 
     //읽기전용
     public int CurrentIndex { get; private set; } = 0;
@@ -81,14 +82,14 @@ public class QuickSlotController : MonoBehaviour
         {
             for (int i = 0; i < _slots.Length; i++)
             {
-                QuickSlot slot = _slots[i];
+                _slot = _slots[i];
 
-                if (!slot.IsEmpty && slot.Data == data && slot.Count < data.maxStack)
+                if (!_slot.IsEmpty && _slot.Data == data && _slot.Count < data.maxStack)
                 {
-                    slot.Add(1);
+                    _slot.Add(1);
 
                     // UI 업데이트는 GameManager 호출
-                    GameManager.Instance.UpdateQuickSlot(i, slot);
+                    GameManager.Instance.UpdateQuickSlot(i, _slot);
                     return true;
                 }
             }
@@ -117,13 +118,13 @@ public class QuickSlotController : MonoBehaviour
         //변경된 빈슬롯
         for (int i = 0; i < _slots.Length; i++)
         {
-            QuickSlot slot = _slots[i];
+            _slot = _slots[i];
 
-            if (slot.IsEmpty)
+            if (_slot.IsEmpty)
             {
-                slot.Init(data, 1);
+                _slot.Init(data, 1);
 
-                GameManager.Instance.UpdateQuickSlot(i, slot);
+                GameManager.Instance.UpdateQuickSlot(i, _slot);
                 return true;
             }
         }
@@ -137,7 +138,7 @@ public class QuickSlotController : MonoBehaviour
     }
 
 
-    Color clear = new Color(1, 1, 1, 0);
+    //Color clear = new Color(1, 1, 1, 0);
 
 
     public bool TryUseCurrentSlot(int index)//선택된 슬롯 아이템 사용
