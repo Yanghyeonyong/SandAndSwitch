@@ -376,6 +376,7 @@ public class Player : MonoBehaviour
         //{
         //    _curGimmick.ExitGimmick();
         //}
+
         //아이템 관련 추가 
         if (ctx.started && _nearbyItem != null)
         {
