@@ -31,7 +31,8 @@ public class Player : MonoBehaviour
     // Ground Check (틈 방지)
     [Header("Ground Check")]
     public Transform groundCheck;
-    public float groundCheckRadius = 0.12f;
+    public Vector2 boxSize = new Vector2(0.5f, 0.1f); // 박스 크기 (가로, 세로)
+    public float castDistance = 0.1f; // 바닥 감지 거리
     public LayerMask groundLayer;
 
     [Header("Ground Confirm")]
@@ -143,10 +144,14 @@ public class Player : MonoBehaviour
         // Input
         moveX = moveAction.ReadValue<Vector2>().x;
 
-        // Ground Check
-        bool rawGrounded = Physics2D.OverlapCircle(
+        // 1️⃣ Ground Check (BoxCast로 변경)
+        // groundCheck 위치에서 boxSize 크기의 사각형을 아래로(Vector2.down) castDistance만큼 발사
+        bool rawGrounded = Physics2D.BoxCast(
             groundCheck.position,
-            groundCheckRadius,
+            boxSize,
+            0f,
+            Vector2.down,
+            castDistance,
             groundLayer
         );
 
@@ -353,7 +358,8 @@ public class Player : MonoBehaviour
     {
         if (groundCheck == null) return;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Vector3 center = groundCheck.position + (Vector3.down * castDistance * 0.5f);
+        Gizmos.DrawWireCube(center, boxSize);
     }
 
     //251216 - 양현용 : 기믹과의 상호작용
