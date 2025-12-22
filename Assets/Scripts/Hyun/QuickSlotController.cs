@@ -143,17 +143,17 @@ public class QuickSlotController : MonoBehaviour
 
     public bool TryUseCurrentSlot(int index)//선택된 슬롯 아이템 사용
     {
-        QuickSlot slot = _slots[index];
-        if (slot.IsEmpty)
+        _slot = _slots[index];
+        if (_slot.IsEmpty)
         {
             return false;
         }
-        if (slot.Data.type != ItemType.Consumable && slot.Data.type != ItemType.Key)//소모성아이템,키가 아닐경우
+        if (_slot.Data.type != ItemType.Consumable && _slot.Data.type != ItemType.Key)//소모성아이템,키가 아닐경우
         {
             return false;
         }
         //아이템 사용
-        slot.Use(1);
+        _slot.Use(1);
 
         //기존코드
         //if (slot.Count <= 0)
@@ -171,8 +171,8 @@ public class QuickSlotController : MonoBehaviour
         //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
 
         //변경된 코드
-        GameManager.Instance.UpdateQuickSlot(index, slot);
-        if (slot.Count <= 0)
+        GameManager.Instance.UpdateQuickSlot(index, _slot);
+        if (_slot.Count <= 0)
         {
             ShiftSlots();//슬롯이동
 
