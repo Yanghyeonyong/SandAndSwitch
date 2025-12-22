@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -173,16 +173,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b8736c7047f3746b3947df955c1dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement2D
-  maxSpeed: 4
+  maxSpeed: 6
   acceleration: 60
   deceleration: 80
   knockBackForce: 10
-  jumpImpulse: 10
+  jumpImpulse: 18
   holdForce: 4
   maxHoldTime: 0.3
   jumpCutMultiplier: 0.35
-  coyoteTime: 0.1
-  jumpBufferTime: 0.12
+  coyoteTime: 0.2
+  jumpBufferTime: 0.15
   groundCheck: {fileID: 2134809257679761731}
   groundCheckRadius: 0.2
   groundLayer:
