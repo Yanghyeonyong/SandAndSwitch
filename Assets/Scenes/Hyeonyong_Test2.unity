@@ -11706,11 +11706,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5360bf272bf396747ae7eddcd3275ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  CurrentCutsceneIndex: 0
   _maxPlayerHealth: 3
   CurrentPlayerHealth: 1
   HeartImages: []
   _heartEmptyHexColor: 000000
   _heartFullHexColor: FF0000
+  CollectedItemIDs: []
   _checkItem: 0
   _onProgressGimmick: 0
   _curScene: 2
@@ -11721,6 +11723,8 @@ MonoBehaviour:
   _curGameOverCount: 0
   _minusGameOverCount: 0.1
   _bgms: []
+  _blackFadeToVictoryCutscenesTime: 1.5
+  _deathWhiteToBlackFadeDuration: 1.5
 --- !u!4 &1375658254
 Transform:
   m_ObjectHideFlags: 0
@@ -13064,6 +13068,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92f6edbcd5796714ea1d8c32441e2638, type: 3}
+--- !u!1001 &9026762441661071377
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2643213388706655114, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_Name
+      value: MovingTile
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761416542440196, guid: 15134143a57686347ae8ff628848a944, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15134143a57686347ae8ff628848a944, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -13090,3 +13151,4 @@ SceneRoots:
   - {fileID: 947032601}
   - {fileID: 146761567997794650}
   - {fileID: 1404062379842248322}
+  - {fileID: 9026762441661071377}
