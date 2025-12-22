@@ -78,10 +78,10 @@ public class DoorLock : MonoBehaviour
             _gimmick.IsClear = true;
             _gimmick = null;
             GameManager.Instance.OnProgressGimmick = false;
+            GameManager.Instance.Player.CurGimmick = null;
             GameManager.Instance.ResumeGame();
             gameObject.SetActive(false);
             //StartCoroutine(CollectPassword());
-
             return;
             //Debug.Log(GameManager.Instance.IsGimmickClear[_gimmick.GimmickId]);
         }

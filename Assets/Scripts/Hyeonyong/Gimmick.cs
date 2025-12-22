@@ -48,4 +48,7 @@ public abstract class Gimmick : MonoBehaviour
         }
     }
 
+    public virtual void CheckNum(int num)
+    { }
+
 }

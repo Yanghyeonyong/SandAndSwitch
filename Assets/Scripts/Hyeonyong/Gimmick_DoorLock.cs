@@ -66,6 +66,8 @@ public class Gimmick_DoorLock : Gimmick
             _selectionButtons[2].onClick.AddListener(() => ExitGimmick());
         }
 
+        //선택지 활성화 여부 확인
+        GameManager.Instance.OnSelection = true;
         _interactiveUI.SetActive(false);
         _selection.SetActive(true);
 
@@ -88,18 +90,12 @@ public class Gimmick_DoorLock : Gimmick
         {
             GameManager.Instance.IsGimmickClear[GimmickId] = true;
             _isClear = true;
+           
             ItemData data = GameManager.Instance.GameManagerQuickSlots[index].Data;
             //퀵슬롯이 아니라 퀵슬롯 컨트롤러를 통해서 진행한다
             GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
             bombObj.GetComponent<Bomb>().UseBomb();
             GameManager.Instance.Player.Slot.TryUseCurrentSlot(index);
-            //GameManager.Instance.GameManagerQuickSlots[index].Use(1);
-            //if (GameManager.Instance.GameManagerQuickSlots[index].Count <= 0)
-            //{
-            //    GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
-            //    GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
-            //    GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
-            //}
 
             _doorLockObject.SetActive(false);
             //_testObject.SetActive(false);
@@ -107,7 +103,7 @@ public class Gimmick_DoorLock : Gimmick
 
             ResetSelectionButton();
             GameManager.Instance.OnProgressGimmick = false;
-
+            GameManager.Instance.Player.CurGimmick = null;
             GameManager.Instance.ResumeGame();
 
         }
@@ -134,6 +130,7 @@ public class Gimmick_DoorLock : Gimmick
         {
             button.onClick.RemoveAllListeners();
         }
+        GameManager.Instance.OnSelection = false;
     }
 
     public void Exit()
@@ -166,5 +163,16 @@ public class Gimmick_DoorLock : Gimmick
             }
         }
         return -1;
+    }
+
+    public override void CheckNum(int num)
+    {
+
+        if (num == -1)
+        {
+            _selectionButtons[2].onClick.Invoke();
+        }
+        num--;
+        _selectionButtons[num].onClick.Invoke();
     }
 }

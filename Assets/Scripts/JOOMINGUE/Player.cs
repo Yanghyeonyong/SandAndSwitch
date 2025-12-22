@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -47,6 +50,11 @@ public class Player : MonoBehaviour
     InputAction moveAction;
     InputAction jumpAction;
 
+    [Header("Chat System")]
+    public GameObject chatBubbleCanvas; // 에디터에서 ChatBubbleCanvas 연결
+    public TextMeshProUGUI chatText;    // 에디터에서 BubbleText 연결
+    public float chatDuration = 1.5f;   // 말풍선 떠있는 시간
+
     // Runtime values
     float moveX;
     bool isGrounded;
@@ -85,8 +93,9 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private int onPortal = 0;
+    private ItemPickup _nearbyItem;
     private QuickSlotController slot;
-    public QuickSlotController Slot =>slot;
+    public QuickSlotController Slot => slot;
 
     Vector3 curVelocity;
 
@@ -94,7 +103,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        slot = GetComponent<QuickSlotController>();        
+        slot = GetComponent<QuickSlotController>();
         rb.freezeRotation = true;
 
         if (animator == null)
@@ -216,6 +225,28 @@ public class Player : MonoBehaviour
             holdTimer -= Time.fixedDeltaTime;
         }
     }
+    void LateUpdate()
+    {
+        if (chatBubbleCanvas != null)
+        {
+            // 현재 플레이어(부모)가 보고 있는 방향 (1 또는 -1)
+            float parentDirection = Mathf.Sign(transform.localScale.x);
+
+            // 말풍선의 현재 크기 가져오기
+            Vector3 bubbleScale = chatBubbleCanvas.transform.localScale;
+
+            // 부모의 방향과 동일한 부호를 갖게 설정
+            // 원리: 
+            // 1. 플레이어(양수) * 말풍선(양수) = 정상 출력
+            // 2. 플레이어(음수) * 말풍선(음수) = 정상 출력 (마이너스끼리 곱해서 플러스가 됨)
+            chatBubbleCanvas.transform.localScale = new Vector3(
+                Mathf.Abs(bubbleScale.x) * parentDirection,
+                bubbleScale.y,
+                bubbleScale.z
+            );
+        }
+    }
+
 
     // Jump Handling
     void OnJumpStarted(InputAction.CallbackContext ctx)
@@ -265,6 +296,49 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Damage");
         GameManager.Instance.PlayerTakeDamage(1);
         //rb.AddForce(-curVelocity * knockBackForce, ForceMode2D.Impulse);
+
+        // 2. 말풍선 출력 로직 추가
+        // "char_chat_damage" 키를 사용하여 텍스트를 가져옴 (DataManager 구조에 따라 수정 필요)
+        string damageMsg = GetStringFromTable("char_chat_0001");
+
+        StopAllCoroutines(); // 기존 말풍선 코루틴이 있다면 중지
+        StartCoroutine(ShowChatBubble(damageMsg));
+    }
+
+    // CSV 데이터 가져오는 헬퍼 함수
+    private string GetStringFromTable(string key)
+    {
+        // GameManager 싱글톤과 StringTable이 존재하는지 확인
+        if (GameManager.Instance != null && GameManager.Instance.StringTable != null)
+        {
+            // Table 클래스의 인덱서([])를 사용하여 데이터 조회
+            var data = GameManager.Instance.StringTable[key];
+
+            if (data != null)
+            {
+                return data.kr; // StringTableData의 'kr' 변수 값 반환 (예: "아야!")
+            }
+        }
+
+        // 데이터를 못 찾았을 경우 기본값 반환
+        return "아야!";
+    }
+
+    // 말풍선 띄우는 코루틴
+    private IEnumerator ShowChatBubble(string msg)
+    {
+        if (chatBubbleCanvas != null && chatText != null)
+        {
+            chatText.text = msg;
+            chatBubbleCanvas.SetActive(true); // 말풍선 활성화
+
+            // 텍스트가 바뀔 때 크기 재계산이 한 프레임 늦을 수 있으므로 강제 업데이트
+            LayoutRebuilder.ForceRebuildLayoutImmediate(chatBubbleCanvas.GetComponent<RectTransform>());
+
+            yield return new WaitForSeconds(chatDuration);
+
+            chatBubbleCanvas.SetActive(false); // 말풍선 비활성화
+        }
     }
 
     // FSM Helper
@@ -298,13 +372,25 @@ public class Player : MonoBehaviour
         {
             _curGimmick.StartGimmick();
         }
-        else if (ctx.started && _checkGimmick && GameManager.Instance.OnProgressGimmick)
+        //else if (ctx.started && _checkGimmick && GameManager.Instance.OnProgressGimmick)
+        //{
+        //    _curGimmick.ExitGimmick();
+        //}
+        //아이템 관련 추가 
+        if (ctx.started && _nearbyItem != null)
         {
-            _curGimmick.ExitGimmick();
+            if (slot != null && _nearbyItem.ItemData.type == ItemType.Special)
+            {
+                if (slot.TryPickup(_nearbyItem.ItemData))
+                {
+                    _nearbyItem.Pickup();
+                    _nearbyItem = null;
+                    return;
+
+                }
+            }
         }
-
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Finish"))
@@ -333,40 +419,72 @@ public class Player : MonoBehaviour
             return;
         }
         string input = ctx.control.name;
-        switch (input)
+        if (!GameManager.Instance.OnSelection && !GameManager.Instance.OnProgressGimmick)
         {
-            case "1":
-                slot.SelectSlot(0);
-                break;
-            case "2":
-                slot.SelectSlot(1);
-                break;
-            case "3":
-                slot.SelectSlot(2);
-                break;
-            case "4":
-                slot.SelectSlot(3);
-                break;
-            case "5":
-                slot.SelectSlot(4);
-                break;
-            case "6":
-                slot.SelectSlot(5);
-                break;
-            case "7":
-                slot.SelectSlot(6);
-                break;
-            case "8":
-                slot.SelectSlot(7);
-                break;
-            case "9":
-                slot.SelectSlot(8);
-                break;
-            case "0":
-                slot.SelectSlot(9);
-                break;
+            switch (input)
+            {
+                case "1":
+                    slot.SelectSlot(0);
+                    break;
+                case "2":
+                    slot.SelectSlot(1);
+                    break;
+                case "3":
+                    slot.SelectSlot(2);
+                    break;
+                case "4":
+                    slot.SelectSlot(3);
+                    break;
+                case "5":
+                    slot.SelectSlot(4);
+                    break;
+                case "6":
+                    slot.SelectSlot(5);
+                    break;
+                case "7":
+                    slot.SelectSlot(6);
+                    break;
+                case "8":
+                    slot.SelectSlot(7);
+                    break;
+                case "9":
+                    slot.SelectSlot(8);
+                    break;
+                case "0":
+                    slot.SelectSlot(9);
+                    break;
+            }
+        }
+        else
+        {
+            switch (input)
+            {
+                case "1":
+                    _curGimmick.CheckNum(1);
+                    break;
+                case "2":
+                    _curGimmick.CheckNum(2);
+                    break;
+                case "3":
+                    _curGimmick.CheckNum(3);
+                    break;
+            }
         }
     }
+
+    public void SetNearbyItem(ItemPickup item)
+    {
+        _nearbyItem = item;
+    }
+
+    public void ClearNearbyItem(ItemPickup item)
+    {
+        if (_nearbyItem == item)
+        {
+            _nearbyItem = null;
+        }
+    }
+
     public void OnUseItem(InputAction.CallbackContext ctx)
     {
         if (!ctx.started)
@@ -378,17 +496,17 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        ItemData data = slotData.Data;
 
-        if (slot.TryUseCurrentSlot(slot.CurrentIndex))
-        {
-            if (data.type == ItemType.Consumable && data.prefab != null)//폭탄
-            {
-                GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
-                obj.GetComponent<Bomb>().UseBomb();
-            }
-            //혹은 키아이템 사용을 따로 할것이라면 아래에 추가
-        }
+        //ItemData data = slotData.Data;
+        //if (slot.TryUseCurrentSlot(slot.CurrentIndex))
+        //{
+        //    if (data.type == ItemType.Consumable && data.prefab != null)//폭탄
+        //    {
+        //        GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+        //        obj.GetComponent<Bomb>().UseBomb();
+        //    }
+        //    //혹은 키아이템 사용을 따로 할것이라면 아래에 추가
+        //}
 
     }
     public void OnSlotPrev(InputAction.CallbackContext ctx)
