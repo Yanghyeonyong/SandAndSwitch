@@ -30,4 +30,22 @@ public abstract class Gimmick : MonoBehaviour
             return _isClear;
         }
     }
+
+    protected ItemTransform CheckPos()
+    {
+        if (GameManager.Instance.GimmickPos.ContainsKey(_gimmickId))
+        {
+            Debug.Log("저장된 값 반환 : "+ GameManager.Instance.GimmickPos[_gimmickId].position);
+
+            return GameManager.Instance.GimmickPos[_gimmickId];
+        }
+        else
+        {
+            ItemTransform myTransform = new ItemTransform(this.transform.position, this.transform.rotation, this.transform.localScale);
+            GameManager.Instance.GimmickPos.Add(_gimmickId, myTransform);
+            Debug.Log("저장된 값 없음");
+            return null;
+        }
+    }
+
 }

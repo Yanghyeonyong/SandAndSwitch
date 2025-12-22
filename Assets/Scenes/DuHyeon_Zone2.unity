@@ -38669,6 +38669,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7540922119586240487, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
+      propertyPath: _gimmickId
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540922119586240487, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
       propertyPath: _interactiveUI
       value: 
       objectReference: {fileID: 1341535657}
@@ -40173,6 +40177,10 @@ PrefabInstance:
       value: WoodenItemBox
       objectReference: {fileID: 0}
     - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
+      propertyPath: _gimmickId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: _interactiveUI
       value: 
       objectReference: {fileID: 1341535657}
@@ -41572,37 +41580,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 1341535657}
   _isReuse: 1
---- !u!1 &1607891169
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1607891170}
-  m_Layer: 0
-  m_Name: TeleportPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1607891170
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607891169}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.02, y: 4.6359997, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1630088623100240201}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1772628989
 GameObject:
   m_ObjectHideFlags: 0
@@ -41937,6 +41914,10 @@ PrefabInstance:
       propertyPath: '_audio.Array.data[2]'
       value: 
       objectReference: {fileID: 8300000, guid: 99d6ef228b35bf747a634a006a7e046d, type: 3}
+    - target: {fileID: 7852389351137123256, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40.090942
+      objectReference: {fileID: 0}
     - target: {fileID: 7862137922264489205, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -42090,49 +42071,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7062690150137175514, guid: cd60f7bfc7f7020439b6b1f8b19ff013, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7266417965015965277, guid: cd60f7bfc7f7020439b6b1f8b19ff013, type: 3}
-      propertyPath: _interactiveObj
-      value: 
-      objectReference: {fileID: 1630088623100240200}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5775389616876981403, guid: cd60f7bfc7f7020439b6b1f8b19ff013, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1607891170}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7062690150137175514, guid: cd60f7bfc7f7020439b6b1f8b19ff013, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1630088623100240202}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd60f7bfc7f7020439b6b1f8b19ff013, type: 3}
---- !u!1 &1630088623100240200 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7062690150137175514, guid: cd60f7bfc7f7020439b6b1f8b19ff013, type: 3}
-  m_PrefabInstance: {fileID: 1630088623100240199}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1630088623100240201 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5775389616876981403, guid: cd60f7bfc7f7020439b6b1f8b19ff013, type: 3}
-  m_PrefabInstance: {fileID: 1630088623100240199}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1630088623100240202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630088623100240200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d8b95a7ce9d6544801a02807ccb191, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gimmick_MapDoor
-  _gimmickId: 0
-  _teleportPos: {fileID: 1607891170}
 --- !u!1001 &8224287481964361650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42181,6 +42124,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4076792711257908621, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
+      propertyPath: _gimmickId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4980172726570153654, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
       propertyPath: m_Name
       value: Lever
@@ -42215,7 +42162,7 @@ SceneRoots:
   - {fileID: 1480765826}
   - {fileID: 2101550743}
   - {fileID: 1064652482}
-  - {fileID: 8224287481964361650}
   - {fileID: 607073517}
   - {fileID: 384470634}
+  - {fileID: 8224287481964361650}
   - {fileID: 1630088623100240199}

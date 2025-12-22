@@ -262,7 +262,10 @@ ItemData _bombScriptableObject;
     }
 
     [SerializeField] private Dictionary<int, bool> _isGimmickClear = new Dictionary<int, bool>();
+    //251221 - 양현용 추가 : 기믹 위치 저장 ex) 박스
     public Dictionary<int, bool> IsGimmickClear => _isGimmickClear;
+    [SerializeField] private Dictionary<int, ItemTransform> _gimmickPos = new Dictionary<int, ItemTransform>();
+    public Dictionary<int, ItemTransform> GimmickPos => _gimmickPos;
 
     [SerializeField] int _curScene = 0;
 
@@ -444,6 +447,7 @@ ItemData _bombScriptableObject;
         Debug.Log("스타트");
         _curScene = 1;
         _isGimmickClear.Clear();
+        _gimmickPos.Clear();
         CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         player = null;
 
@@ -545,6 +549,7 @@ ItemData _bombScriptableObject;
         CurrentCutsceneIndex = 0;
         CollectedItemIDs.Clear();//아이템픽업 관련 초기화
         _isGimmickClear.Clear();
+        _gimmickPos.Clear();
         if (_gameOverCoroutine != null)
         {
             StopCoroutine(_gameOverCoroutine);
