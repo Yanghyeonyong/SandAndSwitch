@@ -25,6 +25,8 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
+    
+
     //busy loading game scene flag
     bool _isLoadingGameScene = false;
 
@@ -365,17 +367,30 @@ ItemData _bombScriptableObject;
         }
     }
 
+    [Header("페이즌2 화면 관련")]
+    [SerializeField] Color _phaseTwoScreenColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+    [SerializeField] float _maxAlpha = 0.8f;
+
     IEnumerator CheckGameOver()
     {
         //페이즈 하얘지는 연출 추가 251221 최정욱
-        Color _currentWhiteFadeColor = new Color(1f, 1f, 1f, 0f);
+        Color _currentWhiteFadeColor = _phaseTwoScreenColor;
 
         _curGameOverCount = _gameOverCount;
         _curGameOverCount -= _minusGameOverCount;
         while (_curGameOverCount > 0)
         {
         //페이즈 하얘지는 연출 추가 251221 최정욱
-            _currentWhiteFadeColor.a = 1f - (_curGameOverCount / _gameOverCount);
+
+            if (_curGameOverCount / _gameOverCount >= 0.2f)
+            {
+                _currentWhiteFadeColor.a = _maxAlpha * (1f - (_curGameOverCount / _gameOverCount));
+            }
+            else
+            {
+                _currentWhiteFadeColor.a = _maxAlpha;
+            }
+            //_currentWhiteFadeColor.a = 1f - (_curGameOverCount / _gameOverCount);
             ExtraUITools[0].GetComponent<Image>().color = _currentWhiteFadeColor;
             yield return _wait;
             _curGameOverCount -= _minusGameOverCount;

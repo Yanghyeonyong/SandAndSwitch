@@ -10828,8 +10828,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d491b17a59cf46e4293192fc293b587d, type: 3}
   - {fileID: 8300000, guid: 41a6006e56f25934abcbb18bc82db9d5, type: 3}
   - {fileID: 8300000, guid: 4df603504ddd43f488f4288d5ad5ee12, type: 3}
-  _blackFadeToVictoryCutscenesTime: 10
-  _deathWhiteToBlackFadeDuration: 10
+  _phaseTwoScreenColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _maxAlpha: 0.8
+  _blackFadeToVictoryCutscenesTime: 3
+  _deathWhiteToBlackFadeDuration: 3
 --- !u!1 &1957125918
 GameObject:
   m_ObjectHideFlags: 0
