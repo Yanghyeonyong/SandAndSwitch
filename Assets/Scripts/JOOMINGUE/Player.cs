@@ -68,6 +68,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] float playerScale = 5f;
 
+    // 컷신(자동 이동) 중인지 체크하는 변수
+    bool isCutscene = false;
+
 
     //251216 - 양현용 : 기믹과의 상호작용
     private bool _checkGimmick = false;
@@ -141,8 +144,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // Input
-        moveX = moveAction.ReadValue<Vector2>().x;
+        if (!isCutscene)
+        {
+            moveX = moveAction.ReadValue<Vector2>().x;
+        }
 
         // 1️⃣ Ground Check (BoxCast로 변경)
         // groundCheck 위치에서 boxSize 크기의 사각형을 아래로(Vector2.down) castDistance만큼 발사
@@ -201,6 +206,47 @@ public class Player : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(moveX));
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetFloat("YVel", rb.linearVelocity.y);
+    }
+
+    // Unity 생명주기 Start 추가
+    void Start()
+    {
+        // 현재 씬 이름이 "DuHyeon_Tutorial"이면 등장 이벤트 시작
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial")
+        {
+            StartCoroutine(IntroWalkRoutine());
+        }
+    }
+
+    // 등장 이벤트 코루틴
+    IEnumerator IntroWalkRoutine()
+    {
+        // 1. 제어권 가져오기
+        isCutscene = true;
+
+        // 2. 대사 띄우기 (걷기 시작하면서 동시에 말함)
+        // CSV를 사용하는 경우:
+        string introMsg = GetStringFromTable("char_chat_intro");
+        StartCoroutine(ShowChatBubble(introMsg));
+
+        // (만약 CSV 연동이 아직 안 되었다면 아래처럼 직접 넣으세요)
+        // StartCoroutine(ShowChatBubble("여기가 어디지...?"));
+
+        // 3. 걷기 시작
+        float startX = transform.position.x;
+        float targetX = startX + 3f; // 3칸 이동
+
+        moveX = 1f; // 오른쪽으로 이동 입력
+
+        // 목표 지점에 도달할 때까지 대기
+        while (transform.position.x < targetX)
+        {
+            yield return null;
+        }
+
+        // 4. 도착 후 정지 및 제어권 반환
+        moveX = 0f;
+        isCutscene = false;
     }
 
     void FixedUpdate()
