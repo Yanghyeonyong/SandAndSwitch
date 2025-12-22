@@ -428,6 +428,7 @@ public class Player : MonoBehaviour
         //{
         //    _curGimmick.ExitGimmick();
         //}
+
         //아이템 관련 추가 
         if (ctx.started && _nearbyItem != null)
         {
@@ -543,6 +544,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
+
         QuickSlot slotData = slot.CurrentSlot;
         if (slotData == null || slotData.IsEmpty || slotData.Data == null)//빈슬롯
         {
@@ -550,6 +552,10 @@ public class Player : MonoBehaviour
         }
 
         //ItemData data = slotData.Data;
+        //if (data.type == ItemType.Key)
+        //{
+        //    return;
+        //}
         //if (slot.TryUseCurrentSlot(slot.CurrentIndex))
         //{
         //    if (data.type == ItemType.Consumable && data.prefab != null)//폭탄

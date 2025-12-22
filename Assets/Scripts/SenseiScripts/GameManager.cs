@@ -42,6 +42,17 @@ ItemData _bombScriptableObject;
     [Header("플레이어 체력 관련")]
     [SerializeField] private int _maxPlayerHealth = 3;
     [SerializeField] private int CurrentPlayerHealth = 1;
+    public int currentPlayerHealth
+    {
+        get
+        {
+            return CurrentPlayerHealth;
+        }
+        set
+        {
+            CurrentPlayerHealth = value;
+        }
+    }
     public List<Image> HeartImages = new List<Image>();
 
     [SerializeField] string _heartEmptyHexColor = "000000";
@@ -266,11 +277,30 @@ ItemData _bombScriptableObject;
 
     [SerializeField] private Dictionary<int, bool> _isGimmickClear = new Dictionary<int, bool>();
     //251221 - 양현용 추가 : 기믹 위치 저장 ex) 박스
-    public Dictionary<int, bool> IsGimmickClear => _isGimmickClear;
+    public Dictionary<int, bool> IsGimmickClear
+    {
+        get{ return _isGimmickClear; }
+        set
+        {
+            _isGimmickClear = value;
+        }
+    }
     [SerializeField] private Dictionary<int, ItemTransform> _gimmickPos = new Dictionary<int, ItemTransform>();
-    public Dictionary<int, ItemTransform> GimmickPos => _gimmickPos;
+    public Dictionary<int, ItemTransform> GimmickPos
+    {
+        get { return _gimmickPos; }
+        set
+        {
+            _gimmickPos = value;
+        }
+    }
 
     [SerializeField] int _curScene = 0;
+    public int CurScene
+    {
+        get { return _curScene; }
+        set { _curScene = value; }
+    }
     //251222 - 양현용 추가 : 플레이어 선택지가 활성화되어 있는지 체크
     [SerializeField] bool onSelection = false;
     public bool OnSelection
@@ -279,6 +309,14 @@ ItemData _bombScriptableObject;
         set { onSelection = value; }
     }
     //
+
+    private CheckPointData _checkPointData;
+    public CheckPointData CheckPointData
+    {
+        get { return _checkPointData; }
+        set { _checkPointData = value; }
+    }
+
 
 
     private GameState _gameState = GameState.PhaseOne;
@@ -365,6 +403,20 @@ ItemData _bombScriptableObject;
         player = null;
         _curScene++;
         SceneManager.LoadScene(_curScene);
+
+        if (_curScene >= 1 && _curScene <= 3)
+        {
+            //_player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene-1], Quaternion.identity);
+            //player = _player.GetComponent<Player>();
+            StartCoroutine(SpawnPlayer());
+        }
+    }
+
+    //25122 - 양현용 추가 : 원하는 씬으로 넘어가는 용도
+    public void LoadScene(int index)
+    {
+        player = null;
+        SceneManager.LoadScene(index);
 
         if (_curScene >= 1 && _curScene <= 3)
         {
@@ -568,32 +620,49 @@ ItemData _bombScriptableObject;
 
     public void RestartGame()
     {
-        CurrentCutsceneIndex = 0;
-        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
-        _isGimmickClear.Clear();
-        _gimmickPos.Clear();
-        if (_gameOverCoroutine != null)
+        if (_checkPointData != null)
         {
-            StopCoroutine(_gameOverCoroutine);
-            _gameOverCoroutine = null;
+            CurrentCutsceneIndex = 0;
+            CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+            _isGimmickClear.Clear();
+            _gimmickPos.Clear();
+            if (_gameOverCoroutine != null)
+            {
+                StopCoroutine(_gameOverCoroutine);
+                _gameOverCoroutine = null;
+            }
+            Time.timeScale = 1f;
+            //+추가로직
+            _curScene = 1;
+
+
+            CurrentPlayerHealth = _maxPlayerHealth;
+            HeartLogic();
+
+            GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
+            GameSceneLoadAsyncOperation.allowSceneActivation = false;
+            StartCoroutine(WaitForGameSceneLoad());
         }
-        Time.timeScale = 1f;
-        //+추가로직
-        _curScene = 1;
+        else
+        {
+            CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+            _isGimmickClear.Clear();
+            _gimmickPos.Clear();
+            if (_gameOverCoroutine != null)
+            {
+                StopCoroutine(_gameOverCoroutine);
+                _gameOverCoroutine = null;
+            }
+            Time.timeScale = 1f;
+
+            _checkPointData.LoadCheckPointData();
+        }
 
 
-        CurrentPlayerHealth = _maxPlayerHealth;
-        HeartLogic();
-
-        GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
-        GameSceneLoadAsyncOperation.allowSceneActivation = false;
-        StartCoroutine(WaitForGameSceneLoad());
-
-        //StartCoroutine(SpawnPlayer());
     }
-    
 
-    private void HeartLogic()
+
+    public void HeartLogic()
     {
 
         switch(CurrentPlayerHealth)

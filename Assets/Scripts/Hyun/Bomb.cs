@@ -58,6 +58,33 @@ public class Bomb : MonoBehaviour
         Vector3 origin = transform.position;
         float radius = _itemData.radius;
 
+        #region
+        //foreach (var mapCollider in Physics2D.OverlapCircleAll(origin, radius, _itemData.targetLayer))
+        //{
+        //    Tilemap map = mapCollider.GetComponent<Tilemap>();
+        //    if (map == null) continue;
+
+        //    Vector3Int centerCell = map.WorldToCell(origin);
+
+        //    int cellRadius = Mathf.CeilToInt(radius);
+
+        //    for (int x = -cellRadius; x <= cellRadius; x++)
+        //    {
+        //        for (int y = -cellRadius; y <= cellRadius; y++)
+        //        {
+        //            Vector3Int cell = new Vector3Int(centerCell.x + x, centerCell.y + y, 0);
+
+        //            Vector3 worldPos = map.GetCellCenterWorld(cell);
+
+        //            if (Vector2.Distance(origin, worldPos) <= radius)
+        //            {
+        //                map.SetTile(cell, null);
+        //            }
+        //        }
+        //    }
+        //}
+        #endregion
+
         // Å¸ÀÏ¸Ê Å½»ö
         Collider2D[] maps = Physics2D.OverlapCircleAll(origin, radius, _itemData.targetLayer);
 
