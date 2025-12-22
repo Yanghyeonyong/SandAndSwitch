@@ -42,9 +42,30 @@ public class ItemPickup : MonoBehaviour
         {
             return;
         }
+        if (_itemData.type == ItemType.Special)
+        {
+            player.SetNearbyItem(this);
+            return;
+        }
         if (player.Slot != null && player.Slot.TryPickup(_itemData))
         {
             Pickup();
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player"))
+        {
+            return;
+        }
+        Player player = collision.GetComponent<Player>();
+        if (player == null)
+        {
+            return;
+        }
+        if (_itemData.type == ItemType.Special)
+        {
+            player.ClearNearbyItem(this);
         }
     }
 

@@ -25,6 +25,8 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
+    
+
     //busy loading game scene flag
     bool _isLoadingGameScene = false;
 
@@ -206,23 +208,24 @@ ItemData _bombScriptableObject;
         }
 
     }
-    //private readonly Color clear = new Color(1, 1, 1, 0);
-    //public void UpdateQuickSlot(int index, QuickSlot slot)
-    //{
-    //    if (slot.IsEmpty)
-    //    {
-    //        GameManagerQuickSlotCountTexts[index].text = "";
-    //        GameManagerQuickSlotIcons[index].sprite = null;
-    //        GameManagerQuickSlotIcons[index].color = clear;
-    //        GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
-    //        return;
-    //    }
+    //퀵슬롯컨트롤러 관련 UI 메서드로 따로 뺀 부분
+    private readonly Color clear = new Color(1, 1, 1, 0);
+    public void UpdateQuickSlot(int index, QuickSlot slot)
+    {
+        if (slot.IsEmpty)
+        {
+            GameManagerQuickSlotCountTexts[index].text = "";
+            GameManagerQuickSlotIcons[index].sprite = null;
+            GameManagerQuickSlotIcons[index].color = clear;
+            GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
+            return;
+        }
 
-    //    GameManagerQuickSlotCountTexts[index].text = slot.Count.ToString();
-    //    GameManagerQuickSlotIcons[index].sprite = slot.Data.icon;
-    //    GameManagerQuickSlotIcons[index].color = Color.white;
-    //    GameManagerQuickSlotIcons[index].gameObject.SetActive(true);
-    //}
+        GameManagerQuickSlotCountTexts[index].text = slot.Count.ToString();
+        GameManagerQuickSlotIcons[index].sprite = slot.Data.icon;
+        GameManagerQuickSlotIcons[index].color = Color.white;
+        GameManagerQuickSlotIcons[index].gameObject.SetActive(true);
+    }
 
 
 
@@ -268,7 +271,13 @@ ItemData _bombScriptableObject;
     public Dictionary<int, ItemTransform> GimmickPos => _gimmickPos;
 
     [SerializeField] int _curScene = 0;
-
+    //251222 - 양현용 추가 : 플레이어 선택지가 활성화되어 있는지 체크
+    [SerializeField] bool onSelection = false;
+    public bool OnSelection
+    {
+        get { return onSelection; }
+        set { onSelection = value; }
+    }
     //
 
 
@@ -365,17 +374,30 @@ ItemData _bombScriptableObject;
         }
     }
 
+    [Header("페이즌2 화면 관련")]
+    [SerializeField] Color _phaseTwoScreenColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+    [SerializeField] float _maxAlpha = 0.8f;
+
     IEnumerator CheckGameOver()
     {
         //페이즈 하얘지는 연출 추가 251221 최정욱
-        Color _currentWhiteFadeColor = new Color(1f, 1f, 1f, 0f);
+        Color _currentWhiteFadeColor = _phaseTwoScreenColor;
 
         _curGameOverCount = _gameOverCount;
         _curGameOverCount -= _minusGameOverCount;
         while (_curGameOverCount > 0)
         {
         //페이즈 하얘지는 연출 추가 251221 최정욱
-            _currentWhiteFadeColor.a = 1f - (_curGameOverCount / _gameOverCount);
+
+            if (_curGameOverCount / _gameOverCount >= 1- _maxAlpha)
+            {
+                _currentWhiteFadeColor.a = _maxAlpha * (1f - (_curGameOverCount / _gameOverCount));
+            }
+            else
+            {
+                _currentWhiteFadeColor.a = _maxAlpha;
+            }
+            //_currentWhiteFadeColor.a = 1f - (_curGameOverCount / _gameOverCount);
             ExtraUITools[0].GetComponent<Image>().color = _currentWhiteFadeColor;
             yield return _wait;
             _curGameOverCount -= _minusGameOverCount;
