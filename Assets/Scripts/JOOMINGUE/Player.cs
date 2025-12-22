@@ -378,17 +378,17 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        ItemData data = slotData.Data;
 
-        if (slot.TryUseCurrentSlot(slot.CurrentIndex))
-        {
-            if (data.type == ItemType.Consumable && data.prefab != null)//폭탄
-            {
-                GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
-                obj.GetComponent<Bomb>().UseBomb();
-            }
-            //혹은 키아이템 사용을 따로 할것이라면 아래에 추가
-        }
+        //ItemData data = slotData.Data;
+        //if (slot.TryUseCurrentSlot(slot.CurrentIndex))
+        //{
+        //    if (data.type == ItemType.Consumable && data.prefab != null)//폭탄
+        //    {
+        //        GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+        //        obj.GetComponent<Bomb>().UseBomb();
+        //    }
+        //    //혹은 키아이템 사용을 따로 할것이라면 아래에 추가
+        //}
 
     }
     public void OnSlotPrev(InputAction.CallbackContext ctx)
