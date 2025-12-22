@@ -302,17 +302,7 @@ public class Player : MonoBehaviour
         {
             _curGimmick.ExitGimmick();
         }
-        //아이템 관련 추가
-        if (ctx.started && _nearbyItem != null)
-        {
 
-            if (slot != null && slot.TryPickup(_nearbyItem.ItemData))
-            {
-                _nearbyItem.Pickup();
-                _nearbyItem = null;
-                return;
-            }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -334,20 +324,7 @@ public class Player : MonoBehaviour
             onPortal = 0;
         }
     }
-    //아이템 관련 추가
-    private ItemPickup _nearbyItem;
-    public void SetNearbyItem(ItemPickup item)
-    {
-        _nearbyItem = item;
-    }
 
-    public void ClearNearbyItem(ItemPickup item)
-    {
-        if (_nearbyItem == item)
-        {
-            _nearbyItem = null;
-        }
-    }
 
     public void OnSelectSlot(InputAction.CallbackContext ctx)
     {

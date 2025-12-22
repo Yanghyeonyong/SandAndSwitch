@@ -7,11 +7,11 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] private float _soundValue = 1f;
     [SerializeField] private Vector3 uniqueID;
 
-    
+
 
     public ItemData ItemData => _itemData;
     public Vector3 UniqueID => uniqueID;
-    
+
 
     private void Start()
     {
@@ -38,29 +38,16 @@ public class ItemPickup : MonoBehaviour
             return;
         }
         Player player = collision.GetComponent<Player>();
-        if (player != null)
+        if (player == null)
         {
-            player.SetNearbyItem(this);
+            return;
+        }
+        if (player.Slot != null && player.Slot.TryPickup(_itemData))
+        {
+            Pickup();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Player"))
-        {
-            return;
-        }
-        Bomb bomb = GetComponent<Bomb>();
-        if (bomb != null && bomb.IsThrownBomb)
-        {
-            return;
-        }
-        Player player = collision.GetComponent<Player>();
-        if (player != null)
-        {
-            player.ClearNearbyItem(this);
-        }
-    }
 
     public void Pickup()
     {
