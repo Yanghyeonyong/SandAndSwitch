@@ -18,10 +18,11 @@ MonoBehaviour:
   type: 3
   prefab: {fileID: 5886606223929163084, guid: 613102a45d38cb74da182a9982c859dd, type: 3}
   icon: {fileID: -3491882392630799336, guid: a8aadeb4b96f4c547a47786bfbdbbea6, type: 3}
+  canQuickSlot: 1
   maxStack: 99
   radius: 0
   delay: 0
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  pickupSoundClip: {fileID: 8300000, guid: c454f0066ef17b94daa5753983170042, type: 3}
+  pickupSoundClip: {fileID: 8300000, guid: ae0a55a68d99d794799658af84322e7a, type: 3}
