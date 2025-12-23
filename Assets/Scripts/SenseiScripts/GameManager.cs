@@ -484,26 +484,36 @@ ItemData _bombScriptableObject;
         }
         Debug.Log("체크포인트 위치 정보 : " + _checkPointData._playerPos);
 
+        //for (int i = 0; i < GameManagerQuickSlots.Length; i++)
+        //{
+        //    if (_checkPointData.GameManagerQuickSlots[i] != null)
+        //    {
+        //        if (_checkPointData.GameManagerQuickSlots[i].Data != null)
+        //        {
+        //            ItemData data = Instantiate(_checkPointData.GameManagerQuickSlots[i].Data) as ItemData;
+        //            Debug.Log("아이템 데이터 정보 : " + data.id);
+
+        //            if (data == null)
+        //            {
+        //                Debug.Log("데이터가 없다");
+        //            }
+        //            GameManagerQuickSlots[i].Init(data, _checkPointData.GameManagerQuickSlots[i].Count);
+        //            UpdateQuickSlot(i, GameManagerQuickSlots[i]);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("체크포인트에 값이 없다 : " + i);
+        //    }
+        //}
+
         for (int i = 0; i < GameManagerQuickSlots.Length; i++)
         {
-            if (_checkPointData.GameManagerQuickSlots[i] != null)
+            if (_checkPointData.GameManagerQuickSlots[i].Data != null)
             {
-                if (_checkPointData.GameManagerQuickSlots[i].Data != null)
-                {
-                    ItemData data = Instantiate(_checkPointData.GameManagerQuickSlots[i].Data) as ItemData;
-                    Debug.Log("아이템 데이터 정보 : " + data.id);
-
-                    if (data == null)
-                    {
-                        Debug.Log("데이터가 없다");
-                    }
-                    GameManagerQuickSlots[i].Init(data, _checkPointData.GameManagerQuickSlots[i].Count);
-                    UpdateQuickSlot(i, GameManagerQuickSlots[i]);
-                }
-            }
-            else
-            {
-                Debug.Log("체크포인트에 값이 없다 : " + i);
+                ItemData data = _checkPointData.FindItem(_checkPointData.GameManagerQuickSlots[i].Data.id);
+                GameManagerQuickSlots[i].Init(data, _checkPointData.GameManagerQuickSlots[i].Count);
+                UpdateQuickSlot(i, _checkPointData.GameManagerQuickSlots[i]);
             }
         }
     }
