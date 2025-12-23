@@ -684,6 +684,12 @@ ItemData _bombScriptableObject;
             CollectedItemIDs.Clear();//아이템픽업 관련 초기화
             //아이템 퀵슬롯 초기화 
             GameManagerQuickSlots = new QuickSlot[10];
+            for (int i = 0; i < GameManagerQuickSlotCountTexts.Length; i++)
+            {
+                GameManagerQuickSlotCountTexts[i].text = "";
+                GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
+                GameManagerQuickSlots[i] = null;
+            }
             _isGimmickClear.Clear();
             _gimmickPos.Clear();
             if (_gameOverCoroutine != null)
