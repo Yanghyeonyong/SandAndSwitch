@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         // 현재 씬 이름이 "DuHyeon_Tutorial"이면 등장 이벤트 시작
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial"&& !CheckPointData.Instance._onCheck)
         {
             StartCoroutine(IntroWalkRoutine());
         }
