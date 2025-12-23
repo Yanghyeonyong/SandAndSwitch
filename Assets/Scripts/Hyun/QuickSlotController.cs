@@ -93,6 +93,7 @@ public class QuickSlotController : MonoBehaviour
                     slot.Add(1);
 
                     // UI 업데이트는 GameManager 호출
+                    GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, 1);
                     GameManager.Instance.UpdateQuickSlot(i, slot);
                     return true;
                 }
@@ -127,7 +128,7 @@ public class QuickSlotController : MonoBehaviour
             if (slot.IsEmpty)
             {
                 slot.Init(data, 1);
-
+                GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, 1);
                 GameManager.Instance.UpdateQuickSlot(i, slot);
                 return true;
             }
@@ -167,8 +168,8 @@ public class QuickSlotController : MonoBehaviour
             }
         }
         //아이템 사용
+        GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, -useCount);
         slot.Use(useCount);
-
         //기존코드
         //if (slot.Count <= 0)
         //{

@@ -30,11 +30,11 @@ public class GameManager : Singleton<GameManager>
 
     //아이템 로그 변수
     public List<ItemLogLogScript> ItemLogs { get; set; } = new List<ItemLogLogScript>();
+    public ItemLogCanvasScript ItemLogCanvas { get; set; }
 
 
-
-//busy loading game scene flag
-bool _isLoadingGameScene = false;
+    //busy loading game scene flag
+    bool _isLoadingGameScene = false;
 
     //cutscene info
     public int CurrentCutsceneIndex = 0;
