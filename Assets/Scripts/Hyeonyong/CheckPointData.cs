@@ -59,13 +59,27 @@ public class CheckPointData : Singleton<CheckPointData>
         //기믹 클리어 여부 복사
         foreach (var d in GameManager.Instance.IsGimmickClear)
         {
-            _isGimmickClear.Add(d.Key, d.Value);
+            if (_isGimmickClear.ContainsKey(d.Key))
+            {
+                _isGimmickClear[d.Key] = d.Value;
+            }
+            else
+            {
+                _isGimmickClear.Add(d.Key, d.Value);
+            }
         }
         //기믹 위치 정보 복사
         foreach (var d in GameManager.Instance.GimmickPos)
         {
             ItemTransform itemTransform = new ItemTransform(d.Value.position, d.Value.rotation, d.Value.scale);
-            _gimmickPos.Add(d.Key, itemTransform);
+            if (_gimmickPos.ContainsKey(d.Key))
+            {
+                _gimmickPos[d.Key] = itemTransform;
+            }
+            else
+            {
+                _gimmickPos.Add(d.Key, itemTransform);
+            }
         }
 
         foreach (Vector3 pos in GameManager.Instance.CollectedItemIDs)

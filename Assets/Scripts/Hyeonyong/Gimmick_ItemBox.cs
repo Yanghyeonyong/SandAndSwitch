@@ -10,11 +10,12 @@ public class Gimmick_ItemBox : Gimmick
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _itemBox= GetComponent<ItemBox>();
         if (CheckClear())
         {
             _animator.SetTrigger("TurnOn");
+            _itemBox.OpenBox();
         }
-        _itemBox= GetComponent<ItemBox>();
     }
 
     public override void StartGimmick()

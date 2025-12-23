@@ -17,6 +17,9 @@ public class InteractiveObject : MonoBehaviour
         set { _isReuse = value; }
     }
 
+    //만약 해당 bool 값이 체크되어져 있다면, 2페이즈에서는 작동하지 않는 기믹이라는 뜻
+    [SerializeField] bool _CheckItem=false;
+
     private void Start()
     {
         _gimmick = GetComponent<Gimmick>();
@@ -25,6 +28,10 @@ public class InteractiveObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (GameManager.Instance.CheckItem && _CheckItem)
+        {
+            return;
+        }
         if (_gimmick.IsClear && !_isReuse)
         {
             return;

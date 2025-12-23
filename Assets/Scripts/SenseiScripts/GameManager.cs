@@ -389,6 +389,11 @@ ItemData _bombScriptableObject;
     {
         _gameState = (GameState)0;
         _checkItem=false;
+        if (_gameOverCoroutine != null)
+        {
+            StopCoroutine(_gameOverCoroutine);
+            _gameOverCoroutine = null;
+        }
     }
 
     public int GetCurrentSceneIndex()
@@ -683,6 +688,7 @@ ItemData _bombScriptableObject;
         }
         else
         {
+            EnterPhaseOne();
             Debug.Log("체크포인트 기반 다시하기");
             CollectedItemIDs.Clear();//아이템픽업 관련 초기화
             _isGimmickClear.Clear();
