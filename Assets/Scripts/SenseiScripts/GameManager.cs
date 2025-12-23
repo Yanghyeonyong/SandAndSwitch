@@ -880,6 +880,19 @@ ItemData _bombScriptableObject;
         //추가로직
     }
 
+    public void PlayerHeal(int heal)
+    {
+        CurrentPlayerHealth += heal;
+        if (CurrentPlayerHealth > _maxPlayerHealth)
+        {
+            CurrentPlayerHealth = _maxPlayerHealth;
+        }
+        HeartLogic();
+        //체력 회복 로직
+    }
+
+
+
     [SerializeField] float _deathWhiteToBlackFadeDuration = 1.5f;
 
     Coroutine _deathWhiteToBlackFadeCoroutine;
