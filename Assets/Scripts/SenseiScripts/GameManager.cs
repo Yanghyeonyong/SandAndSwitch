@@ -783,6 +783,8 @@ ItemData _bombScriptableObject;
     {
         _blackFadeToVictoryCoroutine = StartCoroutine(BlackFadeToVictoryCutscene());
         CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+        _isGimmickClear.Clear();
+        _gimmickPos.Clear();
         if (_gameOverCoroutine != null)
         {
             StopCoroutine(_gameOverCoroutine);

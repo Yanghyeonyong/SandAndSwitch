@@ -331,6 +331,7 @@ public class UIManager : MonoBehaviour
         }
         //GameManager.Instance.GameManagerQuickSlotCountTexts[0].text = "";
         //GameManager.Instance.GameManagerQuickSlotIcons[0].gameObject.SetActive(false);
+
         StartCoroutine(WaitForAsyncGameSceneLoad());
     }
 
