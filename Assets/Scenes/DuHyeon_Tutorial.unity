@@ -444,6 +444,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -992720687595220549, guid: 87b7a82562ba2494286830a3be5f90b6, type: 3}
+    - target: {fileID: 3400543341049423541, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3862496120320025304, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
       propertyPath: m_Type
       value: 0
@@ -11291,6 +11295,7 @@ MonoBehaviour:
   CurrentCutsceneIndex: 0
   _maxPlayerHealth: 3
   CurrentPlayerHealth: 1
+  currentLanguage: 0
   HeartImages: []
   _heartEmptyHexColor: 000000
   _heartFullHexColor: FF0000
@@ -11811,7 +11816,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d090f86afb3f88542a5f3b1360b82bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
-  _camera: {fileID: 1351061024}
 --- !u!1001 &1672792270
 PrefabInstance:
   m_ObjectHideFlags: 0

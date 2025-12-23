@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c63d8c42f0b1a4fa5a26c6a05df61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shutter
-  _shutterObject: {fileID: 4509691225346623291}
+  _doorObject: {fileID: 4509691225346623291}
   _interactiveObj: {fileID: 7062690150137175514}
 --- !u!95 &5644070047313174010
 Animator:
@@ -716,6 +716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 0}
   _isReuse: 0
+  _CheckItem: 0
 --- !u!114 &5763171674440513744
 MonoBehaviour:
   m_ObjectHideFlags: 0

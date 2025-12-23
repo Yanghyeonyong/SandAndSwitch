@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,14 +19,19 @@ public class DoorLock : MonoBehaviour
     //[SerializeField] Button[] _selectionButtons;
     ////패스워드
     //[SerializeField] GameObject _doorLock;
-    [SerializeField] int _password;
-    [SerializeField] int _curPassword = -1;
+    [SerializeField] string _password;
+    [SerializeField] StringBuilder _curPassword = new StringBuilder();
     Button[] _numButtons;
     Button _submitButton;
 
     [SerializeField] GameObject _testObject;
 
     Gimmick_DoorLock _gimmick;
+
+    [SerializeField] int _selectCount = 4;
+    [SerializeField] int _curCount = 0;
+
+    Gimmick_Object _obj;
 
     //[SerializeField] GameObject _interactiveUI;
 
@@ -38,13 +44,12 @@ public class DoorLock : MonoBehaviour
 
         for (int i = 0; i < _count; i++)
         {
+            int index = i;
             if (i == _count - 1)
             {
-                _submitButton = transform.GetChild(i).GetComponent<Button>();
-                _submitButton.onClick.AddListener(() => checkPassword());
-                continue;
+                _numButtons[i] = transform.GetChild(i).GetComponent<Button>();
+                _numButtons[i].onClick.AddListener(() => SetPassword(0));
             }
-            int index = i;
             _numButtons[i] = transform.GetChild(i).GetComponent<Button>();
             _numButtons[i].onClick.AddListener(() => SetPassword(index + 1));
 
@@ -52,23 +57,31 @@ public class DoorLock : MonoBehaviour
     }
     void SetPassword(int pressNum)
     {
+        _curCount++;
         //PlaySound(_audio[2]);
         SoundEffectManager.Instance.PlayEffectSound(_audio[2]);
-        _curPassword = pressNum;
+        //_curPassword = pressNum;
+        _curPassword.Append(pressNum.ToString());
+        if (_curCount == _selectCount)
+        {
+            checkPassword();
+        }
     }
 
     public void InitDoorLock(Gimmick_DoorLock gimmick)
     {
         _gimmick = gimmick;
         _password = _gimmick.Password;
-        _testObject = _gimmick.TestObject;
+        _testObject = _gimmick.DoorObject;
+        _obj = _gimmick.Obj;
     }
 
     void checkPassword()
     {
-        Debug.Log($"현재 입력 {_curPassword} 정답 : {_password}");
-        //패스워드 정답시 발동할 코드
-        if (_curPassword == _password)
+        //Debug.Log($"현재 입력 {_curPassword} 정답 : {_password}");
+        ////패스워드 정답시 발동할 코드
+        //if (_curPassword == _password)
+        if(_curPassword.ToString().Equals(_password))
         {
             //PlaySound(_audio[1]);
             SoundEffectManager.Instance.PlayEffectSound(_audio[1]);
@@ -81,6 +94,7 @@ public class DoorLock : MonoBehaviour
             GameManager.Instance.Player.CurGimmick = null;
             GameManager.Instance.ResumeGame();
             gameObject.SetActive(false);
+            _obj.TurnOn();
             //StartCoroutine(CollectPassword());
             return;
             //Debug.Log(GameManager.Instance.IsGimmickClear[_gimmick.GimmickId]);
@@ -88,6 +102,11 @@ public class DoorLock : MonoBehaviour
 
         //PlaySound(_audio[0]);
         SoundEffectManager.Instance.PlayEffectSound(_audio[0]);
+        //GameManager.Instance.OnProgressGimmick = false;
+        //GameManager.Instance.Player.CurGimmick = null;
+        //GameManager.Instance.ResumeGame();
+        _gimmick.ExitGimmick();
+        gameObject.SetActive(false);
 
     }
 
@@ -110,6 +129,16 @@ public class DoorLock : MonoBehaviour
         yield return new WaitForSeconds(_audioSource.clip.length);
         _audioSource.clip = null;
         gameObject.SetActive(false);
+    }
+    private void OnDisable()
+    {
+        _curCount = 0;
+        _curPassword.Clear();
+        _password = null;
+        //GameManager.Instance.OnProgressGimmick = false;
+        //GameManager.Instance.Player.CurGimmick = null;
+        //GameManager.Instance.ResumeGame();
+
     }
 
 }
