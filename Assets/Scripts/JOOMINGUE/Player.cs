@@ -377,7 +377,7 @@ public class Player : MonoBehaviour
     }
 
     // CSV 데이터 가져오는 헬퍼 함수
-    private string GetStringFromTable(string key)
+    public string GetStringFromTable(string key)
     {
         if (GameManager.Instance != null && GameManager.Instance.StringTable != null)
         {
@@ -392,7 +392,7 @@ public class Player : MonoBehaviour
     }
 
     // 말풍선 띄우는 코루틴
-    private IEnumerator ShowChatBubble(string msg)
+    public IEnumerator ShowChatBubble(string msg)
     {
         if (chatBubbleCanvas != null && chatText != null)
         {
