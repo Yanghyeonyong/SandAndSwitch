@@ -17,6 +17,9 @@ public class CheckPointData : Singleton<CheckPointData>
     //아이템 픽업 관련
     public List<Vector3> CollectedItemIDs = new List<Vector3>();
 
+
+    [SerializeField] private ItemData[] _data;//아이템정보
+
     private void Start()
     {
         GameManager.Instance.CheckPointData = this;
@@ -40,13 +43,9 @@ public class CheckPointData : Singleton<CheckPointData>
         {
             if (GameManager.Instance.GameManagerQuickSlots[i].Data != null)
             {
-                ItemData data = Instantiate(GameManager.Instance.GameManagerQuickSlots[i].Data) as ItemData;
-                //Debug.Log("아이템 데이터 정보 : " + data.id);
 
-                //if (data == null)
-                //{
-                //    Debug.Log("데이터가 없다");
-                //}
+                ItemData data = FindItem(GameManager.Instance.GameManagerQuickSlots[i].Data.id);
+
                 GameManagerQuickSlots[i].Init(data, GameManager.Instance.GameManagerQuickSlots[i].Count);
             }
         }
@@ -133,13 +132,7 @@ public class CheckPointData : Singleton<CheckPointData>
         {
             if (GameManagerQuickSlots[i].Data != null)
             {
-                ItemData data = Instantiate(GameManagerQuickSlots[i].Data) as ItemData;
-                //Debug.Log("아이템 데이터 정보 : " + data.id);
-
-                //if (data == null)
-                //{
-                //    Debug.Log("데이터가 없다");
-                //}
+                ItemData data = FindItem(GameManager.Instance.GameManagerQuickSlots[i].Data.id);
                 GameManager.Instance.GameManagerQuickSlots[i].Init(data, GameManagerQuickSlots[i].Count);
                 GameManager.Instance.UpdateQuickSlot(i, GameManagerQuickSlots[i]);
             }
@@ -147,4 +140,15 @@ public class CheckPointData : Singleton<CheckPointData>
         GameManager.Instance.HeartLogic();
     }
 
+    public ItemData FindItem(int id)
+    {
+        foreach (ItemData item in _data)
+        {
+            if(item.id == id)
+            { 
+                return item; 
+            }
+        }
+        return null;
+    }
 }
