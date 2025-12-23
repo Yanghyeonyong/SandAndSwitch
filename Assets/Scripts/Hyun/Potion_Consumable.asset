@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
-  m_Name: Bomb_Consumable
-  m_EditorClassIdentifier: Assembly-CSharp::Item
-  id: 101
-  itemName: "\uD3ED\uD0C4"
-  description: "\uD3ED\uBC1C\uD55C\uB2E4"
+  m_Name: Potion_Consumable
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  id: 0
+  itemName: "\uBB3C\uC57D"
+  description: 
   type: 1
-  prefab: {fileID: 6008120758980611909, guid: 1acefdf1a87e85e448b42e1dc49ccc4b, type: 3}
-  icon: {fileID: -8368097971112543834, guid: b5a00b4863784f34986bdb7f6d01474e, type: 3}
-  maxStack: 99
-  radius: 6.5
-  delay: 2
+  prefab: {fileID: 8990918237548349237, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+  icon: {fileID: 21300000, guid: 6705c549357eddb47b37042f667320ca, type: 3}
+  canQuickSlot: 0
+  maxStack: 0
+  radius: 0
+  delay: 0
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   pickupSoundClip: {fileID: 8300000, guid: c454f0066ef17b94daa5753983170042, type: 3}
