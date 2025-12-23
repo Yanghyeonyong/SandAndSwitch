@@ -1,24 +1,24 @@
-key,kr,en
-string,string,string
-lob_bt_0001,게임시작,Start Game
-lob_bt_0002,조작 가이드,Controls
-lob_bt_0003,나가기,Exit
-end_bt_0001,다시하기,Retry
-end_bt_0002,메인 화면으로,Main Menu
-ig_set_bt_0001,계속하기,Continue
-ig_set_bt_0002,입력하기,Enter
-ig_set_bt_0003,아이템 사용,Use Item
-ig_set_bt_0004,메인 화면으로,Main Menu
-ig_set_bt_0005,조작 가이드,Controls
-ig_set_bt_0006,돌아가기,Back
-ig_set_0001,일시정지,Pause
-ig_set_0002,[치직].... 모래폭풍이 다가온다! 얼른 나와야 해!,[Bzzt]... Sandstorm incoming! Get out of there!
-char_chat_0001,아이고 나 죽네,Oh,I'm gonna die!
-char_chat_0002,이걸 내 손으로 부수면…\n내 손이 먼저 사라지겠어,If I punch this...\n my hand will break first.
-char_chat_0003,열쇠 따는 방법을\n배워 왔어야 해,I should've learned \n how to pick locks.
-char_chat_0004,벙커 내부의 공기가 희박해지고 있어. 서둘러!,The air's getting thin in here. Hurry!
-char_chat_0005,시야가 거의 가려졌어.. 앞이 잘 안 보여!,My vision's blocked... I can't see!
-char_chat_0006,더 이상은 버티기 힘들어.. 제발 출구를..!,I can't hold on much longer... Where's the exit?!
-char_chat_0007,자 가볼까~,Here we go~
-it_name_0001,폭탄,Bomb
-it_exp_0001,폭발을 발생시킨다.,Causes an explosion.
+key|kr|en
+string|string|string
+lob_bt_0001|게임시작|Start Game
+lob_bt_0002|조작 가이드|Controls
+lob_bt_0003|나가기|Exit
+end_bt_0001|다시하기|Retry
+end_bt_0002|메인 화면으로|Main Menu
+ig_set_bt_0001|계속하기|Continue
+ig_set_bt_0002|입력하기|Enter
+ig_set_bt_0003|아이템 사용|Use Item
+ig_set_bt_0004|메인 화면으로|Main Menu
+ig_set_bt_0005|조작 가이드|Controls
+ig_set_bt_0006|돌아가기|Back
+ig_set_0001|일시정지|Pause
+ig_set_0002|[치직].... 모래폭풍이 다가온다! 얼른 나와야 해!|[Bzzt]... Sandstorm incoming! Get out of there!
+char_chat_0001|아이고 나 죽네 \n\n|Oh,I'm gonna die!\n\n
+char_chat_0002|이걸 내 손으로 부수면…\n내 손이 먼저 사라지겠어|If I punch this...\n my hand will break first.
+char_chat_0003|열쇠 따는 방법을\n배워 왔어야 해|I should've learned \n how to pick locks.
+char_chat_0004|벙커 내부의 공기가 희박해지고 있어. 서둘러!|The air's getting thin in here. Hurry!
+char_chat_0005|시야가 거의 가려졌어.. 앞이 잘 안 보여!|My vision's blocked... I can't see!
+char_chat_0006|더 이상은 버티기 힘들어.. 제발 출구를..!|I can't hold on much longer... Where's the exit?!
+char_chat_0007|자 가볼까~ \n\n|Here we go~\n\n
+it_name_0001|폭탄|Bomb
+it_exp_0001|폭발을 발생시킨다.|Causes an explosion.

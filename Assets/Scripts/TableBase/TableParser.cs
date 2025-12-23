@@ -33,7 +33,7 @@ public class TableParser
         {
             rows = csvFile.text.
                 Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(line => line.Split(',').Select(cell => cell.Trim()).ToArray())
+                .Select(line => line.Split('|').Select(cell => cell.Trim()).ToArray())
                 .ToList();
         }
         catch (Exception e)
