@@ -15,6 +15,7 @@ public class ItemData : ScriptableObject
     public ItemType type;
     public GameObject prefab;
     public Sprite icon;
+    public bool canQuickSlot = true;
     //public float weight;
 
     [Header("Stack")]
@@ -29,8 +30,7 @@ public class ItemData : ScriptableObject
     [Header("Sound")]
     public AudioClip pickupSoundClip;
 
-    //[Header("Consumable/Potion")]
-    //public float amount;
+    
     //[Header("Key")]
 
     //[Header("Special")]

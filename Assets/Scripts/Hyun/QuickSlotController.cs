@@ -56,7 +56,10 @@ public class QuickSlotController : MonoBehaviour
         {
             return false;
         }
-
+        if (!data.canQuickSlot)
+        {
+            return false;
+        }
         //기존 중첩코드
         //if (data.IsStackable)
         //{
