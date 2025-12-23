@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
             }
 
             int grandchildIndex = 0;
-            if (index != 7 && index != 8)
+            if (index != 7 && index != 8 && index != 9)
             {
                 GameManager.Instance.CanvasList.Add(child.gameObject);
                 _canvasList.Add(child.gameObject);
