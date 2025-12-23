@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         // 현재 씬 이름이 "DuHyeon_Tutorial"이면 등장 이벤트 시작
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial"&& !CheckPointData.Instance._onCheck)
         {
             StartCoroutine(IntroWalkRoutine());
         }
@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
 
         // 2. 대사 띄우기 (걷기 시작하면서 동시에 말함)
         // CSV를 사용하는 경우:
-        string introMsg = GetStringFromTable("char_chat_intro");
+        string introMsg = GetStringFromTable("char_chat_0007");
         StartCoroutine(ShowChatBubble(introMsg));
 
         // (만약 CSV 연동이 아직 안 되었다면 아래처럼 직접 넣으세요)
