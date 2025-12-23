@@ -17,12 +17,12 @@ public class ItemLogLogScript : MonoBehaviour
 
     public void PickupItemLog(ItemData data)
     {
-        _logText.text = data.itemName + " È¹µæ+1";
+        _logText.text = data.itemName + " È¹µæ +1";
     }
 
     public void UseItemLog(ItemData data, int usecount)
     {
-        _logText.text = data.itemName + " »ç¿ë" + usecount;
+        _logText.text = data.itemName + " »ç¿ë " + usecount;
     }
 
     public void SetLogText(string text)
