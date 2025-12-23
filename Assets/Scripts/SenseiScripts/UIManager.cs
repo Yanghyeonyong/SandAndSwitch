@@ -499,6 +499,12 @@ public class UIManager : MonoBehaviour
             {
                 if (GetCurrentHoveredUI() != null)
                 {
+                    if(GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex] == null)
+                    {
+                        return;
+                    }
+
+
                     if (GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data != null)
                     {
                         if (!_itemToolTip.activeSelf)
