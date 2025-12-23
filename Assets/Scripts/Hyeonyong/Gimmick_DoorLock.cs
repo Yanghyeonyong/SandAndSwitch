@@ -13,24 +13,29 @@ public class Gimmick_DoorLock : Gimmick
     //도어락
     [SerializeField] GameObject _doorLockObject;
     public GameObject DoorLockObject => _doorLockObject;    
-    [SerializeField] int _password;
-    public int Password => _password;
+    [SerializeField] string _password;
+    public string Password => _password;
     DoorLock _doorlock;
 
 
     [SerializeField] GameObject _interactiveUI;
-    [SerializeField] GameObject _testObject;
-    public GameObject TestObject => _testObject;
+    [SerializeField] GameObject _doorObject;
+    public GameObject DoorObject => _doorObject;
+
+    private Gimmick_Object _obj;
+    public Gimmick_Object Obj => _obj;
 
     //사용에 필요한 아이템 id
     [SerializeField] int _itemId;
     int length = 0;
     private void Start()
     {
+        _obj=GetComponent<Gimmick_Object>();
         if (CheckClear())
         {
             //클리어 했으면 클리어된 판정 이벤트 실행
-            TestObject.SetActive(false);
+            //TestObject.SetActive(false);
+            _obj.TurnOn();
             return;
         }
         else
@@ -93,11 +98,12 @@ public class Gimmick_DoorLock : Gimmick
            
             ItemData data = GameManager.Instance.GameManagerQuickSlots[index].Data;
             //퀵슬롯이 아니라 퀵슬롯 컨트롤러를 통해서 진행한다
-            GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
-            bombObj.GetComponent<Bomb>().UseBomb();
+            //GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+            //bombObj.GetComponent<Bomb>().UseBomb();
             GameManager.Instance.Player.Slot.TryUseCurrentSlot(index);
 
             _doorLockObject.SetActive(false);
+            _obj.TurnOn();
             //_testObject.SetActive(false);
             _selection.SetActive(false);
 

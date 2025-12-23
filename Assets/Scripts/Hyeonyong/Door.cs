@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Door : Gimmick_Object
 {
-    [SerializeField] GameObject _shutterObject;
+    [SerializeField] GameObject _doorObject;
     Animator _animator;
     [SerializeField] GameObject _interactiveObj;
     private void Start()
     {
-        _animator = _shutterObject.GetComponent<Animator>();
+        _animator = _doorObject.GetComponent<Animator>();
     }
 
     public override void TurnOn()
