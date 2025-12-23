@@ -47,10 +47,6 @@ public class ItemPickup : MonoBehaviour
             player.SetNearbyItem(this);
             return;
         }
-        if (player.Slot != null && player.Slot.TryPickup(_itemData))
-        {
-            Pickup();
-        }
         if (!_itemData.canQuickSlot)
         {
             Potion potion = GetComponent<Potion>();
@@ -59,12 +55,12 @@ public class ItemPickup : MonoBehaviour
                 potion.UsePotion();
             }
 
-            Destroy(gameObject);
+            Pickup();
             return;
         }
         if (player.Slot != null && player.Slot.TryPickup(_itemData))
         {
-            Destroy(gameObject);
+            Pickup();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
