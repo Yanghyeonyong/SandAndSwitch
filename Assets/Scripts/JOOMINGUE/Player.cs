@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
 
         // 2. 대사 띄우기 (걷기 시작하면서 동시에 말함)
         // CSV를 사용하는 경우:
-        string introMsg = GetStringFromTable("char_chat_intro");
+        string introMsg = GetStringFromTable("char_chat_0007");
         StartCoroutine(ShowChatBubble(introMsg));
 
         // (만약 CSV 연동이 아직 안 되었다면 아래처럼 직접 넣으세요)
