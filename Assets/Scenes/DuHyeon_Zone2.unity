@@ -753,6 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 1341535657}
   _isReuse: 0
+  _CheckItem: 0
 --- !u!114 &108820085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,6 +942,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 1341535657}
   _isReuse: 0
+  _CheckItem: 1
 --- !u!50 &145863291
 Rigidbody2D:
   serializedVersion: 5
@@ -39543,6 +39545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpikeTrap
   _damageDelay: 0.1
+  _attackForce: 10
 --- !u!66 &585118098
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -40822,6 +40825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 1341535657}
   _isReuse: 0
+  _CheckItem: 0
 --- !u!114 &850403366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41819,6 +41823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 1341535657}
   _isReuse: 1
+  _CheckItem: 0
 --- !u!1 &1772628989
 GameObject:
   m_ObjectHideFlags: 0
@@ -42008,6 +42013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 1341535657}
   _isReuse: 0
+  _CheckItem: 1
 --- !u!50 &1847244487
 Rigidbody2D:
   serializedVersion: 5

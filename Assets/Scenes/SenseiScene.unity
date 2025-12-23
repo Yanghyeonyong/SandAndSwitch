@@ -6098,6 +6098,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022231854}
   m_CullTransparentMesh: 1
+--- !u!1 &1027383599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1027383601}
+  - component: {fileID: 1027383600}
+  m_Layer: 0
+  m_Name: CheckPointData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1027383600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027383599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da051ba12708384aae29af484fc05a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckPointData
+  _onCheck: 0
+  _playerPos: {x: 0, y: 0, z: 0}
+  _playerRot: {x: 0, y: 0, z: 0, w: 0}
+  _playerHp: 0
+  _checkPointScene: 0
+  GameManagerQuickSlots:
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  - _data: {fileID: 0}
+    _count: 0
+  CollectedItemIDs: []
+--- !u!4 &1027383601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027383599}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.6352, y: -13.61872, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1029710470
 GameObject:
   m_ObjectHideFlags: 0
@@ -10813,6 +10884,7 @@ MonoBehaviour:
   _checkItem: 0
   _onProgressGimmick: 0
   _curScene: 1
+  onSelection: 0
   _playerPrefab: {fileID: 673342718292914668, guid: 04458193750062148a0826942060c90d, type: 3}
   _player: {fileID: 0}
   _playerSpawnPos:
@@ -12625,3 +12697,4 @@ SceneRoots:
   - {fileID: 797095670}
   - {fileID: 1170154398}
   - {fileID: 953858023}
+  - {fileID: 1027383601}

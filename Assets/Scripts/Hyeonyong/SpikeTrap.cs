@@ -9,6 +9,7 @@ public class SpikeTrap : MonoBehaviour
     [SerializeField] float _damageDelay = 0.1f;
     ContactPoint2D _contactPoint;
     Vector2 _normal;
+    [SerializeField] float _attackForce = 10f;
 //WaitForSeconds _wait;
 //    bool _active = false;
 //    Coroutine _damageCoroutine;
@@ -21,7 +22,7 @@ public class SpikeTrap : MonoBehaviour
             _contactPoint = collision.contacts[0];
             _normal= _contactPoint.normal;
             //Debug.Log(_normal);
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-_normal * 10f,ForceMode2D.Impulse);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-_normal * _attackForce,ForceMode2D.Impulse);
 
             collision.gameObject.GetComponent<Player>().TakeDamage();
         }
