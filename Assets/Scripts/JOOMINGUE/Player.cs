@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         // 현재 씬 이름이 "DuHyeon_Tutorial"이면 등장 이벤트 시작
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial"&& !CheckPointData.Instance._onCheck)
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial" && !CheckPointData.Instance._onCheck)
         {
             StartCoroutine(IntroWalkRoutine());
         }
@@ -572,16 +572,25 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        if (slot.TryUseCurrentSlot(slot.CurrentIndex))
+        if (!slot.TryUseCurrentSlot(slot.CurrentIndex))
         {
-            if (data.type == ItemType.Consumable && data.prefab != null)//폭탄
+            return;
+        }
+
+        if (data.type == ItemType.Consumable && data.prefab != null)
+        {
+            //물약
+            if (data.prefab.TryGetComponent(out Potion potion))
+            {
+                potion.UsePotion();
+            }
+            //폭탄
+            else if (data.prefab.TryGetComponent(out Bomb bombPrefab))
             {
                 GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
                 obj.GetComponent<Bomb>().UseBomb();
             }
-            //혹은 키아이템 사용을 따로 할것이라면 아래에 추가
         }
-
     }
     public void OnSlotPrev(InputAction.CallbackContext ctx)
     {

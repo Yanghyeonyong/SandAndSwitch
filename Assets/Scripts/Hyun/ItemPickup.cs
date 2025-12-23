@@ -51,6 +51,21 @@ public class ItemPickup : MonoBehaviour
         {
             Pickup();
         }
+        if (!_itemData.canQuickSlot)
+        {
+            Potion potion = GetComponent<Potion>();
+            if (potion != null)
+            {
+                potion.UsePotion();
+            }
+
+            Destroy(gameObject);
+            return;
+        }
+        if (player.Slot != null && player.Slot.TryPickup(_itemData))
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -82,4 +97,5 @@ public class ItemPickup : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
 }
