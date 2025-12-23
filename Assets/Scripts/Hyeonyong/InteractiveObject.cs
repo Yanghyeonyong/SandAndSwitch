@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class InteractiveObject : MonoBehaviour
@@ -11,6 +12,7 @@ public class InteractiveObject : MonoBehaviour
     Player _player;
     [SerializeField] GameObject _interactiveUI;
     [SerializeField] bool _isReuse=false;
+    [SerializeField] bool _isTeleport=false;
     public bool IsReuse
     {
         get { return _isReuse; }
@@ -57,6 +59,7 @@ public class InteractiveObject : MonoBehaviour
         { 
             return ;
         }
+
         if (_gimmick.IsClear)
         {
             //NullReferenceExeption 방지를 위해 && _isReuse 추가
@@ -74,4 +77,30 @@ public class InteractiveObject : MonoBehaviour
             _interactiveUI.SetActive(false);
         }
     }
+
+    public IEnumerator Teleport()
+    {
+        yield return null;
+        if (_player == null)
+        {
+            _player = GameManager.Instance.Player;
+        }
+        Debug.Log("텔레포트");
+        _player.CheckGimmick = true;
+        _player.CurGimmick = _gimmick;
+        _interactiveUI.SetActive(true);
+        Debug.Log("텔레포트 성공");
+    }
+    //public void Teleport()
+    //{
+    //    if (_player == null)
+    //    {
+    //        _player = GameManager.Instance.Player;
+    //    }
+    //    Debug.Log("텔레포트");
+    //    _player.CheckGimmick = true;
+    //    _player.CurGimmick = _gimmick;
+    //    _interactiveUI.SetActive(true);
+    //    Debug.Log("텔레포트 성공");
+    //}
 }
