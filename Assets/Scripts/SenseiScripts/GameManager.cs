@@ -389,7 +389,13 @@ ItemData _bombScriptableObject;
     {
         SoundEffectManager.Instance.PlayBGM(_bgms[3]);
         _gameState = (GameState)1;
-        //
+        
+        //플레이어의 Phase 2 대사 시작(주민규)
+        if (Player != null)
+        {
+            Player.StartCoroutine(Player.PlayPhaseTwoDialogueSequence());
+        }
+        //기존 로직
         if (_gameOverCoroutine == null)
         {
             _gameOverCoroutine = StartCoroutine(CheckGameOver());
