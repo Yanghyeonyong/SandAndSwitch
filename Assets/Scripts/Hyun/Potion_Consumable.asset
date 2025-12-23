@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: Potion_Consumable
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: 
+  itemName: "\uBB3C\uC57D"
   description: 
-  type: 0
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  type: 1
+  prefab: {fileID: 8990918237548349237, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+  icon: {fileID: 21300000, guid: 6705c549357eddb47b37042f667320ca, type: 3}
+  canQuickSlot: 0
   maxStack: 0
   radius: 0
   delay: 0
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  pickupSoundClip: {fileID: 0}
+  pickupSoundClip: {fileID: 8300000, guid: c454f0066ef17b94daa5753983170042, type: 3}

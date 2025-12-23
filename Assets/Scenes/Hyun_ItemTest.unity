@@ -148,12 +148,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5360bf272bf396747ae7eddcd3275ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  CurrentCutsceneIndex: 0
+  _maxPlayerHealth: 3
+  CurrentPlayerHealth: 1
+  HeartImages: []
+  _heartEmptyHexColor: 000000
+  _heartFullHexColor: FF0000
+  CollectedItemIDs: []
   _checkItem: 0
   _onProgressGimmick: 0
   _curScene: 0
+  onSelection: 0
   _playerPrefab: {fileID: 0}
   _player: {fileID: 0}
   _playerSpawnPos: []
+  _gameOverCount: 60
+  _curGameOverCount: 0
+  _minusGameOverCount: 0.1
+  _bgms: []
+  _phaseTwoScreenColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _maxAlpha: 0.8
+  _blackFadeToVictoryCutscenesTime: 1.5
+  _deathWhiteToBlackFadeDuration: 1.5
 --- !u!4 &458869707
 Transform:
   m_ObjectHideFlags: 0
@@ -428,6 +444,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1acefdf1a87e85e448b42e1dc49ccc4b, type: 3}
+--- !u!1001 &788682544921938543
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.9152946
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1528492
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541395320162011822, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990918237548349237, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+      propertyPath: m_Name
+      value: Potion
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
 --- !u!1001 &4798834022252718977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -552,3 +625,4 @@ SceneRoots:
   - {fileID: 969598742}
   - {fileID: 6392667244725482350}
   - {fileID: 4798834022252718977}
+  - {fileID: 788682544921938543}
