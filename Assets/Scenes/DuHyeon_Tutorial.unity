@@ -10687,6 +10687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 790421004}
   _isReuse: 0
+  _CheckItem: 0
 --- !u!50 &966708839
 Rigidbody2D:
   serializedVersion: 5
@@ -11714,7 +11715,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 1, y: 1, z: 1}
+  Damping: {x: 0, y: 0, z: 0}
   Lookahead:
     Enabled: 0
     Time: 0
@@ -11810,6 +11811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d090f86afb3f88542a5f3b1360b82bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
+  _camera: {fileID: 1351061024}
 --- !u!1001 &1672792270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12109,6 +12111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 790421004}
   _isReuse: 0
+  _CheckItem: 0
 --- !u!50 &2107523100
 Rigidbody2D:
   serializedVersion: 5

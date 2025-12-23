@@ -4,9 +4,10 @@ using UnityEngine.UIElements;
 
 public class ClearPortal : MonoBehaviour
 {
-    bool check;
-    [SerializeField] int _itemId = 103;
-    int length = 0;
+    //bool check;
+    //[SerializeField] int _itemId = 103;
+    //int length = 0;
+    //[SerializeField] GameObject _phaseTwoUI;
     private void Start()
     {
         //length = GameManager.Instance.GameManagerQuickSlots.Length;
@@ -18,7 +19,7 @@ public class ClearPortal : MonoBehaviour
         //{
         //    Debug.Log(CheckQuickSlotItem() + "에 있다");
         //}
-        StartCoroutine(CheckItem());
+        //StartCoroutine(CheckItem());
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,41 +29,43 @@ public class ClearPortal : MonoBehaviour
         }
     }
 
-    //해당 아이템 id가 있으면 true 반환
-    private int CheckQuickSlotItem()
-    {
-        //QuickSlot[] _check = GameManager.Instance.GameManagerQuickSlots;
-        for (int i = 0; i < length; i++)
-        {
-            if (GameManager.Instance.GameManagerQuickSlots[i] != null)
-            {
-                if (GameManager.Instance.GameManagerQuickSlots[i].Data == null)
-                {
-                    continue;
-                }
+    ////해당 아이템 id가 있으면 true 반환
+    //private int CheckQuickSlotItem()
+    //{
+    //    //QuickSlot[] _check = GameManager.Instance.GameManagerQuickSlots;
+    //    for (int i = 0; i < length; i++)
+    //    {
+    //        if (GameManager.Instance.GameManagerQuickSlots[i] != null)
+    //        {
+    //            if (GameManager.Instance.GameManagerQuickSlots[i].Data == null)
+    //            {
+    //                continue;
+    //            }
 
-                if (GameManager.Instance.GameManagerQuickSlots[i].Data.id == _itemId)
-                {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
+    //            if (GameManager.Instance.GameManagerQuickSlots[i].Data.id == _itemId)
+    //            {
+    //                return i;
+    //            }
+    //        }
+    //    }
+    //    return -1;
+    //}
 
-    IEnumerator CheckItem()
-    {
-        yield return GameManager.Instance != null;
-        length = GameManager.Instance.GameManagerQuickSlots.Length;
-        if (CheckQuickSlotItem() == -1)
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            GameManager.Instance.CheckItem=true;
-            GameManager.Instance.EnterPhaseTwo();
-        }
+    //IEnumerator CheckItem()
+    //{
+    //    yield return GameManager.Instance != null;
+    //    length = GameManager.Instance.GameManagerQuickSlots.Length;
+    //    if (CheckQuickSlotItem() == -1)
+    //    {
+    //        gameObject.SetActive(false);
+    //    }
+    //    else
+    //    {
+    //        _phaseTwoUI.SetActive(true);
+    //        GameManager.Instance.CheckItem=true;
+    //        yield return !_phaseTwoUI.activeSelf;
 
-    }
+    //        GameManager.Instance.EnterPhaseTwo();
+    //    }
+    //}
 }
