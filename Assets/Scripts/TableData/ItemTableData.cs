@@ -21,26 +21,28 @@ public class ItemTableData : TableBase
     {
         get
         {
-            if (GameManager.Instance != null && GameManager.Instance.StringTable != null)
-            {
-                // StringTable에 해당 키가 있으면 kr 텍스트 반환, 없으면 키값 자체 반환(에러 방지)
-                var data = GameManager.Instance.StringTable[Name];
-                return data != null ? data.kr : Name;
-            }
-            return Name;
+            if (GameManager.Instance == null || GameManager.Instance.StringTable == null) return Name;
+
+            var data = GameManager.Instance.StringTable[Name];
+            if (data == null) return Name;
+
+            //언어 설정에 따라 분기
+            return GameManager.Instance.currentLanguage == Language.KR ? data.kr : data.en;
         }
     }
 
+    // 설명 가져오기
     public string DescText
     {
         get
         {
-            if (GameManager.Instance != null && GameManager.Instance.StringTable != null)
-            {
-                var data = GameManager.Instance.StringTable[Desc];
-                return data != null ? data.kr : Desc;
-            }
-            return Desc;
+            if (GameManager.Instance == null || GameManager.Instance.StringTable == null) return Desc;
+
+            var data = GameManager.Instance.StringTable[Desc];
+            if (data == null) return Desc;
+
+            //언어 설정에 따라 분기
+            return GameManager.Instance.currentLanguage == Language.KR ? data.kr : data.en;
         }
     }
 }

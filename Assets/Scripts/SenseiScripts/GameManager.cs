@@ -23,6 +23,7 @@ public enum GameState
     PhaseTwo
 }
 
+public enum Language { KR, EN }
 public class GameManager : Singleton<GameManager>
 {
     
@@ -42,6 +43,10 @@ ItemData _bombScriptableObject;
     [Header("플레이어 체력 관련")]
     [SerializeField] private int _maxPlayerHealth = 3;
     [SerializeField] private int CurrentPlayerHealth = 1;
+
+    [Header("Settings")]
+    public Language currentLanguage = Language.KR;
+
     public int currentPlayerHealth
     {
         get

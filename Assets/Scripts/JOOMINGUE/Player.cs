@@ -359,20 +359,16 @@ public class Player : MonoBehaviour
     // CSV 데이터 가져오는 헬퍼 함수
     private string GetStringFromTable(string key)
     {
-        // GameManager 싱글톤과 StringTable이 존재하는지 확인
         if (GameManager.Instance != null && GameManager.Instance.StringTable != null)
         {
-            // Table 클래스의 인덱서([])를 사용하여 데이터 조회
             var data = GameManager.Instance.StringTable[key];
-
             if (data != null)
             {
-                return data.kr; // StringTableData의 'kr' 변수 값 반환 (예: "아야!")
+                //언어 설정에 따라 반환
+                return GameManager.Instance.currentLanguage == Language.KR ? data.kr : data.en;
             }
         }
-
-        // 데이터를 못 찾았을 경우 기본값 반환
-        return "아야!";
+        return "Missing Text";
     }
 
     // 말풍선 띄우는 코루틴
