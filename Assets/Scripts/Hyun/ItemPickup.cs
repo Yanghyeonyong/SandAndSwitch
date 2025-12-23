@@ -49,6 +49,10 @@ public class ItemPickup : MonoBehaviour
         }
         if (!_itemData.canQuickSlot)
         {
+            if (GameManager.Instance.currentPlayerHealth >= 3)
+            {
+                return;
+            }
             Potion potion = GetComponent<Potion>();
             if (potion != null)
             {
