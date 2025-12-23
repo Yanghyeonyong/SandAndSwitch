@@ -6379,6 +6379,11 @@ MonoBehaviour:
   - _data: {fileID: 0}
     _count: 0
   CollectedItemIDs: []
+  _data:
+  - {fileID: 11400000, guid: add8d2d4205b91f4d81c38cac2df835c, type: 2}
+  - {fileID: 11400000, guid: 45615eba42e39c5468f1978239e30174, type: 2}
+  - {fileID: 11400000, guid: d8566b0e9ee87824c86c002e248722be, type: 2}
+  - {fileID: 11400000, guid: 810cf7971d7d3b64da968029b8d72bac, type: 2}
 --- !u!4 &1027383601
 Transform:
   m_ObjectHideFlags: 0
@@ -11359,6 +11364,7 @@ MonoBehaviour:
   CurrentCutsceneIndex: 0
   _maxPlayerHealth: 3
   CurrentPlayerHealth: 1
+  currentLanguage: 0
   HeartImages: []
   _heartEmptyHexColor: 000000
   _heartFullHexColor: FF0000
