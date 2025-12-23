@@ -19,6 +19,16 @@ public class UIManager : MonoBehaviour
     private List<Button> _victoryMenuButton = new List<Button>();
 
 
+    //ItemToolTip
+    GameObject _itemToolTip;
+    Image _itemToolTipIconImage;
+    TextMeshProUGUI _itemToolTipNameText;
+    TextMeshProUGUI _itemToolTipTypeText;
+    TextMeshProUGUI _itemToolTipDescText;
+    GameObject[] _quickSlotBox = new GameObject[10];
+
+
+
     InputAction _pauseGameAction;
 
     AudioSource _audioSource;
@@ -49,6 +59,14 @@ public class UIManager : MonoBehaviour
                 GameManager.Instance.HeartImages.Add(child.GetChild(0).GetComponent<Image>());
                 GameManager.Instance.HeartImages.Add(child.GetChild(1).GetComponent<Image>());
                 GameManager.Instance.HeartImages.Add(child.GetChild(2).GetComponent<Image>());
+
+                _itemToolTip = child.GetChild(6).gameObject;
+
+                _itemToolTipIconImage = _itemToolTip.transform.GetChild(0).GetComponent<Image>();
+                _itemToolTipNameText = _itemToolTip.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                _itemToolTipTypeText = _itemToolTip.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+                _itemToolTipDescText = _itemToolTip.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+
             }
 
 
@@ -129,20 +147,24 @@ public class UIManager : MonoBehaviour
                     switch (grandchildIndex)
                     {
                         case 5:
-                            for (int greatGrandChildIndex = 0; greatGrandChildIndex < 10; greatGrandChildIndex ++)
-                            
+
+
+
+                            for (int greatGrandChildIndex = 0; greatGrandChildIndex < 10; greatGrandChildIndex++)
+
                             {
-                                if(grandChild.GetChild(greatGrandChildIndex)==null)
+                                if (grandChild.GetChild(greatGrandChildIndex) == null)
                                 {
                                     continue;
                                 }
+                                _quickSlotBox[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).gameObject;
                                 GameManager.Instance.GameManagerQuickSlotsImages[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).GetChild(0).GetComponent<Image>();
                                 GameManager.Instance.GameManagerQuickSlotCountTexts[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).GetChild(3).GetComponent<TextMeshProUGUI>();
                                 GameManager.Instance.GameManagerQuickSlotIcons[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).GetChild(1).GetComponent<Image>();
-                                
+
                                 if (GameManager.Instance.GameManagerQuickSlotsImages[greatGrandChildIndex].gameObject.activeSelf)
                                 {
-                                GameManager.Instance.GameManagerQuickSlotIcons[greatGrandChildIndex].gameObject.SetActive(false);
+                                    GameManager.Instance.GameManagerQuickSlotIcons[greatGrandChildIndex].gameObject.SetActive(false);
                                     //continue;
                                 }
                                 //Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[greatGrandChildIndex].name);
@@ -415,13 +437,21 @@ public class UIManager : MonoBehaviour
 
 
 
-    GameObject _hoveredUI;
+    int _hoveredUIIndex = -1;
 
 
 
     GameObject GetCurrentHoveredUI()
     {
+        if (GameManager.Instance.CanvasList[1].activeSelf == false)
+        {
+            return null;
+        }
 
+        if (GameManager.Instance.CanvasList[2].activeSelf == true)
+        {
+            return null;
+        }
 
         PointerEventData mouseEventData = new PointerEventData(EventSystem.current);
         if (Mouse.current != null)
@@ -435,7 +465,21 @@ public class UIManager : MonoBehaviour
 
         if (pointerRaycastHits.Count > 0)
         {
-            return pointerRaycastHits[0].gameObject;
+            for (int i = 0; i < pointerRaycastHits.Count; i++)
+            {
+                //Debug.Log("Hit UI: " + pointerRaycastHits[i].gameObject.name);
+                for(int j = 0; j<10; j++)
+                {
+                    if (pointerRaycastHits[i].gameObject == _quickSlotBox[j])
+                    {
+                        _hoveredUIIndex = j;
+                        return pointerRaycastHits[i].gameObject;
+                    }
+                }
+
+            }
+
+            //return pointerRaycastHits[0].gameObject;
         }
         return null;
 
@@ -453,11 +497,36 @@ public class UIManager : MonoBehaviour
             }
             if (EventSystem.current.IsPointerOverGameObject())
             {
-            if ( GetCurrentHoveredUI() != null)
-            {
-               // if (GetCurrentHoveredUI().GetComponent<Image>.sprite 
+                if (GetCurrentHoveredUI() != null)
+                {
+                    if (GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data != null)
+                    {
+                        if (!_itemToolTip.activeSelf)
+                        {
+                            _itemToolTip.SetActive(true);
+                        }
+                        _itemToolTip.GetComponent<RectTransform>().anchoredPosition = new Vector2(_quickSlotBox[_hoveredUIIndex].GetComponent<RectTransform>().anchoredPosition.x, -237.5f);
 
-            }
+                        _itemToolTipIconImage.sprite = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.icon;
+                        _itemToolTipNameText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.itemName;
+                        _itemToolTipTypeText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.type.ToString();
+                        _itemToolTipDescText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.description;
+
+
+                    }
+                    else
+                    {
+                        if (_itemToolTip.activeSelf)
+                        {
+                            _itemToolTip.SetActive(false);
+                        }
+                    }
+
+
+
+                    // if (GetCurrentHoveredUI().GetComponent<Image>.sprite 
+
+                }
                 //_hoveredUI = GetCurrentHoveredUI();
             }
 
@@ -468,6 +537,13 @@ public class UIManager : MonoBehaviour
 
         }
 
+        if (GetCurrentHoveredUI() == null)
+        {
+            if (_itemToolTip.activeSelf)
+            {
+                _itemToolTip.SetActive(false);
+            }
+        }
 
     }
 }
