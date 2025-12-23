@@ -256,7 +256,15 @@ ItemData _bombScriptableObject;
     public List<Vector3> CollectedItemIDs = new List<Vector3>();
 
 
+    public void RefreshAllQuickSlotUI()
+    {
+        for (int i = 0; i < GameManagerQuickSlots.Length; i++)
+        {
+            UpdateQuickSlot(i, GameManagerQuickSlots[i]);
+        }
 
+        QuickSlotUIUpdate(0);
+    }
 
 
     [SerializeField] bool _checkItem;
@@ -485,6 +493,7 @@ ItemData _bombScriptableObject;
         SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
         _player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene - 1], Quaternion.identity);
         player = _player.GetComponent<Player>();
+        GameManager.Instance.RefreshAllQuickSlotUI();
     }
     IEnumerator SpawnPlayer_CheckPoint()
     {
@@ -493,7 +502,7 @@ ItemData _bombScriptableObject;
         SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
         _player = Instantiate(_playerPrefab, _checkPointData._playerPos,_checkPointData._playerRot);
         player = _player.GetComponent<Player>();
-
+        GameManager.Instance.RefreshAllQuickSlotUI();
         if (_checkPointData == null)
         {
             Debug.Log("체크포인트가 없다");
@@ -735,6 +744,7 @@ ItemData _bombScriptableObject;
             Time.timeScale = 1f;
 
             _checkPointData.LoadCheckPointData();
+            GameManager.Instance.RefreshAllQuickSlotUI();
             LoadIndexScene(_curScene);
         }
 
