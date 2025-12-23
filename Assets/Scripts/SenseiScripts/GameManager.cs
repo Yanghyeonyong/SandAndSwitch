@@ -26,10 +26,15 @@ public enum GameState
 public enum Language { KR, EN }
 public class GameManager : Singleton<GameManager>
 {
-    
 
-    //busy loading game scene flag
-    bool _isLoadingGameScene = false;
+
+    //아이템 로그 변수
+    public List<ItemLogLogScript> ItemLogs { get; set; } = new List<ItemLogLogScript>();
+
+
+
+//busy loading game scene flag
+bool _isLoadingGameScene = false;
 
     //cutscene info
     public int CurrentCutsceneIndex = 0;

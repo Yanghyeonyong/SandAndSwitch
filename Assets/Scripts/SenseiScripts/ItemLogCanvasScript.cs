@@ -9,6 +9,9 @@ public class ItemLogCanvasScript : MonoBehaviour
 
     void Awake()
     {
+
+
+
         if (_positionZeroToFour.Count < 5)
         {
             _positionZeroToFour = new List<float>() { -344f, -290f, -236f, -182f, -128f};
@@ -26,6 +29,11 @@ public class ItemLogCanvasScript : MonoBehaviour
         }
 
 
+    }
+
+    void Start()
+    {
+        GameManager.Instance.ItemLogs = _itemLogs;
     }
 
     [SerializeField] float _moveUpSpeed = 2f;
@@ -63,11 +71,7 @@ public class ItemLogCanvasScript : MonoBehaviour
     }
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    
 
     // Update is called once per frame
     void Update()
