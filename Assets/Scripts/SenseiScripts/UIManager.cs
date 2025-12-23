@@ -316,7 +316,7 @@ public class UIManager : MonoBehaviour
         //    GameManager.Instance.GameManagerQuickSlots[i] = null;
         //}
 
-
+        GameManager.Instance.ExtraUITools[0].GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
         StartCoroutine(WaitForAsyncGameSceneLoad());
         
     }
@@ -388,6 +388,7 @@ public class UIManager : MonoBehaviour
                 canvas.SetActive(false);
             }
         }
+        GameManager.Instance.ExtraUITools[0].GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
     }
 
 

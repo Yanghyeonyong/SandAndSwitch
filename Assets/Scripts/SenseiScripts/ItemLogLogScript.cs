@@ -15,17 +15,28 @@ public class ItemLogLogScript : MonoBehaviour
         _logText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
+    public void PickupItemLog(ItemData data)
+    {
+        _logText.text = data.itemName + " È¹µæ+1";
+    }
+
+    public void UseItemLog(ItemData data, int usecount)
+    {
+        _logText.text = data.itemName + " »ç¿ë" + usecount;
+    }
+
     public void SetLogText(string text)
     {
         _logText.text = text;
     }
 
 
-    public void SetLogAlpha(float alpha)
+    public void SetLogAlpha(Color color)
     {
-        Color color = _logImage.color;
-        color.a = alpha;
+        //Color color = _logImage.color;
+        //color.a = alpha;
         _logImage.color = color;
+        _logText.color = color;
     }
 
 
