@@ -677,6 +677,8 @@ ItemData _bombScriptableObject;
         {
             CurrentCutsceneIndex = 0;
             CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+            //아이템 퀵슬롯 초기화 
+            GameManagerQuickSlots = new QuickSlot[10];
             _isGimmickClear.Clear();
             _gimmickPos.Clear();
             if (_gameOverCoroutine != null)
