@@ -309,12 +309,12 @@ public class UIManager : MonoBehaviour
     private void RestartLogic()
     {
 
-        for (int i = 0; i < GameManager.Instance.GameManagerQuickSlotCountTexts.Length; i++)
-        {
-            GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
-            GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
-            GameManager.Instance.GameManagerQuickSlots[i] = null;
-        }
+        //for (int i = 0; i < GameManager.Instance.GameManagerQuickSlotCountTexts.Length; i++)
+        //{
+        //    GameManager.Instance.GameManagerQuickSlotCountTexts[i].text = "";
+        //    GameManager.Instance.GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
+        //    GameManager.Instance.GameManagerQuickSlots[i] = null;
+        //}
 
 
         StartCoroutine(WaitForAsyncGameSceneLoad());

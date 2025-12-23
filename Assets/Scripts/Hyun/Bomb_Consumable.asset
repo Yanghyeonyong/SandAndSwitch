@@ -23,5 +23,5 @@ MonoBehaviour:
   delay: 2
   targetLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   pickupSoundClip: {fileID: 8300000, guid: c454f0066ef17b94daa5753983170042, type: 3}
