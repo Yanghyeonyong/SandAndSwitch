@@ -461,8 +461,17 @@ public class Player : MonoBehaviour
         //}
         if (ctx.started && _nearbyItem != null)
         {
-            _nearbyItem.Pickup();
-            _nearbyItem = null;
+            ItemData data = _nearbyItem.ItemData;
+
+            if (slot != null && data.canQuickSlot)
+            {
+                if (slot.TryPickup(data))
+                {
+                    _nearbyItem.Pickup();
+                    _nearbyItem = null;
+                    return;
+                }
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

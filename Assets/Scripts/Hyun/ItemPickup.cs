@@ -61,7 +61,10 @@ public class ItemPickup : MonoBehaviour
                 break;
 
             case ItemType.Key:
-                Pickup();
+                if (player.Slot != null && player.Slot.TryPickup(_itemData))
+                {
+                    Pickup();
+                }
                 break;
         }
     }
