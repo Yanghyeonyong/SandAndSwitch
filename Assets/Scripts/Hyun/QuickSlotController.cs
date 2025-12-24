@@ -288,7 +288,6 @@ public class QuickSlotController : MonoBehaviour
         // 개수 차감
         slot.Use(consumeCount);
 
-        // 개수만 줄이고, ShiftSlots() 절대 호출하지 않음!
         GameManager.Instance.UpdateQuickSlot(index, slot);
 
         return true;
