@@ -446,18 +446,23 @@ public class Player : MonoBehaviour
         //}
 
         //아이템 관련 추가 
+        //if (ctx.started && _nearbyItem != null)
+        //{
+        //    if (slot != null && _nearbyItem.ItemData.type == ItemType.Special)
+        //    {
+        //        if (slot.TryPickup(_nearbyItem.ItemData))
+        //        {
+        //            _nearbyItem.Pickup();
+        //            _nearbyItem = null;
+        //            return;
+
+        //        }
+        //    }
+        //}
         if (ctx.started && _nearbyItem != null)
         {
-            if (slot != null && _nearbyItem.ItemData.type == ItemType.Special)
-            {
-                if (slot.TryPickup(_nearbyItem.ItemData))
-                {
-                    _nearbyItem.Pickup();
-                    _nearbyItem = null;
-                    return;
-
-                }
-            }
+            _nearbyItem.Pickup();
+            _nearbyItem = null;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

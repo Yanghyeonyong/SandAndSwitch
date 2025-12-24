@@ -42,29 +42,27 @@ public class ItemPickup : MonoBehaviour
         {
             return;
         }
-        if (_itemData.type == ItemType.Special)
+        switch (_itemData.type)
         {
-            player.SetNearbyItem(this);
-            return;
-        }
-        if (!_itemData.canQuickSlot)
-        {
-            if (GameManager.Instance.currentPlayerHealth >= 3)
-            {
-                return;
-            }
-            Potion potion = GetComponent<Potion>();
-            if (potion != null)
-            {
-                potion.UsePotion();
-            }
+            case ItemType.Collection:
+                GameManager.Instance.GetComponent<CollectSlotController>().Collect(_itemData);
+                Pickup();
+                break;
 
-            Pickup();
-            return;
-        }
-        if (player.Slot != null && player.Slot.TryPickup(_itemData))
-        {
-            Pickup();
+            case ItemType.Consumable:
+                if (player.Slot != null && player.Slot.TryPickup(_itemData))
+                {
+                    Pickup();
+                }
+                break;
+
+            case ItemType.Special:
+                player.SetNearbyItem(this);
+                break;
+
+            case ItemType.Key:
+                Pickup();
+                break;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

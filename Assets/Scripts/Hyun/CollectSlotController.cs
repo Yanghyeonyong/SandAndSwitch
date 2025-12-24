@@ -1,18 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CollectSlotController : MonoBehaviour
 {
     private Dictionary<int, CollectSlot> _slots = new Dictionary<int, CollectSlot>();
     public IReadOnlyDictionary<int, CollectSlot> Slots => _slots;
 
+    public event Action<ItemData, int> OnCollected;//컬렉트 아이템을 획득했다는 이벤트
+
     public void Collect(ItemData data)
     {
-        if (data == null) return;
-
+        if (data == null)
+        {
+            return;
+        }
+        if (data.type != ItemType.Collection)
+        {
+            return;
+        }
         if (_slots.TryGetValue(data.id, out CollectSlot slot))
         {
-            slot.Count++;
+            slot.Add(1);
         }
         else
         {
@@ -23,8 +32,8 @@ public class CollectSlotController : MonoBehaviour
             });
         }
 
-        //UI갱신
-
+        //UI갱신을 위해 획득했다는 이벤트 발생
+        OnCollected?.Invoke(data, _slots[data.id].Count);
     }
     //보유 여부
     public bool HasItem(int itemId, int requiredCount = 1)

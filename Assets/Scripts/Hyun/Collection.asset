@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
-  m_Name: Bomb_Consumable
-  m_EditorClassIdentifier: Assembly-CSharp::Item
-  id: 101
-  itemName: "\uD3ED\uD0C4"
+  m_Name: Collection
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  id: 401
+  itemName: "\uC218\uC9D1\uD488"
   EnItemName: 
-  description: "\uD3ED\uBC1C\uD55C\uB2E4"
+  description: 
   EnDescription: 
-  type: 1
-  prefab: {fileID: 6008120758980611909, guid: 1acefdf1a87e85e448b42e1dc49ccc4b, type: 3}
-  icon: {fileID: -8368097971112543834, guid: b5a00b4863784f34986bdb7f6d01474e, type: 3}
+  type: 4
+  prefab: {fileID: 0}
+  icon: {fileID: 0}
   canQuickSlot: 1
   maxStack: 99
-  radius: 6.5
-  delay: 2
+  radius: 0
+  delay: 0
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
-  pickupSoundClip: {fileID: 8300000, guid: ae0a55a68d99d794799658af84322e7a, type: 3}
+    m_Bits: 0
+  pickupSoundClip: {fileID: 0}
   typeKor: 
   typeEng: 
