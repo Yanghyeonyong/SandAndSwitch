@@ -17,8 +17,10 @@ public class CheckPointData : Singleton<CheckPointData>
     //아이템 픽업 관련
     public List<Vector3> CollectedItemIDs = new List<Vector3>();
 
+    public Dictionary<int, CollectSlot> _collectSlots = new Dictionary<int, CollectSlot>();
 
     [SerializeField] private ItemData[] _data;//아이템정보
+
 
     private void Start()
     {
@@ -123,6 +125,21 @@ public class CheckPointData : Singleton<CheckPointData>
         //기믹 상태 저장
         _isGimmickClear = new Dictionary<int, bool>(GameManager.Instance.IsGimmickClear);
         _gimmickPos = new Dictionary<int, ItemTransform>(GameManager.Instance.GimmickPos);
+
+        _collectSlots.Clear();
+        //수집품 상태 저장
+        foreach (var d in GameManager.Instance.GetComponent<CollectSlotController>().Slots)
+        {
+            ItemData data = FindItem(d.Value.Data.id);
+            if (data == null)
+            {
+                Debug.Log("잘못된 번호 : " + d.Value.Data.id);
+            }
+            CollectSlot collect = new CollectSlot();
+            collect.Init(data, d.Value.Count);
+
+            _collectSlots.Add(d.Key, collect);
+        }
     }
 
     public void LoadCheckPointData()
@@ -199,9 +216,9 @@ public class CheckPointData : Singleton<CheckPointData>
     {
         foreach (ItemData item in _data)
         {
-            if(item.id == id)
-            { 
-                return item; 
+            if (item.id == id)
+            {
+                return item;
             }
         }
         return null;

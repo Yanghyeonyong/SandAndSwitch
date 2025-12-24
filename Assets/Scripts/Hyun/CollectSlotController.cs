@@ -5,19 +5,33 @@ using System;
 public class CollectSlotController : MonoBehaviour
 {
     private Dictionary<int, CollectSlot> _slots = new Dictionary<int, CollectSlot>();
+    [SerializeField] ItemData _collectItem;
+    //public IReadOnlyDictionary<int, CollectSlot> Slots => _slots;
 
-    public IReadOnlyDictionary<int, CollectSlot> Slots => _slots;
+    public Dictionary<int, CollectSlot> Slots
+    {
+        get { return _slots; }
+        set { _slots = value; }
+    }
 
+    void Awake()
+    {
+        _slots.Add(401, new CollectSlot
+        {
+            Data = _collectItem,
+            Count = 0
+        });
+    }
 
-
-    //void Awake()
-    //{
-    //    _slots.Add(401, new CollectSlot
-    //    {
-            
-    //        Count = 0
-    //    });
-    //}
+    public void CollectSlotClear()
+    {
+        _slots.Clear();
+        _slots.Add(401, new CollectSlot
+        {
+            Data = _collectItem,
+            Count = 0
+        });
+    }
 
     public void Collect(ItemData data)
     {

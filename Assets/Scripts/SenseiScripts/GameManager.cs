@@ -27,6 +27,7 @@ public enum Language { KR, EN }
 public class GameManager : Singleton<GameManager>
 {
     //수집품 변수
+    public CollectSlotController _collectSlotContoller;
     [SerializeField] public int TotalCollectibleCount { get; private set; } = 10;
     public Image CollectibleIcon { get; set; }
     public TextMeshProUGUI CollectibleCountText { get; set; }
@@ -254,7 +255,23 @@ public class GameManager : Singleton<GameManager>
         GameManagerQuickSlotIcons[index].gameObject.SetActive(true);
     }
 
-
+    public void UpdateCollectSlot(CollectSlot slot)
+    {
+        if (slot.IsEmpty)
+        {
+            Debug.Log("빈 업데이트 수집품 슬롯 호출");
+            CollectibleIcon.color = new Color(1f, 1f, 1f, 0.2f);
+            CollectibleCountText.text = "0/" + TotalCollectibleCount;
+            return;
+        }
+        else
+        {
+            Debug.Log("업데이트 수집품 슬롯 호출" + slot.Count.ToString());
+            CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
+            CollectibleCountText.text = slot.Count.ToString()+"/"+ TotalCollectibleCount;
+        }
+                
+    }
 
     public Image[] GameManagerQuickSlotIcons { get; set; } = new Image[10];
 
@@ -389,7 +406,7 @@ public class GameManager : Singleton<GameManager>
         ColorUtility.TryParseHtmlString("#" + _heartFullHexColor, out _heartFullColor);
         ColorUtility.TryParseHtmlString("#" + _heartEmptyHexColor, out _heartEmptyColor);
 
-
+        _collectSlotContoller =GetComponent<CollectSlotController>();
         //addressable 로딩
 
         //PutParsingResultsInScriptableObjects();
@@ -510,6 +527,27 @@ public class GameManager : Singleton<GameManager>
     }
     IEnumerator SpawnPlayer_CheckPoint()
     {
+        //_collectSlotContoller.Slots.Clear();
+        _collectSlotContoller.CollectSlotClear();
+        //수집품 상태 저장
+        foreach (var d in _checkPointData._collectSlots)
+        {
+            Debug.Log("업데이트 : " + d.Value.Data.id);
+            ItemData data = _checkPointData.FindItem(d.Value.Data.id);
+            CollectSlot collect = new CollectSlot();
+            collect.Init(data, d.Value.Count);
+            if (_collectSlotContoller.Slots.ContainsKey(d.Key))
+            {
+                _collectSlotContoller.Slots[d.Key].Count = _checkPointData._collectSlots[d.Key].Count;
+            }
+            else
+            {
+                _collectSlotContoller.Slots.Add(d.Key, collect);
+            }
+            UpdateCollectSlot(_collectSlotContoller.Slots[d.Key]);
+        }
+        //Debug.Log("업데이트 : " + _collectSlotContoller.Slots);
+        UpdateCollectSlot(_collectSlotContoller.Slots[401]);
         yield return GameSceneLoadAsyncOperation.isDone;
         yield return null;
         if (_gameState == GameState.PhaseOne)
@@ -534,6 +572,15 @@ public class GameManager : Singleton<GameManager>
                 UpdateQuickSlot(i, _checkPointData.GameManagerQuickSlots[i]);
             }
         }
+
+
+        CollectedItemIDs.Clear();
+        foreach (Vector3 pos in _checkPointData.CollectedItemIDs)
+        {
+            CollectedItemIDs.Add(pos);
+        }
+
+
     }
     IEnumerator SpawnPlayer_Prev(int spawnPos)
     {
@@ -584,6 +631,10 @@ public class GameManager : Singleton<GameManager>
 
         CollectedItemIDs.Clear();
         //251216 - 양현용 : 새게임시 기믹 초기화 및 씬 설정
+        //수집품 초기화
+        _collectSlotContoller.CollectSlotClear();
+        UpdateCollectSlot(_collectSlotContoller.Slots[401]);
+
         Debug.Log("스타트");
         _curScene = 1;
         _isGimmickClear.Clear();
