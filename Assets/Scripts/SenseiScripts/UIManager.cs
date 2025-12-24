@@ -264,6 +264,9 @@ public class UIManager : MonoBehaviour
 
     void ChangeLanguageLogic()
     {
+        Table<string, StringTableData> stringTable = GameManager.Instance.StringTable;
+
+
         if (GameManager.Instance.currentLanguage == Language.EN)
         {
             GameManager.Instance.currentLanguage = Language.KR;
@@ -272,21 +275,21 @@ public class UIManager : MonoBehaviour
 
 
 
-            //_menuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "게임 시작";
-            //_menuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "게임 시작";
-            //_menuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "게임 시작";
+            _menuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0001"].kr ;
+            _menuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0002"].kr ;
+            _menuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0003"].kr ;
+            
+            _pauseMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0001"].kr;
+            _pauseMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0004"].kr;
+            _pauseMenuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0001"].kr;
+            _pauseMenuButton[3].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0005"].kr;
+            
+            _gameOverMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0001"].kr;
+            _gameOverMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0002"].kr;
 
-            //_pauseMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "다시 시작";
-            //_pauseMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "메인 메뉴";
-            //_pauseMenuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "계속하기";
-            //_pauseMenuButton[3].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "조작법 안내";
+            _victoryMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0004"].kr;
 
-            //_gameOverMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "다시 시작";
-            //_gameOverMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "메인 메뉴";
-
-            //_victoryMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "메인 메뉴";
-
-
+            
 
 
         }
@@ -294,6 +297,21 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.currentLanguage = Language.EN;
             _languageIcon.sprite = _languageIcons[1];
+            _menuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0001"].en ;
+            _menuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0002"].en ;
+            _menuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0003"].en ;
+            
+            _pauseMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0001"].en;
+            _pauseMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0004"].en;
+            _pauseMenuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0001"].en;
+            _pauseMenuButton[3].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0005"].en;
+            
+            _gameOverMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0001"].en;
+            _gameOverMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0002"].en;
+            _victoryMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0004"].en;
+
+
+            
         }
 
     }
