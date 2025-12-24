@@ -42592,7 +42592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_Gate
   _gimmickId: 1
-  _itemId: 102
+  _itemId: 301
   _requireCount: 3
 --- !u!114 &1587891372
 MonoBehaviour:
@@ -43235,7 +43235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c742f1cfec2eb42b6c22ff5761ad55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckClear
-  _itemId: 103
+  _itemId: 201
   _clearPortal: {fileID: 839951088}
   _phaseTwoUI: {fileID: 1704858314}
   _tableId:
