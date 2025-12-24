@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] List<Sprite> _languageIcons = new List<Sprite>();
+
     private List<GameObject> _canvasList = new List<GameObject>();
     private List<Button> _menuButton = new List<Button>();
     private List<Button> _ingameButton = new List<Button>();
@@ -27,7 +29,8 @@ public class UIManager : MonoBehaviour
     TextMeshProUGUI _itemToolTipDescText;
     GameObject[] _quickSlotBox = new GameObject[10];
 
-
+    //언어
+    Image _languageIcon;
 
     InputAction _pauseGameAction;
 
@@ -59,6 +62,12 @@ public class UIManager : MonoBehaviour
                 GameManager.Instance.HeartImages.Add(child.GetChild(0).GetComponent<Image>());
                 GameManager.Instance.HeartImages.Add(child.GetChild(1).GetComponent<Image>());
                 GameManager.Instance.HeartImages.Add(child.GetChild(2).GetComponent<Image>());
+
+
+                GameManager.Instance.CollectibleIcon = child.GetChild(3).GetChild(0).GetComponent<Image>();
+                //_languageIcon = child.GetChild(3).GetChild(0).GetComponent<Image>();
+                GameManager.Instance.CollectibleCountText = child.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
+
 
                 _itemToolTip = child.GetChild(6).gameObject;
 
@@ -172,6 +181,7 @@ public class UIManager : MonoBehaviour
                             }
                             break;
 
+                        
                     }
 
 
@@ -188,6 +198,9 @@ public class UIManager : MonoBehaviour
      
         }
 
+
+        _languageIcon = _menuButton[3].gameObject.GetComponent<Image>();
+
         _menuButton[0].onClick.AddListener(GameManager.Instance.LoadGameScene);
         _menuButton[0].onClick.AddListener(LoadGameSceneLogic);
         _menuButton[0].onClick.AddListener(PlayUIClickSound);
@@ -195,6 +208,10 @@ public class UIManager : MonoBehaviour
         _menuButton[1].onClick.AddListener(PlayUIClickSound);
         _menuButton[2].onClick.AddListener(GameManager.Instance.ExitGame);
         _menuButton[2].onClick.AddListener(PlayUIClickSound);
+        _menuButton[3].onClick.AddListener(PlayUIClickSound);
+        _menuButton[3].onClick.AddListener(ChangeLanguageLogic);
+
+
 
         _ingameButton[0].onClick.AddListener(GameManager.Instance.PauseGame);
         _ingameButton[0].onClick.AddListener(PauseLogic);
@@ -211,6 +228,8 @@ public class UIManager : MonoBehaviour
         _pauseMenuButton[2].onClick.AddListener(ResumeLogic);
         _pauseMenuButton[3].onClick.AddListener(ControlGuideLogic);
         _pauseMenuButton[3].onClick.AddListener(PlayUIClickSound);
+        _pauseMenuButton[3].onClick.AddListener(ChangeLanguageLogic);
+
 
         _gameOverMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
         _gameOverMenuButton[0].onClick.AddListener(PlayUIClickSound);
@@ -241,6 +260,43 @@ public class UIManager : MonoBehaviour
 
 
     List<GameObject> _tempCanvasList = new List<GameObject>();
+
+
+    void ChangeLanguageLogic()
+    {
+        if (GameManager.Instance.currentLanguage == Language.EN)
+        {
+            GameManager.Instance.currentLanguage = Language.KR;
+            _languageIcon.sprite = _languageIcons[0];
+
+
+
+
+            //_menuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "게임 시작";
+            //_menuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "게임 시작";
+            //_menuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "게임 시작";
+
+            //_pauseMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "다시 시작";
+            //_pauseMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "메인 메뉴";
+            //_pauseMenuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "계속하기";
+            //_pauseMenuButton[3].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "조작법 안내";
+
+            //_gameOverMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "다시 시작";
+            //_gameOverMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "메인 메뉴";
+
+            //_victoryMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "메인 메뉴";
+
+
+
+
+        }
+        else if (GameManager.Instance.currentLanguage == Language.KR)
+        {
+            GameManager.Instance.currentLanguage = Language.EN;
+            _languageIcon.sprite = _languageIcons[1];
+        }
+
+    }
 
     void ControlGuideLogic()
     {
