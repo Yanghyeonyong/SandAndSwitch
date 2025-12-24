@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         // 현재 씬 이름이 "DuHyeon_Tutorial"이면 등장 이벤트 시작
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial"&& !CheckPointData.Instance._onCheck)
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial" && !CheckPointData.Instance._onCheck)
         {
             StartCoroutine(IntroWalkRoutine());
         }
@@ -247,6 +247,26 @@ public class Player : MonoBehaviour
         // 4. 도착 후 정지 및 제어권 반환
         moveX = 0f;
         isCutscene = false;
+    }
+
+    public IEnumerator PlayPhaseTwoDialogueSequence()
+    {
+        // 출력할 대사 키값 배열
+        string[] dialogueKeys = { "char_chat_0004", "char_chat_0005", "char_chat_0006" };
+
+        foreach (string key in dialogueKeys)
+        {
+            // 1. 테이블에서 대사 가져오기
+            string msg = GetStringFromTable(key);
+
+            // 2. 말풍선 띄우기 (ShowChatBubble이 끝날 때까지 대기)
+            // ShowChatBubble이 IEnumerator라면 yield return StartCoroutine(...) 사용
+            // 만약 void라면 ShowChatBubble 내부 로직에 맞춰 대기 시간 추가 필요
+            yield return StartCoroutine(ShowChatBubble(msg));
+
+            // (선택사항) 대사 사이 잠깐의 텀
+            yield return new WaitForSeconds(10f);
+        }
     }
 
     void FixedUpdate()
@@ -357,7 +377,7 @@ public class Player : MonoBehaviour
     }
 
     // CSV 데이터 가져오는 헬퍼 함수
-    private string GetStringFromTable(string key)
+    public string GetStringFromTable(string key)
     {
         if (GameManager.Instance != null && GameManager.Instance.StringTable != null)
         {
@@ -372,7 +392,7 @@ public class Player : MonoBehaviour
     }
 
     // 말풍선 띄우는 코루틴
-    private IEnumerator ShowChatBubble(string msg)
+    public IEnumerator ShowChatBubble(string msg)
     {
         if (chatBubbleCanvas != null && chatText != null)
         {
@@ -426,16 +446,30 @@ public class Player : MonoBehaviour
         //}
 
         //아이템 관련 추가 
+        //if (ctx.started && _nearbyItem != null)
+        //{
+        //    if (slot != null && _nearbyItem.ItemData.type == ItemType.Special)
+        //    {
+        //        if (slot.TryPickup(_nearbyItem.ItemData))
+        //        {
+        //            _nearbyItem.Pickup();
+        //            _nearbyItem = null;
+        //            return;
+
+        //        }
+        //    }
+        //}
         if (ctx.started && _nearbyItem != null)
         {
-            if (slot != null && _nearbyItem.ItemData.type == ItemType.Special)
+            ItemData data = _nearbyItem.ItemData;
+
+            if (slot != null && data.canQuickSlot)
             {
-                if (slot.TryPickup(_nearbyItem.ItemData))
+                if (slot.TryPickup(data))
                 {
                     _nearbyItem.Pickup();
                     _nearbyItem = null;
                     return;
-
                 }
             }
         }
@@ -547,21 +581,30 @@ public class Player : MonoBehaviour
             return;
         }
 
-        //ItemData data = slotData.Data;
-        //if (data.type == ItemType.Key)
-        //{
-        //    return;
-        //}
-        //if (slot.TryUseCurrentSlot(slot.CurrentIndex))
-        //{
-        //    if (data.type == ItemType.Consumable && data.prefab != null)//폭탄
-        //    {
-        //        GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
-        //        obj.GetComponent<Bomb>().UseBomb();
-        //    }
-        //    //혹은 키아이템 사용을 따로 할것이라면 아래에 추가
-        //}
+        ItemData data = slotData.Data;
+        if (data.type == ItemType.Key)
+        {
+            return;
+        }
+        if (!slot.TryUseCurrentSlot(slot.CurrentIndex))
+        {
+            return;
+        }
 
+        if (data.type == ItemType.Consumable && data.prefab != null)
+        {
+            //물약
+            if (data.prefab.TryGetComponent(out Potion potion))
+            {
+                potion.UsePotion();
+            }
+            //폭탄
+            else if (data.prefab.TryGetComponent(out Bomb bombPrefab))
+            {
+                GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);
+                obj.GetComponent<Bomb>().UseBomb();
+            }
+        }
     }
     public void OnSlotPrev(InputAction.CallbackContext ctx)
     {

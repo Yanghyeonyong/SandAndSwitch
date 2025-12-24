@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 5541395320162011822}
   - component: {fileID: 8001599451588839861}
   - component: {fileID: 2849995768711792779}
+  - component: {fileID: -984532004562857931}
   - component: {fileID: 4175152552706936949}
   m_Layer: 0
   m_Name: Potion
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,9 +81,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6705c549357eddb47b37042f667320ca, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -105,6 +106,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Potion
   _itemData: {fileID: 11400000, guid: d8566b0e9ee87824c86c002e248722be, type: 2}
+--- !u!114 &-984532004562857931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8990918237548349237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3476ccb888d6cfd46afc79e2dbb19e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
+  _itemData: {fileID: 11400000, guid: d8566b0e9ee87824c86c002e248722be, type: 2}
+  _soundValue: 1
+  uniqueID: {x: 0, y: 0, z: 0}
 --- !u!58 &4175152552706936949
 CircleCollider2D:
   m_ObjectHideFlags: 0

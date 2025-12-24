@@ -29,8 +29,13 @@ public class Gimmick_Gate : Gimmick
                 for (int i = 0; i < _requireCount; i++)
                 {
                     Debug.Log("열쇠 사용");
-                    GameManager.Instance.Player.Slot.TryUseCurrentSlot(index);
+                    //GameManager.Instance.Player.Slot.TryUseCurrentSlot(index);
+                    GameManager.Instance.Player.Slot.ConsumeKeySlot(index, 1);
                 }
+                //키 사용이 끝난후에 비어있는 슬롯 이동
+                GameManager.Instance.Player.Slot.ShiftSlots();
+                //UI갱신
+                GameManager.Instance.RefreshAllQuickSlotUI();
             }
             //NullReferenceExeption 방지를 위해 IsReuse를 false로 전환
             GetComponent<InteractiveObject>().IsReuse = false;

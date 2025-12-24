@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
   m_Name: Potion_Consumable
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 0
+  id: 102
   itemName: "\uBB3C\uC57D"
+  EnItemName: 
   description: 
+  EnDescription: 
   type: 1
   prefab: {fileID: 8990918237548349237, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
   icon: {fileID: 21300000, guid: 6705c549357eddb47b37042f667320ca, type: 3}
@@ -25,4 +27,6 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  pickupSoundClip: {fileID: 8300000, guid: c454f0066ef17b94daa5753983170042, type: 3}
+  pickupSoundClip: {fileID: 8300000, guid: ae0a55a68d99d794799658af84322e7a, type: 3}
+  typeKor: 
+  typeEng: 

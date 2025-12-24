@@ -8,6 +8,8 @@ public class SoundEffectManager:Singleton<SoundEffectManager>
     //BGM ½ÇÇà
     public void PlayBGM(AudioClip audio)
     {
+        if (audio == _bgmAudio.clip)
+            return;
         _bgmAudio.clip = audio;
         _bgmAudio.Play();
     }

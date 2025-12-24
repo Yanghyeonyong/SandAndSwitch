@@ -17,28 +17,47 @@ public class QuickSlotController : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < _slots.Length; i++)
+        //for (int i = 0; i < _slots.Length; i++)
+        //{
+        //    if (_slots[i] == null)
+        //    {
+        //        _slots[i] = new QuickSlot();
+        //    }
+        //}
+
+
+
+        //if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] == null)
+        //{
+        //    //GameManager의 퀵슬롯 참조
+        //    GameManager.Instance.GameManagerQuickSlots = _slots;
+        //}
+
+
+        //else if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] != null)
+        //{
+        //    _slots = GameManager.Instance.GameManagerQuickSlots;
+        //}
+        if (GameManager.Instance == null)
         {
-            if (_slots[i] == null)
+            return;
+        }
+
+        // GameManager 슬롯이 아직 없으면 생성 (최초 1회)
+        if (GameManager.Instance.GameManagerQuickSlots[0] == null)
+        {
+            for (int i = 0; i < _slots.Length; i++)
             {
                 _slots[i] = new QuickSlot();
             }
-        }
 
-         
-
-        if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] == null)
-        {
-            //GameManager의 퀵슬롯 참조
             GameManager.Instance.GameManagerQuickSlots = _slots;
         }
-
-
-        else if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] != null)
+        else
         {
+            // 이미 있으면 참조만 가져옴 (절대 새로 만들지 않음)
             _slots = GameManager.Instance.GameManagerQuickSlots;
         }
-
         GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
 
     }
@@ -93,6 +112,7 @@ public class QuickSlotController : MonoBehaviour
                     slot.Add(1);
 
                     // UI 업데이트는 GameManager 호출
+                    GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, 1);
                     GameManager.Instance.UpdateQuickSlot(i, slot);
                     return true;
                 }
@@ -127,7 +147,7 @@ public class QuickSlotController : MonoBehaviour
             if (slot.IsEmpty)
             {
                 slot.Init(data, 1);
-
+                GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, 1);
                 GameManager.Instance.UpdateQuickSlot(i, slot);
                 return true;
             }
@@ -152,23 +172,15 @@ public class QuickSlotController : MonoBehaviour
         {
             return false;
         }
-        if (slot.Data.type != ItemType.Consumable && slot.Data.type != ItemType.Key)//소모성아이템,키가 아닐경우
+        if (slot.Data.type != ItemType.Consumable)//소모성아이템,키가 아닐경우
         {
             return false;
         }
         int useCount = 1;
-        if (slot.Data.type == ItemType.Key)
-        {
-            useCount = 3;
 
-            if (slot.Count < useCount)
-            {
-                return false;
-            }
-        }
         //아이템 사용
+        GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, -useCount);
         slot.Use(useCount);
-
         //기존코드
         //if (slot.Count <= 0)
         //{
@@ -240,7 +252,7 @@ public class QuickSlotController : MonoBehaviour
         }
         _wheelTimer = _wheelCool;
     }
-    private void ShiftSlots()
+    public void ShiftSlots()
     {
         int writeIndex = 0;
 
@@ -256,5 +268,28 @@ public class QuickSlotController : MonoBehaviour
                 writeIndex++;
             }
         }
+    }
+    public bool ConsumeKeySlot(int index, int consumeCount)
+    {
+        QuickSlot slot = _slots[index];
+
+        // 슬롯이 비었거나 키가 아니면 실패
+        if (slot.IsEmpty || slot.Data == null || slot.Data.type != ItemType.Key)
+        {
+            return false;
+        }
+
+        // 개수 부족하면 실패
+        if (slot.Count < consumeCount)
+        {
+            return false;
+        }
+
+        // 개수 차감
+        slot.Use(consumeCount);
+
+        GameManager.Instance.UpdateQuickSlot(index, slot);
+
+        return true;
     }
 }

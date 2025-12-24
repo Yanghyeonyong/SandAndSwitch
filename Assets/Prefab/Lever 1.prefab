@@ -181,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 0}
   _isReuse: 0
+  _CheckItem: 0
 --- !u!114 &5914735018716600158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
   _interactiveUI: {fileID: 0}
   _isReuse: 1
+  _CheckItem: 0
 --- !u!114 &4076792711257908621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00dea2c3ea5a745488a3c9b85997151c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_Lever
-  _gimmickId: 0
+  _gimmickId: 4
   _turnLever: 0
 --- !u!114 &6022170838389102077
 MonoBehaviour:
@@ -407,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c63d8c42f0b1a4fa5a26c6a05df61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shutter
-  _shutterObject: {fileID: 9092287550582284447}
+  _doorObject: {fileID: 9092287550582284447}
   _interactiveObj: {fileID: 875478284596290240}
 --- !u!95 &6573766902791106892
 Animator:

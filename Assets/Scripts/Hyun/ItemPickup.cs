@@ -42,14 +42,30 @@ public class ItemPickup : MonoBehaviour
         {
             return;
         }
-        if (_itemData.type == ItemType.Special)
+        switch (_itemData.type)
         {
-            player.SetNearbyItem(this);
-            return;
-        }
-        if (player.Slot != null && player.Slot.TryPickup(_itemData))
-        {
-            Pickup();
+            case ItemType.Collection:
+                GameManager.Instance.GetComponent<CollectSlotController>().Collect(_itemData);
+                Pickup();
+                break;
+
+            case ItemType.Consumable:
+                if (player.Slot != null && player.Slot.TryPickup(_itemData))
+                {
+                    Pickup();
+                }
+                break;
+
+            case ItemType.Special:
+                player.SetNearbyItem(this);
+                break;
+
+            case ItemType.Key:
+                if (player.Slot != null && player.Slot.TryPickup(_itemData))
+                {
+                    Pickup();
+                }
+                break;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -82,4 +98,5 @@ public class ItemPickup : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
 }

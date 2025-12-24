@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] List<Sprite> _languageIcons = new List<Sprite>();
+
     private List<GameObject> _canvasList = new List<GameObject>();
     private List<Button> _menuButton = new List<Button>();
     private List<Button> _ingameButton = new List<Button>();
@@ -18,6 +20,17 @@ public class UIManager : MonoBehaviour
     //승리메뉴 추가
     private List<Button> _victoryMenuButton = new List<Button>();
 
+
+    //ItemToolTip
+    GameObject _itemToolTip;
+    Image _itemToolTipIconImage;
+    TextMeshProUGUI _itemToolTipNameText;
+    TextMeshProUGUI _itemToolTipTypeText;
+    TextMeshProUGUI _itemToolTipDescText;
+    GameObject[] _quickSlotBox = new GameObject[10];
+
+    //언어
+    Image _languageIcon;
 
     InputAction _pauseGameAction;
 
@@ -49,6 +62,20 @@ public class UIManager : MonoBehaviour
                 GameManager.Instance.HeartImages.Add(child.GetChild(0).GetComponent<Image>());
                 GameManager.Instance.HeartImages.Add(child.GetChild(1).GetComponent<Image>());
                 GameManager.Instance.HeartImages.Add(child.GetChild(2).GetComponent<Image>());
+
+
+                GameManager.Instance.CollectibleIcon = child.GetChild(3).GetChild(0).GetComponent<Image>();
+                //_languageIcon = child.GetChild(3).GetChild(0).GetComponent<Image>();
+                GameManager.Instance.CollectibleCountText = child.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
+
+
+                _itemToolTip = child.GetChild(6).gameObject;
+
+                _itemToolTipIconImage = _itemToolTip.transform.GetChild(0).GetComponent<Image>();
+                _itemToolTipNameText = _itemToolTip.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                _itemToolTipTypeText = _itemToolTip.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+                _itemToolTipDescText = _itemToolTip.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+
             }
 
 
@@ -129,20 +156,24 @@ public class UIManager : MonoBehaviour
                     switch (grandchildIndex)
                     {
                         case 5:
-                            for (int greatGrandChildIndex = 0; greatGrandChildIndex < 10; greatGrandChildIndex ++)
-                            
+
+
+
+                            for (int greatGrandChildIndex = 0; greatGrandChildIndex < 10; greatGrandChildIndex++)
+
                             {
-                                if(grandChild.GetChild(greatGrandChildIndex)==null)
+                                if (grandChild.GetChild(greatGrandChildIndex) == null)
                                 {
                                     continue;
                                 }
+                                _quickSlotBox[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).gameObject;
                                 GameManager.Instance.GameManagerQuickSlotsImages[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).GetChild(0).GetComponent<Image>();
                                 GameManager.Instance.GameManagerQuickSlotCountTexts[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).GetChild(3).GetComponent<TextMeshProUGUI>();
                                 GameManager.Instance.GameManagerQuickSlotIcons[greatGrandChildIndex] = grandChild.GetChild(greatGrandChildIndex).GetChild(1).GetComponent<Image>();
-                                
+
                                 if (GameManager.Instance.GameManagerQuickSlotsImages[greatGrandChildIndex].gameObject.activeSelf)
                                 {
-                                GameManager.Instance.GameManagerQuickSlotIcons[greatGrandChildIndex].gameObject.SetActive(false);
+                                    GameManager.Instance.GameManagerQuickSlotIcons[greatGrandChildIndex].gameObject.SetActive(false);
                                     //continue;
                                 }
                                 //Debug.Log(GameManager.Instance.GameManagerQuickSlotCountTexts[greatGrandChildIndex].name);
@@ -150,6 +181,7 @@ public class UIManager : MonoBehaviour
                             }
                             break;
 
+                        
                     }
 
 
@@ -166,6 +198,9 @@ public class UIManager : MonoBehaviour
      
         }
 
+
+        _languageIcon = _menuButton[3].gameObject.GetComponent<Image>();
+
         _menuButton[0].onClick.AddListener(GameManager.Instance.LoadGameScene);
         _menuButton[0].onClick.AddListener(LoadGameSceneLogic);
         _menuButton[0].onClick.AddListener(PlayUIClickSound);
@@ -173,6 +208,10 @@ public class UIManager : MonoBehaviour
         _menuButton[1].onClick.AddListener(PlayUIClickSound);
         _menuButton[2].onClick.AddListener(GameManager.Instance.ExitGame);
         _menuButton[2].onClick.AddListener(PlayUIClickSound);
+        _menuButton[3].onClick.AddListener(PlayUIClickSound);
+        _menuButton[3].onClick.AddListener(ChangeLanguageLogic);
+
+
 
         _ingameButton[0].onClick.AddListener(GameManager.Instance.PauseGame);
         _ingameButton[0].onClick.AddListener(PauseLogic);
@@ -189,6 +228,8 @@ public class UIManager : MonoBehaviour
         _pauseMenuButton[2].onClick.AddListener(ResumeLogic);
         _pauseMenuButton[3].onClick.AddListener(ControlGuideLogic);
         _pauseMenuButton[3].onClick.AddListener(PlayUIClickSound);
+        _pauseMenuButton[3].onClick.AddListener(ChangeLanguageLogic);
+
 
         _gameOverMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
         _gameOverMenuButton[0].onClick.AddListener(PlayUIClickSound);
@@ -219,6 +260,61 @@ public class UIManager : MonoBehaviour
 
 
     List<GameObject> _tempCanvasList = new List<GameObject>();
+
+
+    void ChangeLanguageLogic()
+    {
+        Table<string, StringTableData> stringTable = GameManager.Instance.StringTable;
+
+
+        if (GameManager.Instance.currentLanguage == Language.EN)
+        {
+            GameManager.Instance.currentLanguage = Language.KR;
+            _languageIcon.sprite = _languageIcons[0];
+
+
+
+
+            _menuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0001"].kr ;
+            _menuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0002"].kr ;
+            _menuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0003"].kr ;
+            
+            _pauseMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0001"].kr;
+            _pauseMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0004"].kr;
+            _pauseMenuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0001"].kr;
+            _pauseMenuButton[3].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0005"].kr;
+            
+            _gameOverMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0001"].kr;
+            _gameOverMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0002"].kr;
+
+            _victoryMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0004"].kr;
+
+            
+
+
+        }
+        else if (GameManager.Instance.currentLanguage == Language.KR)
+        {
+            GameManager.Instance.currentLanguage = Language.EN;
+            _languageIcon.sprite = _languageIcons[1];
+            _menuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0001"].en ;
+            _menuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0002"].en ;
+            _menuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0003"].en ;
+            
+            _pauseMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0001"].en;
+            _pauseMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0004"].en;
+            _pauseMenuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0001"].en;
+            _pauseMenuButton[3].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0005"].en;
+            
+            _gameOverMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0001"].en;
+            _gameOverMenuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["end_bt_0002"].en;
+            _victoryMenuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["ig_set_bt_0004"].en;
+
+
+            
+        }
+
+    }
 
     void ControlGuideLogic()
     {
@@ -259,15 +355,22 @@ public class UIManager : MonoBehaviour
                        return;
         }
         //251222 - 양현용 추가 : 기믹 UI 끄기
-        if (GameManager.Instance.OnSelection)
+        //251223 최정욱 인게임에 대해서 만 발동 가능하게 만들어 에러 방지 
+
+        if (GameManager.Instance.CurrentCutsceneIndex != 0 && GameManager.Instance.GetTotalSceneCount() - 1 != GameManager.Instance.CurrentCutsceneIndex)
         {
-            GameManager.Instance.Player.CurGimmick.CheckNum(-1);
-            return;
-        }
-        else if (GameManager.Instance.Player.CheckGimmick && GameManager.Instance.OnProgressGimmick)
-        {
-            GameManager.Instance.Player.CurGimmick.ExitGimmick();
-            return;
+            
+
+            if (GameManager.Instance.OnSelection)
+            {
+                GameManager.Instance.Player.CurGimmick.CheckNum(-1);
+                return;
+            }
+            else if (GameManager.Instance.Player.CheckGimmick && GameManager.Instance.OnProgressGimmick)
+            {
+                GameManager.Instance.Player.CurGimmick.ExitGimmick();
+                return;
+            }
         }
 
         if (GameManager.Instance.GetCurrentSceneIndex() != 0 && _canvasList[1].activeSelf)
@@ -316,7 +419,7 @@ public class UIManager : MonoBehaviour
         //    GameManager.Instance.GameManagerQuickSlots[i] = null;
         //}
 
-
+        GameManager.Instance.ExtraUITools[0].GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
         StartCoroutine(WaitForAsyncGameSceneLoad());
         
     }
@@ -388,6 +491,7 @@ public class UIManager : MonoBehaviour
                 canvas.SetActive(false);
             }
         }
+        GameManager.Instance.ExtraUITools[0].GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
     }
 
 
@@ -414,13 +518,21 @@ public class UIManager : MonoBehaviour
 
 
 
-    GameObject _hoveredUI;
+    int _hoveredUIIndex = -1;
 
 
 
     GameObject GetCurrentHoveredUI()
     {
+        if (GameManager.Instance.CanvasList[1].activeSelf == false)
+        {
+            return null;
+        }
 
+        if (GameManager.Instance.CanvasList[2].activeSelf == true)
+        {
+            return null;
+        }
 
         PointerEventData mouseEventData = new PointerEventData(EventSystem.current);
         if (Mouse.current != null)
@@ -434,7 +546,21 @@ public class UIManager : MonoBehaviour
 
         if (pointerRaycastHits.Count > 0)
         {
-            return pointerRaycastHits[0].gameObject;
+            for (int i = 0; i < pointerRaycastHits.Count; i++)
+            {
+                //Debug.Log("Hit UI: " + pointerRaycastHits[i].gameObject.name);
+                for(int j = 0; j<10; j++)
+                {
+                    if (pointerRaycastHits[i].gameObject == _quickSlotBox[j])
+                    {
+                        _hoveredUIIndex = j;
+                        return pointerRaycastHits[i].gameObject;
+                    }
+                }
+
+            }
+
+            //return pointerRaycastHits[0].gameObject;
         }
         return null;
 
@@ -452,11 +578,42 @@ public class UIManager : MonoBehaviour
             }
             if (EventSystem.current.IsPointerOverGameObject())
             {
-            if ( GetCurrentHoveredUI() != null)
-            {
-               // if (GetCurrentHoveredUI().GetComponent<Image>.sprite 
+                if (GetCurrentHoveredUI() != null)
+                {
+                    if(GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex] == null)
+                    {
+                        return;
+                    }
 
-            }
+
+                    if (GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data != null)
+                    {
+                        if (!_itemToolTip.activeSelf)
+                        {
+                            _itemToolTip.SetActive(true);
+                        }
+                        _itemToolTip.GetComponent<RectTransform>().anchoredPosition = new Vector2(_quickSlotBox[_hoveredUIIndex].GetComponent<RectTransform>().anchoredPosition.x, -237.5f);
+
+                        _itemToolTipIconImage.sprite = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.icon;
+                        _itemToolTipNameText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.itemName;
+                        _itemToolTipTypeText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.type.ToString();
+                        _itemToolTipDescText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.description;
+
+
+                    }
+                    else
+                    {
+                        if (_itemToolTip.activeSelf)
+                        {
+                            _itemToolTip.SetActive(false);
+                        }
+                    }
+
+
+
+                    // if (GetCurrentHoveredUI().GetComponent<Image>.sprite 
+
+                }
                 //_hoveredUI = GetCurrentHoveredUI();
             }
 
@@ -467,6 +624,13 @@ public class UIManager : MonoBehaviour
 
         }
 
+        if (GetCurrentHoveredUI() == null)
+        {
+            if (_itemToolTip.activeSelf)
+            {
+                _itemToolTip.SetActive(false);
+            }
+        }
 
     }
 }
