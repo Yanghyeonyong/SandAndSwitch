@@ -292,6 +292,7 @@ public class UIManager : MonoBehaviour
             
 
 
+
         }
         else if (GameManager.Instance.currentLanguage == Language.KR)
         {
@@ -595,10 +596,18 @@ public class UIManager : MonoBehaviour
                         _itemToolTip.GetComponent<RectTransform>().anchoredPosition = new Vector2(_quickSlotBox[_hoveredUIIndex].GetComponent<RectTransform>().anchoredPosition.x, -237.5f);
 
                         _itemToolTipIconImage.sprite = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.icon;
-                        _itemToolTipNameText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.itemName;
-                        _itemToolTipTypeText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.type.ToString();
-                        _itemToolTipDescText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.description;
+                        _itemToolTipTypeText.text = GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.TypeText;
 
+                        if (GameManager.Instance.ItemTable[GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.id] == null)
+                        {
+                            _itemToolTipNameText.text = "id가 테이블에 없어요!";
+                            _itemToolTipDescText.text = "id가 테이블에 없어요!";
+                        }
+                        else
+                        {
+                            _itemToolTipNameText.text = GameManager.Instance.ItemTable[GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.id].NameText;
+                            _itemToolTipDescText.text = GameManager.Instance.ItemTable[GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data.id].DescText;
+                        }
 
                     }
                     else

@@ -17,14 +17,55 @@ public class ItemLogLogScript : MonoBehaviour
 
     public void PickupItemLog(ItemData data)
     {
-        _logText.text = data.itemName + " 획득 +1";
+        if (GameManager.Instance.currentLanguage == Language.KR)
+        {
+            if (GameManager.Instance.ItemTable[data.id] == null)
+            {
+                _logText.text = $"ItemTable에 ID {data.id}가 없습니다.";
+            }
+            else
+            {
+                _logText.text = GameManager.Instance.ItemTable[data.id].NameText + " 획득 +1";
+            }
+        }
+        else
+        {
+            if (GameManager.Instance.ItemTable[data.id] == null)
+            {
+                _logText.text = $"ItemTable에 ID {data.id}가 없습니다.";
+            }
+            else
+            {
+                _logText.text = GameManager.Instance.ItemTable[data.id].NameText + " Get +1";
+            }
+        }
     }
 
     public void UseItemLog(ItemData data, int usecount)
     {
-        _logText.text = data.itemName + " 사용 " + usecount;
+        if (GameManager.Instance.currentLanguage == Language.KR)
+        {
+            if (GameManager.Instance.ItemTable[data.id] == null)
+            {
+                _logText.text = $"ItemTable에 ID {data.id}가 없습니다.";
+            }
+            else
+            {
+                _logText.text = GameManager.Instance.ItemTable[data.id].NameText + " 사용 " + usecount;
+            }
+        }
+        else
+        {
+            if (GameManager.Instance.ItemTable[data.id] == null)
+            {
+                _logText.text = $"ItemTable에 ID {data.id}가 없습니다.";
+            }
+            else
+            {
+                _logText.text = GameManager.Instance.ItemTable[data.id].NameText + " Use " + usecount;
+            }
+        }
     }
-
     public void SetLogText(string text)
     {
         _logText.text = text;

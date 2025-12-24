@@ -69,15 +69,71 @@ public class ItemData : ScriptableObject
     {
         get
         {
-            //게임매니저에 설정된 게임언어 기준
-            if (GameManager.Instance.currentLanguage == Language.KR)
+
+            //20251224 최정욱 parsing 이전에 사용할 수 있도록 구현
+            if (typeKor == "" || typeEng == "")
             {
+                Debug.Log($"ItemData {itemName}의 typeKor 또는 typeEng이 설정되지 않았습니다. 자동으로 설정합니다.");
+            }
+
+            if (typeKor == "")
+            {
+                switch(type)
+                {
+                    case ItemType.Consumable:
+                        typeKor = "소비 아이템";
+                        break;
+                    case ItemType.Special:
+                        typeKor = "보물";
+                        break;
+                    case ItemType.Key:
+                        typeKor = "열쇠 아이템";
+                        break;
+                    case ItemType.Collection:
+                        typeKor = "수집 아이템";
+                        break;
+                    default:
+                        typeKor = "기타 아이템";
+                        break;
+                }
+            }
+            else if (typeEng == "")
+            {
+                switch (type)
+                {
+                    case ItemType.Consumable:
+                        typeEng = "Consumable";
+                        break;
+                    case ItemType.Special:
+                        typeEng = "Treasure";
+                        break;
+                    case ItemType.Key:
+                        typeEng = "Key";
+                        break;
+                    case ItemType.Collection:
+                        typeEng = "Collection";
+                        break;
+                    default:
+                        typeEng = "Other Item";
+                        break;
+                }
+            }
+
+            //게임매니저에 설정된 게임언어 기준
+            if (typeKor != "" && GameManager.Instance.currentLanguage == Language.KR)
+            {
+                
 
                 return typeKor;
             }
+            else if (typeEng != "" && GameManager.Instance.currentLanguage == Language.EN)
+            {
+                
+                return typeEng;
+            }
             else
             {
-                return typeEng;
+                return "Undefined Type";
             }
         }
     }

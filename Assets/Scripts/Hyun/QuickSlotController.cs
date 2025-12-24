@@ -286,8 +286,8 @@ public class QuickSlotController : MonoBehaviour
         }
 
         // 개수 차감
+        GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, -consumeCount);
         slot.Use(consumeCount);
-
         GameManager.Instance.UpdateQuickSlot(index, slot);
 
         return true;

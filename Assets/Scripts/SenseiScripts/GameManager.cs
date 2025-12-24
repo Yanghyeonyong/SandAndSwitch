@@ -27,6 +27,7 @@ public enum Language { KR, EN }
 public class GameManager : Singleton<GameManager>
 {
     //수집품 변수
+    [SerializeField] public int TotalCollectibleCount { get; private set; } = 10;
     public Image CollectibleIcon { get; set; }
     public TextMeshProUGUI CollectibleCountText { get; set; }
 
@@ -564,6 +565,8 @@ ItemData _bombScriptableObject;
     public AsyncOperation GameSceneLoadAsyncOperation;
     public void LoadGameScene()
     {
+        CollectibleIcon.color = new Color(1f, 1f, 1f, 0.2f);
+        CollectibleCountText.text = "0/" + TotalCollectibleCount;
 
         if (CinematicControllerSensei == null)
         {
@@ -683,6 +686,8 @@ ItemData _bombScriptableObject;
     {
         if (!_checkPointData._onCheck)
         {
+            CollectibleIcon.color = new Color(1f, 1f, 1f, 0.2f);
+            CollectibleCountText.text = "0/" + TotalCollectibleCount;
             CurrentCutsceneIndex = 0;
             _checkPointData.Clear();//기믹,아이템 초기화
             //아이템 퀵슬롯 초기화 
@@ -721,6 +726,12 @@ ItemData _bombScriptableObject;
                 _gameOverCoroutine = null;
             }
             Time.timeScale = 1f;
+
+            //수집품에 대한 로직이 필요함!
+
+            //CollectibleIcon.color = new Color(1f, 1f, 1f, 0.2f);
+            //CollectibleCountText.text = "0/" + TotalCollectibleCount;
+
 
             _checkPointData.LoadCheckPointData();
             GameManager.Instance.RefreshAllQuickSlotUI();

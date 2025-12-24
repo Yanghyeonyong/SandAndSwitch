@@ -23,6 +23,12 @@ public class CollectSlotController : MonoBehaviour
         if (_slots.TryGetValue(data.id, out CollectSlot slot))
         {
             slot.Add(1);
+            GameManager.Instance.CollectibleCountText.text = slot.Count + "/" + GameManager.Instance.TotalCollectibleCount;
+            if (GameManager.Instance.CollectibleIcon.color.a != 1f)
+            {
+                GameManager.Instance.CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
+            }
+            GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, 1);
         }
         else
         {
@@ -31,6 +37,9 @@ public class CollectSlotController : MonoBehaviour
                 Data = data,
                 Count = 1
             });
+            GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, 1);
+            GameManager.Instance.CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
+            GameManager.Instance.CollectibleCountText.text = 1 + "/"+ GameManager.Instance.TotalCollectibleCount;
         }
 
         //UI°»½Å
