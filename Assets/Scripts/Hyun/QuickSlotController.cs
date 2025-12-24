@@ -172,20 +172,12 @@ public class QuickSlotController : MonoBehaviour
         {
             return false;
         }
-        if (slot.Data.type != ItemType.Consumable && slot.Data.type != ItemType.Key)//소모성아이템,키가 아닐경우
+        if (slot.Data.type != ItemType.Consumable)//소모성아이템,키가 아닐경우
         {
             return false;
         }
         int useCount = 1;
-        if (slot.Data.type == ItemType.Key)
-        {
-            useCount = 3;
 
-            if (slot.Count < useCount)
-            {
-                return false;
-            }
-        }
         //아이템 사용
         GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, -useCount);
         slot.Use(useCount);
@@ -260,7 +252,7 @@ public class QuickSlotController : MonoBehaviour
         }
         _wheelTimer = _wheelCool;
     }
-    private void ShiftSlots()
+    public void ShiftSlots()
     {
         int writeIndex = 0;
 
@@ -276,5 +268,29 @@ public class QuickSlotController : MonoBehaviour
                 writeIndex++;
             }
         }
+    }
+    public bool ConsumeKeySlot(int index, int consumeCount)
+    {
+        QuickSlot slot = _slots[index];
+
+        // 슬롯이 비었거나 키가 아니면 실패
+        if (slot.IsEmpty || slot.Data == null || slot.Data.type != ItemType.Key)
+        {
+            return false;
+        }
+
+        // 개수 부족하면 실패
+        if (slot.Count < consumeCount)
+        {
+            return false;
+        }
+
+        // 개수 차감
+        slot.Use(consumeCount);
+
+        // 개수만 줄이고, ShiftSlots() 절대 호출하지 않음!
+        GameManager.Instance.UpdateQuickSlot(index, slot);
+
+        return true;
     }
 }
