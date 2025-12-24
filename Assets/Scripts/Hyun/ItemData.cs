@@ -33,9 +33,25 @@ public class ItemData : ScriptableObject
     [Header("Sound")]
     public AudioClip pickupSoundClip;
 
-    
-    //[Header("Key")]
+    [Header("Type")]
+    //외부에서 타입명을 주입할수있도록 열어뒀습니다
+    public string typeKor;
+    public string typeEng;
+    public string TypeText
+    {
+        get
+        {
+            //게임매니저에 설정된 게임언어 기준
+            if (GameManager.Instance.currentLanguage == Language.KR)
+            {
 
-    //[Header("Special")]
+                return typeKor;
+            }
+            else
+            {
+                return typeEng;
+            }
+        }
+    }
 
 }
