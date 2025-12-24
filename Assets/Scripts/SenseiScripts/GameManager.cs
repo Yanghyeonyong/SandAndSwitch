@@ -579,7 +579,7 @@ public class GameManager : Singleton<GameManager>
         }
         _isLoadingGameScene = true;
 
-        //
+        CollectedItemIDs.Clear();
         //251216 - 양현용 : 새게임시 기믹 초기화 및 씬 설정
         Debug.Log("스타트");
         _curScene = 1;
@@ -716,7 +716,6 @@ public class GameManager : Singleton<GameManager>
         {
             EnterPhaseOne();
             Debug.Log("체크포인트 기반 다시하기");
-            _checkPointData.Clear();//기믹,아이템 초기화
             if (_gameOverCoroutine != null)
             {
                 StopCoroutine(_gameOverCoroutine);
