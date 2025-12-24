@@ -18,6 +18,34 @@ public class ItemData : ScriptableObject
     public GameObject prefab;
     public Sprite icon;
     public bool canQuickSlot = true;
+    public string ItemNameText
+    {
+        get
+        {
+            if (GameManager.Instance.currentLanguage == Language.KR)
+            {
+                return itemName;
+            }
+            else
+            {
+                return EnItemName;
+            }
+        }
+    }
+    public string ItemDescription
+    {
+        get
+        {
+            if (GameManager.Instance.currentLanguage == Language.KR)
+            {
+                return description;
+            }
+            else
+            {
+                return EnDescription;
+            }
+        }
+    }
 
     //public float weight;
 
