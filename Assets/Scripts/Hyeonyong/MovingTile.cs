@@ -33,7 +33,7 @@ public class MovingTile : MonoBehaviour
             //Debug.Log("거리: "+Vector3.Distance(transform.position, _movingDirection[_curDir].position));
             if (Vector3.Distance(transform.position, _movingDirection[_curDir].position) <= 0.1f)
             {
-                Debug.Log("전환");
+                //Debug.Log("전환");
                 _curDir++;
                 if (_curDir == _movingDirection.Length)
                 {
