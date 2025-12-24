@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 102
+  id: 301
   itemName: "\uC5F4\uC1E0"
   EnItemName: 
   description: 
@@ -28,3 +28,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   pickupSoundClip: {fileID: 8300000, guid: ae0a55a68d99d794799658af84322e7a, type: 3}
+  typeKor: 
+  typeEng: 
