@@ -11506,6 +11506,7 @@ GameObject:
   - component: {fileID: 1925396786}
   - component: {fileID: 1925396788}
   - component: {fileID: 1925396787}
+  - component: {fileID: 1925396789}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -11596,6 +11597,18 @@ MonoBehaviour:
   _maxAlpha: 0.8
   _blackFadeToVictoryCutscenesTime: 3
   _deathWhiteToBlackFadeDuration: 3
+--- !u!114 &1925396789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925396785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f970a988d01ae449854ee9128ae3020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollectSlotController
 --- !u!1 &1957125918
 GameObject:
   m_ObjectHideFlags: 0
