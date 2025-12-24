@@ -12,5 +12,6 @@ public class Potion : MonoBehaviour
     public void UsePotion()
     {
         OnUsePotion?.Invoke();//물약 사용을 알리는 이벤트 발생
+        GameManager.Instance.PlayerHeal(1);
     }
 }
