@@ -86,15 +86,15 @@ public class DoorLock : MonoBehaviour
             //PlaySound(_audio[1]);
             SoundEffectManager.Instance.PlayEffectSound(_audio[1]);
             GameManager.Instance.IsGimmickClear[_gimmick.GimmickId] = true;
-            _testObject.SetActive(false);
+            //_testObject.SetActive(false);
 
             _gimmick.IsClear = true;
             _gimmick = null;
             GameManager.Instance.OnProgressGimmick = false;
             GameManager.Instance.Player.CurGimmick = null;
             GameManager.Instance.ResumeGame();
-            gameObject.SetActive(false);
             _obj.TurnOn();
+            gameObject.SetActive(false);
             //StartCoroutine(CollectPassword());
             return;
             //Debug.Log(GameManager.Instance.IsGimmickClear[_gimmick.GimmickId]);

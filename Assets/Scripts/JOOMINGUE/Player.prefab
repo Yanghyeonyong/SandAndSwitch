@@ -323,19 +323,7 @@ MonoBehaviour:
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4109991600814425346}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnIneract
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
@@ -403,83 +391,23 @@ MonoBehaviour:
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4109991600814425346}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnUseItem
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: c8dd5a94-a72f-4299-8eb2-1fe258a389ad
     m_ActionName: 'Player/UseItem[/Keyboard/f]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4109991600814425346}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnSelectSlot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: fe155eb3-84f6-48d3-88fa-cae92e5fd87b
     m_ActionName: 'Player/SlotSelect[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/0]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4109991600814425346}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnSlotPrev
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 07e040a0-c956-4c0d-aea6-4cbd1a36849f
     m_ActionName: 'Player/SlotPrev[/Keyboard/q]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4109991600814425346}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnSlotNext
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 746aaafe-1ef8-48e6-9c00-6bb187feb181
     m_ActionName: 'Player/SlotNext[/Keyboard/r]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4109991600814425346}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnWheelScroll
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 9d509900-5b31-46d8-b722-cf6199b8aa4d
     m_ActionName: 'Player/WheelScroll[/Mouse/scroll/x,/Mouse/scroll/y]'
   m_NeverAutoSwitchControlSchemes: 0

@@ -99,7 +99,7 @@ public class CheckPointData : Singleton<CheckPointData>
         //플레이어 상태 저장
         _playerPos = GameManager.Instance._player.transform.position;
         _playerRot = GameManager.Instance._player.transform.rotation;
-        _playerHp = GameManager.Instance.currentPlayerHealth;
+        _playerHp = GameManager.Instance.CurrentPlayerHealth;
         _checkPointScene = GameManager.Instance.CurScene;
         //퀵슬롯 저장
         GameManagerQuickSlots = new QuickSlot[10];
@@ -130,7 +130,7 @@ public class CheckPointData : Singleton<CheckPointData>
 
         GameManager.Instance._player.transform.position = _playerPos;
         GameManager.Instance._player.transform.rotation = _playerRot;
-        GameManager.Instance.currentPlayerHealth = _playerHp;
+        GameManager.Instance.CurrentPlayerHealth = _playerHp;
         GameManager.Instance.CurScene = _checkPointScene;
 
         //이거 하니까 아이템 데이터 사라지는 것 확인
