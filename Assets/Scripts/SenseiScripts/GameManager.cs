@@ -819,6 +819,7 @@ ItemData _bombScriptableObject;
 
     public void LoadVictoryScene()
     {
+        GameManager.Instance.CollectedItemIDs.Clear();
         _blackFadeToVictoryCoroutine = StartCoroutine(BlackFadeToVictoryCutscene());
         _checkPointData.Clear();//기믹,아이템 초기화
         if (_gameOverCoroutine != null)
