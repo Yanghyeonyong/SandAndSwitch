@@ -9,6 +9,8 @@ public class FlickerBlock : MonoBehaviour
     WaitForSeconds wait;
     Coroutine _coroutine;
     bool _onFlicker=false;
+
+    [SerializeField] bool _checkPhase=false;
     private void Start()
     {
         wait= new WaitForSeconds(_flickerDelay);
@@ -17,6 +19,11 @@ public class FlickerBlock : MonoBehaviour
 
     IEnumerator Flicker()
     {
+
+        if (GameManager.Instance.CheckItem&&_checkPhase)
+        {
+            yield break;
+        }
         while (true)
         {
             if (_onFlicker)
