@@ -581,6 +581,7 @@ ItemData _bombScriptableObject;
         //251216 - 양현용 : 새게임시 기믹 초기화 및 씬 설정
         Debug.Log("스타트");
         _curScene = 1;
+        _isGimmickClear.Clear();
         _checkPointData.Clear();//기믹,아이템 초기화
         _checkPointData._onCheck=false;
         player = null;
@@ -600,7 +601,7 @@ ItemData _bombScriptableObject;
 
         CurrentPlayerHealth = _maxPlayerHealth;
         HeartLogic();
-
+        SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
         Time.timeScale = 1f;
         GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
         GameSceneLoadAsyncOperation.allowSceneActivation = false;
@@ -608,7 +609,7 @@ ItemData _bombScriptableObject;
         StartCoroutine(WaitForGameSceneLoad());
 
 
-
+        _checkItem = false;
         //SceneManager.LoadScene(1);
     }
 
