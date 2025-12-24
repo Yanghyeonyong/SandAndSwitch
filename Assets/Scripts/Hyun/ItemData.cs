@@ -11,11 +11,14 @@ public class ItemData : ScriptableObject
 {
     public int id;
     public string itemName;
+    public string EnItemName;
     public string description;
+    public string EnDescription;
     public ItemType type;
     public GameObject prefab;
     public Sprite icon;
     public bool canQuickSlot = true;
+
     //public float weight;
 
     [Header("Stack")]
