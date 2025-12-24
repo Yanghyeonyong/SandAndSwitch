@@ -714,7 +714,7 @@ ItemData _bombScriptableObject;
         {
             EnterPhaseOne();
             Debug.Log("체크포인트 기반 다시하기");
-            _checkPointData.Clear();//기믹,아이템 초기화
+            //_checkPointData.Clear();//기믹,아이템 초기화
             if (_gameOverCoroutine != null)
             {
                 StopCoroutine(_gameOverCoroutine);
