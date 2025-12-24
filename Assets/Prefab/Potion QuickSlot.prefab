@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5886606223929163084
+--- !u!1 &8990918237548349237
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 606621439878805203}
-  - component: {fileID: 1701914606117239091}
-  - component: {fileID: 9126306037264395733}
-  - component: {fileID: 3642736664613543409}
-  - component: {fileID: 1099866606629244385}
+  - component: {fileID: 5541395320162011822}
+  - component: {fileID: 8001599451588839861}
+  - component: {fileID: 2849995768711792779}
+  - component: {fileID: 144629741035243155}
+  - component: {fileID: 4175152552706936949}
   m_Layer: 0
-  m_Name: Special
-  m_TagString: Item
+  m_Name: Potion QuickSlot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &606621439878805203
+--- !u!4 &5541395320162011822
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5886606223929163084}
+  m_GameObject: {fileID: 8990918237548349237}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.74166, y: -0.0035455227, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1701914606117239091
+--- !u!212 &8001599451588839861
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5886606223929163084}
+  m_GameObject: {fileID: 8990918237548349237}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -82,24 +82,52 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -3491882392630799336, guid: a8aadeb4b96f4c547a47786bfbdbbea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6705c549357eddb47b37042f667320ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.21875, y: 0.21875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &9126306037264395733
+--- !u!114 &2849995768711792779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8990918237548349237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd09ace06443cc84da97d2302452251b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Potion
+  _itemData: {fileID: 11400000, guid: de0b5999d16aa1447ab21c9e63bbe821, type: 2}
+--- !u!114 &144629741035243155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8990918237548349237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3476ccb888d6cfd46afc79e2dbb19e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
+  _itemData: {fileID: 11400000, guid: de0b5999d16aa1447ab21c9e63bbe821, type: 2}
+  _soundValue: 1
+  uniqueID: {x: 0, y: 0, z: 0}
+--- !u!58 &4175152552706936949
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5886606223929163084}
+  m_GameObject: {fileID: 8990918237548349237}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -128,32 +156,4 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
---- !u!114 &3642736664613543409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5886606223929163084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76aa71b4c84cd8f4ba9ece321682c838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpecialItem
-  _itemData: {fileID: 11400000, guid: 810cf7971d7d3b64da968029b8d72bac, type: 2}
---- !u!114 &1099866606629244385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5886606223929163084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3476ccb888d6cfd46afc79e2dbb19e13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
-  _itemData: {fileID: 11400000, guid: 810cf7971d7d3b64da968029b8d72bac, type: 2}
-  _soundValue: 1
-  uniqueID: {x: 0, y: 0, z: 0}
+  m_Radius: 0.109375

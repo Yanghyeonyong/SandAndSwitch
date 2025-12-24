@@ -17,28 +17,47 @@ public class QuickSlotController : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < _slots.Length; i++)
+        //for (int i = 0; i < _slots.Length; i++)
+        //{
+        //    if (_slots[i] == null)
+        //    {
+        //        _slots[i] = new QuickSlot();
+        //    }
+        //}
+
+
+
+        //if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] == null)
+        //{
+        //    //GameManager의 퀵슬롯 참조
+        //    GameManager.Instance.GameManagerQuickSlots = _slots;
+        //}
+
+
+        //else if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] != null)
+        //{
+        //    _slots = GameManager.Instance.GameManagerQuickSlots;
+        //}
+        if (GameManager.Instance == null)
         {
-            if (_slots[i] == null)
+            return;
+        }
+
+        // GameManager 슬롯이 아직 없으면 생성 (최초 1회)
+        if (GameManager.Instance.GameManagerQuickSlots[0] == null)
+        {
+            for (int i = 0; i < _slots.Length; i++)
             {
                 _slots[i] = new QuickSlot();
             }
-        }
 
-         
-
-        if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] == null)
-        {
-            //GameManager의 퀵슬롯 참조
             GameManager.Instance.GameManagerQuickSlots = _slots;
         }
-
-
-        else if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] != null)
+        else
         {
+            // 이미 있으면 참조만 가져옴 (절대 새로 만들지 않음)
             _slots = GameManager.Instance.GameManagerQuickSlots;
         }
-
         GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
 
     }

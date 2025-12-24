@@ -256,7 +256,15 @@ ItemData _bombScriptableObject;
     public List<Vector3> CollectedItemIDs = new List<Vector3>();
 
 
+    public void RefreshAllQuickSlotUI()
+    {
+        for (int i = 0; i < GameManagerQuickSlots.Length; i++)
+        {
+            UpdateQuickSlot(i, GameManagerQuickSlots[i]);
+        }
 
+        QuickSlotUIUpdate(0);
+    }
 
 
     [SerializeField] bool _checkItem;
@@ -485,6 +493,7 @@ ItemData _bombScriptableObject;
         SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
         _player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene - 1], Quaternion.identity);
         player = _player.GetComponent<Player>();
+        GameManager.Instance.RefreshAllQuickSlotUI();
     }
     IEnumerator SpawnPlayer_CheckPoint()
     {
@@ -493,7 +502,7 @@ ItemData _bombScriptableObject;
         SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
         _player = Instantiate(_playerPrefab, _checkPointData._playerPos,_checkPointData._playerRot);
         player = _player.GetComponent<Player>();
-
+        GameManager.Instance.RefreshAllQuickSlotUI();
         if (_checkPointData == null)
         {
             Debug.Log("체크포인트가 없다");
@@ -588,9 +597,7 @@ ItemData _bombScriptableObject;
         //251216 - 양현용 : 새게임시 기믹 초기화 및 씬 설정
         Debug.Log("스타트");
         _curScene = 1;
-        _isGimmickClear.Clear();
-        _gimmickPos.Clear();
-        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+        _checkPointData.Clear();//기믹,아이템 초기화
         _checkPointData._onCheck=false;
         player = null;
 
@@ -692,7 +699,7 @@ ItemData _bombScriptableObject;
         if (!_checkPointData._onCheck)
         {
             CurrentCutsceneIndex = 0;
-            CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+            _checkPointData.Clear();//기믹,아이템 초기화
             //아이템 퀵슬롯 초기화 
             GameManagerQuickSlots = new QuickSlot[10];
             for (int i = 0; i < GameManagerQuickSlotCountTexts.Length; i++)
@@ -700,9 +707,7 @@ ItemData _bombScriptableObject;
                 GameManagerQuickSlotCountTexts[i].text = "";
                 GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
                 GameManagerQuickSlots[i] = null;
-            }
-            _isGimmickClear.Clear();
-            _gimmickPos.Clear();
+            }      
             if (_gameOverCoroutine != null)
             {
                 StopCoroutine(_gameOverCoroutine);
@@ -724,9 +729,7 @@ ItemData _bombScriptableObject;
         {
             EnterPhaseOne();
             Debug.Log("체크포인트 기반 다시하기");
-            CollectedItemIDs.Clear();//아이템픽업 관련 초기화
-            _isGimmickClear.Clear();
-            _gimmickPos.Clear();
+            _checkPointData.Clear();//기믹,아이템 초기화
             if (_gameOverCoroutine != null)
             {
                 StopCoroutine(_gameOverCoroutine);
@@ -735,6 +738,7 @@ ItemData _bombScriptableObject;
             Time.timeScale = 1f;
 
             _checkPointData.LoadCheckPointData();
+            GameManager.Instance.RefreshAllQuickSlotUI();
             LoadIndexScene(_curScene);
         }
 
@@ -816,9 +820,7 @@ ItemData _bombScriptableObject;
     public void LoadVictoryScene()
     {
         _blackFadeToVictoryCoroutine = StartCoroutine(BlackFadeToVictoryCutscene());
-        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
-        _isGimmickClear.Clear();
-        _gimmickPos.Clear();
+        _checkPointData.Clear();//기믹,아이템 초기화
         if (_gameOverCoroutine != null)
         {
             StopCoroutine(_gameOverCoroutine);
@@ -869,6 +871,19 @@ ItemData _bombScriptableObject;
         //체력 감소 로직
         //추가로직
     }
+
+    public void PlayerHeal(int heal)
+    {
+        CurrentPlayerHealth += heal;
+        if (CurrentPlayerHealth > _maxPlayerHealth)
+        {
+            CurrentPlayerHealth = _maxPlayerHealth;
+        }
+        HeartLogic();
+        //체력 회복 로직
+    }
+
+
 
     [SerializeField] float _deathWhiteToBlackFadeDuration = 1.5f;
 

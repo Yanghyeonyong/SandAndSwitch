@@ -281,15 +281,22 @@ public class UIManager : MonoBehaviour
                        return;
         }
         //251222 - 양현용 추가 : 기믹 UI 끄기
-        if (GameManager.Instance.OnSelection)
+        //251223 최정욱 인게임에 대해서 만 발동 가능하게 만들어 에러 방지 
+
+        if (GameManager.Instance.CurrentCutsceneIndex != 0 && GameManager.Instance.GetTotalSceneCount() - 1 != GameManager.Instance.CurrentCutsceneIndex)
         {
-            GameManager.Instance.Player.CurGimmick.CheckNum(-1);
-            return;
-        }
-        else if (GameManager.Instance.Player.CheckGimmick && GameManager.Instance.OnProgressGimmick)
-        {
-            GameManager.Instance.Player.CurGimmick.ExitGimmick();
-            return;
+            
+
+            if (GameManager.Instance.OnSelection)
+            {
+                GameManager.Instance.Player.CurGimmick.CheckNum(-1);
+                return;
+            }
+            else if (GameManager.Instance.Player.CheckGimmick && GameManager.Instance.OnProgressGimmick)
+            {
+                GameManager.Instance.Player.CurGimmick.ExitGimmick();
+                return;
+            }
         }
 
         if (GameManager.Instance.GetCurrentSceneIndex() != 0 && _canvasList[1].activeSelf)
@@ -499,6 +506,12 @@ public class UIManager : MonoBehaviour
             {
                 if (GetCurrentHoveredUI() != null)
                 {
+                    if(GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex] == null)
+                    {
+                        return;
+                    }
+
+
                     if (GameManager.Instance.GameManagerQuickSlots[_hoveredUIIndex].Data != null)
                     {
                         if (!_itemToolTip.activeSelf)

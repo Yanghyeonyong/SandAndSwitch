@@ -47,6 +47,21 @@ public class ItemPickup : MonoBehaviour
             player.SetNearbyItem(this);
             return;
         }
+        if (!_itemData.canQuickSlot)
+        {
+            if (GameManager.Instance.currentPlayerHealth >= 3)
+            {
+                return;
+            }
+            Potion potion = GetComponent<Potion>();
+            if (potion != null)
+            {
+                potion.UsePotion();
+            }
+
+            Pickup();
+            return;
+        }
         if (player.Slot != null && player.Slot.TryPickup(_itemData))
         {
             Pickup();
@@ -82,4 +97,5 @@ public class ItemPickup : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
 }

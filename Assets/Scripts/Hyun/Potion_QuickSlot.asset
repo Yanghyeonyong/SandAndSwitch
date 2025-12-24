@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
-  m_Name: Special
+  m_Name: Potion_QuickSlot
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 103
-  itemName: "\uBCF4\uBB3C"
+  id: 0
+  itemName: "\uBB3C\uC57D"
   description: 
-  type: 2
-  prefab: {fileID: 5886606223929163084, guid: 613102a45d38cb74da182a9982c859dd, type: 3}
-  icon: {fileID: -3491882392630799336, guid: a8aadeb4b96f4c547a47786bfbdbbea6, type: 3}
+  type: 1
+  prefab: {fileID: 8990918237548349237, guid: b0c82ddea090bc34db143bb777a67ca5, type: 3}
+  icon: {fileID: 21300000, guid: 6705c549357eddb47b37042f667320ca, type: 3}
   canQuickSlot: 1
   maxStack: 99
   radius: 0
