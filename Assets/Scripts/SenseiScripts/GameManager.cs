@@ -369,6 +369,7 @@ ItemData _bombScriptableObject;
     }
 
     //BGM 목록
+    // 0 타이틀 1. 튜토리얼 2. 스테이지 2 3. 스테이지 3 4. 스테이지 4 5. 페이즈 2 6. 사망 7. 승리
     //0. 튜토리얼 1. 스테이지 2 :Phase 1 2. 스테이지 4 3. 스테이지 2 : Phase 2
     [SerializeField] AudioClip[] _bgms;
 
@@ -386,6 +387,7 @@ ItemData _bombScriptableObject;
         //addressable 로딩
 
         //PutParsingResultsInScriptableObjects();
+        SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
 
 
     }
@@ -395,7 +397,8 @@ ItemData _bombScriptableObject;
 
     public void EnterPhaseTwo()
     {
-        SoundEffectManager.Instance.PlayBGM(_bgms[3]);
+        //페이즈 2 bgm은 끝에서 3번째
+        SoundEffectManager.Instance.PlayBGM(_bgms[_bgms.Length-3]);
         _gameState = (GameState)1;
         
         //플레이어의 Phase 2 대사 시작(주민규)
@@ -413,6 +416,7 @@ ItemData _bombScriptableObject;
     {
         _gameState = (GameState)0;
         _checkItem=false;
+        //SoundEffectManager.Instance.PlayBGM(_bgms[CurScene]);
         if (_gameOverCoroutine != null)
         {
             StopCoroutine(_gameOverCoroutine);
@@ -490,7 +494,10 @@ ItemData _bombScriptableObject;
     {
         yield return GameSceneLoadAsyncOperation.isDone;
         yield return null;
-        SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
+        if (_gameState == GameState.PhaseOne)
+        {
+            SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
+        }
         _player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene - 1], Quaternion.identity);
         player = _player.GetComponent<Player>();
         GameManager.Instance.RefreshAllQuickSlotUI();
@@ -499,7 +506,10 @@ ItemData _bombScriptableObject;
     {
         yield return GameSceneLoadAsyncOperation.isDone;
         yield return null;
-        SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
+        if (_gameState == GameState.PhaseOne)
+        {
+            SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
+        }
         _player = Instantiate(_playerPrefab, _checkPointData._playerPos,_checkPointData._playerRot);
         player = _player.GetComponent<Player>();
         GameManager.Instance.RefreshAllQuickSlotUI();
@@ -508,29 +518,6 @@ ItemData _bombScriptableObject;
             Debug.Log("체크포인트가 없다");
         }
         Debug.Log("체크포인트 위치 정보 : " + _checkPointData._playerPos);
-
-        //for (int i = 0; i < GameManagerQuickSlots.Length; i++)
-        //{
-        //    if (_checkPointData.GameManagerQuickSlots[i] != null)
-        //    {
-        //        if (_checkPointData.GameManagerQuickSlots[i].Data != null)
-        //        {
-        //            ItemData data = Instantiate(_checkPointData.GameManagerQuickSlots[i].Data) as ItemData;
-        //            Debug.Log("아이템 데이터 정보 : " + data.id);
-
-        //            if (data == null)
-        //            {
-        //                Debug.Log("데이터가 없다");
-        //            }
-        //            GameManagerQuickSlots[i].Init(data, _checkPointData.GameManagerQuickSlots[i].Count);
-        //            UpdateQuickSlot(i, GameManagerQuickSlots[i]);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("체크포인트에 값이 없다 : " + i);
-        //    }
-        //}
 
         for (int i = 0; i < GameManagerQuickSlots.Length; i++)
         {
@@ -548,16 +535,10 @@ ItemData _bombScriptableObject;
         yield return null;
         if (!_checkItem)
         {
-            SoundEffectManager.Instance.PlayBGM(_bgms[_curScene - 1]);
+            SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
         }
         _player = Instantiate(_playerPrefab, _playerSpawnPos[spawnPos], Quaternion.identity);
         player = _player.GetComponent<Player>();
-
-
-        //if (phaseChange)
-        //{
-        //    EnterPhaseTwo();
-        //}
     }
     public void LoadPrevScene()
     {
@@ -647,7 +628,7 @@ ItemData _bombScriptableObject;
 
         yield return GameSceneLoadAsyncOperation.isDone;
 
-
+        SoundEffectManager.Instance.PlayBGM(_bgms[_bgms.Length-1]);
         foreach (var canvas in CanvasList)
         {
             if (canvas == CanvasList[4] || canvas == CanvasList[5])
@@ -786,8 +767,11 @@ ItemData _bombScriptableObject;
     {
         CanvasList[0].SetActive(true);
         SceneManager.LoadScene(0);
+        //1224 - 양현용 : 씬 넘버 적용
+        _curScene = 0;
         CurrentCutsceneIndex = 0;
         CinematicControllerSensei.ClearCutscene();
+        SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
 
     }
 
@@ -921,6 +905,8 @@ ItemData _bombScriptableObject;
 
     public void PlayerDeath()
     {
+        SoundEffectManager.Instance.PlayBGM(_bgms[_bgms.Length - 2]);
+
         _deathWhiteToBlackFadeCoroutine = StartCoroutine(DeathWhiteToBlackFade());
 
         foreach (GameObject canvas in CanvasList)
