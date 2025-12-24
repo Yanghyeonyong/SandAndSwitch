@@ -50,9 +50,20 @@ public class ItemPickup : MonoBehaviour
                 break;
 
             case ItemType.Consumable:
-                if (player.Slot != null && player.Slot.TryPickup(_itemData))
+                if (_itemData.canQuickSlot)
                 {
-                    Pickup();
+                    if (player.Slot != null && player.Slot.TryPickup(_itemData))
+                    {
+                        Pickup();
+                    }
+                }
+                else
+                {
+                    if (GameManager.Instance.CurrentPlayerHealth < 3)
+                    {
+                        GameManager.Instance.PlayerHeal(1);
+                        Pickup();
+                    }
                 }
                 break;
 

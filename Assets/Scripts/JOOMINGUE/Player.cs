@@ -620,19 +620,27 @@ public class Player : MonoBehaviour
         {
             return;
         }
+        
+        if (data.prefab.TryGetComponent(out Potion potion))
+        {
+            if (GameManager.Instance.CurrentPlayerHealth >= GameManager.Instance.MaxPlayerHealth)
+            {
+                Debug.Log("체력이 최대라 물약 사용 불가");
+                return;
+            }
+        }
         if (!slot.TryUseCurrentSlot(slot.CurrentIndex))
         {
             return;
         }
-
         if (data.type == ItemType.Consumable && data.prefab != null)
         {
-            //물약
-            if (data.prefab.TryGetComponent(out Potion potion))
+            // 물약
+            if (data.prefab.TryGetComponent(out Potion potion2))
             {
-                potion.UsePotion();
+                potion2.UsePotion();
             }
-            //폭탄
+            // 폭탄
             else if (data.prefab.TryGetComponent(out Bomb bombPrefab))
             {
                 GameObject obj = Instantiate(data.prefab, transform.position, Quaternion.identity);

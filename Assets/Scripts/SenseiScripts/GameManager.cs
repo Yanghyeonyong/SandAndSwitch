@@ -41,31 +41,33 @@ public class GameManager : Singleton<GameManager>
 
     //cutscene info
     public int CurrentCutsceneIndex = 0;
-    public CinematicController CinematicControllerSensei {get; set;}
+    public CinematicController CinematicControllerSensei { get; set; }
 
-//addresables references
-ItemData _bombScriptableObject;
+    //addresables references
+    ItemData _bombScriptableObject;
     SpriteRenderer _bombPrefabImage;
 
 
     [Header("플레이어 체력 관련")]
     [SerializeField] private int _maxPlayerHealth = 3;
-    [SerializeField] private int CurrentPlayerHealth = 1;
+    [SerializeField] private int _currentPlayerHealth = 1;
 
     [Header("Settings")]
     public Language currentLanguage = Language.KR;
 
-    public int currentPlayerHealth
+    public int CurrentPlayerHealth
     {
         get
         {
-            return CurrentPlayerHealth;
+            return _currentPlayerHealth;
         }
         set
         {
-            CurrentPlayerHealth = value;
+            _currentPlayerHealth = value;
         }
     }
+    public int MaxPlayerHealth => _maxPlayerHealth;
+
     public List<Image> HeartImages = new List<Image>();
 
     [SerializeField] string _heartEmptyHexColor = "000000";
@@ -114,7 +116,7 @@ ItemData _bombScriptableObject;
     {
 
 
-        
+
 
 
 
@@ -149,8 +151,8 @@ ItemData _bombScriptableObject;
     AddressableAssetEntry GetEntryFromAddressableGroup(AddressableAssetGroup group, string targetAddress)
     {
         foreach (var entry in group.entries)
-            {
-            if (entry.address ==  targetAddress)
+        {
+            if (entry.address == targetAddress)
             {
                 return entry;
             }
@@ -201,7 +203,7 @@ ItemData _bombScriptableObject;
 
     public QuickSlot[] GameManagerQuickSlots { get; set; } = new QuickSlot[10];
     public Image[] GameManagerQuickSlotsImages { get; set; } = new Image[10];
-    public TextMeshProUGUI[]GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[10];
+    public TextMeshProUGUI[] GameManagerQuickSlotCountTexts { get; set; } = new TextMeshProUGUI[10];
 
     //민규님을 위한 예시
 
@@ -300,7 +302,7 @@ ItemData _bombScriptableObject;
     //251221 - 양현용 추가 : 기믹 위치 저장 ex) 박스
     public Dictionary<int, bool> IsGimmickClear
     {
-        get{ return _isGimmickClear; }
+        get { return _isGimmickClear; }
         set
         {
             _isGimmickClear = value;
@@ -401,9 +403,9 @@ ItemData _bombScriptableObject;
     public void EnterPhaseTwo()
     {
         //페이즈 2 bgm은 끝에서 3번째
-        SoundEffectManager.Instance.PlayBGM(_bgms[_bgms.Length-3]);
+        SoundEffectManager.Instance.PlayBGM(_bgms[_bgms.Length - 3]);
         _gameState = (GameState)1;
-        
+
         //플레이어의 Phase 2 대사 시작(주민규)
         if (Player != null)
         {
@@ -418,7 +420,7 @@ ItemData _bombScriptableObject;
     public void EnterPhaseOne()
     {
         _gameState = (GameState)0;
-        _checkItem=false;
+        _checkItem = false;
         //SoundEffectManager.Instance.PlayBGM(_bgms[CurScene]);
         if (_gameOverCoroutine != null)
         {
@@ -434,7 +436,7 @@ ItemData _bombScriptableObject;
 
 
     //251216 - 양현용 추가 : 다음 씬, 이전 씬으로 넘어가는 용도
-     public void LoadNextScene()
+    public void LoadNextScene()
     {
         player = null;
         _curScene++;
@@ -475,9 +477,9 @@ ItemData _bombScriptableObject;
         _curGameOverCount -= _minusGameOverCount;
         while (_curGameOverCount > 0)
         {
-        //페이즈 하얘지는 연출 추가 251221 최정욱
+            //페이즈 하얘지는 연출 추가 251221 최정욱
 
-            if (_curGameOverCount / _gameOverCount >= 1- _maxAlpha)
+            if (_curGameOverCount / _gameOverCount >= 1 - _maxAlpha)
             {
                 _currentWhiteFadeColor.a = _maxAlpha * (1f - (_curGameOverCount / _gameOverCount));
             }
@@ -513,7 +515,7 @@ ItemData _bombScriptableObject;
         {
             SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
         }
-        _player = Instantiate(_playerPrefab, _checkPointData._playerPos,_checkPointData._playerRot);
+        _player = Instantiate(_playerPrefab, _checkPointData._playerPos, _checkPointData._playerRot);
         player = _player.GetComponent<Player>();
         GameManager.Instance.RefreshAllQuickSlotUI();
         if (_checkPointData == null)
@@ -583,7 +585,7 @@ ItemData _bombScriptableObject;
         _curScene = 1;
         _isGimmickClear.Clear();
         _checkPointData.Clear();//기믹,아이템 초기화
-        _checkPointData._onCheck=false;
+        _checkPointData._onCheck = false;
         player = null;
 
         if (_gameOverCoroutine != null)
@@ -599,13 +601,13 @@ ItemData _bombScriptableObject;
             _gameOverCoroutine = null;
         }
 
-        CurrentPlayerHealth = _maxPlayerHealth;
+        _currentPlayerHealth = _maxPlayerHealth;
         HeartLogic();
         SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
         Time.timeScale = 1f;
         GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
         GameSceneLoadAsyncOperation.allowSceneActivation = false;
-        
+
         StartCoroutine(WaitForGameSceneLoad());
 
 
@@ -632,7 +634,7 @@ ItemData _bombScriptableObject;
 
         yield return GameSceneLoadAsyncOperation.isDone;
 
-        SoundEffectManager.Instance.PlayBGM(_bgms[_bgms.Length-1]);
+        SoundEffectManager.Instance.PlayBGM(_bgms[_bgms.Length - 1]);
         foreach (var canvas in CanvasList)
         {
             if (canvas == CanvasList[4] || canvas == CanvasList[5])
@@ -669,7 +671,7 @@ ItemData _bombScriptableObject;
         }
 
         yield return GameSceneLoadAsyncOperation.isDone;
-        
+
         _isLoadingGameScene = false;
 
         StartCoroutine(SpawnPlayer());
@@ -692,7 +694,7 @@ ItemData _bombScriptableObject;
                 GameManagerQuickSlotCountTexts[i].text = "";
                 GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
                 GameManagerQuickSlots[i] = null;
-            }      
+            }
             if (_gameOverCoroutine != null)
             {
                 StopCoroutine(_gameOverCoroutine);
@@ -703,7 +705,7 @@ ItemData _bombScriptableObject;
             _curScene = 1;
 
 
-            CurrentPlayerHealth = _maxPlayerHealth;
+            _currentPlayerHealth = _maxPlayerHealth;
             HeartLogic();
 
             GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
@@ -734,7 +736,7 @@ ItemData _bombScriptableObject;
     public void HeartLogic()
     {
 
-        switch(CurrentPlayerHealth)
+        switch (_currentPlayerHealth)
         {
             case 3:
                 foreach (var heart in HeartImages)
@@ -761,7 +763,7 @@ ItemData _bombScriptableObject;
                 break;
         }
 
-       
+
 
 
     }
@@ -824,7 +826,7 @@ ItemData _bombScriptableObject;
         StartCoroutine(WaitForVictorySceneLoad());
         //SceneManager.LoadScene(temp - 1);
         //Time.timeScale = 0f;
-        
+
         //CanvasList[4].SetActive(true);
         //추가로직
     }
@@ -851,9 +853,9 @@ ItemData _bombScriptableObject;
 
     public void PlayerTakeDamage(int damage)
     {
-        CurrentPlayerHealth -= damage;
+        _currentPlayerHealth -= damage;
         HeartLogic();
-        if (CurrentPlayerHealth <= 0)
+        if (_currentPlayerHealth <= 0)
         {
             PlayerDeath();
         }
@@ -863,10 +865,10 @@ ItemData _bombScriptableObject;
 
     public void PlayerHeal(int heal)
     {
-        CurrentPlayerHealth += heal;
-        if (CurrentPlayerHealth > _maxPlayerHealth)
+        _currentPlayerHealth += heal;
+        if (_currentPlayerHealth > _maxPlayerHealth)
         {
-            CurrentPlayerHealth = _maxPlayerHealth;
+            _currentPlayerHealth = _maxPlayerHealth;
         }
         HeartLogic();
         //체력 회복 로직
@@ -898,7 +900,7 @@ ItemData _bombScriptableObject;
         fadeDuration = _deathWhiteToBlackFadeDuration;
         while (fadeDuration > 0)
         {
-        //ExtraUITools[0].GetComponent<Image>().raycastTarget = true;
+            //ExtraUITools[0].GetComponent<Image>().raycastTarget = true;
             tempColor.a = (fadeDuration / _deathWhiteToBlackFadeDuration);
             ExtraUITools[0].GetComponent<Image>().color = tempColor;
             yield return _waitRealTime;
@@ -922,20 +924,20 @@ ItemData _bombScriptableObject;
                 canvas.SetActive(false);
 
             }
-            
-            
+
+
 
         }
         if (CanvasList[3].activeSelf == false)
         {
 
-        CanvasList[3].SetActive(true);
+            CanvasList[3].SetActive(true);
         }
         if (CanvasList[5].activeSelf == false)
         {
             CanvasList[5].SetActive(true);
         }
-            Time.timeScale = 0f;
+        Time.timeScale = 0f;
         EnterPhaseOne();
         //추가로직
 
@@ -970,6 +972,6 @@ ItemData _bombScriptableObject;
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

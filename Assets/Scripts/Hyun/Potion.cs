@@ -8,13 +8,6 @@ public class Potion : MonoBehaviour
 
     public void UsePotion()
     {
-        if(GameManager.Instance.currentPlayerHealth == 3)
-        {
-            return;
-        }
-        if (GameManager.Instance.currentPlayerHealth < 3)
-        {
-            GameManager.Instance.PlayerHeal(1);
-        }
+        GameManager.Instance.PlayerHeal(1);
     }
 }
