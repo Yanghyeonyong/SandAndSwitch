@@ -26,6 +26,9 @@ public enum GameState
 public enum Language { KR, EN }
 public class GameManager : Singleton<GameManager>
 {
+    //수집품 변수
+    public Image CollectibleIcon { get; set; }
+    public TextMeshProUGUI CollectibleCountText { get; set; }
 
 
     //아이템 로그 변수
