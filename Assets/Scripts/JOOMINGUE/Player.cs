@@ -51,6 +51,13 @@ public class Player : MonoBehaviour
     InputAction moveAction;
     InputAction jumpAction;
 
+    //추가 액션
+    InputAction interactAction;
+    InputAction useItemAction;
+    InputAction prevSlotAction;
+    InputAction nextSlotAction;
+    InputAction wheelAction;
+
     [Header("Chat System")]
     public GameObject chatBubbleCanvas; // 에디터에서 ChatBubbleCanvas 연결
     public TextMeshProUGUI chatText;    // 에디터에서 BubbleText 연결
@@ -116,7 +123,12 @@ public class Player : MonoBehaviour
         var map = actions.FindActionMap("Player", true);
         moveAction = map.FindAction("Move", true);
         jumpAction = map.FindAction("Jump", true);
-
+        //추가 액션
+        interactAction = map.FindAction("Interact", true);
+        useItemAction = map.FindAction("UseItem", true);
+        prevSlotAction = map.FindAction("SlotPrev", true);
+        nextSlotAction = map.FindAction("SlotNext", true);
+        wheelAction = map.FindAction("WheelScroll", true);
         //251216 - 양현용 : 게임매니저에 플레이어 전달
         GameManager.Instance.Player = this;
     }
@@ -126,8 +138,20 @@ public class Player : MonoBehaviour
         moveAction.Enable();
         jumpAction.Enable();
 
+        interactAction.Enable();
+        useItemAction.Enable();
+        prevSlotAction.Enable();
+        nextSlotAction.Enable();
+        wheelAction.Enable();
+
         jumpAction.started += OnJumpStarted;
         jumpAction.canceled += OnJumpCanceled;
+
+        interactAction.started += OnInteract;
+        useItemAction.started += OnUseItem;
+        prevSlotAction.started += OnSlotPrev;
+        nextSlotAction.started += OnSlotNext;
+        wheelAction.started += OnWheelScroll;
     }
 
     void OnDisable()
@@ -135,10 +159,20 @@ public class Player : MonoBehaviour
         jumpAction.started -= OnJumpStarted;
         jumpAction.canceled -= OnJumpCanceled;
 
+        interactAction.started -= OnInteract;
+        useItemAction.started -= OnUseItem;
+        prevSlotAction.started -= OnSlotPrev;
+        nextSlotAction.started -= OnSlotNext;
+        wheelAction.started -= OnWheelScroll;
+
         moveAction.Disable();
         jumpAction.Disable();
 
-
+        interactAction.Disable();
+        useItemAction.Disable();
+        prevSlotAction.Disable();
+        nextSlotAction.Disable();
+        wheelAction.Disable();
 
     }
 
@@ -425,7 +459,7 @@ public class Player : MonoBehaviour
     }
 
     //251216 - 양현용 : 기믹과의 상호작용
-    public void OnIneract(InputAction.CallbackContext ctx)
+    public void OnInteract(InputAction.CallbackContext ctx)
     {
         if (ctx.started && onPortal == 1)
         {
@@ -608,7 +642,7 @@ public class Player : MonoBehaviour
     }
     public void OnSlotPrev(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed)
+        if (!ctx.started)
         {
             return;
         }
@@ -616,7 +650,7 @@ public class Player : MonoBehaviour
     }
     public void OnSlotNext(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed)
+        if (!ctx.started)
         {
             return;
         }
@@ -624,7 +658,7 @@ public class Player : MonoBehaviour
     }
     public void OnWheelScroll(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed)
+        if (!ctx.started)
         {
             return;
         }
