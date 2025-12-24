@@ -597,9 +597,7 @@ ItemData _bombScriptableObject;
         //251216 - 양현용 : 새게임시 기믹 초기화 및 씬 설정
         Debug.Log("스타트");
         _curScene = 1;
-        _isGimmickClear.Clear();
-        _gimmickPos.Clear();
-        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+        _checkPointData.Clear();//기믹,아이템 초기화
         _checkPointData._onCheck=false;
         player = null;
 
@@ -701,7 +699,7 @@ ItemData _bombScriptableObject;
         if (!_checkPointData._onCheck)
         {
             CurrentCutsceneIndex = 0;
-            CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+            _checkPointData.Clear();//기믹,아이템 초기화
             //아이템 퀵슬롯 초기화 
             GameManagerQuickSlots = new QuickSlot[10];
             for (int i = 0; i < GameManagerQuickSlotCountTexts.Length; i++)
@@ -709,9 +707,7 @@ ItemData _bombScriptableObject;
                 GameManagerQuickSlotCountTexts[i].text = "";
                 GameManagerQuickSlotIcons[i].gameObject.SetActive(false);
                 GameManagerQuickSlots[i] = null;
-            }
-            _isGimmickClear.Clear();
-            _gimmickPos.Clear();
+            }      
             if (_gameOverCoroutine != null)
             {
                 StopCoroutine(_gameOverCoroutine);
@@ -733,9 +729,7 @@ ItemData _bombScriptableObject;
         {
             EnterPhaseOne();
             Debug.Log("체크포인트 기반 다시하기");
-            CollectedItemIDs.Clear();//아이템픽업 관련 초기화
-            _isGimmickClear.Clear();
-            _gimmickPos.Clear();
+            _checkPointData.Clear();//기믹,아이템 초기화
             if (_gameOverCoroutine != null)
             {
                 StopCoroutine(_gameOverCoroutine);
@@ -826,9 +820,7 @@ ItemData _bombScriptableObject;
     public void LoadVictoryScene()
     {
         _blackFadeToVictoryCoroutine = StartCoroutine(BlackFadeToVictoryCutscene());
-        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
-        _isGimmickClear.Clear();
-        _gimmickPos.Clear();
+        _checkPointData.Clear();//기믹,아이템 초기화
         if (_gameOverCoroutine != null)
         {
             StopCoroutine(_gameOverCoroutine);

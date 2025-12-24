@@ -96,12 +96,12 @@ public class CheckPointData : Singleton<CheckPointData>
         //    CollectedItemIDs.Add(itemId);
         //}
         _onCheck = true;
-
+        //플레이어 상태 저장
         _playerPos = GameManager.Instance._player.transform.position;
         _playerRot = GameManager.Instance._player.transform.rotation;
         _playerHp = GameManager.Instance.currentPlayerHealth;
         _checkPointScene = GameManager.Instance.CurScene;
-
+        //퀵슬롯 저장
         GameManagerQuickSlots = new QuickSlot[10];
         for (int i = 0; i < GameManagerQuickSlots.Length; i++)
         {
@@ -114,27 +114,31 @@ public class CheckPointData : Singleton<CheckPointData>
                 GameManagerQuickSlots[i].Init(data, src.Count);
             }
         }
-
+        //id 저장
         CollectedItemIDs.Clear();
         foreach (Vector3 pos in GameManager.Instance.CollectedItemIDs)
         {
             CollectedItemIDs.Add(pos);
         }
-
+        //기믹 상태 저장
         _isGimmickClear = new Dictionary<int, bool>(GameManager.Instance.IsGimmickClear);
         _gimmickPos = new Dictionary<int, ItemTransform>(GameManager.Instance.GimmickPos);
     }
 
     public void LoadCheckPointData()
     {
+
         GameManager.Instance._player.transform.position = _playerPos;
         GameManager.Instance._player.transform.rotation = _playerRot;
         GameManager.Instance.currentPlayerHealth = _playerHp;
         GameManager.Instance.CurScene = _checkPointScene;
+
         //이거 하니까 아이템 데이터 사라지는 것 확인
         //GameManager.Instance.GameManagerQuickSlots = GameManagerQuickSlots;
+
         GameManager.Instance.IsGimmickClear = _isGimmickClear;
         GameManager.Instance.GimmickPos = _gimmickPos;
+
         //GameManager.Instance.CollectedItemIDs = CollectedItemIDs;
         //foreach (Vector3 pos in CollectedItemIDs)
         //{
@@ -144,12 +148,6 @@ public class CheckPointData : Singleton<CheckPointData>
         //    }
         //    GameManager.Instance.CollectedItemIDs.Add(pos);
         //}
-        GameManager.Instance.CollectedItemIDs.Clear();
-
-        foreach (Vector3 pos in CollectedItemIDs)
-        {
-            GameManager.Instance.CollectedItemIDs.Add(pos);
-        }
 
         //for (int i = 0; i < GameManagerQuickSlots.Length; i++)
         //{
@@ -169,6 +167,15 @@ public class CheckPointData : Singleton<CheckPointData>
         //        GameManager.Instance.UpdateQuickSlot(i, GameManagerQuickSlots[i]);
         //    }
         //}
+
+        //id복원
+        GameManager.Instance.CollectedItemIDs.Clear();
+        foreach (Vector3 pos in CollectedItemIDs)
+        {
+            GameManager.Instance.CollectedItemIDs.Add(pos);
+        }
+
+        //퀵슬롯 복원
         for (int i = 0; i < GameManager.Instance.GameManagerQuickSlots.Length; i++)
         {
             GameManager.Instance.GameManagerQuickSlots[i].Clear();
@@ -180,6 +187,7 @@ public class CheckPointData : Singleton<CheckPointData>
             {
                 ItemData data = FindItem(GameManagerQuickSlots[i].Data.id);
                 GameManager.Instance.GameManagerQuickSlots[i].Init(data, GameManagerQuickSlots[i].Count);
+                //이전 Ui가 남는 문제가 있어서 즉시 반영하도록 추가
                 GameManager.Instance.UpdateQuickSlot(i, GameManager.Instance.GameManagerQuickSlots[i]);
             }
         }
@@ -197,5 +205,12 @@ public class CheckPointData : Singleton<CheckPointData>
             }
         }
         return null;
+    }
+    public void Clear()//초기화를 메서드로 만듬
+    {
+        CollectedItemIDs.Clear();//아이템픽업 관련 초기화
+        //기믹 관련 초기화
+        _isGimmickClear.Clear();
+        _gimmickPos.Clear();
     }
 }
