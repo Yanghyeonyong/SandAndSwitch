@@ -5,6 +5,7 @@ using System;
 public class CollectSlotController : MonoBehaviour
 {
     private Dictionary<int, CollectSlot> _slots = new Dictionary<int, CollectSlot>();
+
     public IReadOnlyDictionary<int, CollectSlot> Slots => _slots;
 
 

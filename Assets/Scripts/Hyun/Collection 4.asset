@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
-  m_Name: Collection
+  m_Name: Collection 4
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 401
+  id: 404
   itemName: "\uC218\uC9D1\uD488"
   EnItemName: 
   description: 
@@ -21,7 +21,7 @@ MonoBehaviour:
   prefab: {fileID: 0}
   icon: {fileID: 0}
   canQuickSlot: 1
-  maxStack: 99
+  maxStack: 1
   radius: 0
   delay: 0
   targetLayer:
