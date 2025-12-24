@@ -11578,7 +11578,7 @@ MonoBehaviour:
   CollectedItemIDs: []
   _checkItem: 0
   _onProgressGimmick: 0
-  _curScene: 1
+  _curScene: 0
   onSelection: 0
   _playerPrefab: {fileID: 673342718292914668, guid: 04458193750062148a0826942060c90d, type: 3}
   _player: {fileID: 0}
@@ -11591,10 +11591,13 @@ MonoBehaviour:
   _curGameOverCount: 60
   _minusGameOverCount: 0.1
   _bgms:
+  - {fileID: 8300000, guid: 227be3b57f3b7604cae96d689f971d7b, type: 3}
   - {fileID: 8300000, guid: ddcf0f684cd43424a939fd70075506e1, type: 3}
   - {fileID: 8300000, guid: d491b17a59cf46e4293192fc293b587d, type: 3}
   - {fileID: 8300000, guid: 41a6006e56f25934abcbb18bc82db9d5, type: 3}
   - {fileID: 8300000, guid: 4df603504ddd43f488f4288d5ad5ee12, type: 3}
+  - {fileID: 8300000, guid: 2434353ecc87efa438e64583f2a46db1, type: 3}
+  - {fileID: 8300000, guid: 14d6b94a24253154d95b5b71b4f347d6, type: 3}
   _phaseTwoScreenColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _maxAlpha: 0.8
   _blackFadeToVictoryCutscenesTime: 3
