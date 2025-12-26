@@ -769,6 +769,7 @@ public class GameManager : Singleton<GameManager>
             CollectibleCountText.text = "0/" + TotalCollectibleCount;
             CurrentCutsceneIndex = 0;
             _checkPointData.Clear();//기믹,아이템 초기화
+            CollectedItemIDs.Clear();//아이템픽업 관련 초기화
             //아이템 퀵슬롯 초기화 
             GameManagerQuickSlots = new QuickSlot[10];
             for (int i = 0; i < GameManagerQuickSlotCountTexts.Length; i++)
