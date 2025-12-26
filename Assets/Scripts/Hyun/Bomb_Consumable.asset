@@ -19,7 +19,7 @@ MonoBehaviour:
   EnDescription: 
   type: 1
   prefab: {fileID: 6008120758980611909, guid: 1acefdf1a87e85e448b42e1dc49ccc4b, type: 3}
-  icon: {fileID: -8368097971112543834, guid: b5a00b4863784f34986bdb7f6d01474e, type: 3}
+  icon: {fileID: -2613247888821195678, guid: fe757fe48e0478946886c386485f8efa, type: 3}
   canQuickSlot: 1
   maxStack: 99
   radius: 6.5
@@ -28,5 +28,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   pickupSoundClip: {fileID: 8300000, guid: ae0a55a68d99d794799658af84322e7a, type: 3}
-  typeKor: 
-  typeEng: 
+  typeKor: "\uC18C\uBE44 \uC544\uC774\uD15C"
+  typeEng: Consumable

@@ -85,7 +85,8 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-
+        //미리 컬렉트슬롯 캐싱 251226
+        _collectSlotContoller = GetComponent<CollectSlotController>();
         LoadTables();      // 1) 파싱
         ResolveTableAssets(); // 2) 프리팹/아이콘 실제 로드
 
@@ -94,7 +95,29 @@ public class GameManager : Singleton<GameManager>
 #endif
     }
 
+    //컬렉션컨트롤러 관련 이벤트 251226
+    private void OnEnable()//이벤트 구독
+    {
+        _collectSlotContoller.OnCollectChanged += OnCollectSlotUpdated;
+    }
+    private void OnDisable()//이벤트 해제
+    {
+        _collectSlotContoller.OnCollectChanged -= OnCollectSlotUpdated;
+    }
 
+    //컬렉션컨트롤러의 이벤트를 받고 사용할 메서드 251226
+    private void OnCollectSlotUpdated(CollectSlot slot)
+    {
+        ItemLogCanvas.PickupOrUseLogic(slot.Data, 1);
+
+        CollectibleCountText.text = slot.Count + "/" + TotalCollectibleCount;
+
+        if (CollectibleIcon.color.a != 1f)
+            CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
+
+        // 기존 GameManager UI 갱신 함수 사용
+        UpdateCollectSlot(slot);
+    }
 #if UNITY_EDITOR
     public string GetAssociatedDescriptionFromImage(GameObject objectToCompare)
 
@@ -412,24 +435,8 @@ public class GameManager : Singleton<GameManager>
         //PutParsingResultsInScriptableObjects();
         SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
 
-        //컬렉션컨트롤러 관련 이벤트 251226
-        _collectSlotContoller = GetComponent<CollectSlotController>();
-        _collectSlotContoller.OnCollectChanged += OnCollectSlotUpdated;
-
     }
-    //컬렉션컨트롤러의 이벤트를 받고 사용할 메서드 251226
-    private void OnCollectSlotUpdated(CollectSlot slot)
-    {
-        ItemLogCanvas.PickupOrUseLogic(slot.Data, 1);
-
-        CollectibleCountText.text = slot.Count + "/" + TotalCollectibleCount;
-
-        if (CollectibleIcon.color.a != 1f)
-            CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
-
-        // 기존 GameManager UI 갱신 함수 사용
-        UpdateCollectSlot(slot);
-    }
+   
 
 
     Coroutine _phaseTwoFadeCortouine;
