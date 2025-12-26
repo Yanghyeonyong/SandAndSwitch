@@ -18,8 +18,8 @@ MonoBehaviour:
   description: 
   EnDescription: 
   type: 4
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 6616243943990019364, guid: 7e7b1f6b70676a94d807044c9875e9fe, type: 3}
+  icon: {fileID: -5169007791831861992, guid: a7c750b287dec0144ad56c3b4504713d, type: 3}
   canQuickSlot: 1
   maxStack: 1
   radius: 0
