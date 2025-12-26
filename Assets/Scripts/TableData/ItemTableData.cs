@@ -12,10 +12,12 @@ public class ItemTableData : TableBase
     // CSV에서 읽는 값(문자열 경로/키)
     public string Prefab;
     public string Icon;
+    public string Sound;
 
     // 로드해서 쓰는 실제 오브젝트(테이블 후처리에서 채움)
     [NonSerialized] public GameObject PrefabObject;
     [NonSerialized] public Sprite IconSprite;
+    [NonSerialized] public Sprite SoundEffect;
 
     public string NameText
     {
