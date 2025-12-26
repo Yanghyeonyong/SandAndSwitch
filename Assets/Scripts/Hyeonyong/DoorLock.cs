@@ -49,6 +49,7 @@ public class DoorLock : MonoBehaviour
             {
                 _numButtons[i] = transform.GetChild(i).GetComponent<Button>();
                 _numButtons[i].onClick.AddListener(() => SetPassword(0));
+                continue;
             }
             _numButtons[i] = transform.GetChild(i).GetComponent<Button>();
             _numButtons[i].onClick.AddListener(() => SetPassword(index + 1));
@@ -72,7 +73,7 @@ public class DoorLock : MonoBehaviour
     {
         _gimmick = gimmick;
         _password = _gimmick.Password;
-        _testObject = _gimmick.DoorObject;
+        //_testObject = _gimmick.DoorObject;
         _obj = _gimmick.Obj;
     }
 
@@ -116,20 +117,20 @@ public class DoorLock : MonoBehaviour
         _audioSource.Play();
     }
 
-    IEnumerator CollectPassword()
-    {
-        Debug.Log("도어락 사운드 실행");
-        PlaySound(_audio[1]);
-        GameManager.Instance.IsGimmickClear[_gimmick.GimmickId] = true;
-        _testObject.SetActive(false);
+    //IEnumerator CollectPassword()
+    //{
+    //    Debug.Log("도어락 사운드 실행");
+    //    PlaySound(_audio[1]);
+    //    GameManager.Instance.IsGimmickClear[_gimmick.GimmickId] = true;
+    //    _testObject.SetActive(false);
 
-        _gimmick.IsClear = true;
-        _gimmick = null;
-        GameManager.Instance.OnProgressGimmick = false;
-        yield return new WaitForSeconds(_audioSource.clip.length);
-        _audioSource.clip = null;
-        gameObject.SetActive(false);
-    }
+    //    _gimmick.IsClear = true;
+    //    _gimmick = null;
+    //    GameManager.Instance.OnProgressGimmick = false;
+    //    yield return new WaitForSeconds(_audioSource.clip.length);
+    //    _audioSource.clip = null;
+    //    gameObject.SetActive(false);
+    //}
     private void OnDisable()
     {
         _curCount = 0;
