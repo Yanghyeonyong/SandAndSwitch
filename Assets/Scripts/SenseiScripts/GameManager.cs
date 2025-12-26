@@ -205,7 +205,7 @@ public class GameManager : Singleton<GameManager>
         _bombScriptableObject.prefab = AssetDatabase.LoadAssetAtPath<GameObject>(ItemTable[101].Prefab);
         _bombScriptableObject.icon = AssetDatabase.LoadAssetAtPath<Sprite>(ItemTable[101].Icon);
         _bombPrefabImage.sprite = _bombScriptableObject.icon; //어차피 변경되어 
-
+        _bombScriptableObject.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[101].PickupSound);
         //string test = StringTable["Test"].kr;
 
 
