@@ -42869,8 +42869,7 @@ MonoBehaviour:
   _clearPortal: {fileID: 839951088}
   _phaseTwoUI: {fileID: 1704858314}
   _tableId:
-  - char_chat_0001
-  - char_chat_0001
+  - ig_set_0002
   _text:
   - {fileID: 556719003}
 --- !u!4 &1855966604
