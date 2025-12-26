@@ -89,11 +89,6 @@ public class CollectSlotController : MonoBehaviour
         //UI갱신
         OnCollectChanged?.Invoke(slot);
     }
-    //보유 여부
-    public bool HasItem(int itemId, int requiredCount = 1)
-    {
-        return _slots.ContainsKey(itemId) && _slots[itemId].Count >= requiredCount;
-    }
 
 
 
