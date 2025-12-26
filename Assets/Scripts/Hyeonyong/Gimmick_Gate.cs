@@ -26,12 +26,13 @@ public class Gimmick_Gate : Gimmick
             IsClear = true;
             if (index != -1)
             {
-                for (int i = 0; i < _requireCount; i++)
-                {
-                    Debug.Log("열쇠 사용");
-                    //GameManager.Instance.Player.Slot.TryUseCurrentSlot(index);
-                    GameManager.Instance.Player.Slot.ConsumeKeySlot(index, 1);
-                }
+                //for (int i = 0; i < _requireCount; i++)
+                //{
+                //    Debug.Log("열쇠 사용");
+                //    //GameManager.Instance.Player.Slot.TryUseCurrentSlot(index);
+                //    GameManager.Instance.Player.Slot.ConsumeKeySlot(index, 1);
+                //}
+                GameManager.Instance.Player.Slot.ConsumeKeySlot(index, _requireCount);
                 //키 사용이 끝난후에 비어있는 슬롯 이동
                 GameManager.Instance.Player.Slot.ShiftSlots();
                 //UI갱신

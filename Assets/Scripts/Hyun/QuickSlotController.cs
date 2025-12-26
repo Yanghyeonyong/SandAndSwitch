@@ -275,8 +275,8 @@ public class QuickSlotController : MonoBehaviour
     {
         QuickSlot slot = _slots[index];
 
-        // 슬롯이 비었거나 키가 아니면 실패
-        if (slot.IsEmpty || slot.Data == null || slot.Data.type != ItemType.Key)
+        // 슬롯이 키가 아니면 실패
+        if (slot.Data == null || slot.Data.type != ItemType.Key)
         {
             return false;
         }
@@ -286,10 +286,10 @@ public class QuickSlotController : MonoBehaviour
         {
             return false;
         }
-
+        ItemData backupData = slot.Data;
         // 개수 차감
         slot.Use(consumeCount);
-        GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, -consumeCount);
+        GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(backupData, -consumeCount);
         GameManager.Instance.UpdateQuickSlot(index, slot);
         //OnQuickSlotChanged?.Invoke(index, slot);
         return true;
