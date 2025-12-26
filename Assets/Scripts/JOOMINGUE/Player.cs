@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     InputAction prevSlotAction;
     InputAction nextSlotAction;
     InputAction wheelAction;
+    InputAction selectSlotAction;
 
     [Header("Chat System")]
     public GameObject chatBubbleCanvas; // 에디터에서 ChatBubbleCanvas 연결
@@ -129,6 +130,7 @@ public class Player : MonoBehaviour
         prevSlotAction = map.FindAction("SlotPrev", true);
         nextSlotAction = map.FindAction("SlotNext", true);
         wheelAction = map.FindAction("WheelScroll", true);
+        selectSlotAction = map.FindAction("SlotSelect", true);
         //251216 - 양현용 : 게임매니저에 플레이어 전달
         GameManager.Instance.Player = this;
     }
@@ -143,6 +145,7 @@ public class Player : MonoBehaviour
         prevSlotAction.Enable();
         nextSlotAction.Enable();
         wheelAction.Enable();
+        selectSlotAction.Enable();
 
         jumpAction.started += OnJumpStarted;
         jumpAction.canceled += OnJumpCanceled;
@@ -152,6 +155,7 @@ public class Player : MonoBehaviour
         prevSlotAction.started += OnSlotPrev;
         nextSlotAction.started += OnSlotNext;
         wheelAction.started += OnWheelScroll;
+        selectSlotAction.performed += OnSelectSlot;
     }
 
     void OnDisable()
@@ -164,6 +168,7 @@ public class Player : MonoBehaviour
         prevSlotAction.started -= OnSlotPrev;
         nextSlotAction.started -= OnSlotNext;
         wheelAction.started -= OnWheelScroll;
+        selectSlotAction.performed -= OnSelectSlot;
 
         moveAction.Disable();
         jumpAction.Disable();
@@ -173,6 +178,7 @@ public class Player : MonoBehaviour
         prevSlotAction.Disable();
         nextSlotAction.Disable();
         wheelAction.Disable();
+        selectSlotAction.Disable();
 
     }
 
