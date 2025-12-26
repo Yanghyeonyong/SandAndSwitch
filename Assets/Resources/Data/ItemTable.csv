@@ -1,6 +1,6 @@
 ID|DevDesc|Name|Desc|Type|MaxStack|Prefab|Icon|PickupSound
 int|-|string|string|enum|int|string|string|string
-101|폭탄|it_name_101|it_exp_101|1|99|Assets/Prefab/Bomb.prefab|Assets/ExcludeGit/DirectAssets/Item/bomb.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType1.mp3
+101|폭탄|it_name_101|it_exp_101|1|99|Assets/Prefab/Bomb.prefab|Assets/ExcludeGit/DirectAssets/Item/bombthird.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType1.mp3
 102|하트 포션|it_name_102|it_exp_102|1|99||Assets/ExcludeGit/DirectAssets/12.24 Add Assets/Potion.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType1.mp3
 201|보물|it_name_201|it_exp_201|2|99||Assets/ExcludeGit/DirectAssets/12.24 Add Assets/ibm5150.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType1.mp3
 301|관문 기믹 키 - 열쇠|it_name_301|it_exp_301|3|3||Assets/ExcludeGit/DirectAssets/12.24 Add Assets/GateKey.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType3.mp3
