@@ -107,7 +107,8 @@ public class ItemPickup : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(_itemData.pickupSoundClip, transform.position, _soundValue);
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
 }

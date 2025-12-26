@@ -9,6 +9,8 @@ public class QuickSlotController : MonoBehaviour
 
     private float _wheelTimer = 0f;
 
+    //public event Action<int, QuickSlot> OnQuickSlotChanged;
+
     //읽기전용
     public int CurrentIndex { get; private set; } = 0;
     public QuickSlot CurrentSlot => _slots[CurrentIndex];
@@ -286,10 +288,10 @@ public class QuickSlotController : MonoBehaviour
         }
 
         // 개수 차감
-        GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, -consumeCount);
         slot.Use(consumeCount);
+        GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, -consumeCount);
         GameManager.Instance.UpdateQuickSlot(index, slot);
-
+        //OnQuickSlotChanged?.Invoke(index, slot);
         return true;
     }
 }
