@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -5,10 +7,12 @@ public class Gimmick_Gate : Gimmick
 {
     [SerializeField] int _itemId;
     [SerializeField] int _requireCount;
+    Animator _animator;
     int length;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _animator = GetComponent<Animator>();
         if (CheckClear())
         {
             //문이 열려있고 씬 이동이 활성화되어있는 상태
@@ -41,9 +45,9 @@ public class Gimmick_Gate : Gimmick
             //NullReferenceExeption 방지를 위해 IsReuse를 false로 전환
             GetComponent<InteractiveObject>().IsReuse = false;
             GameManager.Instance.IsGimmickClear[GimmickId] = true;
-            GameManager.Instance.LoadNextScene();
+            //GameManager.Instance.LoadNextScene();
             //gameObject.SetActive(false);
-
+            StartCoroutine(GateOpen());
         }
     }
 
@@ -71,5 +75,14 @@ public class Gimmick_Gate : Gimmick
             }
         }
         return -1;
+    }
+
+    IEnumerator GateOpen()
+    {
+        _animator.SetTrigger("TurnOn");
+        yield return null;
+        float _animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(_animationLength);
+        GameManager.Instance.LoadNextScene();
     }
 }

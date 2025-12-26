@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Gimmick_TimeBomb : Gimmick
 {
@@ -66,7 +67,43 @@ public class Gimmick_TimeBomb : Gimmick
         yield return new WaitForSeconds(_animationLength);
         IsClear=true;
         GameManager.Instance.IsGimmickClear[GimmickId] = true;
+        BreakRadius();
         gameObject.SetActive(false);
 
+    }
+
+    private void BreakRadius()
+    {
+        Vector3 origin = transform.position;
+
+        // 타일맵 탐색
+        int breakWall = LayerMask.GetMask("BreakWall");
+        Collider2D[] maps = Physics2D.OverlapCircleAll(origin, _range, breakWall);
+
+        foreach (var col in maps)
+        {
+            Tilemap map = col.GetComponent<Tilemap>();
+            if (map == null)
+            {
+                continue;
+            }
+
+            // 폭발 범위 내부의 타일만 제거
+            BoundsInt bounds = map.cellBounds;
+
+            for (int x = bounds.xMin; x <= bounds.xMax; x++)
+            {
+                for (int y = bounds.yMin; y <= bounds.yMax; y++)
+                {
+                    Vector3Int cell = new Vector3Int(x, y, 0);
+                    Vector3 world = map.GetCellCenterWorld(cell);
+
+                    if (Vector2.Distance(origin, world) <= _range)
+                    {
+                        map.SetTile(cell, null);
+                    }
+                }
+            }
+        }
     }
 }
