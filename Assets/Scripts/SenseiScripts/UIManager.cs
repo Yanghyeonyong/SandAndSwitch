@@ -228,7 +228,7 @@ public class UIManager : MonoBehaviour
         _pauseMenuButton[2].onClick.AddListener(ResumeLogic);
         _pauseMenuButton[3].onClick.AddListener(ControlGuideLogic);
         _pauseMenuButton[3].onClick.AddListener(PlayUIClickSound);
-        _pauseMenuButton[3].onClick.AddListener(ChangeLanguageLogic);
+        //_pauseMenuButton[3].onClick.AddListener(ChangeLanguageLogic);
 
 
         _gameOverMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
