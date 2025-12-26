@@ -17,7 +17,7 @@ public class ItemTableData : TableBase
     // 로드해서 쓰는 실제 오브젝트(테이블 후처리에서 채움)
     [NonSerialized] public GameObject PrefabObject;
     [NonSerialized] public Sprite IconSprite;
-    [NonSerialized] public Sprite SoundEffect;
+    [NonSerialized] public AudioClip SoundEffect;
 
     public string NameText
     {
