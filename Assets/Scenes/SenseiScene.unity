@@ -11591,9 +11591,11 @@ MonoBehaviour:
   _player: {fileID: 0}
   _playerSpawnPos:
   - {x: -5, y: -3, z: 0}
-  - {x: 6.4, y: 0, z: 0}
-  - {x: -5, y: -3, z: 0}
-  - {x: -53, y: -62, z: 0}
+  - {x: 42, y: 5, z: 0}
+  - {x: 97, y: 39.26, z: 0}
+  - {x: 12, y: -3, z: 0}
+  - {x: -69, y: -88, z: 0}
+  - {x: 35, y: -11.7, z: 0}
   _gameOverCount: 60
   _curGameOverCount: 60
   _minusGameOverCount: 0.1

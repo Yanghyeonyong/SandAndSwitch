@@ -532,12 +532,11 @@ public class GameManager : Singleton<GameManager>
         _curScene++;
         SceneManager.LoadScene(_curScene);
 
-        if (_curScene >= 1 && _curScene <= 3)
-        {
+        //if (_curScene >= 1 && _curScene <= 3)
+        //{
             //_player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene-1], Quaternion.identity);
             //player = _player.GetComponent<Player>();
             StartCoroutine(SpawnPlayer());
-        }
     }
 
     //25122 - 양현용 추가 : 원하는 씬으로 넘어가는 용도
@@ -662,7 +661,22 @@ public class GameManager : Singleton<GameManager>
         {
             SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
         }
+        //4에서 3 3에서 2로 가는 경우
+
         _player = Instantiate(_playerPrefab, _playerSpawnPos[spawnPos], Quaternion.identity);
+        player = _player.GetComponent<Player>();
+    }
+    IEnumerator SpawnPlayer_Prev()
+    {
+        yield return GameSceneLoadAsyncOperation.isDone;
+        yield return null;
+        if (!_checkItem)
+        {
+            SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
+        }
+        //4에서 3 3에서 2로 가는 경우
+
+        _player = Instantiate(_playerPrefab, _playerSpawnPos[_curScene+2], Quaternion.identity);
         player = _player.GetComponent<Player>();
     }
     public void LoadPrevScene()
@@ -671,16 +685,17 @@ public class GameManager : Singleton<GameManager>
         _curScene--;
         SceneManager.LoadScene(_curScene);
         //현재 페이즈가 전환되는 시점의 씬 넘버가 2라서 이와 같이 적용
-        if (_curScene == 2)
-        {
-            //_player = Instantiate(_playerPrefab, _playerSpawnPos[3], Quaternion.identity);
-            //player = _player.GetComponent<Player>();
+        //if (_curScene == 2)
+        //{
+        //    //_player = Instantiate(_playerPrefab, _playerSpawnPos[3], Quaternion.identity);
+        //    //player = _player.GetComponent<Player>();
 
-            //테스트용으로 남는 bool값 아이템 보유 여부로 사용
+        //    //테스트용으로 남는 bool값 아이템 보유 여부로 사용
 
 
-            StartCoroutine(SpawnPlayer_Prev(3));
-        }
+        //    StartCoroutine(SpawnPlayer_Prev(3));
+        //}
+        StartCoroutine(SpawnPlayer_Prev());
     }
 
     public AsyncOperation GameSceneLoadAsyncOperation;

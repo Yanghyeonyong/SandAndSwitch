@@ -89,7 +89,14 @@ public class CheckClear : MonoBehaviour
 
             if (data != null)
             {
-                return data.kr; // StringTableData의 'kr' 변수 값 반환 (예: "아야!")
+                if (GameManager.Instance.currentLanguage == Language.KR)
+                {
+                    return data.kr; // StringTableData의 'kr' 변수 값 반환 (예: "아야!")
+                }
+                else if (GameManager.Instance.currentLanguage == Language.EN)
+                {
+                    return data.en; // StringTableData의 'en' 변수 값 반환 (예: "Ouch!")
+                }
             }
         }
 
