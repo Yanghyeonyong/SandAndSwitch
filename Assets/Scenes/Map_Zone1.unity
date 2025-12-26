@@ -373,7 +373,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0.050000012, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -912,6 +912,10 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: -0.0055117384
       objectReference: {fileID: 0}
+    - target: {fileID: 5767373808722810240, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 1820176960}
     - target: {fileID: 6022170838389102077, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -925,6 +929,10 @@ PrefabInstance:
       value: -0.006614119
       objectReference: {fileID: 0}
     - target: {fileID: 6323244766650018748, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 1820176960}
+    - target: {fileID: 8240317526630073475, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
       propertyPath: _interactiveUI
       value: 
       objectReference: {fileID: 1820176960}
@@ -21425,7 +21433,7 @@ CompositeCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -21716,7 +21724,7 @@ PrefabInstance:
     - target: {fileID: 5612845094543276731, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: _interactiveUI
       value: 
-      objectReference: {fileID: 1820176959}
+      objectReference: {fileID: 1820176960}
     - target: {fileID: 5830423973767855423, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: m_Name
       value: WoodenItemBox
@@ -21725,6 +21733,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 1820176960}
     - target: {fileID: 7165754520019267442, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: _uniqueID
       value: ee681ca9-bb67-4fde-a4f3-ac8cc0e0b579
@@ -22311,11 +22323,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
---- !u!1 &1820176959 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7859215601316787471, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
-  m_PrefabInstance: {fileID: 1820176958}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1820176960 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8313381681718479824, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
@@ -22462,11 +22469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8853817001050741795, guid: 04458193750062148a0826942060c90d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.52
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8853817001050741795, guid: 04458193750062148a0826942060c90d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.02
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8853817001050741795, guid: 04458193750062148a0826942060c90d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22798,7 +22805,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0.050000012, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0

@@ -1075,6 +1075,7 @@ GameObject:
   - component: {fileID: 156225082}
   - component: {fileID: 156225081}
   - component: {fileID: 156225080}
+  - component: {fileID: 156225084}
   m_Layer: 0
   m_Name: Portal_End
   m_TagString: Untagged
@@ -1131,9 +1132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 242189ce8a6366c48b2e79b269a4ad4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_Gate
-  _gimmickId: 0
-  _itemId: 0
-  _requireCount: 0
+  _gimmickId: 342
+  _itemId: 301
+  _requireCount: 3
 --- !u!61 &156225082
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1238,6 +1239,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &156225084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156225078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0292107f62db3e7478a1976754147deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
+  _interactiveUI: {fileID: 790421004}
+  _isReuse: 1
+  _isTeleport: 0
+  _CheckItem: 0
 --- !u!4 &157525960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3386999639568982978, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
@@ -5192,6 +5209,57 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &697458781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 697458783}
+  - component: {fileID: 697458782}
+  m_Layer: 0
+  m_Name: CheckClear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &697458782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697458781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c742f1cfec2eb42b6c22ff5761ad55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckClear
+  _itemId: 201
+  _clearPortal: {fileID: 0}
+  _phaseTwoUI: {fileID: 790421006}
+  _tableId:
+  - ig_set_0002
+  _text:
+  - {fileID: 790421007}
+--- !u!4 &697458783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697458781}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.88583, y: -11.72304, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &705053819
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6537,6 +6605,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3914049868688935356, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
   m_PrefabInstance: {fileID: 790421003}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &790421006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3400543341049423541, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
+  m_PrefabInstance: {fileID: 790421003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &790421007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7635562570331670739, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
+  m_PrefabInstance: {fileID: 790421003}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &799883067
 GameObject:
   m_ObjectHideFlags: 0
@@ -126204,7 +126288,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.04545456, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.100000024, y: 0.050000012, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -130305,3 +130389,4 @@ SceneRoots:
   - {fileID: 522798034}
   - {fileID: 91375652}
   - {fileID: 1477635882}
+  - {fileID: 697458783}
