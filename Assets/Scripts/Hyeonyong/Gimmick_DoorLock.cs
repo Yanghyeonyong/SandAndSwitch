@@ -30,7 +30,7 @@ public class Gimmick_DoorLock : Gimmick
     int length = 0;
     private void Start()
     {
-        _obj=GetComponent<Gimmick_Object>();
+        _obj =GetComponent<Gimmick_Object>();
         if (CheckClear())
         {
             //클리어 했으면 클리어된 판정 이벤트 실행
