@@ -211,7 +211,7 @@ public class GameManager : Singleton<GameManager>
             if (!string.IsNullOrEmpty(row.Icon))
                 row.IconSprite = Resources.Load<Sprite>(row.Icon);
             if (!string.IsNullOrEmpty(row.Sound))
-                row.IconSprite = Resources.Load<Sprite>(row.Sound);
+                row.SoundEffect = Resources.Load<AudioClip>(row.Sound);
         }
     }
 
