@@ -8,6 +8,8 @@ public class CollectSlotController : MonoBehaviour
     [SerializeField] ItemData _collectItem;
     //public IReadOnlyDictionary<int, CollectSlot> Slots => _slots;
 
+    public event Action<CollectSlot> OnCollectChanged;
+
     public Dictionary<int, CollectSlot> Slots
     {
         get { return _slots; }
@@ -35,41 +37,57 @@ public class CollectSlotController : MonoBehaviour
 
     public void Collect(ItemData data)
     {
-        if (data == null)
+        //if (data == null)
+        //{
+        //    return;
+        //}
+        //if (data.type != ItemType.Collection)
+        //{
+        //    return;
+        //}
+        //if (_slots.TryGetValue(data.id, out CollectSlot slot))
+        //{
+        //    //if (_slots[data.id].Data != data)
+        //    //{
+        //    //    _slots[data.id].Data = data;
+        //    //}
+        //    GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(data, 1);
+        //    slot.Add(1);
+        //    GameManager.Instance.CollectibleCountText.text = slot.Count + "/" + GameManager.Instance.TotalCollectibleCount;
+        //    if (GameManager.Instance.CollectibleIcon.color.a != 1f)
+        //    {
+        //        GameManager.Instance.CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
+        //    }
+        //}
+        //else
+        //{
+        //    GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(data, 1);
+        //    _slots.Add(data.id, new CollectSlot
+        //    {
+        //        Data = data,
+        //        Count = 1
+        //    });
+        //    GameManager.Instance.CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
+        //    GameManager.Instance.CollectibleCountText.text = 1 + "/"+ GameManager.Instance.TotalCollectibleCount;
+        //}
+        if (data == null || data.type != ItemType.Collection)
         {
             return;
         }
-        if (data.type != ItemType.Collection)
+
+        CollectSlot slot;
+
+        if (_slots.TryGetValue(data.id, out slot))
         {
-            return;
-        }
-        if (_slots.TryGetValue(data.id, out CollectSlot slot))
-        {
-            //if (_slots[data.id].Data != data)
-            //{
-            //    _slots[data.id].Data = data;
-            //}
-            GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(data, 1);
             slot.Add(1);
-            GameManager.Instance.CollectibleCountText.text = slot.Count + "/" + GameManager.Instance.TotalCollectibleCount;
-            if (GameManager.Instance.CollectibleIcon.color.a != 1f)
-            {
-                GameManager.Instance.CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
-            }
         }
         else
         {
-            GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(data, 1);
-            _slots.Add(data.id, new CollectSlot
-            {
-                Data = data,
-                Count = 1
-            });
-            GameManager.Instance.CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
-            GameManager.Instance.CollectibleCountText.text = 1 + "/"+ GameManager.Instance.TotalCollectibleCount;
+            slot = new CollectSlot { Data = data, Count = 1 };
+            _slots.Add(data.id, slot);
         }
-
         //UI갱신
+        OnCollectChanged?.Invoke(slot);
     }
     //보유 여부
     public bool HasItem(int itemId, int requiredCount = 1)

@@ -412,8 +412,25 @@ public class GameManager : Singleton<GameManager>
         //PutParsingResultsInScriptableObjects();
         SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
 
+        //컬렉션컨트롤러 관련 이벤트 251226
+        _collectSlotContoller = GetComponent<CollectSlotController>();
+        _collectSlotContoller.OnCollectChanged += OnCollectSlotUpdated;
 
     }
+    //컬렉션컨트롤러의 이벤트를 받고 사용할 메서드 251226
+    private void OnCollectSlotUpdated(CollectSlot slot)
+    {
+        ItemLogCanvas.PickupOrUseLogic(slot.Data, 1);
+
+        CollectibleCountText.text = slot.Count + "/" + TotalCollectibleCount;
+
+        if (CollectibleIcon.color.a != 1f)
+            CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
+
+        // 기존 GameManager UI 갱신 함수 사용
+        UpdateCollectSlot(slot);
+    }
+
 
     Coroutine _phaseTwoFadeCortouine;
 
