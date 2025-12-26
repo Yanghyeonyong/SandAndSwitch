@@ -701,6 +701,7 @@ public class GameManager : Singleton<GameManager>
     public AsyncOperation GameSceneLoadAsyncOperation;
     public void LoadGameScene()
     {
+        FiredPhaseTwoDialogue = false;
         CollectibleIcon.color = new Color(1f, 1f, 1f, 0.2f);
         CollectibleCountText.text = "0/" + TotalCollectibleCount;
 
@@ -824,6 +825,7 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
+        FiredPhaseTwoDialogue = false;
         if (!_checkPointData._onCheck)
         {
             CollectibleIcon.color = new Color(1f, 1f, 1f, 0.2f);
@@ -1000,6 +1002,11 @@ public class GameManager : Singleton<GameManager>
 
 
 
+    //251226 최정욱 페이즈2 진입 연출 고치기
+    public CheckClear SenseiCheckClear { get; set; }
+    public bool PrimedForPhaseTwo { get; set; } = false;
+    public bool FiredPhaseTwoDialogue { get; set; } = false;
+    public Coroutine PhaseTwoCoroutine { get; set; }
 
     public void PlayerTakeDamage(int damage)
     {

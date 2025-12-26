@@ -13,8 +13,11 @@ public class CheckClear : MonoBehaviour
     [SerializeField] string[] _tableId;
     [SerializeField] TextMeshProUGUI[] _text;
 
+    public GameObject PhaseTwoUI => _phaseTwoUI;
+
     private void Start()
     {
+        GameManager.Instance.SenseiCheckClear = this;
         StartCoroutine(CheckItem());
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,7 +29,7 @@ public class CheckClear : MonoBehaviour
     }
 
     //해당 아이템 id가 있으면 true 반환
-    private int CheckQuickSlotItem()
+    public int CheckQuickSlotItem()
     {
         //QuickSlot[] _check = GameManager.Instance.GameManagerQuickSlots;
         for (int i = 0; i < length; i++)
@@ -58,23 +61,44 @@ public class CheckClear : MonoBehaviour
                 _clearPortal.SetActive(false);
             }
         }
-        else
-        {
-            //만약 _phaseTwoUI가 설정되어져 있지 않다면 이미 이전 단계에서 해당 스크립트를 실행하였다는 뜻
-            if (_phaseTwoUI != null)
-            {
-                for (int i = 0; i < _text.Length; i++)
-                {
-                    _text[i].text = GetStringFromTable(_tableId[i]);
-                }
+        //else
+        //{
+        //    //만약 _phaseTwoUI가 설정되어져 있지 않다면 이미 이전 단계에서 해당 스크립트를 실행하였다는 뜻
+        //    if (_phaseTwoUI != null)
+        //    {
+        //        for (int i = 0; i < _text.Length; i++)
+        //        {
+        //            _text[i].text = GetStringFromTable(_tableId[i]);
+        //        }
 
-                GameManager.Instance.PauseGame();
-                _phaseTwoUI.SetActive(true);
-                GameManager.Instance.CheckItem = true;
-                yield return new WaitWhile (() => _phaseTwoUI.activeSelf);
-                GameManager.Instance.ResumeGame();
-                GameManager.Instance.EnterPhaseTwo();
+        //        GameManager.Instance.PrimedForPhaseTwo = true;
+
+
+        //        GameManager.Instance.PauseGame();
+        //        _phaseTwoUI.SetActive(true);
+        //        GameManager.Instance.CheckItem = true;
+        //        yield return new WaitWhile (() => _phaseTwoUI.activeSelf);
+        //        GameManager.Instance.ResumeGame();
+        //        GameManager.Instance.EnterPhaseTwo();
+        //    }
+        //}
+    }
+
+    public IEnumerator SenseiStartPhaseTwo()
+    {
+        if (_phaseTwoUI != null)
+        {
+            for (int i = 0; i < _text.Length; i++)
+            {
+                _text[i].text = GetStringFromTable(_tableId[i]);
             }
+            GameManager.Instance.PauseGame();
+            _phaseTwoUI.SetActive(true);
+            GameManager.Instance.CheckItem = true;
+            yield return new WaitWhile(() => _phaseTwoUI.activeSelf);
+            GameManager.Instance.ResumeGame();
+            GameManager.Instance.EnterPhaseTwo();
+            GameManager.Instance.PhaseTwoCoroutine = null;  
         }
     }
 
