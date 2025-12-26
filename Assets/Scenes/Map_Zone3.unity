@@ -6621,6 +6621,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &790421008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7859215601316787471, guid: bb196d7268bab6148abf936262dd5ad1, type: 3}
+  m_PrefabInstance: {fileID: 790421003}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &799883067
 GameObject:
   m_ObjectHideFlags: 0
@@ -6919,7 +6924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_DoorLock
   _gimmickId: 39
   _isStageGimmick: 0
-  _selection: {fileID: 0}
+  _selection: {fileID: 790421008}
   _selectionButtons: []
   _doorLockObject: {fileID: 790421005}
   _password: 0531
@@ -119248,7 +119253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_DoorLock
   _gimmickId: 38
   _isStageGimmick: 0
-  _selection: {fileID: 0}
+  _selection: {fileID: 790421008}
   _selectionButtons: []
   _doorLockObject: {fileID: 790421005}
   _password: 0102
@@ -119915,7 +119920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_DoorLock
   _gimmickId: 37
   _isStageGimmick: 0
-  _selection: {fileID: 0}
+  _selection: {fileID: 790421008}
   _selectionButtons: []
   _doorLockObject: {fileID: 790421005}
   _password: 1225
