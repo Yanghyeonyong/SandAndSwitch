@@ -1,8 +1,8 @@
 key|kr|en
 string|string|string
-lob_bt_0001|게임시작|Start Game
+lob_bt_0001|새 게임|Start Game
 lob_bt_0002|조작 가이드|Controls
-lob_bt_0003|나가기|Exit
+lob_bt_0003|데스크탑으로 돌아가기|Exit
 lob_bt_0004|언어|Language
 end_bt_0001|다시하기|Retry
 end_bt_0002|메인 화면으로|Main Menu
