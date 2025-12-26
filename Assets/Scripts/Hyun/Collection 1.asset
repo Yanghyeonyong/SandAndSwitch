@@ -19,7 +19,7 @@ MonoBehaviour:
   EnDescription: 
   type: 4
   prefab: {fileID: 6616243943990019364, guid: 3f5b3596aa3f12945a3f227bd9b09689, type: 3}
-  icon: {fileID: 8909960197485554810, guid: 4ac279675b143b246af5b376d2cc035f, type: 3}
+  icon: {fileID: 21300000, guid: 4ac279675b143b246af5b376d2cc035f, type: 3}
   canQuickSlot: 1
   maxStack: 99
   radius: 0
