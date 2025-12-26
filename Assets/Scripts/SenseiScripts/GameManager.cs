@@ -113,7 +113,9 @@ public class GameManager : Singleton<GameManager>
         CollectibleCountText.text = slot.Count + "/" + TotalCollectibleCount;
 
         if (CollectibleIcon.color.a != 1f)
+        {
             CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
+        }
 
         // 기존 GameManager UI 갱신 함수 사용
         UpdateCollectSlot(slot);
