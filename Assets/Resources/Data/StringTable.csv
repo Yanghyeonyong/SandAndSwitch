@@ -3,6 +3,7 @@ string|string|string
 lob_bt_0001|게임시작|Start Game
 lob_bt_0002|조작 가이드|Controls
 lob_bt_0003|나가기|Exit
+lob_bt_0004|언어|Language
 end_bt_0001|다시하기|Retry
 end_bt_0002|메인 화면으로|Main Menu
 ig_set_bt_0001|계속하기|Continue
@@ -13,12 +14,34 @@ ig_set_bt_0005|조작 가이드|Controls
 ig_set_bt_0006|돌아가기|Back
 ig_set_0001|일시정지|Pause
 ig_set_0002|[치직].... 모래폭풍이 다가온다! 얼른 나와야 해!|[Bzzt]... Sandstorm incoming! Get out of there!
-char_chat_0001|아이고 나 죽네 \n\n|Oh,I'm gonna die!\n\n
+char_chat_0001|아이고 나 죽네|"Oh, I'm gonna die!"
 char_chat_0002|이걸 내 손으로 부수면…\n내 손이 먼저 사라지겠어|If I punch this...\n my hand will break first.
 char_chat_0003|열쇠 따는 방법을\n배워 왔어야 해|I should've learned \n how to pick locks.
 char_chat_0004|벙커 내부의 공기가 희박해지고 있어. 서둘러!|The air's getting thin in here. Hurry!
 char_chat_0005|시야가 거의 가려졌어.. 앞이 잘 안 보여!|My vision's blocked... I can't see!
 char_chat_0006|더 이상은 버티기 힘들어.. 제발 출구를..!|I can't hold on much longer... Where's the exit?!
-char_chat_0007|자 가볼까~ \n\n|Here we go~\n\n
-it_name_0001|폭탄|Bomb
-it_exp_0001|폭발을 발생시킨다.|Causes an explosion.
+char_chat_0007|자 가볼까~|Here we go~
+it_type_0001|소비 아이템|Consumable
+it_type_0002|보물 아이템|Treasure
+it_type_0003|키 아이템|Key
+it_type_0004|수집 아이템|Collection
+it_name_101|폭탄|Bomb
+it_exp_101|강력한 폭발을 발생시킨다.\n구조물을 파괴할 수 있을 것 같다.|Causes a powerful explosion.\nCan destroy cracked walls.
+it_name_102|붉은색 액체|Red Liquid
+it_exp_102|하트를 1개 회복한다.\n유통기한은... 알 수 없다.|Restores 1 Heart.\nExpiration date is... unknown.
+it_name_201|보물|Treasure
+it_exp_201|찾아오도록 의뢰받은 물품이다.\n인생역전의 발판이 되어줄 것 같다.|The item I was commissioned to find.
+it_name_301|열쇠|Key
+it_exp_301|구역 이동을 막는 관문의 잠금을 해제한다.\n3개가 모여야 작동한다.|Opens the gate to the next area. Requires 3 keys.
+it_name_302|출입 카드|Access Card
+it_exp_302|관리자가 사용하는 카드.\n보안 스캐너를 통과한다.|Looks like an administrator's card.
+it_name_401|USB|USB
+it_exp_401|구인류가 사용하던 도구.\n어디가 윗면인지 알 수 없다.|Data storage used by the ancients.
+it_name_402|망가진 발사대|Broken Launcher
+it_exp_402|사출구에 화살이 끼어있다.\n고쳐 쓸 수는 없을 듯하다.|The emitter is choked with gray dust.
+it_name_403|쟁반|Metal Tray
+it_exp_403|경쾌한 소리가 난다.\n정수리를 보호하는 용도처럼 보인다.|Clangs nicely. Should I use it as a sled?
+it_name_404|바스러진 메모|Crumbling Diary
+it_exp_404|"글씨가 아무렇게나 휘갈겨져 있다.\n""벙커가 뭐 이렇게 복잡해!"""|The writing has faded away.
+it_name_405|그림 쪽지|Drawing Note
+it_exp_405|12xx.. 누군가의 낙서이다. \n구인류 전설 속의 빨간 코 사슴이 그려져 있다.|12xx... Must have been someone's birthday.
