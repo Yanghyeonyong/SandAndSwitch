@@ -43,6 +43,7 @@ public class Shutter : Gimmick_Object
             Debug.Log("올라간다");
             _shutterObject.transform.Translate(Vector3.up * Time.deltaTime * _moveSpeed);
             yield return null;
+
         }
     }
 
@@ -53,6 +54,7 @@ public class Shutter : Gimmick_Object
             Debug.Log("내려간다");
             _shutterObject.transform.Translate(Vector3.down * Time.deltaTime * _moveSpeed);
             yield return null;
+
         }
     }
 }

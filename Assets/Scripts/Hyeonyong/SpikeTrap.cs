@@ -13,12 +13,21 @@ public class SpikeTrap : MonoBehaviour
 //WaitForSeconds _wait;
 //    bool _active = false;
 //    Coroutine _damageCoroutine;
+    Coroutine _coroutine;
+    public bool _onDamage=false;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.rigidbody.WakeUp();
+            if (_onDamage)
+            {
+                return;
+            }
+            _coroutine=StartCoroutine(PlayerOnDamage());
             _contactPoint = collision.contacts[0];
             _normal= _contactPoint.normal;
             //Debug.Log(_normal);
@@ -28,7 +37,33 @@ public class SpikeTrap : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.rigidbody.WakeUp();
+            if (_onDamage)
+            {
+                return;
+            }
+            _coroutine = StartCoroutine(PlayerOnDamage());
+            _contactPoint = collision.contacts[0];
+            _normal = _contactPoint.normal;
+            //Debug.Log(_normal);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-_normal * _attackForce, ForceMode2D.Impulse);
 
+            collision.gameObject.GetComponent<Player>().TakeDamage();
+        }
+    }
+
+
+    IEnumerator PlayerOnDamage()
+    {
+        _onDamage=true;
+        yield return new WaitForSeconds(_damageDelay);
+        _onDamage = false;
+        _coroutine=null;
+    }
 
     //private void Start()
     //{
