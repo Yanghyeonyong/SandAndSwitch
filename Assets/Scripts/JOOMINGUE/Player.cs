@@ -473,7 +473,38 @@ public class Player : MonoBehaviour
         }
         if (ctx.started && onPortal == 2)
         {
-            GameManager.Instance.LoadPrevScene();
+            if (GameManager.Instance.PrimedForPhaseTwo && !GameManager.Instance.FiredPhaseTwoDialogue && GameManager.Instance.PhaseTwoCoroutine == null)
+            {
+                GameManager.Instance.PhaseTwoCoroutine = StartCoroutine(GameManager.Instance.SenseiCheckClear.SenseiStartPhaseTwo());
+                GameManager.Instance.FiredPhaseTwoDialogue = true;
+            }
+            else
+            {
+                if (GameManager.Instance.SenseiCheckClear != null)
+                {
+                    if (GameManager.Instance.SenseiCheckClear.PhaseTwoUI != null)
+                    {
+                        if (GameManager.Instance.SenseiCheckClear.PhaseTwoUI.activeSelf)
+                        {
+                            GameManager.Instance.SenseiCheckClear.PhaseTwoUI.SetActive(false);
+                            return;
+                        }
+                        else
+                        {
+                            GameManager.Instance.LoadPrevScene();
+                        }
+                    }
+                    else
+                    {
+                        GameManager.Instance.LoadPrevScene();
+                    }
+                }
+                else
+                {
+                    GameManager.Instance.LoadPrevScene();
+                }
+                //GameManager.Instance.LoadPrevScene();
+            }
         }
 
         if (ctx.started && _checkGimmick && !GameManager.Instance.OnProgressGimmick)
@@ -522,6 +553,27 @@ public class Player : MonoBehaviour
         }
         else if (collision.CompareTag("Respawn"))
         {
+            if (GameManager.Instance.SenseiCheckClear!=null)
+            {
+                Debug.Log(GameManager.Instance.SenseiCheckClear.CheckQuickSlotItem());
+                Debug.Log(GameManager.Instance.CurrentCutsceneIndex);
+                //Debug.Log(GameManager.Instance.GetTotalSceneCount());
+                Debug.Log(GameManager.Instance.GetTotalSceneCount() - 2);
+                if (GameManager.Instance.SenseiCheckClear.CheckQuickSlotItem() != -1 && GameManager.Instance.GetCurrentSceneIndex() == GameManager.Instance.GetTotalSceneCount() -2)
+                {
+                    onPortal = 2;
+                    GameManager.Instance.PrimedForPhaseTwo = true;
+                    //GameManager.Instance.SenseiCheckClear
+                    return;
+                }
+                else
+                {
+                    onPortal = 2;
+                    GameManager.Instance.PrimedForPhaseTwo = false;
+                    return;
+                }
+            }
+
             onPortal = 2;
         }
     }
