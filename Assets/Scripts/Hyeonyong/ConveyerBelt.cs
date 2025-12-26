@@ -4,7 +4,7 @@ using UnityEngine;
 public class ConveyerBelt : MonoBehaviour
 {
 
-    [SerializeField] float _moveForce = 3f;
+    public float _moveForce = 3f;
     [SerializeField] float _maxForce = 5f;
     Coroutine _coroutine;
     Rigidbody2D _rb;
@@ -17,8 +17,8 @@ public class ConveyerBelt : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if(_checkPhase && GameManager.Instance.CheckItem)
-        //    return;
+        if (_checkPhase && GameManager.Instance.CheckItem)
+            return;
         if (collision.gameObject.CompareTag("Player"))
         {
             if (_coroutine != null)
