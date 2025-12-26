@@ -265,6 +265,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     - target: {fileID: 7165754520019267442, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: itemPickupPrefab
       value: 
@@ -1490,6 +1494,7 @@ GameObject:
   - component: {fileID: 218329971}
   - component: {fileID: 218329970}
   - component: {fileID: 218329972}
+  - component: {fileID: 218329973}
   m_Layer: 0
   m_Name: Door 3 Ref
   m_TagString: Untagged
@@ -1597,6 +1602,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &218329973
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218329969}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7a6c7d82efe45b14492cc0e7bdaa31c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &234991054
 GameObject:
   m_ObjectHideFlags: 0
@@ -4403,6 +4430,7 @@ GameObject:
   - component: {fileID: 584565053}
   - component: {fileID: 584565052}
   - component: {fileID: 584565054}
+  - component: {fileID: 584565055}
   m_Layer: 0
   m_Name: Door 1 _ PassWord 1225
   m_TagString: Untagged
@@ -4510,6 +4538,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &584565055
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584565051}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7a6c7d82efe45b14492cc0e7bdaa31c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &588103176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4530,6 +4580,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 34
       objectReference: {fileID: 0}
+    - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     - target: {fileID: 7209817547133345873, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.3
@@ -4755,6 +4809,7 @@ GameObject:
   - component: {fileID: 680613906}
   - component: {fileID: 680613905}
   - component: {fileID: 680613907}
+  - component: {fileID: 680613908}
   m_Layer: 0
   m_Name: Door 2 _ PassWord 0102
   m_TagString: Untagged
@@ -4862,6 +4917,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &680613908
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680613904}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7a6c7d82efe45b14492cc0e7bdaa31c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &685035258
 GameObject:
   m_ObjectHideFlags: 0
@@ -5062,7 +5139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &694789208
 Transform:
   m_ObjectHideFlags: 0
@@ -5091,7 +5168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_MapDoor
   _gimmickId: 0
-  _teleportPos: {fileID: 1059611299}
+  _teleportPos: {fileID: 1050623624}
 --- !u!114 &694789210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5104,9 +5181,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0292107f62db3e7478a1976754147deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
-  _interactiveUI: {fileID: 0}
+  _interactiveUI: {fileID: 790421004}
   _isReuse: 0
-  _isTeleport: 0
+  _isTeleport: 1
   _CheckItem: 0
 --- !u!61 &694789211
 BoxCollider2D:
@@ -5450,6 +5527,7 @@ GameObject:
   - component: {fileID: 708238430}
   - component: {fileID: 708238429}
   - component: {fileID: 708238431}
+  - component: {fileID: 708238432}
   m_Layer: 0
   m_Name: Door 3 _ PassWord 0531
   m_TagString: Untagged
@@ -5557,6 +5635,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &708238432
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708238428}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7a6c7d82efe45b14492cc0e7bdaa31c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &712953816
 GameObject:
   m_ObjectHideFlags: 0
@@ -5608,7 +5708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &724024856
 Transform:
   m_ObjectHideFlags: 0
@@ -5637,7 +5737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_MapDoor
   _gimmickId: 0
-  _teleportPos: {fileID: 218329969}
+  _teleportPos: {fileID: 1110940850}
 --- !u!114 &724024858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5650,9 +5750,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0292107f62db3e7478a1976754147deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
-  _interactiveUI: {fileID: 0}
+  _interactiveUI: {fileID: 790421004}
   _isReuse: 0
-  _isTeleport: 0
+  _isTeleport: 1
   _CheckItem: 0
 --- !u!61 &724024859
 BoxCollider2D:
@@ -5805,6 +5905,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 33
       objectReference: {fileID: 0}
+    - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     - target: {fileID: 7165754520019267442, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: itemPickupPrefab
       value: 
@@ -118603,6 +118707,7 @@ GameObject:
   - component: {fileID: 864670514}
   - component: {fileID: 864670513}
   - component: {fileID: 864670515}
+  - component: {fileID: 864670516}
   m_Layer: 0
   m_Name: Door 2 Ref
   m_TagString: Untagged
@@ -118710,6 +118815,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &864670516
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864670512}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7a6c7d82efe45b14492cc0e7bdaa31c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &867378162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 737270363704586930, guid: 15134143a57686347ae8ff628848a944, type: 3}
@@ -119046,7 +119173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &924294082
 Transform:
   m_ObjectHideFlags: 0
@@ -119075,7 +119202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_MapDoor
   _gimmickId: 0
-  _teleportPos: {fileID: 680613904}
+  _teleportPos: {fileID: 1090827325}
 --- !u!114 &924294084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119088,9 +119215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0292107f62db3e7478a1976754147deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
-  _interactiveUI: {fileID: 0}
+  _interactiveUI: {fileID: 790421004}
   _isReuse: 0
-  _isTeleport: 0
+  _isTeleport: 1
   _CheckItem: 0
 --- !u!61 &924294085
 BoxCollider2D:
@@ -120045,6 +120172,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 36
       objectReference: {fileID: 0}
+    - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     - target: {fileID: 7165754520019267442, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: itemPickupPrefab
       value: 
@@ -120114,7 +120245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1050623625
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -120201,7 +120332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_MapDoor
   _gimmickId: 0
-  _teleportPos: {fileID: 584565051}
+  _teleportPos: {fileID: 694789207}
 --- !u!114 &1050623628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120214,9 +120345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0292107f62db3e7478a1976754147deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
-  _interactiveUI: {fileID: 0}
+  _interactiveUI: {fileID: 790421004}
   _isReuse: 0
-  _isTeleport: 0
+  _isTeleport: 1
   _CheckItem: 0
 --- !u!61 &1050623629
 BoxCollider2D:
@@ -120388,6 +120519,7 @@ GameObject:
   - component: {fileID: 1059611300}
   - component: {fileID: 1059611302}
   - component: {fileID: 1059611301}
+  - component: {fileID: 1059611303}
   m_Layer: 0
   m_Name: Door 1 Ref (1)
   m_TagString: Untagged
@@ -120495,6 +120627,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1059611303
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059611299}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7a6c7d82efe45b14492cc0e7bdaa31c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1063655362
 GameObject:
   m_ObjectHideFlags: 0
@@ -120597,6 +120751,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 31
       objectReference: {fileID: 0}
+    - target: {fileID: 7540922119586240487, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     - target: {fileID: 7679569330452876520, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
       propertyPath: m_Name
       value: MetalItemBox (1)
@@ -120905,7 +121063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1090827326
 Transform:
   m_ObjectHideFlags: 0
@@ -120934,7 +121092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_MapDoor
   _gimmickId: 0
-  _teleportPos: {fileID: 864670512}
+  _teleportPos: {fileID: 924294081}
 --- !u!114 &1090827328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120947,9 +121105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0292107f62db3e7478a1976754147deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
-  _interactiveUI: {fileID: 0}
+  _interactiveUI: {fileID: 790421004}
   _isReuse: 0
-  _isTeleport: 0
+  _isTeleport: 1
   _CheckItem: 0
 --- !u!61 &1090827329
 BoxCollider2D:
@@ -121094,6 +121252,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 32
       objectReference: {fileID: 0}
+    - target: {fileID: 7540922119586240487, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     - target: {fileID: 7679569330452876520, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
       propertyPath: m_Name
       value: MetalItemBox (2)
@@ -121172,7 +121334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1110940851
 Transform:
   m_ObjectHideFlags: 0
@@ -121201,7 +121363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_MapDoor
   _gimmickId: 0
-  _teleportPos: {fileID: 708238428}
+  _teleportPos: {fileID: 724024855}
 --- !u!114 &1110940853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121214,9 +121376,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0292107f62db3e7478a1976754147deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
-  _interactiveUI: {fileID: 0}
+  _interactiveUI: {fileID: 790421004}
   _isReuse: 0
-  _isTeleport: 0
+  _isTeleport: 1
   _CheckItem: 0
 --- !u!61 &1110940854
 BoxCollider2D:
@@ -121882,6 +122044,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 7540922119586240487, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     - target: {fileID: 7679569330452876520, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
       propertyPath: m_Name
       value: 'MetalItemBox '
