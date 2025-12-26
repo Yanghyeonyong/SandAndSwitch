@@ -27,6 +27,6 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  pickupSoundClip: {fileID: 8300000, guid: ae0a55a68d99d794799658af84322e7a, type: 3}
+  pickupSoundClip: {fileID: 8300000, guid: 9dbb8938bd067d1468b9987ed094c8a4, type: 3}
   typeKor: "\uC5F4\uC1E0 \uC544\uC774\uD15C"
   typeEng: Key

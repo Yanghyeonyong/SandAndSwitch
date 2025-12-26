@@ -8,6 +8,8 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.ResourceManagement.AsyncOperations;
+//using Unity.VisualScripting;
+
 
 
 #if UNITY_EDITOR
@@ -143,9 +145,50 @@ public class GameManager : Singleton<GameManager>
     {
 
 
+        ItemData heartPotionQuickslot = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Scripts/Hyun/Potion_QuickSlot.asset");
+        ItemData treasure = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Scripts/Hyun/Special.asset");
+        ItemData key = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Scripts/Hyun/Key 1.asset");
+        ItemData keycard = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Scripts/Hyun/Key 2.asset");
+        ItemData usb = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Scripts/Hyun/Collection 1.asset");
+        ItemData brokenLauncher = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Scripts/Hyun/Collection 2.asset");
+        ItemData tray = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Scripts/Hyun/Collection 3.asset");
+        ItemData memo = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Scripts/Hyun/Collection 4.asset");
+        ItemData message = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Scripts/Hyun/Collection 5.asset");
+        Debug.Log(ItemTable[102].ID);
+        Debug.Log(ItemTable[102].PickupSound);
+        heartPotionQuickslot.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[102].PickupSound);
+        Debug.Log(heartPotionQuickslot.pickupSoundClip);
+        treasure.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[201].PickupSound);
+        key.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[301].PickupSound);
+        keycard.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[302].PickupSound);
+        usb.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[401].PickupSound);
+        brokenLauncher.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[402].PickupSound);
+        tray.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[403].PickupSound);
+        memo.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[404].PickupSound);
+        message.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[405].PickupSound);
 
 
-
+        //heartPotionQuickslot.pickupSoundClip = ItemTable[102].SoundEffect;
+        //treasure.pickupSoundClip = ItemTable[201].SoundEffect;
+        //key.pickupSoundClip = ItemTable[301].SoundEffect;
+        //keycard.pickupSoundClip = ItemTable[302].SoundEffect;
+        //usb.pickupSoundClip = ItemTable[401].SoundEffect;
+        //brokenLauncher.pickupSoundClip = ItemTable[402].SoundEffect;
+        //tray.pickupSoundClip = ItemTable[403].SoundEffect;
+        //memo.pickupSoundClip = ItemTable[404].SoundEffect;
+        //message.pickupSoundClip = ItemTable[405].SoundEffect;
+        //Assets / ExcludeGit / DirectAssets / 12.23 Add Sound/ GetItemSoundType3.mp3
+        EditorUtility.SetDirty(heartPotionQuickslot);
+        EditorUtility.SetDirty(treasure);
+        EditorUtility.SetDirty(key);
+        EditorUtility.SetDirty(keycard);
+        EditorUtility.SetDirty(usb);
+        EditorUtility.SetDirty(brokenLauncher);
+        EditorUtility.SetDirty(tray);
+        EditorUtility.SetDirty(memo);
+        EditorUtility.SetDirty(message);
+        AssetDatabase.SaveAssets();
+        
 
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         var group = settings.DefaultGroup;
