@@ -120110,7 +120110,11 @@ MonoBehaviour:
   _password: 1225
   _interactiveUI: {fileID: 790421004}
   _doorObject: {fileID: 0}
+<<<<<<< Updated upstream
   _itemId: 0
+=======
+  _itemId: 50001
+>>>>>>> Stashed changes
 --- !u!58 &1020738290
 CircleCollider2D:
   m_ObjectHideFlags: 0
