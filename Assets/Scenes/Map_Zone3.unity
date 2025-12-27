@@ -4574,7 +4574,7 @@ PrefabInstance:
       objectReference: {fileID: 790421004}
     - target: {fileID: 5830423973767855423, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: m_Name
-      value: WoodenItemBox_ Bomb_For Door3
+      value: WoodenItemBox_ Door3 _Bomb
       objectReference: {fileID: 0}
     - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: _gimmickId
@@ -5899,7 +5899,7 @@ PrefabInstance:
       objectReference: {fileID: 790421004}
     - target: {fileID: 5830423973767855423, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: m_Name
-      value: WoodenItemBox_Collect 5 _For Door1
+      value: WoodenItemBox_Message(1225)
       objectReference: {fileID: 0}
     - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: _gimmickId
@@ -119443,7 +119443,7 @@ MonoBehaviour:
   _password: 0102
   _interactiveUI: {fileID: 790421004}
   _doorObject: {fileID: 0}
-  _itemId: 302
+  _itemId: 0
 --- !u!58 &927533069
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -120110,7 +120110,7 @@ MonoBehaviour:
   _password: 1225
   _interactiveUI: {fileID: 790421004}
   _doorObject: {fileID: 0}
-  _itemId: 0
+  _itemId: 302
 --- !u!58 &1020738290
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -120166,7 +120166,7 @@ PrefabInstance:
       objectReference: {fileID: 790421004}
     - target: {fileID: 5830423973767855423, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: m_Name
-      value: WoodenItemBox_Key 2_For Door2
+      value: WoodenItemBox_Door2 _ ID Card
       objectReference: {fileID: 0}
     - target: {fileID: 6727325859911911930, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
       propertyPath: _gimmickId
@@ -120763,10 +120763,6 @@ PrefabInstance:
       propertyPath: _interactiveUI
       value: 
       objectReference: {fileID: 790421004}
-    - target: {fileID: 8701241001906878853, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
-      propertyPath: itemPickupPrefab
-      value: 
-      objectReference: {fileID: 2886194570387356004, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
     - target: {fileID: 8707256419826229021, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.7244415
@@ -121268,10 +121264,6 @@ PrefabInstance:
       propertyPath: _interactiveUI
       value: 
       objectReference: {fileID: 790421004}
-    - target: {fileID: 8701241001906878853, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
-      propertyPath: itemPickupPrefab
-      value: 
-      objectReference: {fileID: 2886194570387356004, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
     - target: {fileID: 8707256419826229021, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
       propertyPath: m_LocalPosition.x
       value: -94.84422
@@ -122064,10 +122056,6 @@ PrefabInstance:
       propertyPath: _interactiveUI
       value: 
       objectReference: {fileID: 790421004}
-    - target: {fileID: 8701241001906878853, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
-      propertyPath: itemPickupPrefab
-      value: 
-      objectReference: {fileID: 2886194570387356004, guid: a91f60b3808e4da48aaebf2a6380b1bd, type: 3}
     - target: {fileID: 8707256419826229021, guid: cf558d7af92dd2e4d8d79892179dd184, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.97
