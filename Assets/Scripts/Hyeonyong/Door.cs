@@ -5,6 +5,8 @@ public class Door : Gimmick_Object
     [SerializeField] GameObject[] _doorObject;
     Animator[] _animator;
     [SerializeField] GameObject[] _interactiveObj;
+
+
     private void Start()
     {
         _animator = new Animator[_doorObject.Length];
@@ -16,6 +18,10 @@ public class Door : Gimmick_Object
 
     public override void TurnOn()
     {
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
+        }
         for (int i = 0; i < _animator.Length; i++)
         {
             _interactiveObj[i].SetActive(true);
@@ -25,6 +31,10 @@ public class Door : Gimmick_Object
     }
     public override void TurnOff()
     {
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
+        }
         for (int i = 0; i < _animator.Length; i++)
         {
             _interactiveObj[i].SetActive(false);

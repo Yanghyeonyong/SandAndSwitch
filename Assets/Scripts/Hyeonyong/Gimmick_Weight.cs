@@ -4,6 +4,9 @@ public class Gimmick_Weight : Gimmick
 {
     Rigidbody2D _rb;
     [SerializeField] float _weight = 5f;
+    CheckGround _checkGround;
+
+    AudioSource _audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,7 +17,17 @@ public class Gimmick_Weight : Gimmick
             transform.position = CheckPos().position;
             transform.rotation = CheckPos().rotation;
         }
+        _checkGround = transform.GetChild(0).GetComponent<CheckGround>();
+        _audioSource=GetComponent<AudioSource>();
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 6 && !_checkGround._isGround)
+        {
+            _audioSource.Play();
+            _checkGround._isGround = true;
+        }
     }
     private void OnCollisionStay2D(Collision2D collision)
     {

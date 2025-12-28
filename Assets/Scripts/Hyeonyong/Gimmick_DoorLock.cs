@@ -28,6 +28,11 @@ public class Gimmick_DoorLock : Gimmick
     //사용에 필요한 아이템 id
     [SerializeField] int _itemId;
     int length = 0;
+
+
+
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioSource _gimmickObjAudioSource;
     private void Start()
     {
         _obj =GetComponent<Gimmick_Object>();
@@ -55,6 +60,7 @@ public class Gimmick_DoorLock : Gimmick
             }
         }
         length=GameManager.Instance.GameManagerQuickSlots.Length;
+        _obj._audioSource = _gimmickObjAudioSource;
     }
 
     public override void StartGimmick()

@@ -3,8 +3,11 @@ using UnityEngine;
 public class Gimmick_Lever : Gimmick
 {
     [SerializeField] bool _turnLever=false;
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioSource _gimmickObjAudioSource;
     Gimmick_Object _obj;
     Animator _animator;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,11 +22,19 @@ public class Gimmick_Lever : Gimmick
             _animator.SetTrigger("TurnOn");
         }
 
+
+        //_audioSource = GetComponent<AudioSource>();
+
     }
 
     public override void StartGimmick()
     {
+        if (_obj._audioSource == null)
+        {
+            _obj._audioSource = _gimmickObjAudioSource;
+        }
         _turnLever = !_turnLever;
+        _audioSource.Play();
         if (_turnLever)
         {
 
