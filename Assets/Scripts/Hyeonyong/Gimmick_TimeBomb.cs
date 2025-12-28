@@ -12,25 +12,32 @@ public class Gimmick_TimeBomb : Gimmick
     Rigidbody2D _rb;
     [SerializeField] float _weight = 5f;
     [SerializeField] float _range = 6.5f;
+    public bool _isUse = false;
     private void Start()
     {
-        if (CheckClear())
-        {
-            gameObject.SetActive(false);
-        }
+
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _audio = GetComponent<AudioSource>();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player")&&_coroutine == null)
+        if (CheckClear())
         {
-            Debug.Log("타이머 플레이어와 닿았다");
-            _coroutine = StartCoroutine(StartTimer());
+            BreakRadius();
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine(StartTimer());
         }
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player")&&_coroutine == null)
+    //    {
+    //        Debug.Log("타이머 플레이어와 닿았다");
+    //        _coroutine = StartCoroutine(StartTimer());
+    //    }
+    //}
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -46,6 +53,11 @@ public class Gimmick_TimeBomb : Gimmick
 
     IEnumerator StartTimer()
     {
+        if (_isUse) 
+        {
+            yield break;
+                
+        }
         Debug.Log("타이머 코루틴 시작");
         yield return new WaitForSeconds(_timer);
         _rb.bodyType = RigidbodyType2D.Static;
