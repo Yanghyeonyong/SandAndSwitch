@@ -1324,7 +1324,7 @@ MonoBehaviour:
   _interactiveUI: {fileID: 790421004}
   _isReuse: 1
   _isTeleport: 0
-  _CheckItem: 0
+  _CheckItem: 1
 --- !u!4 &157525960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3386999639568982978, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
@@ -1970,6 +1970,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 46
       objectReference: {fileID: 0}
+    - target: {fileID: 5864649563148392319, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     m_RemovedComponents:
     - {fileID: 2206213159282200686, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
     m_RemovedGameObjects:
@@ -2812,6 +2816,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 5864649563148392319, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     m_RemovedComponents:
     - {fileID: 2206213159282200686, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
     m_RemovedGameObjects:
@@ -3049,6 +3057,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8520768748903906274, guid: 9c7cb0164e31e3143bdd8d4412c7e2ec, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4381,6 +4393,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -6.52
       objectReference: {fileID: 0}
+    - target: {fileID: 5864649563148392319, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     - target: {fileID: 5957386866760671358, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
       propertyPath: _teleportPos
       value: 
@@ -5631,6 +5647,7 @@ MonoBehaviour:
   - ig_set_0002
   _text:
   - {fileID: 790421007}
+  _breakObject: {fileID: 0}
 --- !u!4 &697458783
 Transform:
   m_ObjectHideFlags: 0
@@ -119923,6 +119940,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.86
       objectReference: {fileID: 0}
+    - target: {fileID: 5864649563148392319, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     - target: {fileID: 5957386866760671358, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
       propertyPath: _teleportPos
       value: 
@@ -124011,6 +124032,10 @@ PrefabInstance:
       propertyPath: _gimmickId
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 5864649563148392319, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
+      propertyPath: _interactiveUI
+      value: 
+      objectReference: {fileID: 790421004}
     m_RemovedComponents:
     - {fileID: 2206213159282200686, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
     m_RemovedGameObjects:

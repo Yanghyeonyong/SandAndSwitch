@@ -913,6 +913,10 @@ PrefabInstance:
       value: -0.0055117384
       objectReference: {fileID: 0}
     - target: {fileID: 5767373808722810240, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
+      propertyPath: _isTeleport
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767373808722810240, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
       propertyPath: _interactiveUI
       value: 
       objectReference: {fileID: 1820176960}
@@ -932,6 +936,10 @@ PrefabInstance:
       propertyPath: _interactiveUI
       value: 
       objectReference: {fileID: 1820176960}
+    - target: {fileID: 8240317526630073475, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
+      propertyPath: _isTeleport
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8240317526630073475, guid: 33c02e9db8be4854e8e99013938d5159, type: 3}
       propertyPath: _interactiveUI
       value: 

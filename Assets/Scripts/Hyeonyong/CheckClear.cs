@@ -13,6 +13,8 @@ public class CheckClear : MonoBehaviour
     [SerializeField] string[] _tableId;
     [SerializeField] TextMeshProUGUI[] _text;
 
+    [SerializeField] GameObject _breakObject;
+
     public GameObject PhaseTwoUI => _phaseTwoUI;
 
     private void Start()
@@ -59,6 +61,14 @@ public class CheckClear : MonoBehaviour
             if (_clearPortal != null)
             {
                 _clearPortal.SetActive(false);
+            }
+
+        }
+        else
+        {
+            if (_breakObject != null)
+            {
+                _breakObject.SetActive(false);
             }
         }
         //else
