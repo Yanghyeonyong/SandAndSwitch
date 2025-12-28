@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class FallingRock : Gimmick_Object
+public class TimerBomb : Gimmick_Object
 {
-    [SerializeField] GameObject _rock;
+    [SerializeField] GameObject _bomb;
     [SerializeField] int _gimmickId = 0;
     public bool _isUse=false;
     private void Start()
@@ -11,16 +11,19 @@ public class FallingRock : Gimmick_Object
         {
             if (GameManager.Instance.IsGimmickClear[_gimmickId])
             {
+                _bomb.SetActive(true);
                 _isUse = true;
+                return;
             }
         }
-        _rock.gameObject.SetActive(false);
+        _bomb.gameObject.SetActive(false);
     }
     public override void TurnOn()
     {
         if (_isUse)
             return;
-        _rock.SetActive(true);
+        _bomb.SetActive(true);
         _isUse = true;
+        GameManager.Instance.IsGimmickClear[_gimmickId] = true;
     }
 }
