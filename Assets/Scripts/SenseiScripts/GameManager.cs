@@ -8,6 +8,8 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using System.Linq;
+
 //using Unity.VisualScripting;
 
 
@@ -662,6 +664,21 @@ public class GameManager : Singleton<GameManager>
         //Debug.Log("업데이트 : " + _collectSlotContoller.Slots);
         UpdateCollectSlot(_collectSlotContoller.Slots[401]);
         yield return GameSceneLoadAsyncOperation.isDone;
+
+        _gimmickPos.Clear();
+        foreach (var d in _checkPointData._gimmickPos.ToList())
+        {
+            ItemTransform itemTransform = new ItemTransform(d.Value.position, d.Value.rotation, d.Value.scale);
+            if (_gimmickPos.ContainsKey(d.Key))
+            {
+                _gimmickPos[d.Key] = itemTransform;
+            }
+            else
+            {
+                _gimmickPos.Add(d.Key, itemTransform);
+            }
+        }
+
         yield return null;
         if (_gameState == GameState.PhaseOne)
         {
@@ -849,6 +866,10 @@ public class GameManager : Singleton<GameManager>
 
         //yield return null;
         GameSceneLoadAsyncOperation.allowSceneActivation = true;
+
+        yield return null;
+        _gimmickPos.Clear();
+
 
         while (CinematicControllerSensei.InCutscene)
         {

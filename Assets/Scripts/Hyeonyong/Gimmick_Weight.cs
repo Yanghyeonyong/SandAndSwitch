@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Gimmick_Weight : Gimmick
@@ -12,11 +13,7 @@ public class Gimmick_Weight : Gimmick
     void Start()
     {
         _rb=GetComponent<Rigidbody2D>();
-        if (CheckPos()!=null)
-        {
-            transform.position = CheckPos().position;
-            transform.rotation = CheckPos().rotation;
-        }
+        StartCoroutine(CheckMyPos());   
         _checkGround = transform.GetChild(0).GetComponent<CheckGround>();
         _audioSource=GetComponent<AudioSource>();
     }
@@ -43,8 +40,27 @@ public class Gimmick_Weight : Gimmick
     }
     private void OnDisable()
     {
+        //이게 더 늦게 실행되서 그런거 같은데
         ItemTransform myTransform = new ItemTransform(this.transform.position, this.transform.rotation, this.transform.localScale);
         GameManager.Instance.GimmickPos[GimmickId] = myTransform;
-        Debug.Log("저장하기: "+transform) ;
+        Debug.Log("저장오기: "+transform.position) ;
+    }
+
+    public void SaveMyPos()
+    {
+        //이게 더 늦게 실행되서 그런거 같은데
+        ItemTransform myTransform = new ItemTransform(this.transform.position, this.transform.rotation, this.transform.localScale);
+        GameManager.Instance.GimmickPos[GimmickId] = myTransform;
+        Debug.Log("저장오기: " + transform.position);
+    }
+    IEnumerator CheckMyPos()
+    {
+        yield return null;
+        if (CheckPos() != null)
+        {
+            Debug.Log("위치값 변경");
+            transform.position = CheckPos().position;
+            transform.rotation = CheckPos().rotation;
+        }
     }
 }

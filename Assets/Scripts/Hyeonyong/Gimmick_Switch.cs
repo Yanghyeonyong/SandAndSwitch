@@ -56,9 +56,14 @@ public class Gimmick_Switch : Gimmick
                 }
             }
 
-
-            _obj.TurnOn();
-            _animator.SetTrigger("TurnOn");
+            if (!_turnSwitch)
+            {
+                _obj.TurnOn();
+                _animator.SetTrigger("TurnOn");
+                _turnSwitch = true;
+            }
+            //_obj.TurnOn();
+            //_animator.SetTrigger("TurnOn");
         }
     }
 
@@ -79,8 +84,13 @@ public class Gimmick_Switch : Gimmick
             {
                 _audioSource.Play();
             }
-            _obj.TurnOff();
-            _animator.SetTrigger("TurnOff");
+
+            if (!_onPlayer && !_onBox)
+            {
+                _obj.TurnOff();
+                _animator.SetTrigger("TurnOff");
+                _turnSwitch=false;
+            }
         }
     }
 
