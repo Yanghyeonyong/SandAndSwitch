@@ -17,7 +17,7 @@ MonoBehaviour:
   EnItemName: 
   description: 
   EnDescription: 
-  type: 3
+  type: 5
   prefab: {fileID: 6616243943990019364, guid: 16f4caa120a0c7f4e979e007a4cf43b4, type: 3}
   icon: {fileID: 21300000, guid: 3c4eb02a91e76084cbf2eb7c11702d5a, type: 3}
   canQuickSlot: 1
