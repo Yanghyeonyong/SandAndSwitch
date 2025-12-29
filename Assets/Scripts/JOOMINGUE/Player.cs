@@ -296,26 +296,6 @@ public class Player : MonoBehaviour
         SoundEffectManager.Instance.PlayBGM(GameManager.Instance.Bgms[GameManager.Instance.CurScene]);
     }
 
-    public IEnumerator PlayPhaseTwoDialogueSequence()
-    {
-        // 출력할 대사 키값 배열
-        string[] dialogueKeys = { "char_chat_0004", "char_chat_0005", "char_chat_0006" };
-
-        foreach (string key in dialogueKeys)
-        {
-            // 1. 테이블에서 대사 가져오기
-            string msg = GetStringFromTable(key);
-
-            // 2. 말풍선 띄우기 (ShowChatBubble이 끝날 때까지 대기)
-            // ShowChatBubble이 IEnumerator라면 yield return StartCoroutine(...) 사용
-            // 만약 void라면 ShowChatBubble 내부 로직에 맞춰 대기 시간 추가 필요
-            yield return StartCoroutine(ShowChatBubble(msg));
-
-            // (선택사항) 대사 사이 잠깐의 텀
-            yield return new WaitForSeconds(10f);
-        }
-    }
-
     void FixedUpdate()
     {
         // Horizontal Move

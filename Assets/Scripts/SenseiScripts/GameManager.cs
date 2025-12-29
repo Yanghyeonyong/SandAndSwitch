@@ -492,7 +492,48 @@ public class GameManager : Singleton<GameManager>
 
 
     Coroutine _phaseTwoFadeCortouine;
+    // [추가] 2페이즈 대사 시퀀스를 관리하는 코루틴
+    private IEnumerator PlayPhaseTwoDialogueRoutine()
+    {
+        // 출력할 대사 키값 배열
+        string[] dialogueKeys = { "char_chat_0004", "char_chat_0005", "char_chat_0006" };
 
+        foreach (string key in dialogueKeys)
+        {
+            // 1. 현재 씬에 있는 플레이어가 준비될 때까지 대기 (씬 로딩 중일 수 있음)
+            while (Player == null)
+            {
+                yield return null;
+            }
+
+            // 2. 테이블에서 대사 가져오기
+            string msg = GetStringFromTable(key);
+
+            // 3. 플레이어의 말풍선 함수 호출
+            if (Player != null)
+            {
+                // Player의 ShowChatBubble을 호출 (StartCoroutine은 Player쪽에서 돌림)
+                Player.StartCoroutine(Player.ShowChatBubble(msg));
+            }
+
+            // 4. 다음 대사까지 10초 대기 (WaitWhile을 써서 씬 로딩 중에도 시간 가는 걸 방지할 수도 있음)
+            yield return new WaitForSeconds(10f);
+        }
+    }
+
+    // [추가] 헬퍼 함수: GameManager에서도 텍스트를 가져올 수 있게
+    private string GetStringFromTable(string key)
+    {
+        if (StringTable != null)
+        {
+            var data = StringTable[key];
+            if (data != null)
+            {
+                return currentLanguage == Language.KR ? data.kr : data.en;
+            }
+        }
+        return "Missing Text";
+    }
 
     public void EnterPhaseTwo()
     {
@@ -501,10 +542,7 @@ public class GameManager : Singleton<GameManager>
         _gameState = (GameState)1;
 
         //플레이어의 Phase 2 대사 시작(주민규)
-        if (Player != null)
-        {
-            Player.StartCoroutine(Player.PlayPhaseTwoDialogueSequence());
-        }
+        StartCoroutine(PlayPhaseTwoDialogueRoutine());
         //기존 로직
         if (_gameOverCoroutine == null)
         {
