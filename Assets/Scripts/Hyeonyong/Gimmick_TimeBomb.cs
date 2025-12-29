@@ -71,6 +71,7 @@ public class Gimmick_TimeBomb : Gimmick
         {
             hit.gameObject.GetComponent<Player>().TakeDamage();
         }
+        BreakRadius();
 
         yield return null;
         float _animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
@@ -79,7 +80,7 @@ public class Gimmick_TimeBomb : Gimmick
         yield return new WaitForSeconds(_animationLength);
         IsClear=true;
         GameManager.Instance.IsGimmickClear[GimmickId] = true;
-        BreakRadius();
+        //BreakRadius();
         gameObject.SetActive(false);
 
     }
