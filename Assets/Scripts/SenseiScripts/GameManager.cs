@@ -100,10 +100,12 @@ public class GameManager : Singleton<GameManager>
     //컬렉션컨트롤러 관련 이벤트 251226
     private void OnEnable()//이벤트 구독
     {
+        Potion.OnPotionUsed += PlayerHeal;
         _collectSlotContoller.OnCollectChanged += OnCollectSlotUpdated;
     }
     private void OnDisable()//이벤트 해제
     {
+        Potion.OnPotionUsed -= PlayerHeal;
         _collectSlotContoller.OnCollectChanged -= OnCollectSlotUpdated;
     }
 
