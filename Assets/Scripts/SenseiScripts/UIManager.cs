@@ -563,9 +563,20 @@ public class UIManager : MonoBehaviour
 
             //return pointerRaycastHits[0].gameObject;
         }
+
+        if (Gamepad.all.Count>0 && Gamepad.current.buttonEast.IsPressed())
+        {
+            _hoveredUIIndex = GameManager.Instance.CurrentSelectedQuickslotIndex;
+            return _quickSlotBox[GameManager.Instance.CurrentSelectedQuickslotIndex];
+
+        }
+
+
         return null;
 
     }
+
+   
 
     // Update is called once per frame
     void Update()
@@ -577,7 +588,7 @@ public class UIManager : MonoBehaviour
             {
                 return;
             }
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (EventSystem.current.IsPointerOverGameObject() || Gamepad.all.Count >0)
             {
                 if (GetCurrentHoveredUI() != null)
                 {
