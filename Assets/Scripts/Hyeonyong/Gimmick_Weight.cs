@@ -33,7 +33,10 @@ public class Gimmick_Weight : Gimmick
     {
         if (collision.gameObject.CompareTag("Player")) 
         {
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x / _weight, 0);
+            if(_checkGround._isGround) 
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x / _weight, 0);
+            else
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x / _weight, _rb.linearVelocity.y);
             //Debug.Log("플레이어와 충돌");
             //_rb.AddForce(-_rb.linearVelocity, ForceMode2D.Force);
         }
