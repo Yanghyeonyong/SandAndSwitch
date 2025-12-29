@@ -13,4 +13,8 @@ public class Potion : MonoBehaviour
         //GameManager.Instance.PlayerHeal(1);
         OnPotionUsed?.Invoke(1);//포션 사용 이벤트 발생
     }
+    public static void ConsumableUsed(ItemData data)//외부에서 요청할수있도록 처리
+    {
+        OnPotionUsed?.Invoke(1);
+    }
 }
