@@ -31,7 +31,7 @@ public class MovingTile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Head"))
+        if (collision.gameObject.CompareTag("Head") && _checkHead)
         {
             _curDir++;
             if (_curDir == _movingDirection.Length)
