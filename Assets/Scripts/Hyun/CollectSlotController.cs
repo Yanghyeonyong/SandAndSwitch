@@ -4,11 +4,14 @@ using System;
 
 public class CollectSlotController : MonoBehaviour
 {
+    //수집아이템이 여러개일것이라 생각하고 딕셔너리기반으로 만들었었는데...
+    //키 : id
+    //value : 컬렉트슬롯
     private Dictionary<int, CollectSlot> _slots = new Dictionary<int, CollectSlot>();
-    [SerializeField] ItemData _collectItem;
-    //public IReadOnlyDictionary<int, CollectSlot> Slots => _slots;
 
-    public event Action<CollectSlot> OnCollectChanged;
+    [SerializeField] ItemData _collectItem;
+
+    public event Action<CollectSlot> OnCollectChanged;//수집 슬롯 정보가 변경되었을 때 알리기 위한 이벤트
 
     public Dictionary<int, CollectSlot> Slots
     {
@@ -37,39 +40,7 @@ public class CollectSlotController : MonoBehaviour
 
     public void Collect(ItemData data)
     {
-        //if (data == null)
-        //{
-        //    return;
-        //}
-        //if (data.type != ItemType.Collection)
-        //{
-        //    return;
-        //}
-        //if (_slots.TryGetValue(data.id, out CollectSlot slot))
-        //{
-        //    //if (_slots[data.id].Data != data)
-        //    //{
-        //    //    _slots[data.id].Data = data;
-        //    //}
-        //    GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(data, 1);
-        //    slot.Add(1);
-        //    GameManager.Instance.CollectibleCountText.text = slot.Count + "/" + GameManager.Instance.TotalCollectibleCount;
-        //    if (GameManager.Instance.CollectibleIcon.color.a != 1f)
-        //    {
-        //        GameManager.Instance.CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
-        //    }
-        //}
-        //else
-        //{
-        //    GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(data, 1);
-        //    _slots.Add(data.id, new CollectSlot
-        //    {
-        //        Data = data,
-        //        Count = 1
-        //    });
-        //    GameManager.Instance.CollectibleIcon.color = new Color(1f, 1f, 1f, 1f);
-        //    GameManager.Instance.CollectibleCountText.text = 1 + "/"+ GameManager.Instance.TotalCollectibleCount;
-        //}
+  
         if (data == null || data.type != ItemType.Collection)
         {
             return;

@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class QuickSlotController : MonoBehaviour
@@ -8,38 +7,17 @@ public class QuickSlotController : MonoBehaviour
     //마우스 휠 입력 지연시간
     [SerializeField] private float _wheelCool = 0.1f;
     private float _wheelTimer = 0f;
-
+    //사운드 추가
+    [SerializeField] private AudioClip _slotChangeClip;
+    [SerializeField] private float _slotChangeVolume = 1f;
 
     //읽기전용
     public int CurrentIndex { get; private set; } = 0;//현재 선택된 슬롯 인덱스
     public QuickSlot CurrentSlot => _slots[CurrentIndex];//현재 선택된 슬롯
 
-    //public event Action<ItemData, int> OnItemUsed;//외부에 아이템 사용을 알리는 이벤트
-    //public event Action<int, QuickSlot> OnQuickSlotChanged;
 
     private void Awake()
     {
-        //for (int i = 0; i < _slots.Length; i++)
-        //{
-        //    if (_slots[i] == null)
-        //    {
-        //        _slots[i] = new QuickSlot();
-        //    }
-        //}
-
-
-
-        //if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] == null)
-        //{
-        //    //GameManager의 퀵슬롯 참조
-        //    GameManager.Instance.GameManagerQuickSlots = _slots;
-        //}
-
-
-        //else if (GameManager.Instance != null && GameManager.Instance.GameManagerQuickSlots[0] != null)
-        //{
-        //    _slots = GameManager.Instance.GameManagerQuickSlots;
-        //}
         if (GameManager.Instance == null)
         {
             return;
@@ -143,22 +121,7 @@ public class QuickSlotController : MonoBehaviour
         //아이템 사용
         GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(slot.Data, -useCount);
         slot.Use(useCount);
-        //기존코드
-        //if (slot.Count <= 0)
-        //{
-        //    GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = "";
-        //    GameManager.Instance.GameManagerQuickSlotIcons[index].gameObject.SetActive(false);
-        //    GameManager.Instance.GameManagerQuickSlotIcons[index].sprite = null;
-        //    GameManager.Instance.GameManagerQuickSlotIcons[index].color = clear;
-        //}
-        //else
-        //{
-        //    GameManager.Instance.GameManagerQuickSlotCountTexts[index].text = slot.Count.ToString();
-        //}
 
-        //GameManager.Instance.GameManagerQuickSlotCountTexts[CurrentIndex].text = slot.Count.ToString();
-
-        //변경된 코드
         GameManager.Instance.UpdateQuickSlot(index, slot);
         if (slot.Count <= 0)
         {
@@ -174,8 +137,6 @@ public class QuickSlotController : MonoBehaviour
             GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
         }
 
-        //OnItemUsed?.Invoke(slot.Data, useCount);//아이템 사용 알림
-
         return true;
     }
     public void SelectPreviousSlot()
@@ -187,6 +148,7 @@ public class QuickSlotController : MonoBehaviour
         }
 
         GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
+        SlotChangeSound();
     }
     public void SelectNextSlot()
     {
@@ -197,6 +159,7 @@ public class QuickSlotController : MonoBehaviour
         }
 
         GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
+        SlotChangeSound();
     }
     public void WheelScroll(float scroll)
     {
@@ -251,7 +214,15 @@ public class QuickSlotController : MonoBehaviour
         slot.Use(consumeCount);
         GameManager.Instance.ItemLogCanvas.PickupOrUseLogic(backupData, -consumeCount);
         GameManager.Instance.UpdateQuickSlot(index, slot);
-        //OnQuickSlotChanged?.Invoke(index, slot);
         return true;
+    }
+    private void SlotChangeSound()
+    {
+        if (_slotChangeClip == null)
+        {
+            return;
+        }
+
+        AudioSource.PlayClipAtPoint(_slotChangeClip, Camera.main.transform.position, _slotChangeVolume);
     }
 }

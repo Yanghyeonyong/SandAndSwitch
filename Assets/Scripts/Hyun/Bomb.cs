@@ -24,6 +24,7 @@ public class Bomb : MonoBehaviour
         }
            
     }
+
     public void UseBomb()
     {
         IsThrownBomb = true;
@@ -50,40 +51,30 @@ public class Bomb : MonoBehaviour
         transform.localScale = Vector3.one * explosionScale;
 
         _audio.Play();
+        DamageInRange(transform.position, _itemData.radius);
         BreakRadius();
     }
+    private void DamageInRange(Vector3 origin, float radius)
+    {
+        int playerLayer = LayerMask.GetMask("Player");
 
+        Collider2D hit = Physics2D.OverlapCircle(origin, radius, playerLayer);
+        if (hit == null)
+        {
+            return;
+        }
+
+        Player player = hit.GetComponent<Player>();
+        if (player != null)
+        {
+            hit.gameObject.GetComponent<Player>().TakeDamage();
+        }
+    }
     private void BreakRadius()
     {
         Vector3 origin = transform.position;
         float radius = _itemData.radius;
 
-        #region
-        //foreach (var mapCollider in Physics2D.OverlapCircleAll(origin, radius, _itemData.targetLayer))
-        //{
-        //    Tilemap map = mapCollider.GetComponent<Tilemap>();
-        //    if (map == null) continue;
-
-        //    Vector3Int centerCell = map.WorldToCell(origin);
-
-        //    int cellRadius = Mathf.CeilToInt(radius);
-
-        //    for (int x = -cellRadius; x <= cellRadius; x++)
-        //    {
-        //        for (int y = -cellRadius; y <= cellRadius; y++)
-        //        {
-        //            Vector3Int cell = new Vector3Int(centerCell.x + x, centerCell.y + y, 0);
-
-        //            Vector3 worldPos = map.GetCellCenterWorld(cell);
-
-        //            if (Vector2.Distance(origin, worldPos) <= radius)
-        //            {
-        //                map.SetTile(cell, null);
-        //            }
-        //        }
-        //    }
-        //}
-        #endregion
 
         // Å¸ÀÏ¸Ê Å½»ö
         Collider2D[] maps = Physics2D.OverlapCircleAll(origin, radius, _itemData.targetLayer);
