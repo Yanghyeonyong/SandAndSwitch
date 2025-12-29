@@ -216,7 +216,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.29, y: -1.47, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 817743948370959891}
@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98ae7653133ef24fa98df20aaf038fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_Repeat
+  _audioSource: {fileID: 0}
   _repeatTime: 4
   _startRepeat: 1
   _checkPhase: 0
@@ -251,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ebe370a433d0942a1157d05c32e286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PopupSpike
+  _audioSource: {fileID: 0}
   _spikeObject: {fileID: 577878408203124917}
   _moveSpeed: 10
   _pos:

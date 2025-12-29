@@ -28,5 +28,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   pickupSoundClip: {fileID: 8300000, guid: 6611951f9c283104bae9039925a5cb30, type: 3}
-  typeKor: 
-  typeEng: 
+  typeKor: "\uC218\uC9D1 \uC544\uC774\uD15C"
+  typeEng: Collections
