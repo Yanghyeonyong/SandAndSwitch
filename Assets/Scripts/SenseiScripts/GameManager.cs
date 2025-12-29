@@ -164,10 +164,10 @@ public class GameManager : Singleton<GameManager>
         key.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[301].PickupSound);
         keycard.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[302].PickupSound);
         usb.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[401].PickupSound);
-        brokenLauncher.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[402].PickupSound);
-        tray.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[403].PickupSound);
-        memo.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[404].PickupSound);
-        message.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[405].PickupSound);
+        brokenLauncher.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[501].PickupSound);
+        tray.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[502].PickupSound);
+        memo.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[503].PickupSound);
+        message.pickupSoundClip = AssetDatabase.LoadAssetAtPath<AudioClip>(ItemTable[504].PickupSound);
 
 
         //heartPotionQuickslot.pickupSoundClip = ItemTable[102].SoundEffect;
