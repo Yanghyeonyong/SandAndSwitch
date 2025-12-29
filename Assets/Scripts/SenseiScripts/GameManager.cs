@@ -86,6 +86,9 @@ public class GameManager : Singleton<GameManager>
     public Table<int, ItemTableData> ItemTable { get; private set; }
     public Table<string, StringTableData> StringTable { get; private set; }
 
+    // [추가] 2페이즈 대사가 이미 나왔는지 체크하는 변수
+    private bool _hasPlayedPhaseTwoDialogue = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -545,7 +548,11 @@ public class GameManager : Singleton<GameManager>
         _gameState = (GameState)1;
 
         //플레이어의 Phase 2 대사 시작(주민규)
-        StartCoroutine(PlayPhaseTwoDialogueRoutine());
+        if (!_hasPlayedPhaseTwoDialogue)
+        {
+            StartCoroutine(PlayPhaseTwoDialogueRoutine());
+            _hasPlayedPhaseTwoDialogue = true; // "이제 대사 쳤음"으로 표시
+        }
         //기존 로직
         if (_gameOverCoroutine == null)
         {
@@ -762,6 +769,7 @@ public class GameManager : Singleton<GameManager>
     public void LoadGameScene()
     {
         FiredPhaseTwoDialogue = false;
+        _hasPlayedPhaseTwoDialogue = false;
         CollectibleIcon.color = new Color(1f, 1f, 1f, 0.2f);
         CollectibleCountText.text = "0/" + TotalCollectibleCount;
 
@@ -891,6 +899,7 @@ public class GameManager : Singleton<GameManager>
     public void RestartGame()
     {
         FiredPhaseTwoDialogue = false;
+        _hasPlayedPhaseTwoDialogue = false;
         if (!_checkPointData._onCheck)
         {
             SoundEffectManager.Instance.PlayBGM(_bgms[0]);
