@@ -99,6 +99,7 @@ public class QuickSlotController : MonoBehaviour
     {
         CurrentIndex = index;
         GameManager.Instance.QuickSlotUIUpdate(index);
+        SlotChangeSound();
     }
 
 
@@ -149,6 +150,7 @@ public class QuickSlotController : MonoBehaviour
 
         GameManager.Instance.QuickSlotUIUpdate(CurrentIndex);
         SlotChangeSound();
+
     }
     public void SelectNextSlot()
     {
@@ -225,4 +227,5 @@ public class QuickSlotController : MonoBehaviour
 
         AudioSource.PlayClipAtPoint(_slotChangeClip, Camera.main.transform.position, _slotChangeVolume);
     }
+
 }
