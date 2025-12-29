@@ -288,10 +288,11 @@ public class GameManager : Singleton<GameManager>
 
     //}
 
-
+    public int CurrentSelectedQuickslotIndex { get; private set; } = 0;
     //Äü½½·Ô UI ¾÷µ¥ÀÌÆ®
     public void QuickSlotUIUpdate(int currentSelectedQuickslot)
     {
+        CurrentSelectedQuickslotIndex = currentSelectedQuickslot;
         foreach (var quickslottemp in GameManagerQuickSlotsImages)
         {
             if (quickslottemp != GameManagerQuickSlotsImages[currentSelectedQuickslot])
