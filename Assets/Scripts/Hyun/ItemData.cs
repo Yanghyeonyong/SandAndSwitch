@@ -3,7 +3,7 @@ using UnityEngine;
 //임시로 제외 대상 주석처리
 public enum ItemType
 {
-    Consumable = 1, Special = 2, Key = 3, Collection = 4
+    Consumable = 1, Special = 2, Key = 3, Collection = 4, Collections = 5
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
@@ -92,6 +92,9 @@ public class ItemData : ScriptableObject
                     case ItemType.Collection:
                         typeKor = "수집 아이템";
                         break;
+                    case ItemType.Collections:
+                        typeKor = "수집 아이템";
+                        break;
                     default:
                         typeKor = "기타 아이템";
                         break;
@@ -112,6 +115,9 @@ public class ItemData : ScriptableObject
                         break;
                     case ItemType.Collection:
                         typeEng = "Collection";
+                        break;
+                    case ItemType.Collections:
+                        typeEng = "Collections";
                         break;
                     default:
                         typeEng = "Other Item";

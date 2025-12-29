@@ -48,7 +48,12 @@ public class ItemPickup : MonoBehaviour
                 GameManager.Instance.GetComponent<CollectSlotController>().Collect(_itemData);
                 Pickup();
                 break;
-
+            case ItemType.Collections:
+                if (player.Slot != null && player.Slot.TryPickup(_itemData))
+                {
+                    Pickup();
+                }
+                break;
             case ItemType.Consumable:
                 if (_itemData.canQuickSlot)
                 {
