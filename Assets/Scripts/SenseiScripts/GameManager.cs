@@ -8,6 +8,8 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using System.Linq;
+
 //using Unity.VisualScripting;
 
 
@@ -495,6 +497,7 @@ public class GameManager : Singleton<GameManager>
     // [추가] 2페이즈 대사 시퀀스를 관리하는 코루틴
     private IEnumerator PlayPhaseTwoDialogueRoutine()
     {
+        yield return new WaitForSeconds(60f);
         // 출력할 대사 키값 배열
         string[] dialogueKeys = { "char_chat_0004", "char_chat_0005", "char_chat_0006" };
 
@@ -517,7 +520,7 @@ public class GameManager : Singleton<GameManager>
             }
 
             // 4. 다음 대사까지 10초 대기 (WaitWhile을 써서 씬 로딩 중에도 시간 가는 걸 방지할 수도 있음)
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(60f);
         }
     }
 
@@ -662,6 +665,21 @@ public class GameManager : Singleton<GameManager>
         //Debug.Log("업데이트 : " + _collectSlotContoller.Slots);
         UpdateCollectSlot(_collectSlotContoller.Slots[401]);
         yield return GameSceneLoadAsyncOperation.isDone;
+
+        _gimmickPos.Clear();
+        foreach (var d in _checkPointData._gimmickPos.ToList())
+        {
+            ItemTransform itemTransform = new ItemTransform(d.Value.position, d.Value.rotation, d.Value.scale);
+            if (_gimmickPos.ContainsKey(d.Key))
+            {
+                _gimmickPos[d.Key] = itemTransform;
+            }
+            else
+            {
+                _gimmickPos.Add(d.Key, itemTransform);
+            }
+        }
+
         yield return null;
         if (_gameState == GameState.PhaseOne)
         {
@@ -849,6 +867,10 @@ public class GameManager : Singleton<GameManager>
 
         //yield return null;
         GameSceneLoadAsyncOperation.allowSceneActivation = true;
+
+        yield return null;
+        _gimmickPos.Clear();
+
 
         while (CinematicControllerSensei.InCutscene)
         {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,15 @@ public class CheckPointData : Singleton<CheckPointData>
     private void Start()
     {
         GameManager.Instance.CheckPointData = this;
+    }
+
+    private void SavePos()
+    {
+        Gimmick_Weight[] pos = FindObjectsByType<Gimmick_Weight>(FindObjectsSortMode.None);
+        foreach (Gimmick_Weight p in pos)
+        {
+            p.SaveMyPos();
+        }
     }
     public void Init()
     {
@@ -69,19 +79,21 @@ public class CheckPointData : Singleton<CheckPointData>
         //        _isGimmickClear.Add(d.Key, d.Value);
         //    }
         //}
-        ////기믹 위치 정보 복사
+        //기믹 위치 정보 복사
         //foreach (var d in GameManager.Instance.GimmickPos)
-        //{
-        //    ItemTransform itemTransform = new ItemTransform(d.Value.position, d.Value.rotation, d.Value.scale);
-        //    if (_gimmickPos.ContainsKey(d.Key))
-        //    {
-        //        _gimmickPos[d.Key] = itemTransform;
-        //    }
-        //    else
-        //    {
-        //        _gimmickPos.Add(d.Key, itemTransform);
-        //    }
-        //}
+        SavePos();
+        foreach (var d in GameManager.Instance.GimmickPos.ToList())
+        {
+            ItemTransform itemTransform = new ItemTransform(d.Value.position, d.Value.rotation, d.Value.scale);
+            if (_gimmickPos.ContainsKey(d.Key))
+            {
+                _gimmickPos[d.Key] = itemTransform;
+            }
+            else
+            {
+                _gimmickPos.Add(d.Key, itemTransform);
+            }
+        }
 
         //foreach (Vector3 pos in GameManager.Instance.CollectedItemIDs)
         //{
@@ -124,7 +136,7 @@ public class CheckPointData : Singleton<CheckPointData>
         }
         //기믹 상태 저장
         _isGimmickClear = new Dictionary<int, bool>(GameManager.Instance.IsGimmickClear);
-        _gimmickPos = new Dictionary<int, ItemTransform>(GameManager.Instance.GimmickPos);
+        //_gimmickPos = new Dictionary<int, ItemTransform>(GameManager.Instance.GimmickPos);
 
         _collectSlots.Clear();
         //수집품 상태 저장
@@ -154,7 +166,7 @@ public class CheckPointData : Singleton<CheckPointData>
         //GameManager.Instance.GameManagerQuickSlots = GameManagerQuickSlots;
 
         GameManager.Instance.IsGimmickClear = _isGimmickClear;
-        GameManager.Instance.GimmickPos = _gimmickPos;
+        //GameManager.Instance.GimmickPos = _gimmickPos;
 
         //GameManager.Instance.CollectedItemIDs = CollectedItemIDs;
         //foreach (Vector3 pos in CollectedItemIDs)

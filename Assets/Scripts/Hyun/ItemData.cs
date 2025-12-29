@@ -81,19 +81,19 @@ public class ItemData : ScriptableObject
                 switch(type)
                 {
                     case ItemType.Consumable:
-                        typeKor = "소비 아이템";
+                        typeKor = GameManager.Instance.StringTable["it_type_0001"].kr;
                         break;
                     case ItemType.Special:
-                        typeKor = "보물";
+                        typeKor = GameManager.Instance.StringTable["it_type_0002"].kr;
                         break;
                     case ItemType.Key:
-                        typeKor = "열쇠 아이템";
+                        typeKor = GameManager.Instance.StringTable["it_type_0003"].kr;
                         break;
                     case ItemType.Collection:
-                        typeKor = "수집 아이템";
+                        typeKor = GameManager.Instance.StringTable["it_type_0004"].kr;
                         break;
                     case ItemType.Collections:
-                        typeKor = "수집 아이템";
+                        typeKor = GameManager.Instance.StringTable["it_type_0005"].kr;
                         break;
                     default:
                         typeKor = "기타 아이템";
@@ -105,19 +105,19 @@ public class ItemData : ScriptableObject
                 switch (type)
                 {
                     case ItemType.Consumable:
-                        typeEng = "Consumable";
+                        typeEng = GameManager.Instance.StringTable["it_type_0001"].en;
                         break;
                     case ItemType.Special:
-                        typeEng = "Treasure";
+                        typeEng = GameManager.Instance.StringTable["it_type_0002"].en;
                         break;
                     case ItemType.Key:
-                        typeEng = "Key";
+                        typeEng = GameManager.Instance.StringTable["it_type_0003"].en;
                         break;
                     case ItemType.Collection:
-                        typeEng = "Collection";
+                        typeEng = GameManager.Instance.StringTable["it_type_0004"].en;
                         break;
                     case ItemType.Collections:
-                        typeEng = "Collections";
+                        typeEng = GameManager.Instance.StringTable["it_type_0005"].en;
                         break;
                     default:
                         typeEng = "Other Item";
