@@ -3975,7 +3975,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4027,7 +4027,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -119610,7 +119610,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -119662,7 +119662,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -123233,7 +123233,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -123285,7 +123285,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -124017,7 +124017,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -124069,7 +124069,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -125179,7 +125179,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -125231,7 +125231,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -125267,6 +125267,8 @@ MonoBehaviour:
   - _data: {fileID: 0}
     _count: 0
   _wheelCool: 0.1
+  _slotChangeClip: {fileID: 0}
+  _slotChangeVolume: 1
 --- !u!1 &1431452059
 GameObject:
   m_ObjectHideFlags: 0
@@ -125757,7 +125759,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -125809,7 +125811,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdfac1030c1c0ef4b923e1e7a5f4c260, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
