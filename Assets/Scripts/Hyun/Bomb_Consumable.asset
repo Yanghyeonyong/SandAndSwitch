@@ -26,7 +26,7 @@ MonoBehaviour:
   delay: 2
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   pickupSoundClip: {fileID: 8300000, guid: d186f16f65b55394eb533bf82ea4d6c7, type: 3}
   typeKor: "\uC18C\uBE44 \uC544\uC774\uD15C"
   typeEng: Consumable
