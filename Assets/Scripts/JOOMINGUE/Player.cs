@@ -251,8 +251,8 @@ public class Player : MonoBehaviour
     // Unity 생명주기 Start 추가
     void Start()
     {
-        // 현재 씬 이름이 "DuHyeon_Tutorial"이면 등장 이벤트 시작
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "DuHyeon_Tutorial" && !CheckPointData.Instance._onCheck)
+        // 현재 씬 이름이 "Map_Zone1"이면 등장 이벤트 시작
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Map_Zone1" && !CheckPointData.Instance._onCheck)
         {
             StartCoroutine(IntroWalkRoutine());
         }
