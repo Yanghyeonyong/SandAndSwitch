@@ -1328,7 +1328,7 @@ MonoBehaviour:
   _interactiveUI: {fileID: 790421004}
   _isReuse: 1
   _isTeleport: 0
-  _CheckItem: 1
+  _CheckItem: 0
 --- !u!4 &157525960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3386999639568982978, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
