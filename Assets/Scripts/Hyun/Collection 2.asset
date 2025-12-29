@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ca4e340b0a97e479177e31d3da0005, type: 3}
   m_Name: Collection 2
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: 402
+  id: 501
   itemName: "\uC218\uC9D1\uD488"
   EnItemName: 
   description: 
