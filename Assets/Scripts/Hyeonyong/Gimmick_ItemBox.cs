@@ -6,6 +6,7 @@ public class Gimmick_ItemBox : Gimmick
     Animator _animator;
     ItemBox _itemBox;
     [SerializeField] GameObject _interactiveUI;
+    AudioSource _audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,10 +17,12 @@ public class Gimmick_ItemBox : Gimmick
             _animator.SetTrigger("TurnOn");
             _itemBox.OpenBox();
         }
+        _audioSource= GetComponent<AudioSource>();
     }
 
     public override void StartGimmick()
     {
+        _audioSource.Play();
         _animator.SetTrigger("TurnOn");
         _isClear = true;
         _interactiveUI.SetActive(false);
