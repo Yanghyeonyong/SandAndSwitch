@@ -6,7 +6,7 @@ int|-|string|string|enum|int|string|string|string
 301|관문 기믹 키 - 열쇠|it_name_301|it_exp_301|3|3|Assets/Prefab/Key 1.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/GateKey.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType3.mp3
 302|맵 기믹 키 1 - 출입 카드|it_name_302|it_exp_302|3|1|Assets/Prefab/Key 2.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/출입 카드.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType3.mp3
 401|USB|it_name_401|it_exp_401|4|99|Assets/Prefab/Collect 1.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/USB.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType4.mp3
-402|수집요소 B1 - 망가진 발사대|it_name_402|it_exp_402|4|1|Assets/Prefab/Collect 2.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/망가진 발사대.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType4.mp3
-403|수집요소 B2 - 쟁반|it_name_403|it_exp_403|4|1|Assets/Prefab/Collect 3.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/쟁반.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType4.mp3
-404|수집요소 B3 - 바스러진 메모|it_name_404|it_exp_404|4|1|Assets/Prefab/Collect 4.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/바스러진 메모.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType4.mp3
-405|수집요소 B4 - 그림 쪽지|it_name_405|it_exp_405|4|1|Assets/Prefab/Collect 5.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/그림 쪽지.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType4.mp3
+501|수집요소 B1 - 망가진 발사대|it_name_501|it_exp_501|5|1|Assets/Prefab/Collect 2.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/망가진 발사대.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType4.mp3
+502|수집요소 B2 - 쟁반|it_name_502|it_exp_502|5|1|Assets/Prefab/Collect 3.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/쟁반.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType4.mp3
+503|수집요소 B3 - 바스러진 메모|it_name_503|it_exp_503|5|1|Assets/Prefab/Collect 4.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/바스러진 메모.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType4.mp3
+504|수집요소 B4 - 그림 쪽지|it_name_504|it_exp_504|5|1|Assets/Prefab/Collect 5.prefab|Assets/ExcludeGit/DirectAssets/12.24 Add Assets/그림 쪽지.png|Assets/ExcludeGit/DirectAssets/12.23 Add Sound/GetItemSoundType4.mp3
