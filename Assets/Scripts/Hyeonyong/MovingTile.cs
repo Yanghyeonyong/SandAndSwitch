@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovingTile : MonoBehaviour
@@ -7,6 +8,8 @@ public class MovingTile : MonoBehaviour
     Vector3[] _dir;
     [SerializeField] float _moveSpeed = 0.1f;
     int _curDir = 0;
+
+    [SerializeField] bool _checkHead = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,6 +27,18 @@ public class MovingTile : MonoBehaviour
 
         StartCoroutine(Move());
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Head"))
+        {
+            _curDir++;
+            if (_curDir == _movingDirection.Length)
+            {
+                _curDir = 0;
+            }
+        }
     }
 
     IEnumerator Move()
