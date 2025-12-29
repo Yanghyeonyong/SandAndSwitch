@@ -105,9 +105,13 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private int onPortal = 0;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _failSoundClip;
     private ItemPickup _nearbyItem;
     private QuickSlotController slot;
     public QuickSlotController Slot => slot;
+    public AudioSource AudioSource => _audioSource;
+    public AudioClip FailSoundClip => _failSoundClip;
 
     Vector3 curVelocity;
 
@@ -670,12 +674,14 @@ public class Player : MonoBehaviour
         QuickSlot slotData = slot.CurrentSlot;
         if (slotData == null || slotData.IsEmpty || slotData.Data == null)//빈슬롯
         {
+            FailSound();
             return;
         }
 
         ItemData data = slotData.Data;
         if (data.type == ItemType.Key)
         {
+            FailSound();
             return;
         }
         
@@ -684,11 +690,13 @@ public class Player : MonoBehaviour
             if (GameManager.Instance.CurrentPlayerHealth >= GameManager.Instance.MaxPlayerHealth)
             {
                 Debug.Log("체력이 최대라 물약 사용 불가");
+                FailSound();
                 return;
             }
         }
         if (!slot.TryUseCurrentSlot(slot.CurrentIndex))
         {
+            FailSound();
             return;
         }
         if (data.type == ItemType.Consumable && data.prefab != null)
@@ -705,6 +713,15 @@ public class Player : MonoBehaviour
                 obj.GetComponent<Bomb>().UseBomb();
             }
         }
+    }
+    private void FailSound()
+    {
+        if (_audioSource == null || _failSoundClip == null)
+        {
+            return;
+        }
+
+        _audioSource.PlayOneShot(_failSoundClip);
     }
     public void OnSlotPrev(InputAction.CallbackContext ctx)
     {
