@@ -38,7 +38,7 @@ public class Shutter : Gimmick_Object
     IEnumerator Open()
     {
         Debug.Log("올라가려고 함");
-        while (Vector3.Distance(_edge.position, _pos[0].position) > 0.1f)
+        while (Vector3.Distance(_edge.position, _pos[0].position) > 0.3f)
         {
             Debug.Log("올라간다");
             _shutterObject.transform.Translate(Vector3.up * Time.deltaTime * _moveSpeed);
@@ -49,12 +49,20 @@ public class Shutter : Gimmick_Object
 
     IEnumerator Close()
     {
-        while (Vector3.Distance(_edge.position, _pos[1].position) > 0.1f)
+        while (Vector3.Distance(_edge.position, _pos[1].position) > 0.3f)
         {
             Debug.Log("내려간다");
             _shutterObject.transform.Translate(Vector3.down * Time.deltaTime * _moveSpeed);
             yield return null;
 
+        }
+    }
+    private void OnDisable()
+    {
+        if (_curCoroutine != null)
+        {
+            StopCoroutine(_curCoroutine);
+            _curCoroutine = null;
         }
     }
 }

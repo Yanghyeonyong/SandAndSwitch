@@ -39,7 +39,9 @@ public class Gimmick_Timer : Gimmick
     {
         _obj.TurnOn();
         _animator.Play("TurnOn", -1, 0f);
+        Debug.Log("타이머 애니메이션 실행");
         yield return new WaitForSeconds(_timer);
+        Debug.Log("시간 종료");
         _obj.TurnOff();
         _coroutine = null;
         //GameManager.Instance.IsGimmickClear[GimmickId] = true;

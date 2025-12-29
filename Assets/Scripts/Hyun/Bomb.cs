@@ -93,6 +93,13 @@ public class Bomb : MonoBehaviour
             Tilemap map = col.GetComponent<Tilemap>();
             if (map == null)
             {
+                //범위에 휘말린 오브젝트도 삭제
+                CircleCollider2D circle = col.GetComponent<CircleCollider2D>();
+                if (circle == null)
+                {
+                    continue;
+                }
+                col.gameObject.SetActive(false);
                 continue;
             }
 
