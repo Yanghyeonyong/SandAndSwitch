@@ -97,7 +97,7 @@ public class GameManager : Singleton<GameManager>
 #endif
     }
 
-    //컬렉션컨트롤러 관련 이벤트 251226
+    //컬렉션컨트롤러 관련 이벤트 251226+251229
     private void OnEnable()//이벤트 구독
     {
         Potion.OnPotionUsed += PlayerHeal;
