@@ -453,6 +453,8 @@ MonoBehaviour:
   - _data: {fileID: 0}
     _count: 0
   _wheelCool: 0.1
+  _slotChangeClip: {fileID: 8300000, guid: 16c34484802adf345a069fbd20b1473b, type: 3}
+  _slotChangeVolume: 1
 --- !u!61 &6383519956515517083
 BoxCollider2D:
   m_ObjectHideFlags: 0
