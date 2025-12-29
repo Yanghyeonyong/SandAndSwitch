@@ -22,7 +22,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: b5a00b4863784f34986bdb7f6d01474e, type: 3}
   canQuickSlot: 1
   maxStack: 99
-  radius: 6.5
+  radius: 5
   delay: 2
   targetLayer:
     serializedVersion: 2

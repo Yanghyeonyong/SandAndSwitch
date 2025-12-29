@@ -132,6 +132,7 @@ MonoBehaviour:
   _itemData: {fileID: 11400000, guid: add8d2d4205b91f4d81c38cac2df835c, type: 2}
   _animator: {fileID: 1159282674492997406}
   _audio: {fileID: 2051655380453933502}
+  _visualScaleMultiplier: 1.3
 --- !u!114 &-5633228903109722114
 MonoBehaviour:
   m_ObjectHideFlags: 0

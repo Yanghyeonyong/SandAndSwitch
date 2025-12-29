@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 public class Bomb : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Bomb : MonoBehaviour
     [SerializeField] private AudioSource _audio;//폭발사운드용
 
     private float _baseExplosionRadius = 1f;//스케일 1일때 폭발 반경
+    [SerializeField] private float _visualScaleMultiplier = 1.3f;//이미지 배율
+
     public bool IsExploding { get; private set; } = false;
     public bool IsThrownBomb { get; set; } = false;
     private void Awake()
@@ -22,7 +25,7 @@ public class Bomb : MonoBehaviour
                 pickup.enabled = false;
             }
         }
-           
+
     }
 
     public void UseBomb()
@@ -33,7 +36,7 @@ public class Bomb : MonoBehaviour
         {
             pickup.enabled = false;
         }
-            StartCoroutine(ExplodeCoroutine());
+        StartCoroutine(ExplodeCoroutine());
     }
 
     private IEnumerator ExplodeCoroutine()//딜레이를 주기위한 코루틴
@@ -47,37 +50,34 @@ public class Bomb : MonoBehaviour
     private void Explode()//폭발메서드
     {
         //설정된 폭발 범위에 따라 폭발 애니메이션 스케일 증가
-        float explosionScale = _itemData.radius / _baseExplosionRadius;//설정된 폭발 범위 / 스케일
-        transform.localScale = Vector3.one * explosionScale;
+        float explosionRadius = _itemData.radius;
+        float explosionScale = explosionRadius / _baseExplosionRadius;//이미지 보정
+        transform.localScale = Vector3.one * explosionScale * _visualScaleMultiplier;
 
         _audio.Play();
-        DamageInRange(transform.position, _itemData.radius);
-        BreakRadius();
+        DamageInRange(transform.position, explosionRadius);
+        BreakRadius(explosionRadius);
     }
     private void DamageInRange(Vector3 origin, float radius)
     {
         int playerLayer = LayerMask.GetMask("Player");
 
-        Collider2D hit = Physics2D.OverlapCircle(origin, radius, playerLayer);
-        if (hit == null)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, radius, playerLayer);
+        foreach (var hit in hits)
         {
-            return;
+            Player player = hit.GetComponent<Player>();
+            if (player != null)
+            {
+                hit.gameObject.GetComponent<Player>().TakeDamage();
+            }
         }
 
-        Player player = hit.GetComponent<Player>();
-        if (player != null)
-        {
-            hit.gameObject.GetComponent<Player>().TakeDamage();
-        }
+
     }
-    private void BreakRadius()
+    private void BreakRadius(float radius)
     {
-        Vector3 origin = transform.position;
-        float radius = _itemData.radius;
-
-
         // 타일맵 탐색
-        Collider2D[] maps = Physics2D.OverlapCircleAll(origin, radius, _itemData.targetLayer);
+        Collider2D[] maps = Physics2D.OverlapCircleAll(transform.position, radius, _itemData.targetLayer);
 
         foreach (var col in maps)
         {
@@ -104,12 +104,17 @@ public class Bomb : MonoBehaviour
                     Vector3Int cell = new Vector3Int(x, y, 0);
                     Vector3 world = map.GetCellCenterWorld(cell);
 
-                    if (Vector2.Distance(origin, world) <= radius)
+                    if (Vector2.Distance(transform.position, world) <= radius)
                     {
                         map.SetTile(cell, null);
                     }
                 }
             }
         }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _itemData.radius);
     }
 }
