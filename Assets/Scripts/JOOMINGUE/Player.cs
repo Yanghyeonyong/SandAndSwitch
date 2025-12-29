@@ -291,6 +291,9 @@ public class Player : MonoBehaviour
         // 4. 도착 후 정지 및 제어권 반환
         moveX = 0f;
         isCutscene = false;
+
+        // 5. BGM 적용
+        SoundEffectManager.Instance.PlayBGM(GameManager.Instance.Bgms[GameManager.Instance.CurScene]);
     }
 
     public IEnumerator PlayPhaseTwoDialogueSequence()

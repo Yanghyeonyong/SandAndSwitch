@@ -466,6 +466,7 @@ public class GameManager : Singleton<GameManager>
     // 0 타이틀 1. 튜토리얼 2. 스테이지 2 3. 스테이지 3 4. 스테이지 4 5. 페이즈 2 6. 사망 7. 승리
     //0. 튜토리얼 1. 스테이지 2 :Phase 1 2. 스테이지 4 3. 스테이지 2 : Phase 2
     [SerializeField] AudioClip[] _bgms;
+    public AudioClip[] Bgms => _bgms;
 
     void Start()
     {
@@ -725,6 +726,7 @@ public class GameManager : Singleton<GameManager>
 
         Debug.Log("스타트");
         _curScene = 1;
+        //SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
         _isGimmickClear.Clear();
         _checkPointData.Clear();//기믹,아이템 초기화
         _checkPointData._onCheck = false;
@@ -745,7 +747,7 @@ public class GameManager : Singleton<GameManager>
 
         _currentPlayerHealth = _maxPlayerHealth;
         HeartLogic();
-        SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
+        //SoundEffectManager.Instance.PlayBGM(_bgms[_curScene]);
         Time.timeScale = 1f;
         GameSceneLoadAsyncOperation = SceneManager.LoadSceneAsync(1);
         GameSceneLoadAsyncOperation.allowSceneActivation = false;
@@ -828,6 +830,7 @@ public class GameManager : Singleton<GameManager>
         FiredPhaseTwoDialogue = false;
         if (!_checkPointData._onCheck)
         {
+            SoundEffectManager.Instance.PlayBGM(_bgms[0]);
             CollectibleIcon.color = new Color(1f, 1f, 1f, 0.2f);
             CollectibleCountText.text = "0/" + TotalCollectibleCount;
             CurrentCutsceneIndex = 0;
