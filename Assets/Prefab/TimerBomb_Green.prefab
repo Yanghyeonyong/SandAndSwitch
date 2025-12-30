@@ -108,10 +108,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_TimeBomb
   _gimmickId: 0
-  _timer: 5
+  _timer: 3
   _weight: 5
   _range: 6.5
   _isUse: 0
+  _clip:
+  - {fileID: 8300000, guid: 3549a5d066be396439b50e79ba757b3c, type: 3}
+  - {fileID: 8300000, guid: d8c37cb9600e15a4a8b2ad4d44835838, type: 3}
 --- !u!95 &2696669489088079922
 Animator:
   serializedVersion: 7

@@ -329,7 +329,7 @@ Transform:
   m_GameObject: {fileID: 354605998}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.9, y: 5.1, z: 0}
+  m_LocalPosition: {x: 43.9, y: 4.8, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -865,7 +865,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 6.75
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -22387,6 +22387,8 @@ GameObject:
   - component: {fileID: 1566527225}
   - component: {fileID: 1566527224}
   - component: {fileID: 1566527226}
+  - component: {fileID: 1566527228}
+  - component: {fileID: 1566527227}
   m_Layer: 0
   m_Name: Portal_NextZone
   m_TagString: Finish
@@ -22513,6 +22515,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.2742874, y: 0.39102286}
   m_EdgeRadius: 0
+--- !u!114 &1566527227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566527223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5362efaee11600f4598295ca1f0bb394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gimmick_Empty
+  _gimmickId: 0
+--- !u!114 &1566527228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566527223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0292107f62db3e7478a1976754147deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractiveObject
+  _interactiveUI: {fileID: 1820176960}
+  _isReuse: 0
+  _isTeleport: 0
+  _CheckItem: 0
 --- !u!4 &1752276038 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7209817547133345873, guid: 55cf9853cc5eb604f9afc839163d9edd, type: 3}
@@ -22996,7 +23027,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
