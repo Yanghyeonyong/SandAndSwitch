@@ -636,7 +636,7 @@ public class GameManager : Singleton<GameManager>
             }
             else if (_curGameOverCount < _gameOverCount - 30f)
             {
-                _currentWhiteFadeColor.a = _maxAlpha * (1f - (_curGameOverCount / _gameOverCount -30f));
+                _currentWhiteFadeColor.a = _maxAlpha * (1f - (_curGameOverCount / (_gameOverCount -30f)));
             }
             else
             {
