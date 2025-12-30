@@ -73,6 +73,7 @@ public class Player : MonoBehaviour
     public AudioSource audioSource; // [추가] 오디오 소스 연결
     public AudioClip hitClip;       // [추가] 피격 사운드 파일
     public AudioClip walkClip;      // [추가] 걷기 사운드 파일
+    public AudioClip landingClip;   // [추가] 착지 사운드 파일
 
     public float footstepRate = 0.4f; // [추가] 발소리 간격 (초 단위)
     private float footstepTimer = 0f; // [추가] 발소리 타이머
@@ -235,7 +236,7 @@ public class Player : MonoBehaviour
         {
             if (walkClip != null && audioSource != null)
             {
-                audioSource.PlayOneShot(walkClip);
+                audioSource.PlayOneShot(landingClip, 0.5f);
             }
         }
 
