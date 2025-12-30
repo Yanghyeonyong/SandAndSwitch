@@ -126,7 +126,7 @@ public class QuickSlotController : MonoBehaviour
         GameManager.Instance.UpdateQuickSlot(index, slot);
         if (slot.Count <= 0)
         {
-            ShiftSlots();//½½·ÔÀÌµ¿
+            //ShiftSlots();//½½·ÔÀÌµ¿
 
             for (int i = 0; i < _slots.Length; i++)
             {
@@ -179,23 +179,23 @@ public class QuickSlotController : MonoBehaviour
         }
         _wheelTimer = _wheelCool;
     }
-    public void ShiftSlots()
-    {
-        int writeIndex = 0;
+    //public void ShiftSlots()//½½·ÔÀÌµ¿ º¸·ù
+    //{
+    //    int writeIndex = 0;
 
-        for (int readIndex = 0; readIndex < _slots.Length; readIndex++)
-        {
-            if (!_slots[readIndex].IsEmpty)
-            {
-                if (writeIndex != readIndex)
-                {
-                    _slots[writeIndex].SlotCopy(_slots[readIndex]);
-                    _slots[readIndex].Clear();
-                }
-                writeIndex++;
-            }
-        }
-    }
+    //    for (int readIndex = 0; readIndex < _slots.Length; readIndex++)
+    //    {
+    //        if (!_slots[readIndex].IsEmpty)
+    //        {
+    //            if (writeIndex != readIndex)
+    //            {
+    //                _slots[writeIndex].SlotCopy(_slots[readIndex]);
+    //                _slots[readIndex].Clear();
+    //            }
+    //            writeIndex++;
+    //        }
+    //    }
+    //}
     public bool ConsumeKeySlot(int index, int consumeCount)
     {
         QuickSlot slot = _slots[index];

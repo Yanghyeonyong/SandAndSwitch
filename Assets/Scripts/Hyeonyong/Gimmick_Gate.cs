@@ -44,7 +44,7 @@ public class Gimmick_Gate : Gimmick
                 //}
                 GameManager.Instance.Player.Slot.ConsumeKeySlot(index, _requireCount);
                 //키 사용이 끝난후에 비어있는 슬롯 이동
-                GameManager.Instance.Player.Slot.ShiftSlots();
+                //GameManager.Instance.Player.Slot.ShiftSlots();
                 //UI갱신
                 GameManager.Instance.RefreshAllQuickSlotUI();
             }
