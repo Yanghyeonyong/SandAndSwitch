@@ -229,7 +229,8 @@ public class UIManager : MonoBehaviour
         _pauseMenuButton[3].onClick.AddListener(ControlGuideLogic);
         _pauseMenuButton[3].onClick.AddListener(PlayUIClickSound);
         //_pauseMenuButton[3].onClick.AddListener(ChangeLanguageLogic);
-
+        _pauseMenuButton[4].onClick.AddListener(ChangeLanguageLogic);
+        _pauseMenuButton[4].onClick.AddListener(PlayUIClickSound);
 
         _gameOverMenuButton[0].onClick.AddListener(GameManager.Instance.RestartGame);
         _gameOverMenuButton[0].onClick.AddListener(PlayUIClickSound);
@@ -271,7 +272,7 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.currentLanguage = Language.KR;
             _languageIcon.sprite = _languageIcons[0];
-
+            _pauseMenuButton[4].GetComponent<Image>().sprite = _languageIcons[0];
 
 
 
@@ -298,6 +299,7 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.currentLanguage = Language.EN;
             _languageIcon.sprite = _languageIcons[1];
+            _pauseMenuButton[4].GetComponent<Image>().sprite = _languageIcons[1];
             _menuButton[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0001"].en ;
             _menuButton[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0002"].en ;
             _menuButton[2].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stringTable["lob_bt_0003"].en ;
