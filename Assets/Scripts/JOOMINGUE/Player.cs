@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     [Header("Chat System")]
     public GameObject chatBubbleCanvas; // 에디터에서 ChatBubbleCanvas 연결
     public TextMeshProUGUI chatText;    // 에디터에서 BubbleText 연결
-    public float chatDuration = 1.5f;   // 말풍선 떠있는 시간
+    public float chatDuration = 3f;   // 말풍선 떠있는 시간
 
     // Runtime values
     float moveX;
