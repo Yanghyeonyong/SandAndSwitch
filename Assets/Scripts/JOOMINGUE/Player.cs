@@ -232,11 +232,20 @@ public class Player : MonoBehaviour
 
         isGrounded = groundedFrames >= groundedConfirmFrames;
 
-        if (!wasGrounded && isGrounded)
+        //if (!wasGrounded && isGrounded)
+        //{
+        //    if (walkClip != null && audioSource != null)
+        //    {
+        //        audioSource.PlayOneShot(landingClip, 0.5f);
+        //    }
+        //}
+
+        //251230 최정욱 알파 임시 착지 소리 좀더 앞당기기
+        if (groundedCandidate && !wasGrounded)
         {
-            if (walkClip != null && audioSource != null)
+            if (walkClip != null && audioSource != null && !audioSource.isPlaying)
             {
-                audioSource.PlayOneShot(landingClip, 0.5f);
+                audioSource.PlayOneShot(landingClip, 0.18f);
             }
         }
 
@@ -605,6 +614,16 @@ public class Player : MonoBehaviour
 
         if (ctx.started && _checkGimmick && !GameManager.Instance.OnProgressGimmick)
         {
+            if (_curGimmick.GetComponent<ItemBox>() !=null)
+            {
+                {
+                    if (_curGimmick.GetComponent<ItemBox>().IsOpened)
+                    {
+                        return;
+                    }
+                }
+                //return;
+            }
             _curGimmick.StartGimmick();
         }
         //else if (ctx.started && _checkGimmick && GameManager.Instance.OnProgressGimmick)
@@ -755,6 +774,16 @@ public class Player : MonoBehaviour
             _nearbyItem = null;
         }
     }
+
+    public void ClearNearbyGimmick(Gimmick gimmick)
+    {
+        if (_curGimmick == gimmick)
+        {
+            _curGimmick = null;
+            _checkGimmick = false;
+        }
+    }
+
 
     public void OnUseItem(InputAction.CallbackContext ctx)
     {

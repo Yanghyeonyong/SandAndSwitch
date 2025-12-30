@@ -10,6 +10,9 @@ public class Gimmick_Timer : Gimmick
     Coroutine _coroutine;
     AudioSource _audioSource;
 
+
+    AudioSource _childAudioSource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +24,14 @@ public class Gimmick_Timer : Gimmick
         //}
         _obj = GetComponent<Gimmick_Object>();
         _audioSource = GetComponent<AudioSource>();
+
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.name == "ChildAudioSource")
+            {
+                _childAudioSource = child.GetComponent<AudioSource>();
+            }
+        }
     }
 
     public override void StartGimmick()
@@ -38,6 +49,7 @@ public class Gimmick_Timer : Gimmick
 
     IEnumerator StartTimer()
     {
+        _childAudioSource.Play();
         _audioSource.Play();
         _obj.TurnOn();
         _animator.Play("TurnOn", -1, 0f);

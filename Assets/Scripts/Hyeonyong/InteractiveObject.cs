@@ -72,6 +72,13 @@ public class InteractiveObject : MonoBehaviour
         }
         if (collision.CompareTag("Player"))
         {
+            //251230 최정욱 알파 박스 범위 벗어나도 상호작용 소리가 나던 버그 수정
+            if (GetComponent<ItemBox>()!=null)
+            {
+                _player.CurGimmick = null;
+            }
+
+
             //플레이어와 충돌 시 상호작용 버튼 비활성화
             _player.CheckGimmick = false;
             _interactiveUI.SetActive(false);

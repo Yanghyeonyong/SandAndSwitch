@@ -12,7 +12,7 @@ public class ItemBox : MonoBehaviour
     private bool _isOpened = false;
 
 
-
+    public bool IsOpened => _isOpened;
 
 
     public void OpenBox()
