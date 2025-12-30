@@ -86,8 +86,8 @@ public class GameManager : Singleton<GameManager>
     public Table<int, ItemTableData> ItemTable { get; private set; }
     public Table<string, StringTableData> StringTable { get; private set; }
 
-    // [추가] 2페이즈 대사가 이미 나왔는지 체크하는 변수
-    private bool _hasPlayedPhaseTwoDialogue = false;
+    // [추가] 실행 중인 대사 코루틴을 저장할 변수
+    private Coroutine _dialogueCoroutine;
 
     protected override void Awake()
     {
@@ -527,6 +527,15 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void StopDialogue()
+    {
+        if (_dialogueCoroutine != null)
+        {
+            StopCoroutine(_dialogueCoroutine);
+            _dialogueCoroutine = null;
+        }
+    }
+
     // [추가] 헬퍼 함수: GameManager에서도 텍스트를 가져올 수 있게
     private string GetStringFromTable(string key)
     {
@@ -547,12 +556,9 @@ public class GameManager : Singleton<GameManager>
         SoundEffectManager.Instance.PlayBGM(_bgms[_bgms.Length - 3]);
         _gameState = (GameState)1;
 
-        //플레이어의 Phase 2 대사 시작(주민규)
-        if (!_hasPlayedPhaseTwoDialogue)
-        {
-            StartCoroutine(PlayPhaseTwoDialogueRoutine());
-            _hasPlayedPhaseTwoDialogue = true; // "이제 대사 쳤음"으로 표시
-        }
+        // 플레이어의 Phase 2 대사 시작 기존 코루틴이 있다면 멈추고, 새로 시작한 것을 변수에 저장
+        if (_dialogueCoroutine != null) StopCoroutine(_dialogueCoroutine);
+        _dialogueCoroutine = StartCoroutine(PlayPhaseTwoDialogueRoutine());
         //기존 로직
         if (_gameOverCoroutine == null)
         {
@@ -769,7 +775,7 @@ public class GameManager : Singleton<GameManager>
     public void LoadGameScene()
     {
         FiredPhaseTwoDialogue = false;
-        _hasPlayedPhaseTwoDialogue = false;
+        StopDialogue();
         CollectibleIcon.color = new Color(1f, 1f, 1f, 0.2f);
         CollectibleCountText.text = "0/" + TotalCollectibleCount;
 
@@ -899,7 +905,7 @@ public class GameManager : Singleton<GameManager>
     public void RestartGame()
     {
         FiredPhaseTwoDialogue = false;
-        _hasPlayedPhaseTwoDialogue = false;
+        StopDialogue();
         if (!_checkPointData._onCheck)
         {
             SoundEffectManager.Instance.PlayBGM(_bgms[0]);

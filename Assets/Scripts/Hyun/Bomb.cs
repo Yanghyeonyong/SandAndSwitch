@@ -11,7 +11,7 @@ public class Bomb : MonoBehaviour
     [SerializeField] private AudioSource _audio;//폭발사운드용
 
     private float _baseExplosionRadius = 1f;//스케일 1일때 폭발 반경
-    [SerializeField] private float _visualScaleMultiplier = 1.3f;//이미지 배율
+    [SerializeField] private float _visualScaleMultiplier = 1.5f;//이미지 배율
 
     public bool IsExploding { get; private set; } = false;
     public bool IsThrownBomb { get; set; } = false;
@@ -52,7 +52,7 @@ public class Bomb : MonoBehaviour
         //설정된 폭발 범위에 따라 폭발 애니메이션 스케일 증가
         float explosionRadius = _itemData.radius;
         float explosionScale = explosionRadius / _baseExplosionRadius;//이미지 보정
-        transform.localScale = Vector3.one * explosionScale * _visualScaleMultiplier;
+        transform.localScale = Vector3.one * explosionScale * _visualScaleMultiplier;//배율로 이미지 추가 보정
 
         _audio.Play();
         DamageInRange(transform.position, explosionRadius);
