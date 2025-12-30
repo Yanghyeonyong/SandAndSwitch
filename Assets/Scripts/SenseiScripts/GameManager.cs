@@ -630,9 +630,13 @@ public class GameManager : Singleton<GameManager>
         {
             //페이즈 하얘지는 연출 추가 251221 최정욱
 
-            if (_curGameOverCount / _gameOverCount >= 1 - _maxAlpha)
+            if (_curGameOverCount >= _gameOverCount - 30f)
             {
-                _currentWhiteFadeColor.a = _maxAlpha * (1f - (_curGameOverCount / _gameOverCount));
+                _currentWhiteFadeColor.a = 1f;
+            }
+            else if (_curGameOverCount < _gameOverCount - 30f)
+            {
+                _currentWhiteFadeColor.a = _maxAlpha * (1f - (_curGameOverCount / _gameOverCount -30f));
             }
             else
             {
