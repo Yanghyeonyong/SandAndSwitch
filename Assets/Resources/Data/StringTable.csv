@@ -33,7 +33,7 @@ it_exp_102|하트를 1개 회복한다.\n유통기한은... 알 수 없다.|Rest
 it_name_201|보물|Treasure
 it_exp_201|찾아오도록 의뢰받은 물품이다.\n인생역전의 발판이 되어줄 것 같다.|The item I was commissioned to find.
 it_name_301|열쇠|Key
-it_exp_301|구역 이동을 막는 관문의 잠금을 해제한다.\n3개가 모여야 작동한다.|Opens the gate to the next area. Requires 3 keys.
+it_exp_301|관문의 잠금을 해제한다.\n3개가 모여야 작동한다.|Opens the gate to the next area. Requires 3 keys.
 it_name_302|출입 카드|Access Card
 it_exp_302|관리자가 사용하는 카드.\n보안 스캐너를 통과한다.|Looks like an administrator's card.
 it_name_401|USB|USB
@@ -43,6 +43,6 @@ it_exp_501|사출구에 화살이 끼어있다.\n고쳐 쓸 수는 없을 듯하
 it_name_502|쟁반|Metal Tray
 it_exp_502|경쾌한 소리가 난다.\n정수리를 보호하는 용도처럼 보인다.|Clangs nicely. Should I use it as a sled?
 it_name_503|바스러진 메모|Crumbling Diary
-it_exp_503|"글씨가 아무렇게나 휘갈겨져 있다.\n""벙커가 뭐 이렇게 복잡해!"""|The writing has faded away.
+it_exp_503|글씨가 아무렇게나 휘갈겨져 있다.\n"벙커가 뭐 이렇게 복잡해!"|The writing has faded away.
 it_name_504|그림 쪽지|Drawing Note
 it_exp_504|12xx.. 누군가의 낙서이다. \n구인류 전설 속의 빨간 코 사슴이 그려져 있다.|12xx... Must have been someone's birthday.
