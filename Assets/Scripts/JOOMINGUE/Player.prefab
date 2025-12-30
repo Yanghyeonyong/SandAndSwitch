@@ -267,7 +267,7 @@ MonoBehaviour:
   audioSource: {fileID: 1582475947622260323}
   hitClip: {fileID: 8300000, guid: 35d6e8989a7167f4f9a1e9150e203edc, type: 3}
   walkClip: {fileID: 8300000, guid: 8a486d3edf9cc7d4fb39ec16e455f2f3, type: 3}
-  landingClip: {fileID: 8300000, guid: cd71741629b6c4348b68dce82c7e5f86, type: 3}
+  landingClip: {fileID: 8300000, guid: 64fcdbe0d6140074c8b0e5797482fb64, type: 3}
   footstepRate: 0.3
   playerScale: 5
   onPortal: 0
