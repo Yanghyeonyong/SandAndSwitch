@@ -11,7 +11,7 @@ public class Bomb : MonoBehaviour
     [SerializeField] private AudioSource _audio;//폭발사운드용
 
     private float _baseExplosionRadius = 1f;//스케일 1일때 폭발 반경
-    [SerializeField] private float _visualScaleMultiplier = 1.3f;//이미지 배율
+    [SerializeField] private float _visualScaleMultiplier = 1.5f;//이미지 배율
 
     public bool IsExploding { get; private set; } = false;
     public bool IsThrownBomb { get; set; } = false;
