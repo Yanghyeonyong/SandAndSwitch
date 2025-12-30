@@ -67,8 +67,12 @@ public class InteractiveObject : MonoBehaviour
             {
                 _player.CheckGimmick = false;
                 _interactiveUI.SetActive(false);
+
+                //251231 최정욱 알파 
+                return;
             }
-            return;
+            //251231 최정욱 알파 
+            //return;
         }
         if (collision.CompareTag("Player"))
         {
