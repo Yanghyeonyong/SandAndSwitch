@@ -11635,8 +11635,8 @@ MonoBehaviour:
   - {x: 12, y: -3, z: 0}
   - {x: -69, y: -88, z: 0}
   - {x: 35, y: -11.7, z: 0}
-  _gameOverCount: 240
-  _curGameOverCount: 240
+  _gameOverCount: 180
+  _curGameOverCount: 180
   _minusGameOverCount: 0.1
   _bgms:
   - {fileID: 8300000, guid: 227be3b57f3b7604cae96d689f971d7b, type: 3}
