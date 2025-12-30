@@ -42,15 +42,15 @@ public class PopupSpike : Gimmick_Object
         //while (Vector3.Distance(_spikeObject.transform.position, _pos[0].position) > 0.1f)
         while (_spikeObject.transform.localPosition.y < _pos[0].localPosition.y)
         {
+            if (_spikeObject.transform.localPosition.y >= _pos[0].localPosition.y)
+            {
+                break;
+            }
             //_spikeObject.transform.position = Vector3.MoveTowards(_spikeObject.transform.position,_pos[0].position, _moveSpeed);
             _spikeObject.transform.Translate(Vector3.up * Time.deltaTime * _moveSpeed* Vector3.Distance(_spikeObject.transform.position, _pos[0].position));
             yield return null;
-            //if (_spikeObject.transform.localPosition.y >= _pos[0].localPosition.y)
-            //{
-            //    _spikeObject.transform.localPosition = _pos[0].localPosition;
-            //    break;
-            //}
         }
+        _spikeObject.transform.localPosition = _pos[0].localPosition;
     }
 
     IEnumerator Close()
@@ -58,14 +58,14 @@ public class PopupSpike : Gimmick_Object
         //while (Vector3.Distance(_spikeObject.transform.position, _pos[1].position) > 0.1f)
         while (_spikeObject.transform.localPosition.y > _pos[1].localPosition.y)
         {
+            if (_spikeObject.transform.localPosition.y < _pos[1].localPosition.y)
+            {
+                break;
+            }
             //_spikeObject.transform.position = Vector3.MoveTowards(_spikeObject.transform.position, _pos[1].position, _moveSpeed);
-            _spikeObject.transform.Translate(Vector3.down * Time.deltaTime * _moveSpeed);
+            _spikeObject.transform.Translate(Vector3.down * Time.deltaTime * _moveSpeed * Vector3.Distance(_spikeObject.transform.position, _pos[1].position));
             yield return null;
-            //if (_spikeObject.transform.localPosition.y < _pos[1].localPosition.y)
-            //{
-            //    _spikeObject.transform.localPosition = _pos[1].localPosition;
-            //    break;
-            //}
         }
+        _spikeObject.transform.localPosition = _pos[1].localPosition;
     }
 }
