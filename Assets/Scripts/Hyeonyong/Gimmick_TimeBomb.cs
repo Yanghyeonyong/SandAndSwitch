@@ -13,6 +13,8 @@ public class Gimmick_TimeBomb : Gimmick
     [SerializeField] float _weight = 5f;
     [SerializeField] float _range = 6.5f;
     public bool _isUse = false;
+
+    [SerializeField] AudioClip[] _clip;
     private void Start()
     {
 
@@ -58,6 +60,8 @@ public class Gimmick_TimeBomb : Gimmick
             yield break;
                 
         }
+        _audio.clip = _clip[0];
+        _audio.Play();
         Debug.Log("타이머 코루틴 시작");
         yield return new WaitForSeconds(_timer);
         _rb.bodyType = RigidbodyType2D.Static;
@@ -75,6 +79,8 @@ public class Gimmick_TimeBomb : Gimmick
 
         yield return null;
         float _animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;
+        //_audio.Play();
+        _audio.clip = _clip[1];
         _audio.Play();
 
         yield return new WaitForSeconds(_animationLength);

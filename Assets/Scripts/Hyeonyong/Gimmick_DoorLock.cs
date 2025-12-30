@@ -12,7 +12,7 @@ public class Gimmick_DoorLock : Gimmick
     [SerializeField] Button[] _selectionButtons;
     //도어락
     [SerializeField] GameObject _doorLockObject;
-    public GameObject DoorLockObject => _doorLockObject;    
+    public GameObject DoorLockObject => _doorLockObject;
     [SerializeField] string _password;
     public string Password => _password;
     DoorLock _doorlock;
@@ -30,12 +30,13 @@ public class Gimmick_DoorLock : Gimmick
     int length = 0;
 
 
-
+    [SerializeField] string _tableId;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioSource _gimmickObjAudioSource;
+    Coroutine _coroutine;
     private void Start()
     {
-        _obj =GetComponent<Gimmick_Object>();
+        _obj = GetComponent<Gimmick_Object>();
         if (CheckClear())
         {
             //클리어 했으면 클리어된 판정 이벤트 실행
@@ -59,7 +60,7 @@ public class Gimmick_DoorLock : Gimmick
                 _selectionButtons[i] = _selection.transform.GetChild(i).GetComponent<Button>();
             }
         }
-        length=GameManager.Instance.GameManagerQuickSlots.Length;
+        length = GameManager.Instance.GameManagerQuickSlots.Length;
         _obj._audioSource = _gimmickObjAudioSource;
     }
 
@@ -97,11 +98,11 @@ public class Gimmick_DoorLock : Gimmick
     public void ChoiceItem()
     {
         int index = CheckQuickSlotItem();
-        if (index !=-1)
+        if (index != -1)
         {
             GameManager.Instance.IsGimmickClear[GimmickId] = true;
             _isClear = true;
-           
+
             ItemData data = GameManager.Instance.GameManagerQuickSlots[index].Data;
             //퀵슬롯이 아니라 퀵슬롯 컨트롤러를 통해서 진행한다
             //GameObject bombObj = Instantiate(data.prefab, transform.position, Quaternion.identity);
@@ -119,6 +120,20 @@ public class Gimmick_DoorLock : Gimmick
             GameManager.Instance.ResumeGame();
 
         }
+        else
+        {
+            ExitGimmick();
+            string text = GameManager.Instance.Player.GetStringFromTable(_tableId);
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+                _coroutine = null;
+            }
+
+
+            _coroutine = StartCoroutine(GameManager.Instance.Player.ShowChatBubble(text));
+
+        }
     }
     public override void ExitGimmick()
     {
@@ -131,7 +146,7 @@ public class Gimmick_DoorLock : Gimmick
         ResetSelectionButton();
         _interactiveUI.SetActive(true);
 
-        GameManager.Instance.OnProgressGimmick=false;
+        GameManager.Instance.OnProgressGimmick = false;
 
         GameManager.Instance.ResumeGame();
     }

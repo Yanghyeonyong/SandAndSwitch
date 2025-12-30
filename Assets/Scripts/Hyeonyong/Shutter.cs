@@ -15,6 +15,10 @@ public class Shutter : Gimmick_Object
 
     public override void TurnOn()
     {
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
+        }
         Debug.Log("올라가기 시도");
         //_shutterObject.transform.localPosition += new Vector3(0f, 5f, 0f);
         if (_curCoroutine != null)
@@ -26,6 +30,10 @@ public class Shutter : Gimmick_Object
     }
     public override void TurnOff()
     {
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
+        }
         //_shutterObject.transform.localPosition += new Vector3(0f, -5f, 0f);
         if (_curCoroutine != null)
         {

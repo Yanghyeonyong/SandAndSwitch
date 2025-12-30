@@ -8,6 +8,7 @@ public class Gimmick_Timer : Gimmick
     Animator _animator;
     [SerializeField] float _timer;
     Coroutine _coroutine;
+    AudioSource _audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,24 +20,25 @@ public class Gimmick_Timer : Gimmick
         //    _animator.SetTrigger("TurnOn");
         //}
         _obj = GetComponent<Gimmick_Object>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public override void StartGimmick()
     {
-        if (_coroutine == null)
-        {
-            _coroutine = StartCoroutine(StartTimer());
-        }
+        
+
+
         if (_coroutine != null)
         {
             StopCoroutine( _coroutine );
             _coroutine = null;
-            _coroutine=StartCoroutine(StartTimer_SecondClick());
         }
+       _coroutine = StartCoroutine(StartTimer());
     }
 
     IEnumerator StartTimer()
     {
+        _audioSource.Play();
         _obj.TurnOn();
         _animator.Play("TurnOn", -1, 0f);
         Debug.Log("타이머 애니메이션 실행");

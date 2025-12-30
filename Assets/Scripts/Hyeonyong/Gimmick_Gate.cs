@@ -9,10 +9,15 @@ public class Gimmick_Gate : Gimmick
     [SerializeField] int _requireCount;
     Animator _animator;
     int length;
+    AudioSource _audioSource;
+
+    [SerializeField] string _tableId;
+    Coroutine _coroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         if (CheckClear())
         {
             //문이 열려있고 씬 이동이 활성화되어있는 상태
@@ -20,6 +25,7 @@ public class Gimmick_Gate : Gimmick
             return;
         }
         length = GameManager.Instance.GameManagerQuickSlots.Length;
+
     }
 
     public override void StartGimmick()
@@ -48,6 +54,16 @@ public class Gimmick_Gate : Gimmick
             //GameManager.Instance.LoadNextScene();
             //gameObject.SetActive(false);
             StartCoroutine(GateOpen());
+        }
+        else
+        {
+            string text = GameManager.Instance.Player.GetStringFromTable(_tableId);
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+                _coroutine = null;
+            }
+            _coroutine = StartCoroutine(GameManager.Instance.Player.ShowChatBubble(text));
         }
     }
 
@@ -79,6 +95,7 @@ public class Gimmick_Gate : Gimmick
 
     IEnumerator GateOpen()
     {
+        _audioSource.Play();
         _animator.SetTrigger("TurnOn");
         yield return null;
         float _animationLength = _animator.GetCurrentAnimatorStateInfo(0).length;

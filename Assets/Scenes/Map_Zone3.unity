@@ -1150,6 +1150,7 @@ GameObject:
   - component: {fileID: 156225081}
   - component: {fileID: 156225080}
   - component: {fileID: 156225084}
+  - component: {fileID: 156225085}
   m_Layer: 0
   m_Name: Portal_End
   m_TagString: Untagged
@@ -1209,7 +1210,7 @@ MonoBehaviour:
   _gimmickId: 342
   _itemId: 301
   _requireCount: 3
-  _tableId: 
+  _tableId: char_chat_0003
 --- !u!61 &156225082
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1330,6 +1331,103 @@ MonoBehaviour:
   _isReuse: 1
   _isTeleport: 0
   _CheckItem: 0
+--- !u!82 &156225085
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156225078}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 5eba1ee57402c5a4182310eec0ae9633, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &157525960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3386999639568982978, guid: c2ed3eca27f87dc4a86d3068c6b49751, type: 3}
@@ -8468,9 +8566,9 @@ MonoBehaviour:
   _interactiveUI: {fileID: 790421004}
   _doorObject: {fileID: 0}
   _itemId: 101
+  _tableId: char_chat_0002
   _audioSource: {fileID: 0}
   _gimmickObjAudioSource: {fileID: 708238433}
-  _tableId: char_chat_0002
 --- !u!58 &819351167
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -121086,9 +121184,9 @@ MonoBehaviour:
   _interactiveUI: {fileID: 790421004}
   _doorObject: {fileID: 0}
   _itemId: 302
+  _tableId: char_chat_0002
   _audioSource: {fileID: 0}
   _gimmickObjAudioSource: {fileID: 680613909}
-  _tableId: char_chat_0002
 --- !u!58 &927533069
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -121969,9 +122067,9 @@ MonoBehaviour:
   _interactiveUI: {fileID: 790421004}
   _doorObject: {fileID: 0}
   _itemId: 50001
+  _tableId: char_chat_0002
   _audioSource: {fileID: 0}
   _gimmickObjAudioSource: {fileID: 584565056}
-  _tableId: char_chat_0002
 --- !u!58 &1020738290
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -123979,7 +124077,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 42ad1dfeab450d949a64fe08fd1cc861, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -124861,7 +124959,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 42ad1dfeab450d949a64fe08fd1cc861, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -126335,7 +126433,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 42ad1dfeab450d949a64fe08fd1cc861, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
