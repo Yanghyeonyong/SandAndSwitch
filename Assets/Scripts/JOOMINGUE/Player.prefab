@@ -259,11 +259,15 @@ MonoBehaviour:
     m_Bits: 64
   groundedConfirmFrames: 2
   actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  animator: {fileID: 0}
+  animator: {fileID: 2821272513310658220}
   invincibilityDuration: 1
   chatBubbleCanvas: {fileID: 622830256874504044}
   chatText: {fileID: 757593100286310534}
   chatDuration: 3
+  audioSource: {fileID: 1582475947622260323}
+  hitClip: {fileID: 8300000, guid: 297ae97d4501c074ba4641e6897a596b, type: 3}
+  walkClip: {fileID: 8300000, guid: 8a486d3edf9cc7d4fb39ec16e455f2f3, type: 3}
+  footstepRate: 0.3
   playerScale: 5
   onPortal: 0
   _audioSource: {fileID: 1582475947622260323}

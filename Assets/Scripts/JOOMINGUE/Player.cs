@@ -69,6 +69,14 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI chatText;    // 에디터에서 BubbleText 연결
     public float chatDuration = 3f;   // 말풍선 떠있는 시간
 
+    [Header("Audio")]
+    public AudioSource audioSource; // [추가] 오디오 소스 연결
+    public AudioClip hitClip;       // [추가] 피격 사운드 파일
+    public AudioClip walkClip;      // [추가] 걷기 사운드 파일
+
+    public float footstepRate = 0.4f; // [추가] 발소리 간격 (초 단위)
+    private float footstepTimer = 0f; // [추가] 발소리 타이머
+
     // Runtime values
     float moveX;
     bool isGrounded;
@@ -130,6 +138,9 @@ public class Player : MonoBehaviour
 
         if (animator == null)
             animator = GetComponent<Animator>();
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
 
         var map = actions.FindActionMap("Player", true);
         moveAction = map.FindAction("Move", true);
@@ -199,7 +210,8 @@ public class Player : MonoBehaviour
             moveX = moveAction.ReadValue<Vector2>().x;
         }
 
-        // 1️⃣ Ground Check (BoxCast로 변경)
+        bool wasGrounded = isGrounded;
+
         // groundCheck 위치에서 boxSize 크기의 사각형을 아래로(Vector2.down) castDistance만큼 발사
         bool rawGrounded = Physics2D.BoxCast(
             groundCheck.position,
@@ -218,6 +230,17 @@ public class Player : MonoBehaviour
         else groundedFrames = 0;
 
         isGrounded = groundedFrames >= groundedConfirmFrames;
+
+        if (!wasGrounded && isGrounded)
+        {
+            if (walkClip != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(walkClip);
+            }
+        }
+
+        // 발소리 재생 로직 호출
+        HandleFootstepSound();
 
         // Timers
         if (isGrounded) coyoteTimer = coyoteTime;
@@ -393,9 +416,42 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Jump");
     }
 
+
+    void HandleFootstepSound()
+    {
+        // 땅에 있고 + 움직이는 중이고 + 컷신이 아닐 때
+        if (isGrounded && Mathf.Abs(moveX) > 0.1f && !isCutscene)
+        {
+            footstepTimer -= Time.deltaTime;
+
+            if (footstepTimer <= 0f)
+            {
+                // 소리 재생 (랜덤 피치를 주면 더 자연스럽습니다)
+                if (walkClip != null && audioSource != null)
+                {
+                    // audioSource.pitch = Random.Range(0.9f, 1.1f); // (선택사항) 톤을 살짝 다르게
+                    audioSource.PlayOneShot(walkClip);
+                }
+
+                footstepTimer = footstepRate; // 타이머 초기화
+            }
+        }
+        else
+        {
+            // 멈추면 타이머를 0으로 해서, 다시 걸을 때 즉시 소리 나게 설정
+            footstepTimer = 0f;
+        }
+    }
     public void TakeDamage()
     {
         if (isInvincible) return;
+
+        // [추가] 피격 사운드 재생
+        if (hitClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(hitClip);
+        }
+
         Debug.Log("데미지를 입었다");
         //curVelocity = rb.linearVelocity.normalized;
         animator.SetTrigger("Damage");
