@@ -38,6 +38,15 @@ public class Gimmick_Weight : Gimmick
             //_rb.AddForce(-_rb.linearVelocity, ForceMode2D.Force);
         }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+           _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
+        }
+    }
+
     private void OnDisable()
     {
         //이게 더 늦게 실행되서 그런거 같은데

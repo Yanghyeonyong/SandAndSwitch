@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gimmick_Box
   _gimmickId: 0
-  _weight: 100
+  _weight: 1.3
 --- !u!82 &4925657638657145551
 AudioSource:
   m_ObjectHideFlags: 0
