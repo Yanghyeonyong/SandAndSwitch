@@ -46,10 +46,15 @@ public class Player : MonoBehaviour
     // Components
     [Header("Components")]
     public Animator animator;
+    private SpriteRenderer spriteRenderer; //깜빡임 효과를 위해 필요
 
     Rigidbody2D rb;
     InputAction moveAction;
     InputAction jumpAction;
+
+    [Header("Combat")]
+    public float invincibilityDuration = 1f; // [추가] 무적 지속 시간 (초)
+    private bool isInvincible = false;         // [추가] 현재 무적 상태인지 확인하는 변수
 
     //추가 액션
     InputAction interactAction;
@@ -120,6 +125,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         slot = GetComponent<QuickSlotController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb.freezeRotation = true;
 
         if (animator == null)
@@ -389,6 +395,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
+        if (isInvincible) return;
         Debug.Log("데미지를 입었다");
         //curVelocity = rb.linearVelocity.normalized;
         animator.SetTrigger("Damage");
@@ -401,6 +408,51 @@ public class Player : MonoBehaviour
 
         StopAllCoroutines(); // 기존 말풍선 코루틴이 있다면 중지
         StartCoroutine(ShowChatBubble(damageMsg));
+        StartCoroutine(InvincibilityRoutine());
+    }
+
+    // [추가] 무적 시간 및 깜빡임 효과 코루틴
+    IEnumerator InvincibilityRoutine()
+    {
+        // 1. 무적 상태 진입
+        isInvincible = true;
+
+        float elapsed = 0f;
+        float blinkPeriod = 0.05f; // 깜빡이는 주기
+
+        // 2. 설정된 시간만큼 깜빡거림 반복
+        while (elapsed < invincibilityDuration)
+        {
+            // 투명하게 (Fade Out)
+            if (spriteRenderer != null)
+            {
+                Color c = spriteRenderer.color;
+                c.a = 0.5f;
+                spriteRenderer.color = c;
+            }
+            yield return new WaitForSeconds(blinkPeriod);
+
+            // 불투명하게 (Fade In)
+            if (spriteRenderer != null)
+            {
+                Color c = spriteRenderer.color;
+                c.a = 1f;
+                spriteRenderer.color = c;
+            }
+            yield return new WaitForSeconds(blinkPeriod);
+
+            elapsed += blinkPeriod * 2; // 시간 누적
+        }
+
+        // 3. 무적 상태 해제 및 색상 완전 복구
+        if (spriteRenderer != null)
+        {
+            Color c = spriteRenderer.color;
+            c.a = 1f;
+            spriteRenderer.color = c;
+        }
+
+        isInvincible = false;
     }
 
     // CSV 데이터 가져오는 헬퍼 함수
