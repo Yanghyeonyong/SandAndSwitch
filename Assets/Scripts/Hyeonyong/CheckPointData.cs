@@ -135,7 +135,12 @@ public class CheckPointData : Singleton<CheckPointData>
             CollectedItemIDs.Add(pos);
         }
         //기믹 상태 저장
-        _isGimmickClear = new Dictionary<int, bool>(GameManager.Instance.IsGimmickClear);
+        //_isGimmickClear = new Dictionary<int, bool>(GameManager.Instance.IsGimmickClear);
+        _isGimmickClear.Clear();
+        foreach (var g in GameManager.Instance.IsGimmickClear.ToList())
+        {
+            _isGimmickClear.Add(g.Key, g.Value);
+        }
         //_gimmickPos = new Dictionary<int, ItemTransform>(GameManager.Instance.GimmickPos);
 
         _collectSlots.Clear();
@@ -162,10 +167,18 @@ public class CheckPointData : Singleton<CheckPointData>
         GameManager.Instance.CurrentPlayerHealth = _playerHp;
         GameManager.Instance.CurScene = _checkPointScene;
 
+
+
+
         //이거 하니까 아이템 데이터 사라지는 것 확인
         //GameManager.Instance.GameManagerQuickSlots = GameManagerQuickSlots;
 
-        GameManager.Instance.IsGimmickClear = _isGimmickClear;
+        //GameManager.Instance.IsGimmickClear = _isGimmickClear;
+        GameManager.Instance.IsGimmickClear.Clear();
+        foreach (var g in _isGimmickClear.ToList())
+        {
+            GameManager.Instance.IsGimmickClear.Add(g.Key, g.Value);
+        }
         //GameManager.Instance.GimmickPos = _gimmickPos;
 
         //GameManager.Instance.CollectedItemIDs = CollectedItemIDs;
