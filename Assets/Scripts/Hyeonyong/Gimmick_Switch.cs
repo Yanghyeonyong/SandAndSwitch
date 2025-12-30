@@ -80,17 +80,7 @@ public class Gimmick_Switch : Gimmick
             {
                 StartCoroutine(CheckFalse(1));
             }
-            if (_audioSource != null)
-            {
-                _audioSource.Play();
-            }
 
-            if (!_onPlayer && !_onBox)
-            {
-                _obj.TurnOff();
-                _animator.SetTrigger("TurnOff");
-                _turnSwitch=false;
-            }
         }
     }
 
@@ -118,8 +108,20 @@ public class Gimmick_Switch : Gimmick
                 _onPlayer = false;
                 break;
             case 1:
-                _onPlayer = false;
+                _onBox = false;
                 break;
+        }
+
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
+        }
+
+        if (!_onPlayer && !_onBox)
+        {
+            _obj.TurnOff();
+            _animator.SetTrigger("TurnOff");
+            _turnSwitch = false;
         }
     }
 }
