@@ -52,7 +52,7 @@ public class Bomb : MonoBehaviour
         //설정된 폭발 범위에 따라 폭발 애니메이션 스케일 증가
         float explosionRadius = _itemData.radius;
         float explosionScale = explosionRadius / _baseExplosionRadius;//이미지 보정
-        transform.localScale = Vector3.one * explosionScale * _visualScaleMultiplier;
+        transform.localScale = Vector3.one * explosionScale * _visualScaleMultiplier;//배율로 이미지 추가 보정
 
         _audio.Play();
         DamageInRange(transform.position, explosionRadius);
