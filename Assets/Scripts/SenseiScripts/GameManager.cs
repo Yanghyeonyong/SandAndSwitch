@@ -497,33 +497,37 @@ public class GameManager : Singleton<GameManager>
 
 
     Coroutine _phaseTwoFadeCortouine;
-    // [추가] 2페이즈 대사 시퀀스를 관리하는 코루틴
+    // 2페이즈 시간대별 대사 출력 코루틴
     private IEnumerator PlayPhaseTwoDialogueRoutine()
     {
+        // 1. 시작 후 40초 대기 -> 첫 번째 대사 ("char_chat_0004")
+        yield return new WaitForSeconds(40f);
+        yield return StartCoroutine(TryShowDialogue("char_chat_0004"));
+
+        // 2. 100초 시점까지 대기 (이미 40초 지났으니 60초만 더 대기) -> 두 번째 대사 ("char_chat_0005")
         yield return new WaitForSeconds(60f);
-        // 출력할 대사 키값 배열
-        string[] dialogueKeys = { "char_chat_0004", "char_chat_0005", "char_chat_0006" };
+        yield return StartCoroutine(TryShowDialogue("char_chat_0005"));
 
-        foreach (string key in dialogueKeys)
+        // 3. 150초 시점까지 대기 (이미 100초 지났으니 50초만 더 대기) -> 세 번째 대사 ("char_chat_0006")
+        yield return new WaitForSeconds(50f);
+        yield return StartCoroutine(TryShowDialogue("char_chat_0006"));
+    }
+    // 대사 출력을 시도하는 헬퍼 코루틴 (플레이어가 씬 이동 등으로 잠깐 없을 때를 대비)
+    private IEnumerator TryShowDialogue(string key)
+    {
+        // 플레이어가 준비될 때까지 대기 (씬 로딩 중 등)
+        while (Player == null)
         {
-            // 1. 현재 씬에 있는 플레이어가 준비될 때까지 대기 (씬 로딩 중일 수 있음)
-            while (Player == null)
-            {
-                yield return null;
-            }
+            yield return null;
+        }
 
-            // 2. 테이블에서 대사 가져오기
-            string msg = GetStringFromTable(key);
+        // 테이블에서 대사 가져오기
+        string msg = GetStringFromTable(key);
 
-            // 3. 플레이어의 말풍선 함수 호출
-            if (Player != null)
-            {
-                // Player의 ShowChatBubble을 호출 (StartCoroutine은 Player쪽에서 돌림)
-                Player.StartCoroutine(Player.ShowChatBubble(msg));
-            }
-
-            // 4. 다음 대사까지 10초 대기 (WaitWhile을 써서 씬 로딩 중에도 시간 가는 걸 방지할 수도 있음)
-            yield return new WaitForSeconds(60f);
+        // 플레이어에게 말풍선 띄우기 명령
+        if (Player != null)
+        {
+            Player.StartCoroutine(Player.ShowChatBubble(msg));
         }
     }
 
