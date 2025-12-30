@@ -265,7 +265,7 @@ MonoBehaviour:
   chatText: {fileID: 757593100286310534}
   chatDuration: 3
   audioSource: {fileID: 1582475947622260323}
-  hitClip: {fileID: 8300000, guid: 297ae97d4501c074ba4641e6897a596b, type: 3}
+  hitClip: {fileID: 8300000, guid: 35d6e8989a7167f4f9a1e9150e203edc, type: 3}
   walkClip: {fileID: 8300000, guid: 8a486d3edf9cc7d4fb39ec16e455f2f3, type: 3}
   footstepRate: 0.3
   playerScale: 5
